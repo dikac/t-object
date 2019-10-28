@@ -1,7 +1,7 @@
 {
-  "name": "t-validatable",
+  "name": "t-object",
   "version": "0.0.1",
-  "description": "Typescript validatable",
+  "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.11.7",
     "file-copy-no-overwrite": "git+https://github.com/dikac/file-copy-no-overwrite.git",
