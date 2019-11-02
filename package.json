@@ -1,6 +1,6 @@
 {
   "name": "t-object",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.12.3",
