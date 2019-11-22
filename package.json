@@ -1,6 +1,6 @@
 {
   "name": "t-object",
-  "version": "0.6.5",
+  "version": "0.6.7",
   "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.12.3",
@@ -21,7 +21,7 @@
     "spec-compile-watch-script": "tsc -w -p tsconfig-spec.json",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "install": "npm-run-all compile"
+    "install": "dist-mover"
   },
   "files": [
     "tsconfig-development.json",
