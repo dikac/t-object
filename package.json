@@ -1,6 +1,6 @@
 {
   "name": "t-object",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.12.3",
@@ -25,7 +25,6 @@
     "production": "dist-mover"
   },
   "files": [
-    "tsconfig-development.json",
     "src/",
     "dist/",
     "LICENSE",
