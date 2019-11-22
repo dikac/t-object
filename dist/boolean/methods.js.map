@@ -1,0 +1,1 @@
+{"version":3,"file":"methods.js","sourceRoot":"","sources":["../../src/boolean/methods.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,SAAwB,OAAO,CAAE,MAAe,EAAE,GAAG,UAAqB;QAEtE,KAAK,IAAI,QAAQ,IAAI,UAAU,EAAE;YAE7B,IAAG,OAAO,MAAM,CAAC,QAAQ,CAAC,KAAK,UAAU,EAAE;gBAEvC,OAAO,KAAK,CAAC;aAChB;SACJ;QAED,OAAO,IAAI,CAAC;IAChB,CAAC;IAXD,0BAWC"}
