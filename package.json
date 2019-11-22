@@ -21,7 +21,7 @@
     "spec-compile-watch-script": "tsc -w -p tsconfig-spec.json",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "install": "dist-mover"
+    "install": "npm-run-all dist-mover"
   },
   "files": [
     "tsconfig-development.json",
