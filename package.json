@@ -4,7 +4,7 @@
   "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.12.3",
-    "file-copy-no-overwrite": "git+https://github.com/dikac/file-copy-no-overwrite.git",
+    "file-copy-no-overwrite": "git+https://github.com/dikac/dist-mover.git",
     "npm-run-all": "^4.1.5",
     "typescript": "^3.6.4"
   },
@@ -21,16 +21,15 @@
     "spec-compile-watch-script": "tsc -w -p tsconfig-spec.json",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "install": "npm-run-all production compile",
-    "production": "file-copy-no-overwrite tsconfig-production.json tsconfig.json"
+    "install": "npm-run-all compile"
   },
   "files": [
     "tsconfig-development.json",
     "src/",
-    ".gitignore",
+    "dist/",
     "LICENSE",
     "Readme.md",
-    "tsconfig-production.json"
+    "tsconfig.json"
   ],
   "author": "",
   "license": "MIT"
