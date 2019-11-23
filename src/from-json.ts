@@ -2,11 +2,12 @@ export default function FromJson<Type>(
     json : {toString:()=>string},
     validator : (object : any) => object is Type,
     error : (json : string, object : object) => Error = (json : string, object : object) => new TypeError('json string is not valid according to validator'),
-    preprocess : (object:object) => any
+    preprocess : (object:{[Key in keyof Type] : Type[Key]}) => void
 ) : Type {
 
     let string = json.toString();
-    let object = preprocess(JSON.parse(string));
+    let object = JSON.parse(string);
+    preprocess(object);
 
     if(validator(object)) {
 
@@ -15,3 +16,5 @@ export default function FromJson<Type>(
 
     throw error(string, object);
 }
+
+
