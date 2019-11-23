@@ -11,7 +11,8 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     function FromJson(json, validator, error = (json, object) => new TypeError('json string is not valid according to validator'), preprocess) {
         let string = json.toString();
-        let object = preprocess(JSON.parse(string));
+        let object = JSON.parse(string);
+        preprocess(object);
         if (validator(object)) {
             return object;
         }

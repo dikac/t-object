@@ -1,6 +1,6 @@
 {
   "name": "t-object",
-  "version": "0.8.12",
+  "version": "0.8.13",
   "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.12.3",
@@ -9,7 +9,7 @@
     "typescript": "^3.6.4"
   },
   "devDependencies": {
-    "@types/jasmine": "^3.4.0",
+    "@types/jasmine": "^3.5.0",
     "jasmine": "^3.4.0"
   },
   "scripts": {
