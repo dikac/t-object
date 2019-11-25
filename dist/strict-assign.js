@@ -21,4 +21,4 @@
     }
     exports.default = StrictAssign;
 });
-//# sourceMappingURL=strictAssign.js.map
+//# sourceMappingURL=strict-assign.js.map
