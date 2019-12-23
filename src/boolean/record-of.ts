@@ -1,5 +1,5 @@
 // TODO ADD TYPE
-export default function <O extends object, Value>(
+export default function RecordOf<O extends object, Value>(
     value : object,
     validator : (value : any) => value is Value
 ) : boolean  {
