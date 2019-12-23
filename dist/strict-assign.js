@@ -15,6 +15,10 @@
      * @param object
      * @param data
      * @constructor
+     *
+     *
+     * example to enforce optional type
+     * StrictAssign(new Array(), <Array<any>>{length:5});
      */
     function StrictAssign(object, data) {
         return Object.assign(object, data);
