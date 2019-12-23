@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     // TODO ADD TYPE
-    function default_1(value, validator) {
+    function RecordOf(value, validator) {
         for (let property in value) {
             if (!validator(value[property])) {
                 return false;
@@ -18,6 +18,6 @@
         }
         return true;
     }
-    exports.default = default_1;
+    exports.default = RecordOf;
 });
 //# sourceMappingURL=record-of.js.map
