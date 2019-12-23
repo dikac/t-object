@@ -4,17 +4,11 @@
  * @param object
  * @param data
  * @constructor
- *
- *
- * example to enforce optional type
- * StrictAssign(new Array(), <Array<any>>{length:5});
  */
 export default function StrictAssign<O extends object, U extends {
-    [Key in keyof O] : O[Key]
-}>(object : O, data : U) : U & O {
+    [Key in keyof O]: O[Key];
+}>(object: O, data: U): U & Omit<O, keyof U>{
 
     return Object.assign(object, data);
 }
-
-
 
