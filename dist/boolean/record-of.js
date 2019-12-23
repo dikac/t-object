@@ -9,16 +9,15 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * Strict assign
-     *
-     * @param object
-     * @param data
-     * @constructor
-     */
-    function StrictAssign(object, data) {
-        return Object.assign(object, data);
+    // TODO ADD TYPE
+    function default_1(value, validator) {
+        for (let property in value) {
+            if (!validator(value[property])) {
+                return false;
+            }
+        }
+        return true;
     }
-    exports.default = StrictAssign;
+    exports.default = default_1;
 });
-//# sourceMappingURL=strict-assign.js.map
+//# sourceMappingURL=record-of.js.map
