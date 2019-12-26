@@ -1,10 +1,10 @@
 {
   "name": "t-object",
-  "version": "0.9.21",
+  "version": "0.9.22",
   "description": "Typescript object",
   "dependencies": {
     "@types/node": "^12.12.3",
-    "dist-mover": "git+https://github.com/dikac/dist-mover.git",
+    "dist-mover": "0.0.9",
     "npm-run-all": "^4.1.5",
     "typescript": "^3.6.4"
   },
