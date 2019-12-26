@@ -1,5 +1,5 @@
 {
-  "name": "t-object",
+  "name": "@dikac/t-object",
   "version": "0.9.22",
   "description": "Typescript object",
   "dependencies": {
