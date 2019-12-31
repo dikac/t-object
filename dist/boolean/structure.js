@@ -9,17 +9,15 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * check if method or function exists
-     */
-    function Methods(object, ...properties) {
-        for (let property of properties) {
-            if (typeof object[property] !== "function") {
+    function Structure(value, validators) {
+        for (let property in validators) {
+            let validator = validators[property];
+            if (!validator(value[property])) {
                 return false;
             }
         }
         return true;
     }
-    exports.default = Methods;
+    exports.default = Structure;
 });
-//# sourceMappingURL=methods.js.map
+//# sourceMappingURL=structure.js.map

@@ -1,3 +1,6 @@
+/**
+ * check if all properies valid
+ */
 // TODO ADD TYPE
 export default function RecordOf<O extends object, Value>(
     value : object,

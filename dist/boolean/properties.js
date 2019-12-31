@@ -9,6 +9,9 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * check if property exists
+     */
     function Properties(object, ...properties) {
         for (let property of properties) {
             if (!(property in object)) {

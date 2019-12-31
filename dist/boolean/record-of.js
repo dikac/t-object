@@ -9,6 +9,9 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * check if all properies valid
+     */
     // TODO ADD TYPE
     function RecordOf(value, validator) {
         for (let property in value) {
