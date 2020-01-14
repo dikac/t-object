@@ -1,6 +1,6 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "Typescript object",
   "dependencies": {},
   "devDependencies": {
@@ -25,8 +25,8 @@
     "compile-watch": "tsc -w",
     "release": "remove-private-field dist/package.json",
     "postrelease": "npm publish dist",
-    "prerelease": "cpy     package.json package-lock.json LICENSE Readme.md dist",
-    "postpublish": "rimraf package.json package-lock.json LICENSE Readme.md"
+    "prerelease": "cpy     package.json package-lock.json LICENSE Readme.md compiler-cache dist",
+    "postpublish": "rimraf package.json package-lock.json LICENSE Readme.md compiler-cache"
   },
   "author": "",
   "license": "MIT",
