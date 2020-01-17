@@ -142,7 +142,7 @@
         "signature": "8c79fc4bc665c5ae967f7c04a5d092083b35511ddee6b3fbce1f086ec30b000f"
       },
       "../spec/mixin.spec.ts": {
-        "version": "fd88ae9a387f5a11baaf26a76ddd10ac59834152b9141725fc56bae6e16b5b47",
+        "version": "732db6986f5ba65f5df82657eb79c6fe7364bd1d738e1f476c29e510bc17e9f4",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
       },
       "../spec/boolean/structure.spec.ts": {
@@ -1160,6 +1160,12 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../dist/boolean/structure.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../node_modules/utility-types/dist/aliases-and-guards.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1191,6 +1197,13 @@
         "../node_modules/utility-types/dist/mapped-types.d.ts",
         "../node_modules/utility-types/dist/aliases-and-guards.d.ts",
         "../node_modules/utility-types/dist/functional-helpers.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../dist/mixin.d.ts": [
+        "../node_modules/utility-types/dist/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -1579,19 +1592,6 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../dist/boolean/structure.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../dist/mixin.d.ts": [
-        "../node_modules/utility-types/dist/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1623,11 +1623,14 @@
       "../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../node_modules/typescript/lib/lib.esnext.bigint.d.ts",
+      "../dist/boolean/structure.d.ts",
       "../node_modules/utility-types/dist/aliases-and-guards.d.ts",
       "../node_modules/utility-types/dist/mapped-types.d.ts",
       "../node_modules/utility-types/dist/utility-types.d.ts",
       "../node_modules/utility-types/dist/functional-helpers.d.ts",
       "../node_modules/utility-types/dist/index.d.ts",
+      "../dist/mixin.d.ts",
+      "../spec/boolean/structure.spec.ts",
       "../node_modules/@types/events/index.d.ts",
       "../node_modules/@types/node/globals.d.ts",
       "../node_modules/@types/node/assert.d.ts",
@@ -1677,10 +1680,7 @@
       "../node_modules/@types/minimatch/index.d.ts",
       "../node_modules/@types/glob/index.d.ts",
       "../node_modules/@types/jasmine/ts3.1/index.d.ts",
-      "../dist/boolean/structure.d.ts",
-      "../spec/boolean/structure.spec.ts",
-      "../spec/mixin.spec.ts",
-      "../dist/mixin.d.ts"
+      "../spec/mixin.spec.ts"
     ]
   },
   "version": "3.7.4"
