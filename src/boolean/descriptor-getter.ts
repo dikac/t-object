@@ -7,7 +7,7 @@ export type PropertyDescriptorGetter = Required<Omit<PropertyDescriptor,'value'>
 export default function DescriptorGetter(value : object) : value is PropertyDescriptorGetter {
 
     if(!Type<PropertyDescriptorGetter>(value)) {
-;
+
         return false;
     }
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"assign-undefined.js","sourceRoot":"","sources":["../src/assign-undefined.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,SAAwB,eAAe,CAAS,MAAwB,EAAE,MAAe;QAErF,KAAK,IAAI,QAAQ,IAAI,MAAM,EAAE;YAEzB,IAAG,MAAM,CAAC,QAAQ,CAAC,KAAK,SAAS,EAAE;gBAE/B,MAAM,CAAC,QAAQ,CAAC,GAAG,MAAM,CAAC,QAAQ,CAAC,CAAC;aACvC;SACJ;QAED,OAAe,MAAM,CAAC;IAC1B,CAAC;IAXD,kCAWC"}

@@ -13,7 +13,6 @@
     const type_1 = require("./type");
     function DescriptorGetter(value) {
         if (!type_1.default(value)) {
-            ;
             return false;
         }
         if (!methods_1.default(value, 'get')) {
