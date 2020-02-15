@@ -1,7 +1,7 @@
 # Logs
 .idea/
 dist/compiler-cache
-dist-spec/compiler-cache
+dist-spec
 logs
 *.log
 npm-debug.log*
