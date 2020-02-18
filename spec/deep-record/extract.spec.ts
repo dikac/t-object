@@ -29,12 +29,12 @@ describe('test', () => {
 
     let result = Extract<Data, 'data', typeof data>(data, 'data');
 
-    let c = result.property3.property2;
-
     it(`property valid`, () => {
 
-        expect(result.property1).toBe('a');
-        expect(result.property2).toBe('b');
+        expect(result.property1).toBe('a', 'property1');
+        expect(result.property2).toBe('b', 'property2');
+        expect(result.property3.property1).toBe('c', 'property3.property1');
+        expect(result.property3.property2).toBe('d', 'property3.property2');
     });
 
 

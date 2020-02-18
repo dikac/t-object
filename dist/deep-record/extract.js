@@ -11,43 +11,17 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const type_1 = require("../boolean/type");
     const empty_1 = require("../boolean/empty");
-    {
-        let original = {
-            data1: { data: 1 },
-            data2: { data: 1 },
-            data3: {
-                data1: { data: 1 },
-                data2: { data: 1 },
-                data3: {
-                    data1: { data: 1 },
-                    data2: { data: 1 },
-                }
-            }
-        };
-        let converted = {
-            data1: '1',
-            data2: '2',
-            data3: {
-                data1: 'a',
-                data2: 'a',
-                data3: {
-                    data1: 'a',
-                    data2: 'a',
-                }
-            }
-        };
-    }
-    // {
-    //     let original = [
-    //         1,2,3,[4,5]
-    //     ];
-    //
-    //
-    //
-    //     let converted : Convert2<string, number, DeepRecord<number>> = [
-    //         '1','2','3',['4','5']
-    //     ];
-    // }
+    /**
+     * get all {@link DeepRecord} value property and construct with the same structure with original
+     *
+     * @template Value - value for {@link DeepRecord}
+     * @template Container - object compatible with {@link DeepRecord}
+     * @template Key - property from {Value} to be extracted
+     *
+     * @param object - source, and structure
+     * @param property - property to be extracted
+     * @return value from {@link DeepRecord}
+     */
     function Extract(object, property) {
         let result = {};
         for (let prop in object) {
