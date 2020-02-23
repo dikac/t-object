@@ -1,13 +1,14 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Typescript object",
   "dependencies": {
+    "@dikac/t-validatable": "^0.8.0",
+    "@dikac/t-value": "^0.4.0",
     "is-empty-object": "^1.1.1",
     "utility-types": "^3.10.0"
   },
   "devDependencies": {
-    "@types/node": "^12.12.24",
     "typescript": "^3.7.4",
     "@types/jasmine": "^3.5.0",
     "npm-run-all": "^4.1.5",

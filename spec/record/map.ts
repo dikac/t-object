@@ -1,6 +1,4 @@
-import Extract from "../../dist/deep-record/extract";
-import {Return} from "../../dist/deep-record/extract";
-import Structure from "../../dist/boolean/structure";
+import Map from "../../dist/record/map";
 
 
 
@@ -27,7 +25,7 @@ describe('test', () => {
     };
 
 
-    let result = Extract<Data, 'data', typeof data>(data, 'data');
+    let result = Map<Data, string, typeof data>(data,  (v:any) : v is Data => v in v, (v:Data)=>v.data);
 
     it(`property valid`, () => {
 

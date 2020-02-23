@@ -1,7 +1,5 @@
-import Structure, {Validator} from "../dist/boolean/structure";
 import Mixin from "../dist/mixin";
 import {Mutable} from "utility-types";
-import * as util from "util";
 import {InspectOptions} from "util";
 it("force console log", () => { spyOn(console, 'log').and.callThrough()});
 
