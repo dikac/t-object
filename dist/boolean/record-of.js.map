@@ -1,1 +1,0 @@
-{"version":3,"file":"record-of.js","sourceRoot":"","sources":["../../src/boolean/record-of.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;OAEG;IACH,gBAAgB;IAChB,SAAwB,QAAQ,CAC5B,KAAc,EACd,SAA2C;QAG3C,KAAI,IAAI,QAAQ,IAAI,KAAK,EAAE;YAEvB,IAAG,CAAC,SAAS,CAAC,KAAK,CAAC,QAAQ,CAAC,CAAC,EAAE;gBAE5B,OAAO,KAAK,CAAC;aAChB;SACJ;QAED,OAAO,IAAI,CAAC;IAChB,CAAC;IAdD,2BAcC"}

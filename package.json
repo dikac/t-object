@@ -1,6 +1,6 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/t-validatable": "^0.8.0",
@@ -9,14 +9,14 @@
     "utility-types": "^3.10.0"
   },
   "devDependencies": {
-    "typescript": "^3.7.4",
-    "@types/jasmine": "^3.5.0",
-    "npm-run-all": "^4.1.5",
-    "json-properties-remover": "^0.1.2",
+    "@types/jasmine": "^3.5.6",
+    "cpy-cli": "^3.1.0",
     "jasmine": "^3.4.0",
+    "json-properties-remover": "^0.1.2",
     "move-cli": "^1.2.1",
-    "cpy-cli": "^3.0.0",
-    "rimraf": "^3.0.0"
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.4"
   },
   "scripts": {
     "spec-run": "jasmine --config=./jasmine.json",
