@@ -1,6 +1,6 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/t-validatable": "^0.8.0",

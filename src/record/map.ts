@@ -2,14 +2,7 @@ import Type from "../boolean/type";
 import Empty from "../boolean/empty";
 import Record from "./record";
 import PropertyActual from "../message/string/property-actual";
-
-/**
- * helper return type
- */
-export type Return<Value, Replace, Container extends Record<Value>> = {
-    [Key in keyof Container]: Container[Key] extends Record<Value> ? Return<Value, Replace, Container[Key]>  : Replace
-}
-
+import Convert from "./convert";
 
 /**
  * get all {@link Record} value property and construct with the same structure with original
@@ -26,8 +19,7 @@ export default function Map<Value, Replace, Container extends Record<Value>>(
     object : Container,
     validation : (value : any) => value is Value,
     replace : (value : Value) => Replace
-) : Return<Value, Replace , Container> {
-
+) : Convert<Value, Replace , Container> {
 
     let result : Record<Replace> = {};
 
@@ -54,6 +46,6 @@ export default function Map<Value, Replace, Container extends Record<Value>>(
         }
     }
 
-    return <Return<Value, Replace, Container>> result;
+    return <Convert<Value, Replace, Container>> result;
 }
 
