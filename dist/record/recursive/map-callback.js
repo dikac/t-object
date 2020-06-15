@@ -22,7 +22,7 @@
      */
     function MapCallback(object, validation, replace) {
         let result = {};
-        for (let property in object) {
+        for (const property in object) {
             const value = object[property];
             if (validation(value)) {
                 // @ts-ignore

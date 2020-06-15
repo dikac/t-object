@@ -20,7 +20,7 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 
     let result : Map<Replace, Value, Key, Object> = <Map<Replace, Value, Key, Object>>{};
 
-    for(let property in object) {
+    for(const property in object) {
 
         const value = object[property];
 
@@ -36,12 +36,10 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 
             if(!Empty(val)) {
 
-
                 result[property] = val;
             }
 
         } else {
-
 
             throw new Error(PropertyActual(property, 'valid against validation', result[property] + ''))
         }

@@ -12,7 +12,7 @@ describe("single dimension", function() {
 
     it("true", () => {
 
-        let result = Filter(record, (v:any) : boolean => v === true);
+        let result = Filter(record, (v:any) : v is boolean => typeof v === "boolean",(v:any) : boolean => v === true);
 
         expect(result.valid).toBe(true);
         expect(result.invalid).toBe(undefined);
@@ -21,7 +21,7 @@ describe("single dimension", function() {
 
     it("false", () => {
 
-        let result = Filter(record, (v:any) : boolean => v === false);
+        let result = Filter(record, (v:any) : v is boolean => typeof v === "boolean",(v:any) : boolean => v === false);
 
         expect(result.invalid).toBe(false);
         expect(result.valid).toBe(undefined);
@@ -29,7 +29,7 @@ describe("single dimension", function() {
 
     it("boolean", () => {
 
-        let result = Filter(record, (v:any) : boolean => typeof v === "boolean");
+        let result = Filter(record, (v:any) : v is boolean => typeof v === "boolean",(v:any) : boolean => typeof v === "boolean");
         expect(result.invalid).toBe(false);
         expect(result.valid).toBe(true);
     });
@@ -57,7 +57,7 @@ describe("multi dimension", function() {
 
     it("true", () => {
 
-        let result = Filter(record, (v:any) : boolean => v === true);
+        let result = Filter(record, (v:any) : v is boolean => typeof v === "boolean",(v:any) : boolean => v === true);
 
         expect(result.valid).toBe(true);
         expect(result.invalid).toBe(undefined);
@@ -82,7 +82,7 @@ describe("multi dimension", function() {
 
     it("false", () => {
 
-        let result = Filter(record, (v:any) : boolean => v === false);
+        let result = Filter(record, (v:any) : v is boolean => typeof v === "boolean", (v:any) : boolean => v === false);
 
         expect(result.invalid).toBe(false);
         expect(result.valid).toBe(undefined);
@@ -106,7 +106,7 @@ describe("multi dimension", function() {
 
     it("boolean", () => {
 
-        let result = Filter(record, (v:any) : boolean => typeof v === "boolean");
+        let result = Filter(record, (v:any) : v is boolean => typeof v === "boolean", (v:any) : boolean => typeof v === "boolean");
 
         expect(result.invalid).toBe(false);
         expect(result.valid).toBe(true);

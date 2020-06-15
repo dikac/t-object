@@ -14,16 +14,22 @@
     /**
      * recursively filter {@param record} value, returning new object with all value allowed
      * by {@param filter}
+     *
+     * {@param validation} is used to distinguish between value to be validated by {@param filter} or tobe called
+     * recursively
      */
-    function Filter(record, filter) {
+    function Filter(record, validation, filter) {
         let result = {};
-        for (let property in record) {
+        for (const property in record) {
             const value = record[property];
-            if (filter(value)) {
-                result[property] = value;
+            if (validation(value)) {
+                if (filter(value)) {
+                    // @ts-ignore
+                    result[property] = value;
+                }
             }
             else if (type_1.default(value)) {
-                const results = Filter(value, filter /*, validation*/);
+                const results = Filter(value, validation, filter);
                 if (!empty_1.default(results)) {
                     result[property] = results;
                 }
