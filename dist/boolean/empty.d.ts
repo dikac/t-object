@@ -1,1 +1,4 @@
-export default function Empty(value: any): value is object;
+/**
+ * check if object is empty (contain zero property & method)
+ */
+export default function Empty(value: object): boolean;
