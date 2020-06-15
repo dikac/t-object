@@ -11,7 +11,9 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     function AssignUndefined(target, source) {
         for (let property in source) {
+            // @ts-ignore
             if (target[property] === undefined) {
+                // @ts-ignore
                 target[property] = source[property];
             }
         }

@@ -1,3 +1,6 @@
-export default interface Property<P extends string | number | symbol> {
-    property: P;
+/**
+ * intended to contain object property type
+ */
+export default interface Property<Prop extends string | number | symbol> {
+    property: Prop;
 }

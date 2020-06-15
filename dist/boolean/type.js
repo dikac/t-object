@@ -9,6 +9,11 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * Check if {@param value} is object and not null
+     *
+     * {@template Assumption} can be used for type guard if object type is known
+     */
     function Type(value) {
         if (value === null) {
             return false;

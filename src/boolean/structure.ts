@@ -1,14 +1,20 @@
 
-export type Validator<Type extends object> = {[Key in keyof Type] : (value : Type[Key])=>boolean};
+export type Validation<Type extends object> = {
+    [Key in keyof Type] : (value : Type[Key]) => boolean
+};
 
-export default function Structure<Type extends object>(
+/**
+ * Check if {@param value} key and value valid according to {@param validation}
+ * {@param validation} value is used for check {@param value} under the same property name
+ */
+export default function Structure<Type extends object, V extends Validation<Type> = Validation<Type>>(
     value : any,
-    validators : Validator<Type>
+    validation : V
 ) : value is Type {
 
-    for (let property in validators) {
+    for (let property in validation) {
 
-        let validator = validators[property];
+        let validator = validation[property];
 
         if(!validator(value[property])) {
 

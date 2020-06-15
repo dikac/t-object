@@ -1,51 +1,25 @@
-import Type from "../boolean/type";
-import Empty from "../boolean/empty";
-import Record from "./record";
-import PropertyActual from "../message/string/property-actual";
-import Convert from "./convert";
+import Value from "./infer/value";
 
 /**
- * get all {@link Record} value property and construct with the same structure with original
+ * Calls {@param replace} on each property value from {@param object} recursively
  *
- * @template Value - value for {@link Record}
- * @template Container - object compatible with {@link Record}
- * @template Replace - new value to be used to replace {@link Value}
- *
- * @param object
- * @param validation
- * @param replace
+ * {@template Replace} type of replace result
  */
-export default function Map<Value, Replace, Container extends Record<Value>>(
-    object : Container,
-    validation : (value : any) => value is Value,
-    replace : (value : Value) => Replace
-) : Convert<Value, Replace , Container> {
+export default function Map<Replace, Object extends Record<any, any>>(
+    object : Object,
+    replace : (value : Value<Object>) => Replace
+) : Record<keyof Object, Replace> {
 
-    let result : Record<Replace> = {};
+    let result : Record<keyof Object, Replace> = <Record<keyof Object, Replace>>{};
 
     for(let property in object) {
 
         const value = object[property];
 
-        if(validation(value)) {
+        result[property] = replace(value);
 
-            result[property] = replace(value);
-
-        } else if(Type(value)) {
-
-            const val = Map(<Record<Value>>value, validation, replace);
-
-            if(!Empty(val)) {
-
-                result[property] = val;
-            }
-
-        } else {
-
-            throw new Error(PropertyActual(property, 'valid against validation', result[property] + ''))
-        }
     }
 
-    return <Convert<Value, Replace, Container>> result;
+    return  result;
 }
 

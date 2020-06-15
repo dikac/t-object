@@ -6,12 +6,14 @@
     "@dikac/t-validatable": "^0.8.0",
     "@dikac/t-value": "^0.4.0",
     "is-empty-object": "^1.1.1",
-    "utility-types": "^3.10.0"
+    "utility-types": "^3.10.0",
+    "@dikac/t-message": "git+file:///b:/t-boolean"
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.6",
     "cpy-cli": "^3.1.0",
     "jasmine": "^3.4.0",
+    "jasmine-ts-console-reporter": "^3.1.1",
     "json-properties-remover": "^0.1.2",
     "move-cli": "^1.2.1",
     "npm-run-all": "^4.1.5",
@@ -19,7 +21,7 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "spec-run": "jasmine --config=./jasmine.json",
+    "spec-run": "jasmine --reporter=jasmine-ts-console-reporter --config=./jasmine.json",
     "spec": "npm-run-all spec-compile spec-run",
     "spec-compile": "npm-run-all --parallel spec-compile-script ",
     "spec-compile-watch": "npm-run-all --parallel spec-compile-watch-script",

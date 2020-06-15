@@ -1,3 +1,5 @@
-import { DeepPartial } from "utility-types";
-import Record from "./record";
-export default function Filter<V, O extends Record<V> = Record<V>>(record: O, filter: (val: V) => boolean, validation: (val: any) => val is V): DeepPartial<O>;
+import Value from "./infer/value";
+/**
+ * Add {@link Record} type to {@link ObjectFilter}
+ */
+export default function Filter<O extends Record<keyof any, any>>(record: O, filter: (val: Value<O>) => boolean): Partial<O>;

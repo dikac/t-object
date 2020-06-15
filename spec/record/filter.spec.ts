@@ -1,176 +1,27 @@
-import Filter from "../../dist/record/filter";
+import Filter from "../../dist/filter";
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let record = {
+it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
-    valid : true,
-    invalid : false,
-    valids : {
-        valid1 : true,
-        valid2 : true,
-    },
-    invalids : {
-        invalid1 : false,
-        invalid2 : false,
-    },
-    mixed : {
-        valid : true,
-        invalid : false,
-    }
+
+
+let data = {
+    property1 : 'a',
+    property2 : 'a',
+    property3 : 'b',
+    property4 : 'c',
 };
 
-describe("invalid", function() {
+describe('test', function () {
 
-    let result = Filter(record, (v:boolean)=>v,(v:any) : v is boolean => typeof v === "boolean");
+    let result = Filter(data,  (v:string)  => v==='a');
 
-    it("valid", () => {
+    it(`check value`, () => {
 
-        if(result.valid) {
-
-            expect(result.valid).toBe(true);
-
-        } else {
-
-            fail('property is not exits')
-        }
+        expect(result.property1).toBe('a', 'property1');
+        expect(result.property2).toBe('a', 'property2');
+        expect(result.property3).toBeUndefined();
+        expect(result.property4).toBeUndefined();
     });
-
-    it("invalid", () => {
-
-        expect(result.invalid).toBeUndefined();
-    });
-
-    describe("valids", () => {
-
-        it("valid1", () => {
-
-            if(result.valids && result.valids.valid1) {
-
-                expect(result.valids.valid1).toBe(true);
-
-            } else {
-
-                fail('property is not exits')
-            }
-        });
-
-        it("valid2", () => {
-
-            if(result.valids && result.valids.valid2) {
-
-                expect(result.valids.valid2).toBe(true);
-
-            } else {
-
-                fail('property is not exits')
-            }
-        });
-    });
-
-    it("invalids", () => {
-
-        expect(result.invalids).toBeUndefined();
-    });
-
-
-    it("mixed", () => {
-
-        if(result.mixed) {
-
-            if(result.mixed.valid) {
-
-                expect(result.mixed.valid).toBe(true);
-
-            } else {
-
-                fail('property is not exits')
-            }
-
-            expect(result.mixed.invalid).toBeUndefined();
-
-        } else {
-
-            fail('property is not exits')
-        }
-    });
-
 });
 
-
-describe("valid", function() {
-
-    let result = Filter(record, (v:boolean)=>v, (v:any) : v is boolean => typeof v === "boolean");
-
-    it("valid", () => {
-
-        if(result.valid) {
-
-            expect(result.valid).toBe(true);
-
-        } else {
-
-            fail('property is not exits')
-        }
-    });
-
-    it("invalid", () => {
-
-        expect(result.invalid).toBeUndefined();
-    });
-
-    describe("valids", () => {
-
-        it("valid1", () => {
-
-            if(result.valids && result.valids.valid1) {
-
-                expect(result.valids.valid1).toBe(true);
-
-            } else {
-
-                fail('property is not exits')
-            }
-        });
-
-        it("valid2", () => {
-
-            if(result.valids && result.valids.valid2) {
-
-                expect(result.valids.valid2).toBe(true);
-
-            } else {
-
-                fail('property is not exits')
-            }
-        });
-    });
-
-    it("invalids", () => {
-
-        expect(result.invalids).toBeUndefined();
-    });
-
-
-    it("mixed", () => {
-
-        if(result.mixed) {
-
-            if(result.mixed.valid) {
-
-                expect(result.mixed.valid).toBe(true);
-
-            } else {
-
-                fail('property is not exits')
-            }
-
-            expect(result.mixed.invalid).toBeUndefined();
-
-        } else {
-
-            fail('property is not exits')
-        }
-    });
-
-});

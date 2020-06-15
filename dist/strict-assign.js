@@ -10,14 +10,11 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
-     * Strict assign
-     *
-     * @param object
-     * @param data
-     * @constructor
+     * Assign {@param source} to {@param target}
+     * {@param source} must have the same or partial type of {@param source}
      */
-    function StrictAssign(object, data) {
-        return Object.assign(object, data);
+    function StrictAssign(target, source) {
+        return Object.assign(target, source);
     }
     exports.default = StrictAssign;
 });

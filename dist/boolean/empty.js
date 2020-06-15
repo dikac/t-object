@@ -10,6 +10,9 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const IsEmptyObject = require("is-empty-object");
+    /**
+     * check if object is empty (contain zero property & method)
+     */
     function Empty(value) {
         return IsEmptyObject(value);
     }

@@ -10,6 +10,9 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const isPlainObject = require("is-plain-object");
+    /**
+     * Check if plain object ({})
+     */
     function Plain(value) {
         return isPlainObject(value);
     }

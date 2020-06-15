@@ -9,9 +9,13 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function Structure(value, validators) {
-        for (let property in validators) {
-            let validator = validators[property];
+    /**
+     * Check if {@param value} key and value valid according to {@param validation}
+     * {@param validation} value is used for check {@param value} under the same property name
+     */
+    function Structure(value, validation) {
+        for (let property in validation) {
+            let validator = validation[property];
             if (!validator(value[property])) {
                 return false;
             }

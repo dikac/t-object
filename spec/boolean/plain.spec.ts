@@ -1,6 +1,6 @@
 import Plain from "../../dist/boolean/plain";
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
 describe('test', () => {
 
