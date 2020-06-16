@@ -4,15 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./property-actual"], factory);
+        define(["require", "exports"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_actual_1 = require("./property-actual");
-    function PropertyActualObject(data) {
-        return property_actual_1.default(data.property, data.type, data.value);
+    function Property(property, type) {
+        return `property '${property}' expect '${type}'`;
     }
-    exports.default = PropertyActualObject;
+    exports.default = Property;
 });
-//# sourceMappingURL=property-actual-object.js.map
+//# sourceMappingURL=recursive-type.js.map

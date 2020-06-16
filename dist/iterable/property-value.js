@@ -12,11 +12,11 @@
     /**
      * iterate {@param object} property and value in array form
      */
-    function* ObjectProperty(object) {
+    function* PropertyValue(object) {
         for (const property in object) {
             yield [property, object[property]];
         }
     }
-    exports.default = ObjectProperty;
+    exports.default = PropertyValue;
 });
 //# sourceMappingURL=property-value.js.map

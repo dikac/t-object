@@ -1,7 +1,7 @@
 import {DeepPartial} from "utility-types";
 import Record from "./record";
 import Empty from "../../boolean/empty";
-import Type from "../../boolean/type";
+import ObjectType from "../../boolean/type";
 import Value from "../infer/value";
 
 /**
@@ -34,7 +34,7 @@ export default function Filter<
                 result[property] = value;
             }
 
-        } else if(Type(value)) {
+        } else if(ObjectType(value)) {
 
             const results =  Filter(value, validation, filter);
 

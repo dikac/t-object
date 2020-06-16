@@ -1,0 +1,1 @@
+export default function Type<Value, Key extends string | number | symbol = string | number | symbol>(obj: object, value: (value: any) => value is Value, property?: (value: string | number | symbol) => value is Key): obj is Record<Key, Value>;
