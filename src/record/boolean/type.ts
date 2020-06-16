@@ -1,7 +1,11 @@
 import PropertyValue from "../../iterable/property-value";
 import PropertyType from "../../property/boolean/type";
 
-
+/**
+ * check if {@param obj} is certain type of record
+ * {@param value} use to validate object value
+ * optionally {@param property} use to validate object property
+ */
 export default function Type<
     Value,
     Key extends string|number|symbol = string|number|symbol
