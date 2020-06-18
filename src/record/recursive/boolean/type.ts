@@ -3,7 +3,7 @@ import RecordInterface from "../record";
 import PropertyType from "../../../property/boolean/type";
 
 /**
- * Check if {@param record} is {@link RecordInterface} with {@template Value}
+ * Check if {@param record} is {@link RecordInterface} with {@template Value} value
  *
  * {@param validation} is use to validate for {@template Value}
  * optionally {@param prop} use to validate object property
@@ -40,7 +40,7 @@ export default function Type<
 
         if(TypeObject(value)) {
 
-            if(Type(value, validation)) {
+            if(Type(value, validation, prop)) {
 
                 continue;
             }
