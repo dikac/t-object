@@ -1,6 +1,6 @@
 import RecordInterface from "../record";
 /**
- * Check if {@param record} is {@link RecordInterface} with {@template Value}
+ * Check if {@param record} is {@link RecordInterface} with {@template Value} value
  *
  * {@param validation} is use to validate for {@template Value}
  * optionally {@param prop} use to validate object property

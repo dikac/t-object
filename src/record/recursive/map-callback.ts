@@ -36,6 +36,7 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 
             if(!Empty(val)) {
 
+                // @ts-ignore
                 result[property] = val;
             }
 

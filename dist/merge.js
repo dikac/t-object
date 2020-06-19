@@ -16,8 +16,13 @@
      * Merge object property, symbol and method, the latter object will replace former
      */
     function Merge(...objects) {
+        switch (objects.length) {
+            case 0: return {};
+            case 1: return objects.pop();
+        }
         // assign value
-        let target = Object.assign({}, ...objects);
+        // @ts-ignore
+        let target = Object.assign(...objects);
         // populate descriptor
         let descriptors = new Map();
         for (let object of objects) {

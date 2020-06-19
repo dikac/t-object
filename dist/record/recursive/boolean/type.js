@@ -12,7 +12,7 @@
     const type_1 = require("../../../boolean/type");
     const type_2 = require("../../../property/boolean/type");
     /**
-     * Check if {@param record} is {@link RecordInterface} with {@template Value}
+     * Check if {@param record} is {@link RecordInterface} with {@template Value} value
      *
      * {@param validation} is use to validate for {@template Value}
      * optionally {@param prop} use to validate object property
@@ -31,7 +31,7 @@
                 continue;
             }
             if (type_1.default(value)) {
-                if (Type(value, validation)) {
+                if (Type(value, validation, prop)) {
                     continue;
                 }
             }

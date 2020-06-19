@@ -32,6 +32,7 @@
                 // @ts-ignore
                 const val = MapCallback(value, validation, replace);
                 if (!empty_1.default(val)) {
+                    // @ts-ignore
                     result[property] = val;
                 }
             }

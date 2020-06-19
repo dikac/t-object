@@ -10,8 +10,14 @@ import Set from "./descriptor/set/set";
  */
 export default function Merge<Objects extends object[]>(...objects : Objects) : UnionToIntersection<ValuesType<Objects>> {
 
+    switch(objects.length) {
+        case 0 : return <UnionToIntersection<ValuesType<Objects>>>{};
+        case 1 : return <UnionToIntersection<ValuesType<Objects>>>objects.pop();
+    }
+
     // assign value
-    let target = Object.assign({}, ...objects);
+    // @ts-ignore
+    let target = Object.assign(...objects);
 
     // populate descriptor
     let descriptors : Map<string|number|symbol, PropertyDescriptor> = new Map<string|number|symbol, PropertyDescriptor>();
