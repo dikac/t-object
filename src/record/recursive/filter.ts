@@ -3,6 +3,7 @@ import Record from "./record";
 import Empty from "../../boolean/empty";
 import ObjectType from "../../boolean/type";
 import Value from "../infer/value";
+import Pair from "./iterable/pair";
 
 /**
  * recursively filter {@param record} value, returning new object with all value allowed
@@ -20,7 +21,10 @@ export default function Filter<
     filter : (value : Type) => boolean,
 ) : DeepPartial<Object> {
 
+    let pair = new Pair(record, validation);
+
     let result : DeepPartial<Object> = <DeepPartial<Object>>{};
+
 
     for(const property in record) {
 

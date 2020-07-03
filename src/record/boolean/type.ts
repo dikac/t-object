@@ -1,5 +1,5 @@
-import PropertyValue from "../../iterable/property-value";
-import PropertyType from "../../property/boolean/type";
+import Pair from "../../iterable/pair";
+import PropertyType from "../../key/boolean/type";
 
 /**
  * check if {@param obj} is certain type of record
@@ -15,7 +15,7 @@ export default function Type<
     property : (value : string|number|symbol) => value is Key = PropertyType,
 ) : obj is Record<Key, Value> {
 
-    for(const [prop, val] of PropertyValue(obj)) {
+    for(const [prop, val] of Pair(obj)) {
 
         if(!property(prop)) {
 

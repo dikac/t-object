@@ -4,14 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../boolean/type", "../../boolean/empty", "../../message/string/property-actual"], factory);
+        define(["require", "exports", "../../boolean/type", "../../boolean/empty", "../../string/invalid-type"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const type_1 = require("../../boolean/type");
     const empty_1 = require("../../boolean/empty");
-    const property_actual_1 = require("../../message/string/property-actual");
+    const invalid_type_1 = require("../../string/invalid-type");
     /**
      * Calls {@param replace} on each property value from {@param object} recursively
      *
@@ -37,7 +37,10 @@
                 }
             }
             else {
-                throw new Error(property_actual_1.default(property, 'valid against validation', result[property] + ''));
+                throw new Error(invalid_type_1.default({
+                    value: this.validation.toString(),
+                    property: property
+                }));
             }
         }
         return result;

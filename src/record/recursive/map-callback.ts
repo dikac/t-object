@@ -1,8 +1,9 @@
 import Type from "../../boolean/type";
 import Empty from "../../boolean/empty";
 import Record from "./record";
-import PropertyActual from "../../message/string/property-actual";
+import PropertyActual from "../../string/property-actual";
 import Map from "./map";
+import InvalidType from "../../string/invalid-type";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -19,6 +20,7 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 ) : Map<Replace, Value, Key, Object> {
 
     let result : Map<Replace, Value, Key, Object> = <Map<Replace, Value, Key, Object>>{};
+
 
     for(const property in object) {
 
@@ -42,7 +44,10 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 
         } else {
 
-            throw new Error(PropertyActual(property, 'valid against validation', result[property] + ''))
+            throw new Error(InvalidType({
+                value : this.validation.toString(),
+                property : property
+            }))
         }
     }
 

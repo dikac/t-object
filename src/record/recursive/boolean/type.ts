@@ -1,6 +1,6 @@
 import TypeObject from "../../../boolean/type";
 import RecordInterface from "../record";
-import PropertyType from "../../../property/boolean/type";
+import PropertyType from "../../../key/boolean/type";
 
 /**
  * Check if {@param record} is {@link RecordInterface} with {@template Value} value

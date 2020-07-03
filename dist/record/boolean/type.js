@@ -4,20 +4,20 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../iterable/property-value", "../../property/boolean/type"], factory);
+        define(["require", "exports", "../../iterable/pair", "../../key/boolean/type"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_value_1 = require("../../iterable/property-value");
-    const type_1 = require("../../property/boolean/type");
+    const pair_1 = require("../../iterable/pair");
+    const type_1 = require("../../key/boolean/type");
     /**
      * check if {@param obj} is certain type of record
      * {@param value} use to validate object value
      * optionally {@param property} use to validate object property
      */
     function Type(obj, value, property = type_1.default) {
-        for (const [prop, val] of property_value_1.default(obj)) {
+        for (const [prop, val] of pair_1.default(obj)) {
             if (!property(prop)) {
                 return false;
             }

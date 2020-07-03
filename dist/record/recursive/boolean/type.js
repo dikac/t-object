@@ -4,13 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../../boolean/type", "../../../property/boolean/type"], factory);
+        define(["require", "exports", "../../../boolean/type", "../../../key/boolean/type"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const type_1 = require("../../../boolean/type");
-    const type_2 = require("../../../property/boolean/type");
+    const type_2 = require("../../../key/boolean/type");
     /**
      * Check if {@param record} is {@link RecordInterface} with {@template Value} value
      *
