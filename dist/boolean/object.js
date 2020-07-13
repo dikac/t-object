@@ -14,12 +14,12 @@
      *
      * {@template Assumption} can be used for type guard if object type is known
      */
-    function Object(value) {
+    function Object_(value) {
         if (value === null) {
             return false;
         }
         return typeof value === "object";
     }
-    exports.default = Object;
+    exports.default = Object_;
 });
 //# sourceMappingURL=object.js.map

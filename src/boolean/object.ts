@@ -3,7 +3,7 @@
  *
  * {@template Assumption} can be used for type guard if object type is known
  */
-export default function Object<
+export default function Object_<
     Assumption extends object
 >(value : any) : value is Assumption {
 
