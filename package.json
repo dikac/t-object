@@ -5,8 +5,6 @@
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
     "@dikac/t-boolean": "git+file:///b:/t-boolean",
-    "@dikac/t-type": "git+file:///b:/t-type",
-    "@dikac/t-validatable": "git+file:///b:/t-validatable",
     "@dikac/t-value": "git+file:///b:/t-value",
     "is-empty-object": "^1.1.1",
     "ts-toolbelt": "^6.12.1",
