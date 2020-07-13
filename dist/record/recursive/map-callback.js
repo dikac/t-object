@@ -4,12 +4,11 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../boolean/type", "../../boolean/empty", "../../string/invalid-type"], factory);
+        define(["require", "exports", "../../boolean/empty", "../../string/invalid-type"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const type_1 = require("../../boolean/type");
     const empty_1 = require("../../boolean/empty");
     const invalid_type_1 = require("../../string/invalid-type");
     /**
@@ -28,7 +27,7 @@
                 // @ts-ignore
                 result[property] = replace(value);
             }
-            else if (type_1.default(value)) {
+            else if (Object(value)) {
                 // @ts-ignore
                 const val = MapCallback(value, validation, replace);
                 if (!empty_1.default(val)) {

@@ -4,13 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../boolean/empty", "../../boolean/type", "./iterable/pair"], factory);
+        define(["require", "exports", "../../boolean/empty", "../../boolean/object", "./iterable/pair"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const empty_1 = require("../../boolean/empty");
-    const type_1 = require("../../boolean/type");
+    const object_1 = require("../../boolean/object");
     const pair_1 = require("./iterable/pair");
     /**
      * recursively filter {@param record} value, returning new object with all value allowed
@@ -30,7 +30,7 @@
                     result[property] = value;
                 }
             }
-            else if (type_1.default(value)) {
+            else if (object_1.default(value)) {
                 const results = Filter(value, validation, filter);
                 if (!empty_1.default(results)) {
                     result[property] = results;

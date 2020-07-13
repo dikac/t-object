@@ -1,5 +1,4 @@
 import Pair from "../../../../dist/record/recursive/iterable/pair";
-import Filter from "../../../../dist/record/recursive/filter";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 

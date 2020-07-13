@@ -1,3 +1,3 @@
-import { Required } from "utility-types";
-declare type Get = Required<Omit<PropertyDescriptor, 'value'>, 'get' | 'enumerable' | 'configurable'>;
+import { Object } from "ts-toolbelt";
+declare type Get = Object.Required<Omit<PropertyDescriptor, 'value'>, 'get' | 'enumerable' | 'configurable'>;
 export default Get;

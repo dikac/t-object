@@ -1,5 +1,7 @@
-import {Required} from "utility-types";
+import {Object} from "ts-toolbelt";
 
-type Get = Required<Omit<PropertyDescriptor,'value'>,'get'|'enumerable'|'configurable'>
+type Get = Object.Required<Omit<PropertyDescriptor,'value'>,'get'|'enumerable'|'configurable'>
 
 export default Get;
+
+

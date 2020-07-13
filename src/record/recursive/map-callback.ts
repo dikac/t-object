@@ -1,7 +1,5 @@
-import Type from "../../boolean/type";
 import Empty from "../../boolean/empty";
 import Record from "./record";
-import PropertyActual from "../../string/property-actual";
 import Map from "./map";
 import InvalidType from "../../string/invalid-type";
 
@@ -31,7 +29,7 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
             // @ts-ignore
             result[property] = replace(value);
 
-        } else if(Type(value)) {
+        } else if(Object(value)) {
 
             // @ts-ignore
             const val = MapCallback(value, validation, replace);

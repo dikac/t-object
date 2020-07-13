@@ -1,8 +1,4 @@
 import Record from "../record";
-import {DeepPartial} from "utility-types";
-import ObjectType from "../../../boolean/type";
-import Empty from "../../../boolean/empty";
-import Property from "../../infer/property";
 import Pair from "./pair";
 
 export default class Value<

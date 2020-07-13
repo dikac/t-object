@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../../boolean/type", "../../../string/invalid-type"], factory);
+        define(["require", "exports", "../../../boolean/object", "../../../string/invalid-type"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const type_1 = require("../../../boolean/type");
+    const object_1 = require("../../../boolean/object");
     const invalid_type_1 = require("../../../string/invalid-type");
     class Pair {
         constructor(record, validation) {
@@ -24,7 +24,7 @@
                 if (this.validation(value)) {
                     yield [properties, value];
                 }
-                else if (type_1.default(value)) {
+                else if (object_1.default(value)) {
                     let recursive = new Pair(value, this.validation);
                     recursive.keys.push(...properties);
                     yield* recursive;

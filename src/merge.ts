@@ -1,6 +1,6 @@
 import { UnionToIntersection, ValuesType } from 'utility-types';
-import GetterType from "./descriptor/get/boolean/type";
-import SetterType from "./descriptor/set/boolean/type";
+import GetterType from "./descriptor/get/boolean/descriptor";
+import SetterType from "./descriptor/set/boolean/descriptor";
 import MergeDescriptor from "./descriptor/merge";
 import Get from "./descriptor/get/get";
 import Set from "./descriptor/set/set";

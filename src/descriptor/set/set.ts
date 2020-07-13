@@ -1,5 +1,5 @@
-import {Required} from "utility-types";
+import {Object} from "ts-toolbelt";
 
-type Set = Required<Omit<PropertyDescriptor,'value'>,'set'|'enumerable'|'configurable'>
+type Set = Object.Required<Omit<PropertyDescriptor,'value'>,'set'|'enumerable'|'configurable'>
 
 export default Set;

@@ -1,9 +1,8 @@
-import {DeepPartial} from "utility-types";
 import Record from "./record";
 import Empty from "../../boolean/empty";
-import ObjectType from "../../boolean/type";
-import Value from "../infer/value";
+import ObjectType from "../../boolean/object";
 import Pair from "./iterable/pair";
+import {O} from "ts-toolbelt";
 
 /**
  * recursively filter {@param record} value, returning new object with all value allowed
@@ -19,11 +18,11 @@ export default function Filter<
     record : Object,
     validation : (value : any) => value is Type,
     filter : (value : Type) => boolean,
-) : DeepPartial<Object> {
+) : O.Partial<Object, 'deep'> {
 
     let pair = new Pair(record, validation);
 
-    let result : DeepPartial<Object> = <DeepPartial<Object>>{};
+    let result : O.Partial<Object, 'deep'> = <O.Partial<Object, 'deep'>>{};
 
 
     for(const property in record) {
@@ -49,5 +48,5 @@ export default function Filter<
         }
     }
 
-    return <DeepPartial<Object>> result;
+    return result;
 }

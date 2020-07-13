@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./boolean/type"], factory);
+        define(["require", "exports", "./boolean/object"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const type_1 = require("./boolean/type");
+    const object_1 = require("./boolean/object");
     function FilterRecursive(record, validation) {
         let result = {};
         for (let property in record) {
@@ -18,7 +18,7 @@
                 // @ts-ignore
                 result[property] = value;
             }
-            else if (type_1.default(value)) {
+            else if (object_1.default(value)) {
                 // @ts-ignore
                 result[property] = FilterRecursive(value, validation);
             }

@@ -1,14 +1,14 @@
-import {DeepPartial} from "utility-types";
-import Type from "./boolean/type";
+import ObjectGuard from "./boolean/object";
+import {Object} from "ts-toolbelt";
 
 export default function FilterRecursive<
     O extends object = object
     >(
     record : O,
     validation : (val : any) => boolean,
-) : DeepPartial<O> {
+) : Object.Partial<O, 'deep'> {
 
-    let result : DeepPartial<O> = <DeepPartial<O>>{};
+    let result : Object.Partial<O, 'deep'> = <Object.Partial<O, 'deep'>>{};
 
     for(let property in record) {
 
@@ -19,7 +19,7 @@ export default function FilterRecursive<
             // @ts-ignore
             result[property] = value;
 
-        } else if(Type(value)) {
+        } else if(ObjectGuard(value)) {
 
              // @ts-ignore
              result[property] = FilterRecursive(value, validation);
@@ -29,3 +29,5 @@ export default function FilterRecursive<
 
     return  result;
 }
+
+
