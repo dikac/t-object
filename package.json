@@ -1,6 +1,6 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.17.1",
+  "version": "0.17.2",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
@@ -30,7 +30,7 @@
     "spec-compile-watch-script": "tsc -w -p tsconfig-spec.json",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "release": "remove-json-properties dist/package.json private",
+    "release": "remove-json-properties dist/package.json private scripts.postinstall scripts.deploy dependencies.@dikac/deployer",
     "postrelease": "npm publish dist",
     "prerelease": "cpy     package.json package-lock.json LICENSE Readme.md .npmignore dist",
     "postpublish": "rimraf package.json package-lock.json LICENSE Readme.md .npmignore",
