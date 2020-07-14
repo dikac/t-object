@@ -1,4 +1,5 @@
 import Value from "./infer/value";
+import Fn from "@dikac/t-function/function";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -7,7 +8,7 @@ import Value from "./infer/value";
  */
 export default function Map<Replace, Object extends Record<any, any>>(
     object : Object,
-    replace : (value : Value<Object>) => Replace
+    replace : Fn<[Value<Object>], Replace>
 ) : Record<keyof Object, Replace> {
 
     let result : Record<keyof Object, Replace> = <Record<keyof Object, Replace>>{};

@@ -1,5 +1,6 @@
 import Pair from "../../iterable/pair";
 import PropertyType from "../../key/boolean/key";
+import Guard from "@dikac/t-function/boolean/guard";
 
 /**
  * check if {@param obj} is certain type of record
@@ -11,8 +12,8 @@ export default function Record<
     Key extends string|number|symbol = string|number|symbol
 >(
     obj : object,
-    value : (value : any) => value is Value,
-    property : (value : string|number|symbol) => value is Key = PropertyType,
+    value : Guard<any, Value>,
+    property : Guard<string|number|symbol, Key> = PropertyType,
 ) : obj is Record<Key, Value> {
 
     for(const [prop, val] of Pair(obj)) {

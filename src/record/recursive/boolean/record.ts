@@ -1,6 +1,7 @@
 import TypeObject from "../../../boolean/object";
 import RecordInterface from "../record";
 import PropertyType from "../../../key/boolean/key";
+import Guard from "@dikac/t-function/boolean/guard";
 
 /**
  * Check if {@param record} is {@link RecordInterface} with {@template Value} value
@@ -14,8 +15,8 @@ export default function Record<
     Key extends string|number|symbol = string|number|symbol
 >(
     record : any,
-    validation : (value : any) => value is Value,
-    prop : (value : string|number|symbol) => value is Key = PropertyType,
+    validation : Guard<any,  Value>,
+    prop : Guard<string|number|symbol,  Key> = PropertyType,
 ) : record is Assumption {
 
     if(!TypeObject(record)) {

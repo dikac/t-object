@@ -1,6 +1,7 @@
+import Fn from "@dikac/t-function/function";
 
 export type Validation<Type extends object> = {
-    [Key in keyof Type] : (value : Type[Key]) => boolean
+    [Key in keyof Type] : Fn<[Type[Key]], boolean>
 };
 
 /**

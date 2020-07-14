@@ -1,3 +1,6 @@
+import Guard from "@dikac/t-function/boolean/guard";
+import Fn from "@dikac/t-function/function";
+
 /**
  * Parse json string to object and check for certain type according to {@param validator}
  * @param json
@@ -8,9 +11,9 @@
  */
 export default function GuardedJson<Type>(
     json : {toString:()=>string}|string,
-    validator : (object : any) => object is Type,
-    error : (json : string, object : object) => Error = (json : string, object : object) => new TypeError('json string is not valid according to validator'),
-    preprocess : (object:{[Key in keyof Type] : Type[Key]}) => void = () => {}
+    validator : Guard<any, Type>,
+    error : Fn<[string, object], Error> = (json : string, object : object) => new TypeError('json string is not valid according to validator'),
+    preprocess : Fn<[{[Key in keyof Type] : Type[Key]}], void> = () => {}
 ) : Type {
 
     let string = json.toString();

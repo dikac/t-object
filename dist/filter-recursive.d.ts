@@ -1,2 +1,3 @@
 import { Object } from "ts-toolbelt";
-export default function FilterRecursive<O extends object = object>(record: O, validation: (val: any) => boolean): Object.Partial<O, 'deep'>;
+import Function from "@dikac/t-function/function";
+export default function FilterRecursive<O extends object = object>(record: O, validation: Function<[any], boolean>): Object.Partial<O, 'deep'>;

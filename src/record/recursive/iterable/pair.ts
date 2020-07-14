@@ -3,6 +3,7 @@ import ObjectType from "../../../boolean/object";
 import Property from "../../infer/property";
 import PropertyValueValidation from "../../../assert/throwable/property-value-validation";
 import Name from "../../../string/name";
+import Guard from "@dikac/t-function/boolean/guard";
 
 export default class Pair<
     Type,
@@ -15,7 +16,7 @@ export default class Pair<
 
     constructor(
         public record : Object,
-        public validation : (value : any) => value is Type,
+        public validation : Guard<any, Type>,
     ) {
 
     }

@@ -3,6 +3,8 @@ import Empty from "../../boolean/empty";
 import ObjectType from "../../boolean/object";
 import Pair from "./iterable/pair";
 import {O} from "ts-toolbelt";
+import Fn from "@dikac/t-function/function";
+import Guard from "@dikac/t-function/boolean/guard";
 
 /**
  * recursively filter {@param record} value, returning new object with all value allowed
@@ -16,14 +18,13 @@ export default function Filter<
     Object extends Record<keyof any, Type> = Record<keyof any, Type>
 >(
     record : Object,
-    validation : (value : any) => value is Type,
-    filter : (value : Type) => boolean,
+    validation : Guard<any, Type>,
+    filter : Fn<[Type], boolean>,
 ) : O.Partial<Object, 'deep'> {
 
     let pair = new Pair(record, validation);
 
     let result : O.Partial<Object, 'deep'> = <O.Partial<Object, 'deep'>>{};
-
 
     for(const property in record) {
 

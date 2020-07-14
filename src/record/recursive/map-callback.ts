@@ -3,6 +3,8 @@ import Record from "./record";
 import Map from "./map";
 import PropertyValueValidation from "../../assert/throwable/property-value-validation";
 import Name from "../../string/name";
+import Function from "@dikac/t-function/function";
+import Guard from "@dikac/t-function/boolean/guard";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -14,8 +16,8 @@ import Name from "../../string/name";
  */
 export default function MapCallback<Replace, Value, Key extends keyof any = keyof any, Object extends Record<Key, Value> = Record<Key, Value>>(
     object : Object,
-    validation : (value : any) => value is Value,
-    replace : (value : Value) => Replace
+    validation : Guard<any, Value>,
+    replace : Function<[Value], Replace>
 ) : Map<Replace, Value, Key, Object> {
 
     let result : Map<Replace, Value, Key, Object> = <Map<Replace, Value, Key, Object>>{};

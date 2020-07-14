@@ -1,6 +1,7 @@
 import Record from "../record";
 import PropertyInfer from "../../infer/property";
 import Pair from "./pair";
+import Guard from "@dikac/t-function/boolean/guard";
 
 export default class Property<
     Type,
@@ -13,7 +14,7 @@ export default class Property<
 
     constructor(
         public record : Object,
-        public validation : (value : any) => value is Type,
+        public validation : Guard<any, Type>,
     ) {
 
     }
