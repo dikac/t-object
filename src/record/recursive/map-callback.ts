@@ -1,7 +1,8 @@
 import Empty from "../../boolean/empty";
 import Record from "./record";
 import Map from "./map";
-import InvalidType from "../../string/invalid-type";
+import PropertyValueValidation from "../../assert/throwable/property-value-validation";
+import Name from "../../string/name";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -42,10 +43,7 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 
         } else {
 
-            throw new Error(InvalidType({
-                value : this.validation.toString(),
-                property : property
-            }))
+            throw PropertyValueValidation(property, 'valid', Name(validation))
         }
     }
 
