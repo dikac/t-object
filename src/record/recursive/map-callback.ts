@@ -1,7 +1,7 @@
 import Empty from "../../boolean/empty";
 import Record from "./record";
 import Map from "./map";
-import PropertyValueValidation from "../../assert/throwable/property-value-validation";
+import ValueValidation from "../../assert/throwable/value-validation";
 import Name from "../../string/name";
 import Function from "@dikac/t-function/function";
 import Guard from "@dikac/t-function/boolean/guard";
@@ -45,7 +45,7 @@ export default function MapCallback<Replace, Value, Key extends keyof any = keyo
 
         } else {
 
-            throw PropertyValueValidation(property, 'valid', Name(validation))
+            throw ValueValidation(property, 'valid', Name(validation))
         }
     }
 

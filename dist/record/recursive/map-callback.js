@@ -4,13 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../boolean/empty", "../../assert/throwable/property-value-validation", "../../string/name"], factory);
+        define(["require", "exports", "../../boolean/empty", "../../assert/throwable/value-validation", "../../string/name"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const empty_1 = require("../../boolean/empty");
-    const property_value_validation_1 = require("../../assert/throwable/property-value-validation");
+    const value_validation_1 = require("../../assert/throwable/value-validation");
     const name_1 = require("../../string/name");
     /**
      * Calls {@param replace} on each property value from {@param object} recursively
@@ -37,7 +37,7 @@
                 }
             }
             else {
-                throw property_value_validation_1.default(property, 'valid', name_1.default(validation));
+                throw value_validation_1.default(property, 'valid', name_1.default(validation));
             }
         }
         return result;

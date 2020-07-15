@@ -1,7 +1,7 @@
 import Record from "../record";
 import ObjectType from "../../../boolean/object";
 import Property from "../../infer/property";
-import PropertyValueValidation from "../../../assert/throwable/property-value-validation";
+import ValueValidation from "../../../assert/throwable/value-validation";
 import Name from "../../../string/name";
 import Guard from "@dikac/t-function/boolean/guard";
 
@@ -41,7 +41,7 @@ export default class Pair<
 
             } else {
 
-                throw PropertyValueValidation(properties.join('.'), 'valid', Name(this.validation))
+                throw ValueValidation(properties.join('.'), 'valid', Name(this.validation))
             }
         }
 
