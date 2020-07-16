@@ -1,34 +1,93 @@
 import Type from "../../../dist/record/boolean/record";
 
-it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
+
+it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
 
-
-describe('valid', function () {
-
+describe("single dimension", function() {
 
     let data = {
-        property1 : 'a',
-        property2 : 'b',
-        property3 : 'c',
-        property4 : 'd',
-    };
+        data1 : 1,
+        data2 : 2,
+        data3 : 3,
+        data4 : 4,
+    }
 
-    let convert : object = data;
+    it("check valid", () => {
 
+        let result = Type(data, (value : any) : value is number => typeof value === "number");
 
-    it(`check value`, () => {
+        expect(result).toBe(true);
 
-        if(Type<string, string>(convert,  (v:any) : v is string  => typeof v === 'string')) {
-
-            expect(convert.property1).toBe('a', 'property1');
-            expect(convert.property2).toBe('b', 'property2');
-            expect(convert.property3).toBe('c', 'property3');
-            expect(convert.property4).toBe('d', 'property4');
-
-            convert.property5 = 'e'; // compiler pass
-        }
     });
 
 
-});
+    it("check invalid", () => {
+
+        let result = Type(data, (value : any) : value is number => typeof value === "string");
+
+        expect(result).toBe(false);
+
+    });
+
+    it("check mixed invalid", () => {
+
+        let result = Type(data, (value : any) : value is number => value < 3);
+
+        expect(result).toBe(false);
+
+    });
+
+
+})
+
+describe("multi dimension", function() {
+
+    let data = {
+        data1 : 1,
+        data2 : 2,
+        data3 : 3,
+        data4 : 4,
+        data5 : {
+            data1 : 1,
+            data2 : 2,
+            data3 : 3,
+            data4 : 4,
+            data5 : {
+                data1 : 1,
+                data2 : 2,
+                data3 : 3,
+                data4 : 4,
+            }
+        }
+    }
+
+    it("check valid", () => {
+
+        let result = Type(data, (value : any) : value is number => typeof value === "number");
+
+        expect(result).toBe(true);
+
+    });
+
+
+    it("check invalid", () => {
+
+        let result = Type(data, (value : any) : value is number => typeof value === "string");
+
+        expect(result).toBe(false);
+
+    });
+
+    it("check mixed invalid", () => {
+
+        let result = Type(data, (value : any) : value is number => value < 3);
+
+        expect(result).toBe(false);
+
+    });
+
+
+})
+
+

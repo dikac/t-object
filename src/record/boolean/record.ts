@@ -1,32 +1,53 @@
-import Pair from "../../iterable/pair";
+import TypeObject from "../../boolean/object";
+import RecordInterface from "../record";
 import PropertyType from "../../key/boolean/key";
 import Guard from "@dikac/t-function/boolean/guard";
 
 /**
- * check if {@param obj} is certain type of record
- * {@param value} use to validate object value
- * optionally {@param property} use to validate object property
+ * Check if {@param record} is {@link RecordInterface} with {@template Value} value
+ *
+ * {@param validation} is use to validate for {@template Value}
+ * optionally {@param prop} use to validate object property
  */
 export default function Record<
     Value,
+    Assumption extends RecordInterface<keyof any, Value>,
     Key extends string|number|symbol = string|number|symbol
 >(
-    obj : object,
-    value : Guard<any, Value>,
-    property : Guard<string|number|symbol, Key> = PropertyType,
-) : obj is Record<Key, Value> {
+    record : any,
+    validation : Guard<any,  Value>,
+    prop : Guard<string|number|symbol,  Key> = PropertyType,
+) : record is Assumption {
 
-    for(const [prop, val] of Pair(obj)) {
+    if(!TypeObject(record)) {
 
-        if(!property(prop)) {
+        return false;
+    }
+
+    for(let property in record) {
+
+        if(!prop(property)) {
 
             return false;
         }
 
-        if(!value(val)) {
+        // @ts-ignore
+        const value = record[property];
 
-            return false;
+        if(validation(value)) {
+
+           continue;
         }
+
+        if(TypeObject(value)) {
+
+            if(Record(value, validation, prop)) {
+
+                continue;
+            }
+        }
+
+        return false;
     }
 
     return true;

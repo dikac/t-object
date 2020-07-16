@@ -1,35 +1,67 @@
-import Map from "../../dist/record/map";
-
+import Record from "../../dist/record/record";
+import Convert from "../../dist/record/map";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
 
-let data = {
-    property1 : 1,
-    property2 : 'string',
-    property3 : true,
-};
 
-describe('implicit', function () {
+interface Single {
+    str : string;
+    num : number;
+}
 
-    let result = Map<string, typeof data>(data,  (v:any) => 'data');
+interface Multi extends Single {
+    str : string;
+    num : number;
+    child ?: Multi;
+}
 
-    it(`check value`, () => {
+describe('single dimension', () => {
 
-        expect(result.property1).toBe('data', 'property1');
-        expect(result.property2).toBe('data', 'property2');
-        expect(result.property3).toBe('data', 'property3');
-    });
+    let single : Record<string, string> = {
+        str : 'string',
+        num : 'string',
+    }
+
+
+    let type : Convert<boolean, string, string, typeof single> = {
+
+        str : true, // Compile Pass
+        num : true, // Compile Pass
+    }
+
+
+})
+
+
+describe('multi dimension', () => {
+
+    let single  = {
+        str : 'string',
+        num : 'string',
+        child : {
+            str : 'string',
+            num : 'string',
+            child : {
+                str : 'string',
+                num : 'string',
+            }
+        }
+    }
+
+    let type : Convert<boolean, string, string, typeof single> =  {
+
+        str : true, // Compile Pass
+        num : true, // Compile Pass
+        child : {
+            str : true,// Compile Pass
+            num : true, // Compile Pass
+            child : {
+                str : true,// Compile Pass
+                num : true, // Compile Pass
+            }
+        }
+    }
+
+
 });
-
-describe('explicit', function () {
-
-    let result = Map(data,  (v:any) => 'data');
-
-    it(`check value`, () => {
-        expect(result.property1).toBe('data', 'property1');
-        expect(result.property2).toBe('data', 'property2');
-        expect(result.property3).toBe('data', 'property3');
-    });
-});
-

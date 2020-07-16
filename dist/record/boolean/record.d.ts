@@ -1,7 +1,9 @@
+import RecordInterface from "../record";
 import Guard from "@dikac/t-function/boolean/guard";
 /**
- * check if {@param obj} is certain type of record
- * {@param value} use to validate object value
- * optionally {@param property} use to validate object property
+ * Check if {@param record} is {@link RecordInterface} with {@template Value} value
+ *
+ * {@param validation} is use to validate for {@template Value}
+ * optionally {@param prop} use to validate object property
  */
-export default function Record<Value, Key extends string | number | symbol = string | number | symbol>(obj: object, value: Guard<any, Value>, property?: Guard<string | number | symbol, Key>): obj is Record<Key, Value>;
+export default function Record<Value, Assumption extends RecordInterface<keyof any, Value>, Key extends string | number | symbol = string | number | symbol>(record: any, validation: Guard<any, Value>, prop?: Guard<string | number | symbol, Key>): record is Assumption;
