@@ -2,7 +2,7 @@ import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import RecordObject from "../record/record";
 import Validate from "./record/record";
-import And from "@dikac/t-validatable/record/recursive/boolean/and";
+import And from "../validatable/record/boolean/and";
 import Value from "@dikac/t-value/value";
 import RecursiveInferReturn from "./record/infer/return";
 import RecursiveInferArgument from "./record/infer/argument";

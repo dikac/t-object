@@ -4,13 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./record/record", "@dikac/t-validatable/record/recursive/boolean/and"], factory);
+        define(["require", "exports", "./record/record", "../validatable/record/boolean/and"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const record_1 = require("./record/record");
-    const and_1 = require("@dikac/t-validatable/record/recursive/boolean/and");
+    const and_1 = require("../validatable/record/boolean/and");
     class Record {
         constructor(validators) {
             this.validators = validators;
