@@ -5,7 +5,6 @@ import Validate from "../../validator/validatable/record/value";
 import And from "../../validatable/record/boolean/and";
 import ValueInterface from "@dikac/t-value/value";
 import RecursiveInferReturn from "../../validator/validatable/record/validatable";
-import Argument from "@dikac/t-function/argument/argument";
 
 export default class Value<
     Val,
