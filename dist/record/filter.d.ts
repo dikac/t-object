@@ -9,4 +9,4 @@ import Guard from "@dikac/t-function/boolean/guard";
  * {@param validation} is used to distinguish between value to be validated by {@param filter} or tobe called
  * recursively
  */
-export default function Filter<Type, Object extends Record<keyof any, Type> = Record<keyof any, Type>>(record: Object, validation: Guard<any, Type>, filter: Fn<[Type], boolean>): O.Partial<Object, 'deep'>;
+export default function Filter<Type, Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>>(record: Object, validation: Guard<any, Type>, filter: Fn<[Type], boolean>): O.Partial<Object, 'deep'>;

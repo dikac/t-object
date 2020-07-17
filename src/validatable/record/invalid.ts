@@ -9,7 +9,7 @@ import {O} from "ts-toolbelt";
  */
 export default function Invalid<
     V extends Validatable = Validatable,
-    Object extends Record<keyof any, V> = Record<keyof any, V>
+    Object extends Record<PropertyKey, V> = Record<PropertyKey, V>
 >(
     record : Object
 ) : O.Partial<Object, 'deep'> {

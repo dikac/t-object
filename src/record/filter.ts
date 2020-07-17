@@ -15,7 +15,7 @@ import Guard from "@dikac/t-function/boolean/guard";
  */
 export default function Filter<
     Type,
-    Object extends Record<keyof any, Type> = Record<keyof any, Type>
+    Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>
 >(
     record : Object,
     validation : Guard<any, Type>,

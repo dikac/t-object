@@ -11,7 +11,7 @@ import Guard from "@dikac/t-function/boolean/guard";
  */
 export default function Record<
     Value,
-    Assumption extends RecordInterface<keyof any, Value>,
+    Assumption extends RecordInterface<PropertyKey, Value>,
     Key extends string|number|symbol = string|number|symbol
 >(
     record : any,
