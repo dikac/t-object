@@ -1,8 +1,8 @@
 import Validatable from "@dikac/t-validatable/validatable";
-import TypeRecord from "@dikac/t-object/record/recursive/boolean/record";
+import TypeRecord from "../../..//record/boolean/record";
 import ValidatableType from "@dikac/t-validatable/boolean/validatable";
-import PropertyType from "@dikac/t-object/key/boolean/key";
-import RecursiveRecord from "@dikac/t-object/record/recursive/record";
+import PropertyType from "../../../key/boolean/key";
+import RecursiveRecord from "../../../record/record";
 import Guard from "@dikac/t-function/boolean/guard";
 
 /**

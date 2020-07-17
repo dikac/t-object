@@ -1,5 +1,5 @@
-import Record from "@dikac/t-object/record/recursive/record";
-import Empty from "@dikac/t-object/boolean/empty";
+import Record from "../../..//record/record";
+import Empty from "../../../boolean/empty";
 import Valid from "../valid";
 import Validatable from "@dikac/t-validatable/validatable";
 

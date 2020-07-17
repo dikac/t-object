@@ -1,8 +1,8 @@
 import Validatable from "@dikac/t-validatable/validatable";
-import Record from "@dikac/t-object/record/recursive/record";
+import Record from "../../record/record";
 import GuardValidatable from "@dikac/t-validatable/boolean/validatable";
 import {O} from "ts-toolbelt";
-import Filter from "@dikac/t-object/record/recursive/filter";
+import Filter from "../../record/filter";
 
 /**
  * filter all valid {@link Validatable} while retain its original structure

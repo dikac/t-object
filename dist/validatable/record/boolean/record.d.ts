@@ -1,5 +1,5 @@
 import Validatable from "@dikac/t-validatable/validatable";
-import RecursiveRecord from "@dikac/t-object/record/recursive/record";
+import RecursiveRecord from "../../../record/record";
 import Guard from "@dikac/t-function/boolean/guard";
 /**
  * Check if {@param record} is record of {@link Validatable}

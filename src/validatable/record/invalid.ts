@@ -1,6 +1,6 @@
 import Validatable from "@dikac/t-validatable/validatable";
-import Record from "@dikac/t-object/record/recursive/record";
-import Filter from "@dikac/t-object/record/recursive/filter";
+import Record from "../../record/record";
+import Filter from "../../record/filter";
 import GuardValidatable from "@dikac/t-validatable/boolean/validatable";
 import {O} from "ts-toolbelt";
 
