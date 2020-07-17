@@ -14,9 +14,12 @@ describe('object', function () {
     it(`compiler compilable`, () => {
 
         let property : Property<typeof data>; // Compiler Pass
-        property = 'data1'; // Compiler Pass
-        property = 'data2'; // Compiler Pass
-        property = 'data3'; // Compiler Pass
-        property = 'data4'; // Compiler Pass
+        property = 'data1';
+        property = 'data2';
+        property = 'data3';
+        property = 'data4';
+
+        // @ts-expect-error
+        property = 'data5';
     });
 });
