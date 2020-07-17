@@ -1,4 +1,4 @@
-import Value from "../../../dist/record/infer/value";
+import Value from "../../../dist/record/value/value";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 

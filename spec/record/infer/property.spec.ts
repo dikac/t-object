@@ -1,4 +1,4 @@
-import Property from "../../../dist/record/infer/property";
+import Property from "../../../dist/record/property/property";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 

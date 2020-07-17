@@ -11,7 +11,7 @@ import Guard from "@dikac/t-function/boolean/guard";
 export default function Record<
     Key extends PropertyKey
 >(
-    record : any,
+    record : unknown,
     property : Guard<any, Key> = PropertyType
 ) : record is Record<Key, Validatable> {
 

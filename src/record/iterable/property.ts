@@ -1,5 +1,5 @@
 import Record from "../record";
-import PropertyInfer from "../infer/property";
+import PropertyInfer from "../property/property";
 import Pair from "./pair";
 import Guard from "@dikac/t-function/boolean/guard";
 

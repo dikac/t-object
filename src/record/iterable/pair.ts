@@ -1,6 +1,6 @@
 import Record from "../record";
 import ObjectType from "../../boolean/object";
-import Property from "../infer/property";
+import Property from "../property/property";
 import ValueValidation from "../../assert/throwable/value-validation";
 import Name from "../../string/name";
 import Guard from "@dikac/t-function/boolean/guard";

@@ -1,5 +1,5 @@
 import Record from "../record";
-import Property from "../infer/property";
+import Property from "../property/property";
 import Guard from "@dikac/t-function/boolean/guard";
 export default class Pair<Type, Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>> implements Iterable<[Property<Object>[], Type]> {
     record: Object;

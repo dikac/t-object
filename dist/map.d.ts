@@ -1,4 +1,4 @@
-import Value from "./record/infer/value";
+import Value from "./record/value/value";
 import Fn from "@dikac/t-function/function";
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
