@@ -1,6 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import Mixin from "@dikac/t-validatable/message/readonly-merge";
+import Mixin from "@dikac/t-value/message/readonly-merge";
 import Message from "@dikac/t-message/message";
 import Str from "./str";
 import Value from "@dikac/t-value/value";

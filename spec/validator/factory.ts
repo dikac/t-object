@@ -1,6 +1,6 @@
 import ValidatableFactory from "../validatable/factory";
 
-export default class Factoryz  {
+export default class Factory  {
 
     constructor(private type : string) {
     }
