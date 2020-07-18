@@ -1,11 +1,11 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.22.1",
+  "version": "0.23.0",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
     "@dikac/t-boolean": "^0.7.4",
-    "@dikac/t-function": "^0.9.1",
+    "@dikac/t-function": "^0.9.2",
     "@dikac/t-message": "^0.6.1",
     "@dikac/t-validatable": "^0.17.1",
     "@dikac/t-validator": "^0.9.1",

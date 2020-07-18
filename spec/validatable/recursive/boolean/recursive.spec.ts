@@ -1,4 +1,4 @@
-import Type from "../../../../dist/validatable/recursive/boolean/record";
+import Type from "../../../../dist/validatable/recursive/boolean/recursive";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 

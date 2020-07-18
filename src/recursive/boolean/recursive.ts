@@ -9,7 +9,7 @@ import Guard from "@dikac/t-function/boolean/guard";
  * {@param validation} is use to validate for {@template Value}
  * optionally {@param prop} use to validate object property
  */
-export default function Record<
+export default function Recursive<
     Value,
     Assumption extends RecordInterface<PropertyKey, Value>,
     Key extends string|number|symbol = string|number|symbol
@@ -41,7 +41,7 @@ export default function Record<
 
         if(TypeObject(value)) {
 
-            if(Record(value, validation, prop)) {
+            if(Recursive(value, validation, prop)) {
 
                 continue;
             }

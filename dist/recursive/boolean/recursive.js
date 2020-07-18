@@ -17,7 +17,7 @@
      * {@param validation} is use to validate for {@template Value}
      * optionally {@param prop} use to validate object property
      */
-    function Record(record, validation, prop = key_1.default) {
+    function Recursive(record, validation, prop = key_1.default) {
         if (!object_1.default(record)) {
             return false;
         }
@@ -31,7 +31,7 @@
                 continue;
             }
             if (object_1.default(value)) {
-                if (Record(value, validation, prop)) {
+                if (Recursive(value, validation, prop)) {
                     continue;
                 }
             }
@@ -39,6 +39,6 @@
         }
         return true;
     }
-    exports.default = Record;
+    exports.default = Recursive;
 });
-//# sourceMappingURL=record.js.map
+//# sourceMappingURL=recursive.js.map
