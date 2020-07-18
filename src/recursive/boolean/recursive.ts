@@ -12,11 +12,11 @@ import Guard from "@dikac/t-function/boolean/guard";
 export default function Recursive<
     Value,
     Assumption extends RecordInterface<PropertyKey, Value>,
-    Key extends string|number|symbol = string|number|symbol
+    Key extends PropertyKey = PropertyKey
 >(
     record : any,
     validation : Guard<any,  Value>,
-    prop : Guard<string|number|symbol,  Key> = PropertyType,
+    prop : Guard<PropertyKey,  Key> = PropertyType,
 ) : record is Assumption {
 
     if(!TypeObject(record)) {

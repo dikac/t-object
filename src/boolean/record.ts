@@ -9,11 +9,11 @@ import Guard from "@dikac/t-function/boolean/guard";
  */
 export default function Record<
     Value,
-    Key extends string|number|symbol = string|number|symbol
+    Key extends PropertyKey = PropertyKey
 >(
     obj : object,
     value : Guard<any, Value>,
-    property : Guard<string|number|symbol, Key> = PropertyType,
+    property : Guard<PropertyKey, Key> = PropertyType,
 ) : obj is Record<Key, Value> {
 
     for(const [prop, val] of Pair(obj)) {

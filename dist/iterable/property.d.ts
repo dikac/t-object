@@ -1,4 +1,4 @@
 /**
  * iterate {@param object} property
  */
-export default function Property<Property extends string | symbol | number>(object: Record<Property, any>): Iterable<Property>;
+export default function Property<Property extends PropertyKey>(object: Record<Property, any>): Iterable<Property>;

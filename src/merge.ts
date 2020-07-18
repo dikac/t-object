@@ -20,7 +20,7 @@ export default function Merge<Objects extends object[]>(...objects : Objects) : 
     let target = Object.assign(...objects);
 
     // populate descriptor
-    let descriptors : Map<string|number|symbol, PropertyDescriptor> = new Map<string|number|symbol, PropertyDescriptor>();
+    let descriptors : Map<PropertyKey, PropertyDescriptor> = new Map<PropertyKey, PropertyDescriptor>();
 
 
     for (let object of objects) {
