@@ -1,4 +1,4 @@
-import Value from "./record/value/value";
+import Value from "./recursive/value/value";
 import Fn from "@dikac/t-function/function";
 
 /**
