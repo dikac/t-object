@@ -1,0 +1,1 @@
+{"version":3,"file":"empty.js","sourceRoot":"","sources":["../../../src/boolean/string/empty.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,4CAAqC;IAErC,SAAwB,KAAK,CAAC,KAAe,EAAE,KAAc;QAEzD,IAAI,MAAM,GAAG,cAAI,CAAC,KAAK,CAAC,CAAC;QAEzB,IAAG,KAAK,EAAE;YAEN,OAAO,UAAU,MAAM,mBAAmB,CAAC;SAE9C;aAAM;YAEH,OAAO,UAAU,MAAM,uBAAuB,CAAC;SAClD;IACL,CAAC;IAZD,wBAYC"}

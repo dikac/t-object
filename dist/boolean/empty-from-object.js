@@ -4,18 +4,15 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "is-empty-object"], factory);
+        define(["require", "exports", "./empty"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const IsEmptyObject = require("is-empty-object");
-    /**
-     * check if object is empty (contain zero property & method)
-     */
-    function Empty(value, empty = true) {
-        return IsEmptyObject(value) === empty;
+    const empty_1 = require("./empty");
+    function EmptyFromObject(object) {
+        return empty_1.default(object.value, object.empty);
     }
-    exports.default = Empty;
+    exports.default = EmptyFromObject;
 });
-//# sourceMappingURL=empty.js.map
+//# sourceMappingURL=empty-from-object.js.map
