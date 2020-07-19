@@ -3,7 +3,6 @@ import Message from "@dikac/t-message/message";
 import Fn from "@dikac/t-function/function";
 import Map from "../../recursive/map";
 import ValidatorType from "@dikac/t-message/boolean/message";
-import TypeObject from "../../boolean/object";
 import Guard from "@dikac/t-function/boolean/guard";
 import MapCallback from "../../recursive/map-callback";
 
