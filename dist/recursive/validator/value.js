@@ -18,8 +18,8 @@
         validate(argument) {
             let results = value_1.default(this.validators, argument);
             return {
-                value: results,
-                // @ts-ignore
+                value: argument,
+                validation: results,
                 valid: and_1.default(results)
             };
         }

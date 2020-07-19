@@ -18,8 +18,8 @@
         validate(argument) {
             let results = map_1.default(this.validators, argument);
             return {
-                value: results,
-                // @ts-ignore
+                validatable: results,
+                value: argument,
                 valid: and_1.default(results)
             };
         }

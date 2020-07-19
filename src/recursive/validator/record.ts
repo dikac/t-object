@@ -11,21 +11,21 @@ export default class Record<
     Container extends RecordObject<PropertyKey, Validator<unknown>>
 > implements Validator<
     RecursiveInferArgument<Container>,
-    Value<RecursiveInferReturn<Container>> & Validatable
+    Value<RecursiveInferArgument<Container>> & Validatable & {validatable : RecursiveInferReturn<Container>}
 > {
     constructor(
         public validators : Container
     ) {
     }
 
-    validate(argument: RecursiveInferArgument<Container>) : Value<RecursiveInferReturn<Container>> & Validatable {
+    validate(argument: RecursiveInferArgument<Container>) : Value<RecursiveInferArgument<Container>> & Validatable & {validatable : RecursiveInferReturn<Container>} {
 
         let results : RecursiveInferReturn<Container> = Validate(this.validators, argument);
 
         return  {
-            value : results,
-            // @ts-ignore
-            valid : And(results)
+            validatable : results,
+            value : argument,
+            valid : And(<any>results)
         };
 
     }

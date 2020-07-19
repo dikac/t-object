@@ -11,7 +11,7 @@ export default class Value<
     Container extends RecordObject<PropertyKey, Validator<Val>>
     > implements Validator<
     Val,
-    ValueInterface<RecursiveInferReturn<Container>> & Validatable
+    ValueInterface<Val> & Validatable & {validation : RecursiveInferReturn<Container>}
     >
 {
     constructor(
@@ -19,14 +19,14 @@ export default class Value<
     ) {
     }
 
-    validate(argument: Val) : ValueInterface<RecursiveInferReturn<Container>> & Validatable {
+    validate(argument: Val) : {validation : RecursiveInferReturn<Container>} & ValueInterface<Val> & Validatable {
 
         let results : RecursiveInferReturn<Container> = Validate(this.validators, argument);
 
         return  {
-            value : results,
-            // @ts-ignore
-            valid : And(results)
+            value : argument,
+            validation : results,
+            valid : And(<any>results)
         };
 
     }

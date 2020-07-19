@@ -46,3 +46,47 @@ describe('flat', ()=>{
     });
 
 });
+
+
+describe('deep', ()=>{
+
+
+    let data = {
+        data1 : {message:1},
+        data2 : {message:2},
+        data3 : {
+            data1 : {message:3},
+            data2 : {message:4},
+        },
+    };
+
+    let result = Standard(data);
+
+    describe('compiler compatibility', () => {
+
+
+        let number : number;
+
+        number = result.data1;
+        number = result.data2;
+        number = result.data3.data1;
+        number = result.data3.data2;
+
+        // @ts-expect-error
+        number = result.data6;
+
+        // @ts-expect-error
+        let string : string = result.data6;
+    });
+
+
+    it('check value', () => {
+
+        expect(result.data1).toBe(1);
+        expect(result.data2).toBe(2);
+        expect(result.data3.data1).toBe(3);
+        expect(result.data3.data2).toBe(4);
+
+    });
+
+});
