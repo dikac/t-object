@@ -3,7 +3,7 @@ import ObjectType from "../../boolean/object";
 import Property from "../property/property";
 import ValueValidation from "../../assert/throwable/value-validation";
 import Name from "../../string/name";
-import Guard from "@dikac/t-function/boolean/guard";
+import Fns from "@dikac/t-function/function-single";
 
 export default class Pair<
     Type,
@@ -16,7 +16,7 @@ export default class Pair<
 
     constructor(
         public record : Object,
-        public validation : Guard<any, Type>,
+        public validation : Fns<any, boolean>,
     ) {
 
     }
@@ -25,19 +25,22 @@ export default class Pair<
 
         for(const property in this.record) {
 
-            const value : Type = <Type>this.record[property];
+            const value = this.record[property];
             const properties = [...this.keys, property];
 
             if(this.validation(value)) {
 
-                yield [<Property<Object>[]>properties, value];
+                yield [
+                    <Property<Object>[]>properties,
+                    <Type>value
+                ];
 
-            } else if(ObjectType(value)) {
+            } else if(ObjectType<Object>(value)) {
 
                 let recursive = new Pair(value, this.validation);
                 recursive.keys.push(...properties);
 
-                yield * recursive;
+                yield * <Iterable<[Property<Object>[], Type]>>recursive;
 
             } else {
 

@@ -1,6 +1,6 @@
 import Recursive from "../recursive";
-import Pair from "./pair";
-import Guard from "@dikac/t-function/boolean/guard";
+import PairGuard from "./pair-guard";
+import Fns from "@dikac/t-function/function-single";
 
 export default class Value<
     Type,
@@ -11,16 +11,17 @@ export default class Value<
 
     constructor(
         public record : Object,
-        public validation : Guard<any, Type>,
+        public validation : Fns<any, boolean>,
     ) {
 
     }
 
     * [Symbol.iterator](): Iterator<Type> {
 
-        for (let [properties, value] of new Pair(this.record, this.validation)) {
+        // @ts-ignore
+        for (let [properties, value] of new PairGuard(this.record, this.validation)) {
 
-            yield value
+            yield <Type>value
         }
     }
 }

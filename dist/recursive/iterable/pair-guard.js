@@ -4,24 +4,22 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./pair-guard"], factory);
+        define(["require", "exports", "./pair"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const pair_guard_1 = require("./pair-guard");
-    class Value {
+    const pair_1 = require("./pair");
+    class PairGuard {
         constructor(record, validation) {
             this.record = record;
             this.validation = validation;
+            this.keys = [];
         }
         *[Symbol.iterator]() {
-            // @ts-ignore
-            for (let [properties, value] of new pair_guard_1.default(this.record, this.validation)) {
-                yield value;
-            }
+            return new pair_1.default(this.record, this.validation);
         }
     }
-    exports.default = Value;
+    exports.default = PairGuard;
 });
-//# sourceMappingURL=value.js.map
+//# sourceMappingURL=pair-guard.js.map

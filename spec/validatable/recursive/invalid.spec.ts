@@ -1,6 +1,5 @@
 import Invalid from "../../../dist/validatable/recursive/invalid";
 
-
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 let record = {
@@ -89,8 +88,5 @@ describe("check property", function() {
             fail('property is not exits')
         }
     });
-
-
-
 });
 

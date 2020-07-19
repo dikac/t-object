@@ -1,4 +1,4 @@
-import Pair from "../../../dist/recursive/iterable/pair";
+import Pair from "../../../dist/recursive/iterable/pair-guard";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 

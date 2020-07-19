@@ -1,4 +1,4 @@
-import Map from "../../dist/recursive/map-callback";
+import Map from "../../dist/recursive/map-callback-guard";
 
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});

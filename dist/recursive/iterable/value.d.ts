@@ -1,8 +1,8 @@
 import Recursive from "../recursive";
-import Guard from "@dikac/t-function/boolean/guard";
+import Fns from "@dikac/t-function/function-single";
 export default class Value<Type, Object extends Recursive<PropertyKey, Type> = Recursive<PropertyKey, Type>> implements Iterable<Type> {
     record: Object;
-    validation: Guard<any, Type>;
-    constructor(record: Object, validation: Guard<any, Type>);
+    validation: Fns<any, boolean>;
+    constructor(record: Object, validation: Fns<any, boolean>);
     [Symbol.iterator](): Iterator<Type>;
 }

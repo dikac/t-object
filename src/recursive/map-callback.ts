@@ -4,7 +4,8 @@ import Map from "./map";
 import ValueValidation from "../assert/throwable/value-validation";
 import Name from "../string/name";
 import Function from "@dikac/t-function/function";
-import Guard from "@dikac/t-function/boolean/guard";
+import Fns from "@dikac/t-function/function-single";
+import ObjectType from "../boolean/object";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -16,31 +17,30 @@ import Guard from "@dikac/t-function/boolean/guard";
  */
 export default function MapCallback<Replace, Value, Key extends PropertyKey = PropertyKey, Object extends Recursive<Key, Value> = Recursive<Key, Value>>(
     object : Object,
-    validation : Guard<any, Value>,
-    replace : Function<[Value], Replace>
+    validation : Fns<any, boolean>,
+    replace : Function<[Value, Key[]], Replace>,
+    properties : Key[] = []
 ) : Map<Replace, Value, Key, Object> {
 
-    let result : Map<Replace, Value, Key, Object> = <Map<Replace, Value, Key, Object>>{};
-
+    let result = {};
 
     for(const property in object) {
 
         const value = object[property];
 
+        let props : PropertyKey[] = [...properties, property];
+
         if(validation(value)) {
 
-            // @ts-ignore
-            result[property] = replace(value);
+            result[<PropertyKey>property] = replace(<any>value, <Key[]>props);
 
-        } else if(Object(value)) {
+        } else if(ObjectType<Object>(value)) {
 
-            // @ts-ignore
-            const val = MapCallback(value, validation, replace);
+            const val = MapCallback(<any>value, validation, replace, props);
 
             if(!Empty(val)) {
 
-                // @ts-ignore
-                result[property] = val;
+                result[<PropertyKey>property] = val;
             }
 
         } else {
@@ -49,6 +49,6 @@ export default function MapCallback<Replace, Value, Key extends PropertyKey = Pr
         }
     }
 
-    return result;
+    return <Map<Replace, Value, Key, Object>> result;
 }
 

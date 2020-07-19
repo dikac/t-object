@@ -1,10 +1,9 @@
 import Recursive from "./recursive";
 import Empty from "../boolean/empty";
 import ObjectType from "../boolean/object";
-import Pair from "./iterable/pair";
 import {O} from "ts-toolbelt";
 import Fn from "@dikac/t-function/function";
-import Guard from "@dikac/t-function/boolean/guard";
+import Fns from "@dikac/t-function/function-single";
 
 /**
  * recursively filter {@param record} value, returning new object with all value allowed
@@ -18,13 +17,11 @@ export default function Filter<
     Object extends Recursive<PropertyKey, Type> = Recursive<PropertyKey, Type>
 >(
     record : Object,
-    validation : Guard<any, Type>,
+    validation : Fns<any, boolean>,
     filter : Fn<[Type], boolean>,
 ) : O.Partial<Object, 'deep'> {
 
-    let pair = new Pair(record, validation);
-
-    let result : O.Partial<Object, 'deep'> = <O.Partial<Object, 'deep'>>{};
+    let result = {};
 
     for(const property in record) {
 
@@ -34,17 +31,16 @@ export default function Filter<
 
             if(filter(value)) {
 
-                // @ts-ignore
-                result[property] = value;
+                result[<PropertyKey>property] = value;
             }
 
-        } else if(ObjectType(value)) {
+        } else if(ObjectType<Object>(value)) {
 
             const results =  Filter(value, validation, filter);
 
             if(!Empty(results)) {
 
-                result[property] = results;
+                result[<PropertyKey>property] = results;
             }
         }
     }

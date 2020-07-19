@@ -23,7 +23,10 @@
                 const value = this.record[property];
                 const properties = [...this.keys, property];
                 if (this.validation(value)) {
-                    yield [properties, value];
+                    yield [
+                        properties,
+                        value
+                    ];
                 }
                 else if (object_1.default(value)) {
                     let recursive = new Pair(value, this.validation);
