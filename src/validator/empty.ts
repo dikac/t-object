@@ -5,10 +5,6 @@ import Value from "@dikac/t-value/value";
 import EmptyValidatable from "../validatable/empty";
 import Function from "@dikac/t-function/function";
 
-// export type Return<Msg> =
-//     Readonly<Validatable<true> & Message<Msg> & Value<object>> |
-//     Readonly<Validatable<false> & Message<Msg> & Value<unknown>>;
-
 export default class Empty<Msg>
     implements
         Validator<object, Readonly<Validatable<boolean> & Message<Msg> & Value<object>>>,

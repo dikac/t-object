@@ -14,8 +14,8 @@ describe("flat", function() {
     let property = new Record(validator);
 
     let validatable = property.validate({
-        name : 'name',
-        address : 'address',
+        name : 'name data',
+        address : 'address data',
     });
 
     it(`valid`, () => {

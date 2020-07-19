@@ -18,7 +18,6 @@ export default function Value<
     for(let property in validators) {
 
         const validator = validators[property];
-        //const value = values[property];
 
         if(ValidatorType(validator)) {
 

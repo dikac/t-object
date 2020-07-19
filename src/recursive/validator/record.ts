@@ -9,11 +9,10 @@ import RecursiveInferArgument from "../../validator/parameter/recursive/recursiv
 
 export default class Record<
     Container extends RecordObject<PropertyKey, Validator<unknown>>
-    > implements Validator<
+> implements Validator<
     RecursiveInferArgument<Container>,
     Value<RecursiveInferReturn<Container>> & Validatable
-    >
-{
+> {
     constructor(
         public validators : Container
     ) {
