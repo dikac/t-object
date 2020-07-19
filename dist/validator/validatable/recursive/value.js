@@ -16,7 +16,6 @@
         let object = {};
         for (let property in validators) {
             const validator = validators[property];
-            //const value = values[property];
             if (validator_1.default(validator)) {
                 // @ts-ignore
                 object[property] = validator.validate(value);

@@ -10,9 +10,6 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const empty_1 = require("../validatable/empty");
-    // export type Return<Msg> =
-    //     Readonly<Validatable<true> & Message<Msg> & Value<object>> |
-    //     Readonly<Validatable<false> & Message<Msg> & Value<unknown>>;
     class Empty {
         constructor(empty, message) {
             this.empty = empty;

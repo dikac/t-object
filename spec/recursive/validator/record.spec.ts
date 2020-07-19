@@ -27,8 +27,8 @@ describe("flat", function() {
 
     it(`message equal`, () => {
 
-        expect(validatable.value.name.message).toBe('name valid');
-        expect(validatable.value.address.message).toBe('address valid');
+        expect(validatable.value.name.message).toBe('name data valid');
+        expect(validatable.value.address.message).toBe('address data valid');
     });
 
 
