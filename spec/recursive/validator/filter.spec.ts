@@ -1,9 +1,6 @@
 import Validator from "../../validator/factory";
 import Filtered from "../../../dist/recursive/validator/filtered";
 import Valid from "../../../dist/validatable/recursive/valid";
-import Recursive from "../../../dist/recursive/recursive";
-import Validatable from "@dikac/t-validatable/validatable";
-import ValidatableFactory from "../../validatable/factory";
 
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
