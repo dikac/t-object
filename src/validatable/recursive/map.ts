@@ -1,12 +1,12 @@
 import RecursiveRecord from "../../recursive/recursive";
 import ValidatorType from "@dikac/t-validator/boolean/validator";
 import RecursiveInferArgument from "../../recursive/validator/parameter/parameter";
-import RecursiveInferReturn from "./recursive";
+import RecursiveInferReturn from "../../validator/validatable/recursive/recursive";
 import TypeObject from "../../boolean/object";
 import ThrowableValue from "./assert/throwable/value";
 import ThrowableObjectValue from "../../assert/throwable/value";
 import Validator from "@dikac/t-validator/validator";
-import {Object} from "ts-toolbelt";
+import Optional from "../../validator/validatable/recursive/optional";
 
 export default function Map<
     Validators extends RecursiveRecord<PropertyKey, Validator>
@@ -14,7 +14,7 @@ export default function Map<
     validators : Validators,
     values : RecursiveInferArgument<Validators>,
     stopOnInvalid : true
-) : Object.Partial<RecursiveInferReturn<Validators>, 'deep'>
+) : Optional<Validators>
 
 export default function Map<
     Validators extends RecursiveRecord<PropertyKey, Validator>
@@ -30,7 +30,7 @@ export default function Map<
     validators : Validators,
     values : RecursiveInferArgument<Validators>,
     stopOnInvalid : boolean
-) : Object.Partial<RecursiveInferReturn<Validators>, 'deep'> | RecursiveInferReturn<Validators> {
+) : Optional<Validators> | RecursiveInferReturn<Validators> {
 
     let object : RecursiveInferReturn<Validators> = <RecursiveInferReturn<Validators>>{};
 

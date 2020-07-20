@@ -4,7 +4,7 @@ import RecordObject from "../recursive";
 import Validate from "../../validatable/recursive/map";
 import And from "../../validatable/recursive/boolean/and";
 import Value from "@dikac/t-value/value";
-import RecursiveInferReturn from "../../validatable/recursive/recursive";
+import RecursiveInferReturn from "../../validator/validatable/recursive/recursive";
 import RecursiveInferArgument from "./parameter/parameter";
 
 export default class Record<

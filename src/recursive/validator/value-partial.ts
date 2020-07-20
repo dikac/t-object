@@ -4,15 +4,14 @@ import RecordObject from "../recursive";
 import ValidatePartialValue from "../../validatable/recursive/value";
 import And from "../../validatable/recursive/boolean/and";
 import ValueInterface from "@dikac/t-value/value";
-import RecursiveInferReturn from "../../validatable/recursive/recursive";
-import {Object} from "ts-toolbelt";
+import Optional from "../../validator/validatable/recursive/optional";
 
 export default class ValuePartial<
     Val,
     Container extends RecordObject<PropertyKey, Validator<Val>>
     > implements Validator<
     Val,
-    ValueInterface<Val> & Validatable & {validation : Object.Partial<RecursiveInferReturn<Container>, 'deep'>}
+    ValueInterface<Val> & Validatable & {validation : Optional<Container>}
     >
 {
     constructor(
@@ -20,9 +19,9 @@ export default class ValuePartial<
     ) {
     }
 
-    validate(argument: Val) : {validation : Object.Partial<RecursiveInferReturn<Container>, 'deep'>} & ValueInterface<Val> & Validatable {
+    validate(argument: Val) : {validation : Optional<Container>} & ValueInterface<Val> & Validatable {
 
-        let results : Object.Partial<RecursiveInferReturn<Container>, 'deep'> = ValidatePartialValue(this.validators, argument, true);
+        let results : Optional<Container> = ValidatePartialValue(this.validators, argument, true);
 
         return  {
             value : argument,
