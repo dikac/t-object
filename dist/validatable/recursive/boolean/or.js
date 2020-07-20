@@ -11,9 +11,9 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const empty_1 = require("../../../boolean/empty");
     const valid_1 = require("../valid");
-    function And(object) {
+    function Or(object) {
         return !empty_1.default(valid_1.default(object));
     }
-    exports.default = And;
+    exports.default = Or;
 });
 //# sourceMappingURL=or.js.map

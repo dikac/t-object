@@ -1,8 +1,8 @@
-import Recursive from "./recursive";
 import Empty from "../boolean/empty";
 import ObjectType from "../boolean/object";
 import {O} from "ts-toolbelt";
 import Fn from "@dikac/t-function/function";
+import Guard from "@dikac/t-function/boolean/guard";
 import Fns from "@dikac/t-function/function-single";
 
 /**
@@ -13,13 +13,27 @@ import Fns from "@dikac/t-function/function-single";
  * recursively
  */
 export default function Filter<
+    Type extends O.UnionOf<Object>,
+    Object extends Record<PropertyKey, unknown>
+    >(
+    record : Object,
+    filter : Guard<O.UnionOf<Object>, Type, [keyof Object]>,
+) : O.Select<Object, Type>;
+
+export default function Filter<
+    Object extends Record<PropertyKey, unknown>
+    >(
+    record : Object,
+    filter : Fn<[O.UnionOf<Object>, keyof Object], boolean>,
+) : Partial<Object>;
+
+export default function Filter<
     Type,
-    Object extends Recursive<PropertyKey, Type> = Recursive<PropertyKey, Type>
+    Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>
 >(
     record : Object,
-    validation : Fns<any, boolean>,
-    filter : Fn<[Type], boolean>,
-) : O.Partial<Object, 'deep'> {
+    filter : Fn<[Type, keyof Object], boolean>,
+) : Partial<Object> {
 
     let result = {};
 
@@ -27,23 +41,15 @@ export default function Filter<
 
         const value : Type = <Type>record[property];
 
-        if(validation(value)) {
+        if(filter(value, <keyof Object>property)) {
 
-            if(filter(value)) {
-
-                result[<PropertyKey>property] = value;
-            }
-
-        } else if(ObjectType<Object>(value)) {
-
-            const results =  Filter(value, validation, filter);
-
-            if(!Empty(results)) {
-
-                result[<PropertyKey>property] = results;
-            }
+            result[<PropertyKey>property] = value;
         }
     }
 
     return result;
 }
+
+// let c : O.UnionOf<{ name: string, address: number }> = {
+//
+// }

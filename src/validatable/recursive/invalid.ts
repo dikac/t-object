@@ -1,18 +1,18 @@
 import Validatable from "@dikac/t-validatable/validatable";
-import Recursive from "../../recursive/recursive";
 import Filter from "../../recursive/filter";
 import GuardValidatable from "@dikac/t-validatable/boolean/validatable";
 import {O} from "ts-toolbelt";
+import ValidatableInvalid from "@dikac/t-validatable/boolean/invalid";
 
 /**
  * filter all invalid {@link Validatable} while retain its original structure
  */
 export default function Invalid<
     V extends Validatable = Validatable,
-    Object extends Recursive<PropertyKey, V> = Recursive<PropertyKey, V>
+    Object extends Record<PropertyKey, V> = Record<PropertyKey, V>
 >(
     record : Object
-) : O.Partial<Object, 'deep'> {
+) : Partial<Object> {
 
-    return Filter(record, GuardValidatable, (v : Validatable) => !v.valid);
+    return Filter(record, (v) => GuardValidatable(v) && ValidatableInvalid(v));
 }

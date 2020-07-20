@@ -1,9 +1,8 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import RecordObject from "../recursive";
 import ValueInterface from "@dikac/t-value/value";
 import Optional from "../../validator/validatable/recursive/optional";
-export default class ValuePartial<Val, Container extends RecordObject<PropertyKey, Validator<Val>>> implements Validator<Val, ValueInterface<Val> & Validatable & {
+export default class ValuePartial<Val, Container extends Record<PropertyKey, Validator<Val>>> implements Validator<Val, ValueInterface<Val> & Validatable & {
     validation: Optional<Container>;
 }> {
     validators: Container;

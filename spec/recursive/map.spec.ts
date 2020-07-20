@@ -1,9 +1,6 @@
-import Record from "../../dist/recursive/recursive";
 import Convert from "../../dist/recursive/map";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
-
-
 
 interface Single {
     str : string;
@@ -24,7 +21,7 @@ describe('single dimension', () => {
     }
 
 
-    let type : Convert<boolean, string, string, typeof single> = {
+    let type : Convert<boolean, string, typeof single> = {
 
         str : true, // Compile Pass
         num : true, // Compile Pass
@@ -49,19 +46,26 @@ describe('multi dimension', () => {
         }
     }
 
-    let type : Convert<boolean, string, string, typeof single> =  {
+    let type : Convert<boolean, any, typeof single> =  {
 
-        str : true, // Compile Pass
-        num : true, // Compile Pass
-        child : {
-            str : true,// Compile Pass
-            num : true, // Compile Pass
-            child : {
-                str : true,// Compile Pass
-                num : true, // Compile Pass
-            }
-        }
+        str : true,
+        num : true,
+        child : true,
     }
 
 
+    let invalid : Convert<boolean, any, typeof single> =  {
+
+        str : true,
+        num : true,
+        // @ts-expect-error
+        child : {
+            str : true,
+            num : true,
+            child : {
+                str : true,
+                num : true,
+            }
+        }
+    }
 });

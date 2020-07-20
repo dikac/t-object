@@ -1,11 +1,10 @@
-import Recursive from "../recursive";
 import Property from "../property/property";
 import Guard from "@dikac/t-function/boolean/guard";
 import Pair from "./pair";
 
 export default class PairGuard<
     Type,
-    Object extends Recursive<PropertyKey, Type> = Recursive<PropertyKey, Type>
+    Object extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
 > implements
     Iterable<[Property<Object>[], Type]>
 {

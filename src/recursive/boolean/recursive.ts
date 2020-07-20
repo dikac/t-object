@@ -1,5 +1,4 @@
 import TypeObject from "../../boolean/object";
-import RecordInterface from "../recursive";
 import PropertyType from "../../key/boolean/key";
 import Guard from "@dikac/t-function/boolean/guard";
 
@@ -11,7 +10,7 @@ import Guard from "@dikac/t-function/boolean/guard";
  */
 export default function Recursive<
     Value,
-    Assumption extends RecordInterface<PropertyKey, Value>,
+    Assumption extends Record<PropertyKey, Value>,
     Key extends PropertyKey = PropertyKey
 >(
     record : any,
@@ -39,13 +38,13 @@ export default function Recursive<
            continue;
         }
 
-        if(TypeObject(value)) {
-
-            if(Recursive(value, validation, prop)) {
-
-                continue;
-            }
-        }
+        // if(TypeObject(value)) {
+        //
+        //     if(Recursive(value, validation, prop)) {
+        //
+        //         continue;
+        //     }
+        // }
 
         return false;
     }

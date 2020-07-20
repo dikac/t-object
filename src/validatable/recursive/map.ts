@@ -1,7 +1,6 @@
-import RecursiveRecord from "../../recursive/recursive";
 import ValidatorType from "@dikac/t-validator/boolean/validator";
 import RecursiveInferArgument from "../../recursive/validator/parameter/parameter";
-import RecursiveInferReturn from "../../validator/validatable/recursive/recursive";
+import RecursiveInferReturn from "../../validator/validatable/recursive/record";
 import TypeObject from "../../boolean/object";
 import ThrowableValue from "./assert/throwable/value";
 import ThrowableObjectValue from "../../assert/throwable/value";
@@ -9,7 +8,7 @@ import Validator from "@dikac/t-validator/validator";
 import Optional from "../../validator/validatable/recursive/optional";
 
 export default function Map<
-    Validators extends RecursiveRecord<PropertyKey, Validator>
+    Validators extends Record<PropertyKey, Validator>
     >(
     validators : Validators,
     values : RecursiveInferArgument<Validators>,
@@ -17,7 +16,7 @@ export default function Map<
 ) : Optional<Validators>
 
 export default function Map<
-    Validators extends RecursiveRecord<PropertyKey, Validator>
+    Validators extends Record<PropertyKey, Validator>
     >(
     validators : Validators,
     values : RecursiveInferArgument<Validators>,
@@ -25,7 +24,7 @@ export default function Map<
 ) : RecursiveInferReturn<Validators>
 
 export default function Map<
-    Validators extends RecursiveRecord<PropertyKey, Validator>
+    Validators extends Record<PropertyKey, Validator>
 >(
     validators : Validators,
     values : RecursiveInferArgument<Validators>,

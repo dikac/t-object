@@ -55,9 +55,11 @@ describe('deep', ()=>{
         data1 : {message:1},
         data2 : {message:2},
         data3 : {
-            data1 : {message:3},
-            data2 : {message:4},
-        },
+            message : {
+                data1 : {message:3},
+                data2 : {message:4},
+            },
+        }
     };
 
     let result = Standard(data);
@@ -69,8 +71,8 @@ describe('deep', ()=>{
 
         number = result.data1;
         number = result.data2;
-        number = result.data3.data1;
-        number = result.data3.data2;
+        number = result.data3.data1.message;
+        number = result.data3.data2.message;
 
         // @ts-expect-error
         number = result.data6;
@@ -84,8 +86,8 @@ describe('deep', ()=>{
 
         expect(result.data1).toBe(1);
         expect(result.data2).toBe(2);
-        expect(result.data3.data1).toBe(3);
-        expect(result.data3.data2).toBe(4);
+        expect(result.data3.data1).toEqual({message:3});
+        expect(result.data3.data2).toEqual({message:4});
 
     });
 

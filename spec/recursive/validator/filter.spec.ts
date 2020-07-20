@@ -64,10 +64,10 @@ describe("deep", function() {
 
     let validator = {
         name : new Validator('string'),
-        addresses : {
+        addresses : new Filtered({
             address1 :new Validator('string'),
             address2 :new Validator('string'),
-        },
+        }, Valid, true),
     };
 
     let property = new Filtered(validator, Valid, false);
@@ -88,12 +88,12 @@ describe("deep", function() {
             expect(validatable.validatable.name.valid).toBe(true);
         }
 
-        if(validatable.validatable.addresses && validatable.validatable.addresses.address1) {
-            expect(validatable.validatable.addresses.address1.valid).toBe(true);
+        if(validatable.validatable.addresses && validatable.validatable.addresses.validatable.address1) {
+            expect(validatable.validatable.addresses.validatable.address1.valid).toBe(true);
         }
 
-        if(validatable.validatable.addresses && validatable.validatable.addresses.address2) {
-            expect(validatable.validatable.addresses.address2.valid).toBe(true);
+        if(validatable.validatable.addresses && validatable.validatable.addresses.validatable.address2) {
+            expect(validatable.validatable.addresses.validatable.address2.valid).toBe(true);
         }
     });
 
@@ -103,12 +103,12 @@ describe("deep", function() {
             expect(validatable.validatable.name.message).toBe('name valid');
         }
 
-        if(validatable.validatable.addresses && validatable.validatable.addresses.address1) {
-            expect(validatable.validatable.addresses.address1.message).toBe('address1 valid');
+        if(validatable.validatable.addresses && validatable.validatable.addresses.validatable.address1) {
+            expect(validatable.validatable.addresses.validatable.address1.message).toBe('address1 valid');
         }
 
-        if(validatable.validatable.addresses && validatable.validatable.addresses.address2) {
-            expect(validatable.validatable.addresses.address2.message).toBe('address2 valid');
+        if(validatable.validatable.addresses && validatable.validatable.addresses.validatable.address2) {
+            expect(validatable.validatable.addresses.validatable.address2.message).toBe('address2 valid');
         }
     });
 

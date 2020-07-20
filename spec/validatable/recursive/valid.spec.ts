@@ -1,27 +1,63 @@
 import Valid from "../../../dist/validatable/recursive/valid";
+import And from "../../../dist/recursive/validatable/and";
+import Or from "../../../dist/recursive/validatable/or";
 
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let record = {
 
-    valid : {valid:true},
-    invalid : {valid:false},
-    valids : {
-        valid1 : {valid:true},
-        valid2 : {valid:true},
-    },
-    invalids : {
-        invalid1 : {valid:false},
-        invalid2 : {valid:false},
-    },
-    mixed : {
+
+describe("flat", function() {
+
+    let record = {
+
         valid : {valid:true},
         invalid : {valid:false},
-    }
-};
+    };
 
-describe("check property", function() {
+
+    let result = Valid(record);
+
+    it("valid", () => {
+
+        if(result.valid) {
+
+            expect(result.valid.valid).toBe(true);
+
+        } else {
+
+            fail('property is not exits')
+        }
+    });
+
+    it("invalid", () => {
+
+        expect(result.invalid).toBeUndefined();
+    });
+
+});
+
+
+describe("recursive", function() {
+
+    let record = {
+
+        valid : {valid:true},
+        invalid : {valid:false},
+        valids : new And({
+            valid1 : {valid:true},
+            valid2 : {valid:true},
+        }),
+        invalids : new And({
+            invalid1 : {valid:false},
+            invalid2 : {valid:false},
+        }),
+        mixed : new Or({
+            valid : {valid:true},
+            invalid : {valid:false},
+        })
+    };
+
 
     let result = Valid(record);
 
@@ -46,9 +82,9 @@ describe("check property", function() {
 
         it("valid1", () => {
 
-            if(result.valids && result.valids.valid1) {
+            if(result.valids && result.valids.validatable.valid1) {
 
-                expect(result.valids.valid1.valid).toBe(true);
+                expect(result.valids.validatable.valid1.valid).toBe(true);
 
             } else {
 
@@ -58,9 +94,9 @@ describe("check property", function() {
 
         it("valid2", () => {
 
-            if(result.valids && result.valids.valid2) {
+            if(result.valids && result.valids.validatable.valid2) {
 
-                expect(result.valids.valid2.valid).toBe(true);
+                expect(result.valids.validatable.valid2.valid).toBe(true);
 
             } else {
 
@@ -81,14 +117,13 @@ describe("check property", function() {
 
             if(result.mixed.valid) {
 
-                expect(result.mixed.valid.valid).toBe(true);
+                expect(result.mixed.validatable.valid.valid).toBe(true);
+                expect(result.mixed.validatable.invalid.valid).toBe(false);
 
             } else {
 
                 fail('property is not exits')
             }
-
-            expect(result.mixed.invalid).toBeUndefined();
 
         } else {
 

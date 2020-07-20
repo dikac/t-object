@@ -34,6 +34,8 @@ describe("single dimension", function() {
 
 describe("multi dimension", function() {
 
+    let callback = (v:any) : v is boolean => typeof v === "boolean";
+
     let record = {
         valid: true,
         invalid: false,
@@ -52,7 +54,7 @@ describe("multi dimension", function() {
     };
 
 
-    let pair = new Pair(record, (v:any) : v is boolean => typeof v === "boolean");
+    let pair = new Pair(record, callback);
 
     it("check value", () => {
 

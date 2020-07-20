@@ -4,18 +4,15 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-message/boolean/message", "../../recursive/map-callback"], factory);
+        define(["require", "exports", "../../recursive/map-callback"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const message_1 = require("@dikac/t-message/boolean/message");
     const map_callback_1 = require("../../recursive/map-callback");
-    function Property(object, callback, validation, properties = []) {
-        let validate = function (value) {
-            return message_1.default(value, validation);
-        };
-        return map_callback_1.default(object, validate, callback, properties);
+    // TODO RENAME TO MORE APPROPRIATE
+    function Property(object, callback) {
+        return map_callback_1.default(object, callback /*, properties*/);
     }
     exports.default = Property;
 });

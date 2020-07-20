@@ -1,14 +1,13 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import RecordObject from "../recursive";
 import ValidateValue from "../../validatable/recursive/value";
 import And from "../../validatable/recursive/boolean/and";
 import ValueInterface from "@dikac/t-value/value";
-import RecursiveInferReturn from "../../validator/validatable/recursive/recursive";
+import RecursiveInferReturn from "../../validator/validatable/recursive/record";
 
 export default class Value<
     Val,
-    Container extends RecordObject<PropertyKey, Validator<Val>>
+    Container extends Record<PropertyKey, Validator<Val>>
     > implements Validator<
     Val,
     ValueInterface<Val> & Validatable & {validation : RecursiveInferReturn<Container>}

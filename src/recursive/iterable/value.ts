@@ -1,10 +1,9 @@
-import Recursive from "../recursive";
 import PairGuard from "./pair-guard";
 import Fns from "@dikac/t-function/function-single";
 
 export default class Value<
     Type,
-    Object extends Recursive<PropertyKey, Type> = Recursive<PropertyKey, Type>
+    Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>
 > implements
     Iterable<Type>
 {

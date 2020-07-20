@@ -4,18 +4,19 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../recursive/filter", "@dikac/t-validatable/boolean/validatable"], factory);
+        define(["require", "exports", "../../recursive/filter", "@dikac/t-validatable/boolean/validatable", "@dikac/t-validatable/boolean/invalid"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const filter_1 = require("../../recursive/filter");
     const validatable_1 = require("@dikac/t-validatable/boolean/validatable");
+    const invalid_1 = require("@dikac/t-validatable/boolean/invalid");
     /**
      * filter all invalid {@link Validatable} while retain its original structure
      */
     function Invalid(record) {
-        return filter_1.default(record, validatable_1.default, (v) => !v.valid);
+        return filter_1.default(record, (v) => validatable_1.default(v) && invalid_1.default(v));
     }
     exports.default = Invalid;
 });

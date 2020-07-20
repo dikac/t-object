@@ -15,7 +15,7 @@
      * filter all valid {@link Validatable} while retain its original structure
      */
     function Valid(record) {
-        return filter_1.default(record, validatable_1.default, (v) => v.valid);
+        return filter_1.default(record, (v) => validatable_1.default(v) && v.valid);
     }
     exports.default = Valid;
 });

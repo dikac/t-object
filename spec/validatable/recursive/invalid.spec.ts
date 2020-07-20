@@ -1,26 +1,15 @@
 import Invalid from "../../../dist/validatable/recursive/invalid";
+import And from "../../../dist/recursive/validatable/and";
+import Or from "../../../dist/recursive/validatable/or";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let record = {
+describe("flat", function() {
 
-    valid : {valid:true},
-    invalid : {valid:false},
-    valids : {
-        valid1 : {valid:true},
-        valid2 : {valid:true},
-    },
-    invalids : {
-        invalid1 : {valid:false},
-        invalid2 : {valid:false},
-    },
-    mixed : {
+    let record = {
         valid : {valid:true},
-        invalid : {valid:false},
-    }
-};
-
-describe("check property", function() {
+        invalid : {valid:false}
+    };
 
     let result = Invalid(record);
 
@@ -40,30 +29,75 @@ describe("check property", function() {
 
         expect(result.valid).toBeUndefined();
     });
+});
+
+
+
+
+describe("check property", function() {
+
+    let record = {
+
+        valid : {valid:true},
+        invalid : {valid:false},
+        valids : new And({
+            valid1 : {valid:true},
+            valid2 : {valid:true},
+        }),
+        invalids : new And({
+            invalid1 : {valid:false},
+            invalid2 : {valid:false},
+        }),
+        mixed : new And({
+            valid : {valid:true},
+            invalid : {valid:false},
+        })
+    };
+
+
+
+    let result = Invalid(record);
+
+    it("invalid", () => {
+
+        if(result.invalid) {
+
+            expect(result.invalid.valid).toBe(false);
+
+        } else {
+
+            fail('property should exits')
+        }
+    });
+
+    it("valid", () => {
+
+        expect(result.valid).toBeUndefined();
+    });
 
     describe("invalids", () => {
 
         it("valid1", () => {
 
-            if(result.invalids && result.invalids.invalid1) {
+            if(result.invalids && result.invalids.validatable.invalid1) {
 
-                expect(result.invalids.invalid1.valid).toBe(false);
+                expect(result.invalids.validatable.invalid1.valid).toBe(false);
 
             } else {
 
-                fail('property is not exits')
+                fail('property should exits')
             }
         });
 
         it("valid2", () => {
 
-            if(result.invalids && result.invalids.invalid2) {
+            if(result.invalids && result.invalids.validatable.invalid2) {
 
-                expect(result.invalids.invalid2.valid).toBe(false);
+                expect(result.invalids.validatable.invalid2.valid).toBe(false);
 
             } else {
 
-                fail('property is not exits')
+                fail('property should exits')
             }
         });
     });
@@ -72,20 +106,19 @@ describe("check property", function() {
 
         if(result.mixed) {
 
-            if(result.mixed.invalid) {
+            if(result.mixed.validatable.invalid) {
 
-                expect(result.mixed.invalid.valid).toBe(false);
+                expect(result.mixed.validatable.invalid.valid).toBe(false);
+                expect(result.mixed.validatable.valid.valid).toBe(true);
 
             } else {
 
                 fail('property is not exits')
             }
 
-            expect(result.mixed.valid).toBeUndefined();
-
         } else {
 
-            fail('property is not exits')
+            fail('property should exits')
         }
     });
 });

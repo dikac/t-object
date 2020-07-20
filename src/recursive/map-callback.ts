@@ -1,11 +1,10 @@
 import Empty from "../boolean/empty";
-import Recursive from "./recursive";
-import Map from "./map";
 import ValueValidation from "../assert/throwable/value-validation";
 import Name from "../string/name";
 import Function from "@dikac/t-function/function";
 import Fns from "@dikac/t-function/function-single";
 import ObjectType from "../boolean/object";
+import {O} from "ts-toolbelt";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -15,12 +14,11 @@ import ObjectType from "../boolean/object";
  * {@param replace} is only called when {@param validation} result of value is true
  * {@param validation} is used for distinguish value to be used for {@param replace} or to be used for recursion
  */
-export default function MapCallback<Replace, Value, Key extends PropertyKey = PropertyKey, Object extends Recursive<Key, Value> = Recursive<Key, Value>>(
+export default function MapCallback<Replace, Value, Object extends Record<PropertyKey, Value> = Record<PropertyKey, Value>>(
     object : Object,
-    validation : Fns<any, boolean>,
-    replace : Function<[Value, Key[]], Replace>,
-    properties : Key[] = []
-) : Map<Replace, Value, Key, Object> {
+    replace : Function<[Value, keyof Object], Replace>,
+   // properties : (keyof Object)[] = []
+) : O.Replace<Object, Value, Replace> /*Map<Replace, Value, Object>*/ {
 
     let result = {};
 
@@ -28,27 +26,29 @@ export default function MapCallback<Replace, Value, Key extends PropertyKey = Pr
 
         const value = object[property];
 
-        let props : PropertyKey[] = [...properties, property];
+       // let props : PropertyKey[] = [...properties, property];
 
-        if(validation(value)) {
+        result[<PropertyKey>property] = replace(value, property);
 
-            result[<PropertyKey>property] = replace(<any>value, <Key[]>props);
-
-        } else if(ObjectType<Object>(value)) {
-
-            const val = MapCallback(<any>value, validation, replace, props);
-
-            if(!Empty(val)) {
-
-                result[<PropertyKey>property] = val;
-            }
-
-        } else {
-
-            throw ValueValidation(property, 'valid', Name(validation))
-        }
+        // if(validation(value)) {
+        //
+        //
+        //
+        // } else if(ObjectType<Object>(value)) {
+        //
+        //     const val = MapCallback(<any>value, validation, replace, props);
+        //
+        //     if(!Empty(val)) {
+        //
+        //         result[<PropertyKey>property] = val;
+        //     }
+        //
+        // } else {
+        //
+        //     throw ValueValidation(property, 'valid', Name(validation))
+        // }
     }
 
-    return <Map<Replace, Value, Key, Object>> result;
+    return <O.Replace<Object, Value, Replace>> result;
 }
 

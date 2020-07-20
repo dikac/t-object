@@ -1,4 +1,3 @@
-import Recursive from "../recursive";
 import ObjectType from "../../boolean/object";
 import Property from "../property/property";
 import ValueValidation from "../../assert/throwable/value-validation";
@@ -7,7 +6,7 @@ import Fns from "@dikac/t-function/function-single";
 
 export default class Pair<
     Type,
-    Object extends Recursive<PropertyKey, Type> = Recursive<PropertyKey, Type>
+    Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>
 > implements
     Iterable<[Property<Object>[], Type]>
 {

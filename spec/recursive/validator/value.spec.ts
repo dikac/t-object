@@ -42,10 +42,10 @@ describe("deep", function() {
 
     let validator = {
         name : new Validator('string'),
-        addresses : {
+        addresses : new Record({
             address1 :new Validator('string'),
             address2 :new Validator('string'),
-        },
+        }),
     };
 
     let property = new Record(validator);
@@ -56,15 +56,15 @@ describe("deep", function() {
 
         expect(validatable.valid).toBe(true);
         expect(validatable.validation.name.valid).toBe(true);
-        expect(validatable.validation.addresses.address1.valid).toBe(true);
-        expect(validatable.validation.addresses.address2.valid).toBe(true);
+        expect(validatable.validation.addresses.validation.address1.valid).toBe(true);
+        expect(validatable.validation.addresses.validation.address2.valid).toBe(true);
     });
 
     it(`message equal`, () => {
 
         expect(validatable.validation.name.message).toBe('data valid');
-        expect(validatable.validation.addresses.address1.message).toBe('data valid');
-        expect(validatable.validation.addresses.address2.message).toBe('data valid');
+        expect(validatable.validation.addresses.validation.address1.message).toBe('data valid');
+        expect(validatable.validation.addresses.validation.address2.message).toBe('data valid');
     });
 
     it(`value`, () => {

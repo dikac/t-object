@@ -1,6 +1,5 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import RecordObject from "../recursive";
 import ValidatePartial from "../../validatable/recursive/map";
 import And from "../../validatable/recursive/boolean/and";
 import Value from "@dikac/t-value/value";
@@ -9,7 +8,7 @@ import FunctionSingle from "@dikac/t-function/function-single";
 import Optional from "../../validator/validatable/recursive/optional";
 
 export default class Filtered<
-    Container extends RecordObject<PropertyKey, Validator<unknown>>
+    Container extends globalThis.Record<PropertyKey, Validator<unknown>>
 > implements Validator<
     RecursiveInferArgument<Container>,
     Value<RecursiveInferArgument<Container>> & Validatable & {validatable : Optional<Container>}

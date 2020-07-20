@@ -1,8 +1,7 @@
-import ObjectRecord from "./recursive";
 /**
  * similar to {@link globalThis.Record} but with recursive support
  */
-declare type Optional<Schema extends ObjectRecord<PropertyKey, unknown>> = {
-    [Key in keyof Schema]?: Schema[Key] extends ObjectRecord<PropertyKey, any> ? Optional<Schema[Key]> : Schema[Key];
+declare type Optional<Schema extends Record<PropertyKey, unknown>> = {
+    [Key in keyof Schema]?: Schema[Key];
 };
 export default Optional;
