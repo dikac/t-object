@@ -1,12 +1,12 @@
-import CallValidator from "../../../../dist/validator/validatable/recursive/map";
-import Num from "../../num";
-import ExtendedNum from "../../extended-num";
-import ExtendedNumAny from "../../extended-num-any";
-import ExtendedStr from "../../extended-str";
-import ExtendedStrAny from "../../extended-str-any";
-import NumAny from "../../num-any";
-import Str from "../../str";
-import StrAny from "../../str-any";
+import CallValidator from "../../../dist/validatable/recursive/map";
+import Num from "../../validator/num";
+import ExtendedNum from "../../validator/extended-num";
+import ExtendedNumAny from "../../validator/extended-num-any";
+import ExtendedStr from "../../validator/extended-str";
+import ExtendedStrAny from "../../validator/extended-str-any";
+import NumAny from "../../validator/num-any";
+import Str from "../../validator/str";
+import StrAny from "../../validator/str-any";
 
 it("force console log", () => spyOn(console, 'log').and.callThrough());
 
@@ -48,7 +48,7 @@ describe("simple validatable", function() {
         }
     };
 
-    let result = CallValidator(validator, value);
+    let result = CallValidator(validator, value, false);
     it('match validator1', ()=> expect(result.validator1.valid).toBe(true));
     it('match validator2', ()=> expect(result.validator2.valid).toBe(true));
     it('match validator4', ()=> expect(result.validator3.validator4.valid).toBe(true));
@@ -97,7 +97,7 @@ describe("extended validatable", function() {
         }
     };
 
-    let result = CallValidator(validator, value);
+    let result = CallValidator(validator, value, false);
 
     it('match validator1', ()=> expect(result.validator1.valid).toBe(true));
     it('match validator1', ()=> expect(result.validator1.message).toBe('ExtendedNum'));

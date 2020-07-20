@@ -1,6 +1,6 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.23.5",
+  "version": "0.25.0",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",

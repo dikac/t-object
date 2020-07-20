@@ -4,19 +4,19 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../validator/validatable/recursive/value", "../../validatable/recursive/boolean/and"], factory);
+        define(["require", "exports", "../../validatable/recursive/value", "../../validatable/recursive/boolean/and"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const value_1 = require("../../validator/validatable/recursive/value");
+    const value_1 = require("../../validatable/recursive/value");
     const and_1 = require("../../validatable/recursive/boolean/and");
     class Value {
         constructor(validators) {
             this.validators = validators;
         }
         validate(argument) {
-            let results = value_1.default(this.validators, argument);
+            let results = value_1.default(this.validators, argument, false);
             return {
                 value: argument,
                 validation: results,

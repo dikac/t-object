@@ -1,12 +1,30 @@
-import Recursive from "../../../recursive/recursive";
+import Recursive from "../../recursive/recursive";
 import ValidatorType from "@dikac/t-validator/boolean/validator";
 import RecursiveInferReturn from "./recursive";
-import TypeObject from "../../../boolean/object";
-import ThrowableValue from "../../recursive/assert/throwable/value";
+import TypeObject from "../../boolean/object";
+import ThrowableValue from "./assert/throwable/value";
 import Validator from "@dikac/t-validator/validator";
 import {Object} from "ts-toolbelt";
 
-export default function ValuePartial<
+export default function Value<
+    Val,
+    Validators extends Recursive<PropertyKey, Validator<Val>>
+    >(
+    validators : Validators,
+    value : Val,
+    stopOnInvalid : true
+) : Object.Partial<RecursiveInferReturn<Validators>, 'deep'>
+
+export default function Value<
+    Val,
+    Validators extends Recursive<PropertyKey, Validator<Val>>
+    >(
+    validators : Validators,
+    value : Val,
+    stopOnInvalid : false
+) : RecursiveInferReturn<Validators>
+
+export default function Value<
     Val,
     Validators extends Recursive<PropertyKey, Validator<Val>>
 >(
@@ -23,22 +41,21 @@ export default function ValuePartial<
 
         if(ValidatorType(validator)) {
 
-            let validatable = validator.validate(value);
+            // @ts-ignore
+            object[property] = validator.validate(value);
 
-            if(stopOnInvalid && !validatable.valid) {
+            if(stopOnInvalid && !object[property].valid) {
 
                 return object;
             }
 
-            // @ts-ignore
-            object[property] = validatable;
             continue;
         }
 
         if(TypeObject(validator)) {
 
             // @ts-ignore
-            object[property] = ValuePartial(validator,  value, stopOnInvalid);
+            object[property] = Value(validator,  value, stopOnInvalid);
             continue;
         }
 

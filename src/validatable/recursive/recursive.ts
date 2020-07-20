@@ -1,4 +1,4 @@
-import ObjectRecord from "../../../recursive/recursive";
+import ObjectRecord from "../../recursive/recursive";
 import Validator from "@dikac/t-validator/validator";
 import InferReturn from "@dikac/t-validator/validatable/validatable";
 

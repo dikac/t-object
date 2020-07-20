@@ -1,10 +1,10 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import RecordObject from "../recursive";
-import ValidateValue from "../../validator/validatable/recursive/value";
+import ValidateValue from "../../validatable/recursive/value";
 import And from "../../validatable/recursive/boolean/and";
 import ValueInterface from "@dikac/t-value/value";
-import RecursiveInferReturn from "../../validator/validatable/recursive/recursive";
+import RecursiveInferReturn from "../../validatable/recursive/recursive";
 
 export default class Value<
     Val,
@@ -21,7 +21,7 @@ export default class Value<
 
     validate(argument: Val) : {validation : RecursiveInferReturn<Container>} & ValueInterface<Val> & Validatable {
 
-        let results : RecursiveInferReturn<Container> = ValidateValue(this.validators, argument);
+        let results : RecursiveInferReturn<Container> = ValidateValue(this.validators, argument, false);
 
         return  {
             value : argument,
