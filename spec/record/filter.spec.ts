@@ -1,5 +1,4 @@
 import Filter from "../../dist/record/filter";
-import {O} from "ts-toolbelt";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 

@@ -21,7 +21,4 @@
     }
     exports.default = Filter;
 });
-// let c : O.UnionOf<{ name: string, address: number }> = {
-//
-// }
 //# sourceMappingURL=filter.js.map

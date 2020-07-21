@@ -30,11 +30,6 @@ class Mutator {
 
          this._value = value;
     }
-    //
-    // getValue() : number {
-    //
-    //     return this._value;
-    // }
 }
 
 class Method {

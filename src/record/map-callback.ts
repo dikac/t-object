@@ -1,9 +1,4 @@
-import Empty from "../boolean/empty";
-import ValueValidation from "../assert/throwable/value-validation";
-import Name from "../string/name";
 import Function from "@dikac/t-function/function";
-import Fns from "@dikac/t-function/function-single";
-import ObjectType from "../boolean/object";
 import {O} from "ts-toolbelt";
 
 /**
@@ -17,8 +12,7 @@ import {O} from "ts-toolbelt";
 export default function MapCallback<Replace, Value, Object extends Record<PropertyKey, Value> = Record<PropertyKey, Value>>(
     object : Object,
     replace : Function<[Value, keyof Object], Replace>,
-   // properties : (keyof Object)[] = []
-) : O.Replace<Object, Value, Replace> /*Map<Replace, Value, Object>*/ {
+) : O.Replace<Object, Value, Replace>  {
 
     let result = {};
 
@@ -26,27 +20,7 @@ export default function MapCallback<Replace, Value, Object extends Record<Proper
 
         const value = object[property];
 
-       // let props : PropertyKey[] = [...properties, property];
-
         result[<PropertyKey>property] = replace(value, property);
-
-        // if(validation(value)) {
-        //
-        //
-        //
-        // } else if(ObjectType<Object>(value)) {
-        //
-        //     const val = MapCallback(<any>value, validation, replace, props);
-        //
-        //     if(!Empty(val)) {
-        //
-        //         result[<PropertyKey>property] = val;
-        //     }
-        //
-        // } else {
-        //
-        //     throw ValueValidation(property, 'valid', Name(validation))
-        // }
     }
 
     return <O.Replace<Object, Value, Replace>> result;

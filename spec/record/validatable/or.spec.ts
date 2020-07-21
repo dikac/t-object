@@ -1,4 +1,3 @@
-import Valid from "../../../dist/validatable/record/valid";
 import Or from "../../../dist/record/validatable/or";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

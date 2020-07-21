@@ -21,25 +21,7 @@
         let result = {};
         for (const property in object) {
             const value = object[property];
-            // let props : PropertyKey[] = [...properties, property];
             result[property] = replace(value, property);
-            // if(validation(value)) {
-            //
-            //
-            //
-            // } else if(ObjectType<Object>(value)) {
-            //
-            //     const val = MapCallback(<any>value, validation, replace, props);
-            //
-            //     if(!Empty(val)) {
-            //
-            //         result[<PropertyKey>property] = val;
-            //     }
-            //
-            // } else {
-            //
-            //     throw ValueValidation(property, 'valid', Name(validation))
-            // }
         }
         return result;
     }

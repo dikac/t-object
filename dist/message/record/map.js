@@ -12,7 +12,7 @@
     const map_callback_1 = require("../../record/map-callback");
     // TODO RENAME TO MORE APPROPRIATE
     function Map(object, callback) {
-        return map_callback_1.default(object, callback /*, properties*/);
+        return map_callback_1.default(object, callback);
     }
     exports.default = Map;
 });

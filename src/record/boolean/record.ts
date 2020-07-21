@@ -38,14 +38,6 @@ export default function Record<
            continue;
         }
 
-        // if(TypeObject(value)) {
-        //
-        //     if(Recursive(value, validation, prop)) {
-        //
-        //         continue;
-        //     }
-        // }
-
         return false;
     }
 

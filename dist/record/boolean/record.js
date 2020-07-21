@@ -30,13 +30,6 @@
             if (validation(value)) {
                 continue;
             }
-            // if(TypeObject(value)) {
-            //
-            //     if(Recursive(value, validation, prop)) {
-            //
-            //         continue;
-            //     }
-            // }
             return false;
         }
         return true;

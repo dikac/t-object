@@ -1,9 +1,6 @@
-import Empty from "../boolean/empty";
-import ObjectType from "../boolean/object";
 import {O} from "ts-toolbelt";
 import Fn from "@dikac/t-function/function";
 import Guard from "@dikac/t-function/boolean/guard";
-import Fns from "@dikac/t-function/function-single";
 
 /**
  * recursively filter {@param record} value, returning new object with all value allowed
@@ -49,7 +46,3 @@ export default function Filter<
 
     return result;
 }
-
-// let c : O.UnionOf<{ name: string, address: number }> = {
-//
-// }

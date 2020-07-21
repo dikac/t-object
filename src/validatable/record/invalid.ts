@@ -1,7 +1,6 @@
 import Validatable from "@dikac/t-validatable/validatable";
 import Filter from "../../record/filter";
 import GuardValidatable from "@dikac/t-validatable/boolean/validatable";
-import {O} from "ts-toolbelt";
 import ValidatableInvalid from "@dikac/t-validatable/boolean/invalid";
 
 /**
