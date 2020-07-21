@@ -1,5 +1,5 @@
 import Property from "../../../dist/message/record/map";
-import Prepend from "../../../dist/message/prepend-properties";
+import Prepend from "../../../dist/message/property";
 import Message from "@dikac/t-message/message";
 
 it("force console log", () => {spyOn(console, 'log').and.callThrough();});
@@ -14,7 +14,7 @@ describe("compiler compatible", function() {
             data3 : {message : '3'}
         }
 
-        let result = Property(message, (m, v) => Prepend(m, [v]))
+        let result = Property(message, (m, v) => Prepend(m, v))
 
         it("validate type", function() {
 
@@ -68,7 +68,7 @@ describe("compiler compatible", function() {
                 data3 : {message : 1}
             }
 
-            let result = Property<Message<number>, Message<string>, typeof message>(message, (m, v) : Message<string> => Prepend(m, [v]))
+            let result = Property<Message<number>, Message<string>, typeof message>(message, (m, v) : Message<string> => Prepend(m, v))
 
             it("validate type", function() {
 
@@ -115,7 +115,7 @@ describe("compiler compatible", function() {
                 data3 : {message : 1}
             }
 
-            let result = Property(message, (m, v) : Message<string> => Prepend(m, [v]))
+            let result = Property(message, (m, v) : Message<string> => Prepend(m, v))
 
             it("valid type", function() {
 
@@ -163,7 +163,7 @@ describe("type equal", function() {
         data3 : {message : '3'}
     }
 
-    let result = Property(message, (m, v) => Prepend(m, [v]))
+    let result = Property(message, (m, v) => Prepend(m, v))
 
     it("validate type", function() {
 
@@ -190,7 +190,7 @@ describe("type different", function() {
         data3 : {message : 30}
     }
 
-    let result = Property(message, (m, v) : Message<string> => Prepend(m, [v]))
+    let result = Property(message, (m, v) : Message<string> => Prepend(m, v))
 
     it("validate type", function() {
 
@@ -221,7 +221,7 @@ describe("type different", function() {
         }
     }
 
-    let result = Property(message, (m, v) : Message<string> => Prepend(m, [v]))
+    let result = Property(message, (m, v) : Message<string> => Prepend(m, v))
 
     it("validate type", function() {
 

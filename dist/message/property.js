@@ -9,10 +9,10 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function PrependProperties(message, properties, delimiter = ' : ', conversion = (value) => value.toString()) {
-        let string = properties.join('.') + delimiter + conversion(message.message);
+    function Property(message, property, delimiter = ' : ', conversion = (value) => value.toString()) {
+        let string = property.toString() + delimiter + conversion(message.message);
         return { message: string };
     }
-    exports.default = PrependProperties;
+    exports.default = Property;
 });
-//# sourceMappingURL=prepend-properties.js.map
+//# sourceMappingURL=property.js.map

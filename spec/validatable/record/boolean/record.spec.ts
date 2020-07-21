@@ -43,7 +43,7 @@ describe('compiler compatible', function () {
 
     it('implicit', () => {
 
-        if(Record<typeof record>(object)) {
+        if(Record<typeof record, PropertyKey>(object)) {
 
             let boolean : boolean;
             boolean = object.valid.valid;
