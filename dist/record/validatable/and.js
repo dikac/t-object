@@ -4,19 +4,15 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../validatable/record/boolean/and"], factory);
+        define(["require", "exports", "../../validatable/record/boolean/and", "./validatables"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const and_1 = require("../../validatable/record/boolean/and");
-    class And {
-        constructor(validatable) {
-            this.validatable = validatable;
-        }
-        get valid() {
-            return and_1.default(this.validatable);
-        }
+    const validatables_1 = require("./validatables");
+    function And(validatable) {
+        return new validatables_1.default(validatable, and_1.default);
     }
     exports.default = And;
 });

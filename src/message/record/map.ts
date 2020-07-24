@@ -3,7 +3,6 @@ import Fn from "@dikac/t-function/function";
 import MapCallback from "../../record/map-callback";
 import Map from "../../record/map";
 
-// TODO RENAME TO MORE APPROPRIATE
 export default function Map<
     Origin extends Message,
     Replace extends Message,
@@ -11,7 +10,7 @@ export default function Map<
 >(
     object : Record,
     callback : Fn<[Origin, keyof Record], Replace>,
-) : Map<Replace, Origin, Record> {
+) : Map<Record, Origin, Replace> {
 
-    return <Map<Replace, Origin, Record>> MapCallback(object, callback)
+    return <Map<Record, Origin, Replace>> MapCallback(object, callback)
 }

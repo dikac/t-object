@@ -10,7 +10,6 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const map_callback_1 = require("../../record/map-callback");
-    // TODO RENAME TO MORE APPROPRIATE
     function Map(object, callback) {
         return map_callback_1.default(object, callback);
     }

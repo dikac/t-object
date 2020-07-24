@@ -1,16 +1,13 @@
 import Validatable from "@dikac/t-validatable/validatable";
 import OrBoolean from "../../validatable/record/boolean/or";
-
-export default class Or<Validatables extends Record<PropertyKey, Validatable>> implements Validatable {
-
-    constructor(
-        public validatable : Validatables
-    ) {
-    }
+import Validatables from "./validatables";
 
 
-    get valid() : boolean {
+export default function Or<
+    Record extends globalThis.Record<PropertyKey, Validatable>
+>(
+    validatable : Record
+) : Validatables<Record, boolean> {
 
-       return  OrBoolean(<any>this.validatable)
-    }
+    return new Validatables(validatable, OrBoolean);
 }

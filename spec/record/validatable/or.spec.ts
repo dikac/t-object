@@ -10,7 +10,7 @@ it("valids", function() {
         valid2 : {valid:true},
     };
 
-    let result = new Or(record);
+    let result = Or(record);
 
     expect(result.valid).toBe(true);
 
@@ -25,7 +25,7 @@ it("invalids", () => {
         invalid2 : {valid:false},
     };
 
-    let result = new Or(record);
+    let result = Or(record);
 
     expect(result.valid).toBe(false);
 });
@@ -39,7 +39,7 @@ it("mixed", () => {
         invalid : {valid:false},
     };
 
-    let result = new Or(record);
+    let result = Or(record);
 
     expect(result.valid).toBe(true);
 });

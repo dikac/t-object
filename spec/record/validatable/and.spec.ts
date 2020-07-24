@@ -10,7 +10,7 @@ it("all valid", function() {
         valid2 : {valid:true},
     };
 
-    let result = new And(record);
+    let result = And(record);
 
     expect(result.valid).toBe(true);
 
@@ -25,7 +25,7 @@ it("valid", () => {
         invalid2 : {valid:false},
     };
 
-    let result = new And(record);
+    let result = And(record);
 
     expect(result.valid).toBe(false);
 });
@@ -39,7 +39,7 @@ it("mixed", () => {
         invalid : {valid:false},
     };
 
-    let result = new And(record);
+    let result = And(record);
 
     expect(result.valid).toBe(false);
 });

@@ -115,15 +115,15 @@ describe('valid multi dimension', function () {
     let record = {
         valid :  {valid:true},
         invalid : {valid:false},
-        valids : new And({
+        valids : And({
             valid1 :  {valid:true},
             valid2 :  {valid:true},
         }),
-        invalids : new And({
+        invalids : And({
             invalid1 : {valid:false},
             invalid2 : {valid:false},
         }),
-        mixed : new And({
+        mixed : And({
             valid :  {valid:true},
             invalid : {valid:false},
         })

@@ -44,15 +44,15 @@ describe("recursive", function() {
 
         valid : {valid:true},
         invalid : {valid:false},
-        valids : new And({
+        valids : And({
             valid1 : {valid:true},
             valid2 : {valid:true},
         }),
-        invalids : new And({
+        invalids : And({
             invalid1 : {valid:false},
             invalid2 : {valid:false},
         }),
-        mixed : new Or({
+        mixed : Or({
             valid : {valid:true},
             invalid : {valid:false},
         })
@@ -82,9 +82,9 @@ describe("recursive", function() {
 
         it("valid1", () => {
 
-            if(result.valids && result.valids.validatable.valid1) {
+            if(result.valids && result.valids.validatables.valid1) {
 
-                expect(result.valids.validatable.valid1.valid).toBe(true);
+                expect(result.valids.validatables.valid1.valid).toBe(true);
 
             } else {
 
@@ -94,9 +94,9 @@ describe("recursive", function() {
 
         it("valid2", () => {
 
-            if(result.valids && result.valids.validatable.valid2) {
+            if(result.valids && result.valids.validatables.valid2) {
 
-                expect(result.valids.validatable.valid2.valid).toBe(true);
+                expect(result.valids.validatables.valid2.valid).toBe(true);
 
             } else {
 
@@ -117,8 +117,8 @@ describe("recursive", function() {
 
             if(result.mixed.valid) {
 
-                expect(result.mixed.validatable.valid.valid).toBe(true);
-                expect(result.mixed.validatable.invalid.valid).toBe(false);
+                expect(result.mixed.validatables.valid.valid).toBe(true);
+                expect(result.mixed.validatables.invalid.valid).toBe(false);
 
             } else {
 

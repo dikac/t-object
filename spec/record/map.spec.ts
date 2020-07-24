@@ -20,16 +20,12 @@ describe('single dimension', () => {
         num : 'string',
     }
 
-
-    let type : Convert<boolean, string, typeof single> = {
+    let type : Convert<typeof single, string, boolean> = {
 
         str : true, // Compile Pass
         num : true, // Compile Pass
     }
-
-
 })
-
 
 describe('multi dimension', () => {
 
@@ -46,7 +42,7 @@ describe('multi dimension', () => {
         }
     }
 
-    let type : Convert<boolean, any, typeof single> =  {
+    let type : Convert<typeof single, any, boolean> =  {
 
         str : true,
         num : true,
@@ -54,7 +50,7 @@ describe('multi dimension', () => {
     }
 
 
-    let invalid : Convert<boolean, any, typeof single> =  {
+    let invalid : Convert<typeof single, any, boolean> =  {
 
         str : true,
         num : true,
