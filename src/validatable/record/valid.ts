@@ -13,6 +13,7 @@ export default function Valid<
     record : Object
 ) : Optional<Object> {
 
-    return  Filter(record, (v) =>GuardValidatable(v) && v.valid);
+    let validation = (v) =>GuardValidatable(v) && v.valid;
+    return  Filter(record, validation);
 }
 

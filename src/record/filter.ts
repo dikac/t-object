@@ -9,9 +9,11 @@ import Guard from "@dikac/t-function/boolean/guard";
  * {@param validation} is used to distinguish between value to be validated by {@param filter} or tobe called
  * recursively
  */
+
+
 export default function Filter<
     Type extends O.UnionOf<Object>,
-    Object extends Record<PropertyKey, unknown>
+    Object extends Record<PropertyKey, any>
     >(
     record : Object,
     filter : Guard<O.UnionOf<Object>, Type, [keyof Object]>,
@@ -30,7 +32,7 @@ export default function Filter<
 >(
     record : Object,
     filter : Fn<[Type, keyof Object], boolean>,
-) : Partial<Object> {
+) : Partial<Object>{
 
     let result = {};
 

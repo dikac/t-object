@@ -16,7 +16,8 @@
      * filter all invalid {@link Validatable} while retain its original structure
      */
     function Invalid(record) {
-        return filter_1.default(record, (v) => validatable_1.default(v) && invalid_1.default(v));
+        let valdiation = (v) => validatable_1.default(v) && invalid_1.default(v);
+        return filter_1.default(record, valdiation);
     }
     exports.default = Invalid;
 });
