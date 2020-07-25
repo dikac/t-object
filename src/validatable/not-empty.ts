@@ -4,9 +4,9 @@ import Message from "@dikac/t-message/message";
 import Function from "@dikac/t-function/function";
 import MergeWrapper from "@dikac/t-value/message/readonly-merge";
 import MessageCallback from "@dikac/t-value/message/callback";
-import EmptyArgument from "../boolean/empty";
+import NotEmptyArgument from "../boolean/not-empty";
 
-export default class Empty<Msg>
+export default class NotEmpty<Msg>
     implements
         Readonly<Value<object> & Message<Msg> & Validatable>
 
@@ -18,7 +18,7 @@ export default class Empty<Msg>
         private _message : Function<[Readonly<Value<object> & Validatable>], Msg>,
     ) {
 
-        this.valid = EmptyArgument(value);
+        this.valid = NotEmptyArgument(value);
     }
 
     get message() : Msg {

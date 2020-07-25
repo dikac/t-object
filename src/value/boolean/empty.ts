@@ -3,8 +3,8 @@ import EmptyArgument from "../../boolean/empty";
 
 
 export default function Empty(
-    object : Value<object> & {empty : boolean},
+    object : Value<object>,
 ) : boolean {
 
-    return EmptyArgument(object.value, object.empty)
+    return EmptyArgument(object.value)
 }

@@ -13,8 +13,8 @@
     /**
      * check if object is empty (contain zero property & method)
      */
-    function Empty(value, empty = true) {
-        return IsEmptyObject(value) === empty;
+    function Empty(value) {
+        return IsEmptyObject(value);
     }
     exports.default = Empty;
 });
