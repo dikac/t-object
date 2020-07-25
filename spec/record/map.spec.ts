@@ -51,7 +51,6 @@ describe('multi dimension', () => {
 
 
     let invalid : Convert<typeof single, boolean> =  {
-
         str : true,
         num : true,
         // @ts-expect-error
@@ -64,4 +63,20 @@ describe('multi dimension', () => {
             }
         }
     }
+});
+
+
+describe('complex', () => {
+
+    interface Data {
+
+        string : string;
+        number : number;
+    }
+
+    let convert : Convert<Data, boolean> = {
+        string : true,
+        number : false,
+    }
+
 });

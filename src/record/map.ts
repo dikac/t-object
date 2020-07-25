@@ -3,8 +3,8 @@
  *
  * {@template Value} is required, while {@tempalte Key} is optional to use for distinguish condition recursive {@template Container}
  */
-type MapPartial<Container extends Record<PropertyKey, unknown>, Replace> = {
+type Map<Container extends Record<PropertyKey, any>, Replace> = {
     [K in keyof Container] : Replace
 }
 
-export default MapPartial;
+export default Map;
