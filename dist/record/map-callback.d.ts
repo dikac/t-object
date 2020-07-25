@@ -9,3 +9,4 @@ import { O } from "ts-toolbelt";
  * {@param validation} is used for distinguish value to be used for {@param replace} or to be used for recursion
  */
 export default function MapCallback<Replace, Value, Object extends Record<PropertyKey, Value> = Record<PropertyKey, Value>>(object: Object, replace: Function<[Value, keyof Object], Replace>): O.Replace<Object, Value, Replace>;
+export default function MapCallback<Replace, Value, Object extends Partial<Record<PropertyKey, Value>> = Partial<Record<PropertyKey, Value>>>(object: Object, replace: Function<[Value | undefined, keyof Object], Replace>): Partial<O.Replace<Object, Value, Replace>>;

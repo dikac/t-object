@@ -4,10 +4,10 @@ import Validatables from "./validatables";
 
 
 export default function Or<
-    Record extends globalThis.Record<PropertyKey, Validatable>
+    Object extends Partial<Record<PropertyKey, Validatable>>
 >(
-    validatable : Record
-) : Validatables<Record, boolean> {
+    validatable : Object
+) : Validatables<Object, boolean> {
 
     return new Validatables(validatable, OrBoolean);
 }

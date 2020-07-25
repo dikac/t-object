@@ -4,7 +4,7 @@ import FunctionSingle from "@dikac/t-function/function-single";
 
 
 export default class Validatables<
-    Record extends globalThis.Record<PropertyKey, Validatable>  = globalThis.Record<PropertyKey, Validatable>,
+    Record extends Partial<globalThis.Record<PropertyKey, Validatable>>  = Partial<globalThis.Record<PropertyKey, Validatable>>,
     Boolean extends boolean = boolean
 > implements
     Validatable,
@@ -22,3 +22,4 @@ export default class Validatables<
         return this.validation(this.validatables)
     }
 }
+

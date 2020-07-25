@@ -1,8 +1,9 @@
 import Validatable from "@dikac/t-validatable/validatable";
 
 export default interface Validatables<
-    Record extends globalThis.Record<PropertyKey, Validatable> = globalThis.Record<PropertyKey, Validatable>
+    Object extends Partial<Record<PropertyKey, Validatable>> = Partial<Record<PropertyKey, Validatable>>
 > {
 
-    validatables : Record;
+    validatables : Object;
 }
+

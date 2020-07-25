@@ -11,41 +11,40 @@ it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 describe("compiler compatibility", function() {
 
-    let validator = {
-        name : new Validator('string'),
-        address : new Validator('string'),
-    };
+    describe("explicit typed", function() {
 
-    type TypeValidator = {
-        name : ValidatorInterface<string, Validatable & Message<string>>,
-        address :ValidatorInterface<string, Validatable & Message<string>>,
-    };
+        let validator = {
+            name : new Validator('string'),
+            address : new Validator('string'),
+        };
 
-    type Type = {
-        name : string,
-        address : string,
-    }
+        type TypeValidator = {
+            name : ValidatorInterface<string, Validatable & Message<string>>,
+            address :ValidatorInterface<string, Validatable & Message<string>>,
+        };
 
-    let value = {
-        name : 'name',
-        address : 'address',
-    };
+        type Type = {
+            name : string,
+            address : string,
+        }
+
+        let value = {
+            name : 'name',
+            address : 'address',
+        };
 
 
-    describe("implicit partial", function() {
+        describe("implicit", function() {
 
-        let property = new Map(validator,(v)=>And(<globalThis.Record<PropertyKey, Validatable>>v)
-        );
+            let property = new Map(validator, And);
 
-        let validatable = property.validate(value);
+            let validatable = property.validate(value);
 
-        let unknown : unknown = validatable.value;
-        // @ts-expect-error
-        let string : Type = validatable.value;
+            let unknown : unknown = validatable.value;
+            // @ts-expect-error
+            let string : Type = validatable.value;
 
-    });
-
-    describe("explicit complete", function() {
+        });
 
         describe("auto", function() {
 
@@ -62,9 +61,7 @@ describe("compiler compatibility", function() {
 
         describe("direct", function() {
 
-            let property = new Map<TypeValidator>(validator,
-                (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v)
-            );
+            let property = new Map<TypeValidator>(validator, And);
 
             let validatable = property.validate(value);
 
@@ -73,6 +70,8 @@ describe("compiler compatibility", function() {
 
         });
     });
+
+
 });
 
 describe("implicit incomplete", function() {

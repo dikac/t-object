@@ -8,7 +8,7 @@ import ValidatableInvalid from "@dikac/t-validatable/boolean/invalid";
  */
 export default function Invalid<
     V extends Validatable = Validatable,
-    Object extends Record<PropertyKey, V> = Record<PropertyKey, V>
+    Object extends Partial<Record<PropertyKey, V>> = Partial<Record<PropertyKey, V>>
 >(
     record : Object
 ) : Partial<Object> {

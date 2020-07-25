@@ -32,7 +32,7 @@ export default function Filter<
 >(
     record : Object,
     filter : Fn<[Type, keyof Object], boolean>,
-) : Partial<Object>{
+) : Partial<Object> | O.Select<Object, Type>{
 
     let result = {};
 

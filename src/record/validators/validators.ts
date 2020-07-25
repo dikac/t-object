@@ -1,8 +1,8 @@
 import Validator from "@dikac/t-validator/validator";
 
 export default interface Validators<
-    Record extends globalThis.Record<PropertyKey, Validator>
-    > {
+    Object extends Partial<Record<PropertyKey, Validator>> = Partial<Record<PropertyKey, Validator>>
+> {
 
-    validators : Record;
+    validators : Object;
 }
