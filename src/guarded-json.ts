@@ -27,5 +27,3 @@ export default function GuardedJson<Type>(
 
     throw error(string, object);
 }
-
-

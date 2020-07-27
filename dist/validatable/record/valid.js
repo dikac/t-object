@@ -11,7 +11,6 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const validatable_1 = require("@dikac/t-validatable/boolean/validatable");
     const filter_1 = require("../../record/filter");
-    // import Partial from "../../record/partial";
     const value_1 = require("@dikac/t-validatable/boolean/value");
     /**
      * filter all valid {@link Validatable} while retain its original structure

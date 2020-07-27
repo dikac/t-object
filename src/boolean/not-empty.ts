@@ -1,4 +1,3 @@
-import * as IsEmptyObject from "is-empty-object";
 import Empty from "./empty";
 
 /**

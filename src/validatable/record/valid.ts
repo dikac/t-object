@@ -1,8 +1,6 @@
 import Validatable from "@dikac/t-validatable/validatable";
 import GuardValidatable from "@dikac/t-validatable/boolean/validatable";
 import Filter from "../../record/filter";
-import Boolean from "@dikac/t-validatable/boolean/boolean";
-// import Partial from "../../record/partial";
 import ValidatableValid from "@dikac/t-validatable/boolean/value";
 /**
  * filter all valid {@link Validatable} while retain its original structure
