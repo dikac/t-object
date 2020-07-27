@@ -4,7 +4,7 @@ import Return from "@dikac/t-function/return/return";
 
 export default class Extract<
     O extends object,
-    Key extends Object.Keys<O>[]
+    Key extends (keyof O)[] = (keyof O)[]
 > implements
     Readonly<Value<Omit<O, List.UnionOf<Key>>> & Return<Object.Pick<O, List.UnionOf<Key>>>>
 {
