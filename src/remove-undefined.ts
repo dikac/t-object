@@ -1,14 +1,16 @@
-export default function RemoveUndefined<Entity extends object>(
-    entity : Entity,
-)  : Partial<Entity> {
+import {Object, List} from "ts-toolbelt";
 
-    for(let property in entity) {
+export default function RemoveUndefined<O extends object>(
+    object : O,
+)  : Omit<O, Object.Keys<Object.Select<O, undefined>>> {
 
-        if(entity[property] === undefined) {
+    for(let property in object) {
 
-            delete entity[property];
+        if(object[property] === undefined) {
+
+            delete object[property];
         }
     }
 
-    return entity;
+    return object;
 }
