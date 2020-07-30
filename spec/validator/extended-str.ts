@@ -7,10 +7,10 @@ import Value from "@dikac/t-value/value";
 
 export default class ExtendedStr extends Str implements Validator<string, Validatable & Message<string> & Value<string>> {
 
-    validate(value: string): Validatable & Message<string> & Value<string> {
+    validate(value: string) {
 
 
-        return <Validatable & Message<string> & Value<string>> new Mixin(
+        return <any> new Mixin(
             {value:value},
             {message:'ExtendedStr'},
             super.validate(value),

@@ -19,7 +19,7 @@ describe('valid', function () {
 
     it(`check value`, () => {
 
-        if(Type<string, string>(convert,  (v:any) : v is string  => typeof v === 'string')) {
+        if(Type<string>(convert,  (v:any) : v is string  => typeof v === 'string')) {
 
             expect(convert.property1).toBe('a', 'property1');
             expect(convert.property2).toBe('b', 'property2');

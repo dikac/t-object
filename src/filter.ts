@@ -1,27 +1,50 @@
+import {O} from "ts-toolbelt";
 import Fn from "@dikac/t-function/function";
+import Guard from "@dikac/t-function/boolean/guard";
 
 /**
- * filter {@param object} value, returning new object with all value allowed
- * by {@param validation} with the same property
+ * recursively filter {@param record} value, returning new object with all value allowed
+ * by {@param filter}
+ *
+ * {@param validation} is used to distinguish between value to be validated by {@param filter} or tobe called
+ * recursively
  */
+
+
 export default function Filter<
-    Object extends object = object
+    Type extends O.UnionOf<Object>,
+    Object extends Record<PropertyKey, any>
 >(
-    object : Object,
-    validation : Fn<[any], boolean>,
-) : Partial<Object> {
+    record : Object,
+    filter : Guard<O.UnionOf<Object>, Type, [keyof Object]>,
+) : O.Select<Object, Type>;
 
-    let result : Partial<Object> = {};
+export default function Filter<
+    Object extends Record<PropertyKey, unknown>
+>(
+    record : Object,
+    filter : Fn<[O.UnionOf<Object>, keyof Object], boolean>,
+) : Partial<Object>;
 
-    for(let property in object) {
+export default function Filter<
+    Type,
+    Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>
+>(
+    record : Object,
+    filter : Fn<[Type, keyof Object], boolean>,
+) : Partial<Object> | O.Select<Object, Type>{
 
-        const value : any = object[property];
+    let result = {};
 
-        if(validation(value)) {
+    for(const property in record) {
 
-            result[property] = value;
+        const value : Type = <Type>record[property];
+
+        if(filter(value, <keyof Object>property)) {
+
+            result[<PropertyKey>property] = value;
         }
     }
 
-    return  result;
+    return result;
 }

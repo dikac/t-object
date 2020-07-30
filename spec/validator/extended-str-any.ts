@@ -8,9 +8,9 @@ import StrAny from "./str-any";
 
 export default class ExtendedStrAny extends StrAny implements Validator<any, Validatable & Message<string> & Value<string>> {
 
-    validate(value: any): Validatable & Message<string> & Value<string> {
+    validate(value: any){
 
-        return new Asserted<Validatable & Message<string> & Value<string>>(
+        return <any> new Asserted<Validatable & Message<string> & Value<string>>(
             new Mixin(
                 {value:value},
                 {message:'ExtendedStrAny'},

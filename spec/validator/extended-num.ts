@@ -8,9 +8,9 @@ import Value from "@dikac/t-value/value";
 
 export default class ExtendedNum extends Num implements Validator<number, Validatable & Message<string> & Value<number>> {
 
-    validate(value: number): Validatable & Message<string> & Value<number>  {
+    validate(value: number)  {
 
-        return new Asserted<Validatable & Message<string> & Value<number>>(
+        return <any> new Asserted<Validatable & Message<string> & Value<number>>(
             new Mixin(
                 {value:value},
                 {message:'ExtendedNum'},

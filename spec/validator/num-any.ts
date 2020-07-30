@@ -1,11 +1,12 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
+import ValidatorType from "@dikac/t-type/validator/type";
+import StringType from "@dikac/t-type/validatable/string/type";
 
-export default class NumAny implements Validator<any, Validatable> {
+export default class NumAny extends  ValidatorType {
 
-    validate(value: any): Validatable {
-
-        return {valid: typeof value === "number"};
+    constructor() {
+        super('number', StringType);
     }
 }
 

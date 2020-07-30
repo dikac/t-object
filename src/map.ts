@@ -1,26 +1,10 @@
-import Value from "./record/value/value";
-import Fn from "@dikac/t-function/function";
-
 /**
- * Calls {@param replace} on each property value from {@param object} recursively
+ * Convert recursive {@template Container} Value type to {@template Replace} type
  *
- * {@template Replace} type of replace result
+ * {@template Value} is required, while {@tempalte Key} is optional to use for distinguish condition recursive {@template Container}
  */
-export default function Map<Replace, Object extends Record<any, any>>(
-    object : Object,
-    replace : Fn<[Value<Object>], Replace>
-) : Record<keyof Object, Replace> {
-
-    let result : Record<keyof Object, Replace> = <Record<keyof Object, Replace>>{};
-
-    for(let property in object) {
-
-        const value = object[property];
-
-        result[property] = replace(value);
-
-    }
-
-    return  result;
+type Map<Container extends Record<PropertyKey, any>, Replace> = {
+    [K in keyof Container] : Replace
 }
 
+export default Map;

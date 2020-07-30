@@ -1,6 +1,6 @@
 import MessageInterface from "@dikac/t-message/message";
 import RecordInfer from "./record";
-import MapCallbackGuard from "../../../record/map-callback";
+import MapCallbackGuard from "../../../map-callback";
 import ValueMessage from "@dikac/t-message/message/value";
 
 

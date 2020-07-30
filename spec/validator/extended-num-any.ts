@@ -8,9 +8,9 @@ import NumAny from "./num-any";
 
 export default class ExtendedNumAny extends NumAny implements Validator<any, Validatable & Message<string> & Value<number>> {
 
-    validate(value: any): Validatable & Message<string> & Value<number> {
+    validate(value: any) {
 
-        return new Asserted<Validatable & Message<string> & Value<number>>(
+        return <any>new Asserted<Validatable & Message<string> & Value<number>>(
             new Mixin(
                 {value:value},
                 {message:'ExtendedNumAny'},

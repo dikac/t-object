@@ -4,19 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../../record/boolean/record", "@dikac/t-validatable/boolean/validatable", "../../../key/boolean/key"], factory);
+        define(["require", "exports", "../../../boolean/record", "@dikac/t-validatable/boolean/validatable"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const record_1 = require("../../../record/boolean/record");
+    const record_1 = require("../../../boolean/record");
     const validatable_1 = require("@dikac/t-validatable/boolean/validatable");
-    const key_1 = require("../../../key/boolean/key");
-    /**
-     * Check if {@param record} is record of {@link Validatable}
-     * {@param property} also can be provided to validate property
-     */
-    function Record(record, property = key_1.default) {
+    function Record(record, property) {
         return record_1.default(record, validatable_1.default, property);
     }
     exports.default = Record;

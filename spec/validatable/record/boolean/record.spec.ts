@@ -1,5 +1,5 @@
 import Record from "../../../../dist/validatable/record/boolean/record";
-import And from "../../../../dist/record/validatable/and";
+import And from "../../../../dist/validatable/and";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -43,7 +43,7 @@ describe('compiler compatible', function () {
 
     it('implicit', () => {
 
-        if(Record<typeof record, PropertyKey>(object)) {
+        if(Record<typeof record>(object)) {
 
             let boolean : boolean;
             boolean = object.valid.valid;

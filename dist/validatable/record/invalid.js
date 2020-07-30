@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../record/filter", "@dikac/t-validatable/boolean/validatable", "@dikac/t-validatable/boolean/invalid"], factory);
+        define(["require", "exports", "../../filter", "@dikac/t-validatable/boolean/validatable", "@dikac/t-validatable/boolean/invalid"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const filter_1 = require("../../record/filter");
+    const filter_1 = require("../../filter");
     const validatable_1 = require("@dikac/t-validatable/boolean/validatable");
     const invalid_1 = require("@dikac/t-validatable/boolean/invalid");
     /**

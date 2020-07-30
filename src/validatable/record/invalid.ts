@@ -1,5 +1,5 @@
 import Validatable from "@dikac/t-validatable/validatable";
-import Filter from "../../record/filter";
+import Filter from "../../filter";
 import GuardValidatable from "@dikac/t-validatable/boolean/validatable";
 import ValidatableInvalid from "@dikac/t-validatable/boolean/invalid";
 

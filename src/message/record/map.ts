@@ -1,8 +1,8 @@
 import Message from "@dikac/t-message/message";
 import Fn from "@dikac/t-function/function";
-import MapCallback from "../../record/map-callback";
-import MapInterface from "../../record/map";
-import PartialMapInterface from "../../record/map-partial";
+import MapCallback from "../../map-callback";
+import MapInterface from "../../map";
+import PartialMapInterface from "../../map-partial";
 
 
 export default function Map<

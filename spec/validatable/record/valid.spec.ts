@@ -1,6 +1,6 @@
 import Valid from "../../../dist/validatable/record/valid";
-import And from "../../../dist/record/validatable/and";
-import Or from "../../../dist/record/validatable/or";
+import And from "../../../dist/validatable/and";
+import Or from "../../../dist/validatable/or";
 
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

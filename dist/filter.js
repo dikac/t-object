@@ -9,15 +9,11 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * filter {@param object} value, returning new object with all value allowed
-     * by {@param validation} with the same property
-     */
-    function Filter(object, validation) {
+    function Filter(record, filter) {
         let result = {};
-        for (let property in object) {
-            const value = object[property];
-            if (validation(value)) {
+        for (const property in record) {
+            const value = record[property];
+            if (filter(value, property)) {
                 result[property] = value;
             }
         }

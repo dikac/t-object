@@ -1,4 +1,4 @@
-import CallValidator from "../../../dist/validator/validatable/record/standard";
+import CallValidator from "../../../dist/validator/return/record/standard";
 import Num from "../../validator/num";
 import NumAny from "../../validator/num-any";
 
