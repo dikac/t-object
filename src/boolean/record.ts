@@ -1,5 +1,3 @@
-import Pair from "../iterable/pair";
-import PropertyType from "../key/boolean/key";
 import Guard from "@dikac/t-function/boolean/guard";
 
 /**

@@ -1,2 +1,2 @@
-declare type Record<Type, Key extends keyof any = keyof any> = globalThis.Record<Key, Type>;
+declare type Record<Type> = globalThis.Record<any, Type>;
 export default Record;

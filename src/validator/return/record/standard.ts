@@ -1,10 +1,9 @@
 import ValidatorType from "@dikac/t-validator/boolean/validator";
-import RecordParameter from "../../parameter/record/record";
-import RecordValidatable from "./record";
+import RecordParameter from "../../parameter/base/record/infer";
 import ThrowableValue from "../../../validatable/record/assert/throwable/value";
 import Validator from "@dikac/t-validator/validator";
-import PartialUnion from "./partial-union";
-
+import MapPartialUnion from "../../../map-partial-union";
+import InferReturn from "./infer";
 
 export default function Standard<
     Validators extends Record<PropertyKey, Validator>
@@ -12,7 +11,7 @@ export default function Standard<
     values : RecordParameter<Validators>,
     validators : Validators,
     stopOnInvalid : true
-) : PartialUnion<Validators>
+) : MapPartialUnion<InferReturn<Validators>>
 
 export default function Standard<
     Validators extends Record<PropertyKey, Validator>
@@ -20,7 +19,7 @@ export default function Standard<
     values : RecordParameter<Validators>,
     validators : Validators,
     stopOnInvalid : false
-) : RecordValidatable<Validators>
+) : InferReturn<Validators>
 
 export default function Standard<
     Validators extends Record<PropertyKey, Validator>
@@ -28,9 +27,9 @@ export default function Standard<
     values : RecordParameter<Validators>,
     validators : Validators,
     stopOnInvalid : boolean
-) : PartialUnion<Validators> | RecordValidatable<Validators> {
+) :  MapPartialUnion<InferReturn<Validators>> | InferReturn<Validators> {
 
-    let object : RecordValidatable<Validators> = <RecordValidatable<Validators>>{};
+    let object : InferReturn<Validators> = <InferReturn<Validators>>{};
 
     for(let property in validators) {
 

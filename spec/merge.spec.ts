@@ -205,7 +205,7 @@ describe('plain object', () => {
         it('initial check', () => {
 
             expect(mixin.value).toBe(10);
-            // @ts-ignore
+            // @ts-expect-error
             expect(mixin).toBe(object);
 
         });
@@ -460,7 +460,7 @@ describe('function', () => {
             it('initial check', () => {
 
                 expect(mixin.value).toBe(10);
-                // @ts-ignore
+
                 expect(mixin).toBe(fn);
 
                 expect(mixin()).toBe('fn');

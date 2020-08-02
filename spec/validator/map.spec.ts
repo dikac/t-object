@@ -1,10 +1,12 @@
-import Validator from "./factory";
 import Map from "../../dist/validator/map";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";
 import ValidatorInterface from "@dikac/t-validator/validator";
-import Message from "@dikac/t-message/message";
+import MessageMap from "../../dist/message/return/record/map";
+import RemoveUndefined from "../../dist/remove-undefined";
+import Type from "@dikac/t-type/validator/type-standard";
+import Instance from "@dikac/t-validator/parameter/instance/instance";
 
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
@@ -14,13 +16,13 @@ describe("compiler compatibility", function() {
     describe("explicit typed", function() {
 
         let validator = {
-            name : new Validator('string'),
-            address : new Validator('string'),
+            name : Type('string'),
+            address : Type('string'),
         };
 
         type TypeValidator = {
-            name : ValidatorInterface<string, Validatable & Message<string>>,
-            address :ValidatorInterface<string, Validatable & Message<string>>,
+            name : ValidatorInterface<string, string, Instance<string, string>>,
+            address :ValidatorInterface<string, string, Instance<string, string>>,
         };
 
         type Type = {
@@ -36,20 +38,23 @@ describe("compiler compatibility", function() {
 
         describe("implicit", function() {
 
-            let property = new Map(validator, And);
+            let property = Map(validator, And, MessageMap);
 
             let validatable = property.validate(value);
 
             let unknown : unknown = validatable.value;
-            // @ts-expect-error
+
             let string : Type = validatable.value;
 
         });
 
         describe("auto", function() {
 
-            let property = new Map<globalThis.Record<keyof typeof validator, ValidatorInterface<string, Validatable & Message<string>>>>(validator,
-                (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v)
+            let property = Map<
+                globalThis.Record<keyof typeof validator, ValidatorInterface<string, string, Instance<string, string>>>
+                >(validator,
+                And,
+                (v)=>MessageMap(RemoveUndefined(v))
             );
 
             let validatable = property.validate(value);
@@ -61,7 +66,7 @@ describe("compiler compatibility", function() {
 
         describe("direct", function() {
 
-            let property = new Map<TypeValidator>(validator, And);
+            let property = Map<TypeValidator>(validator, And, (v)=>MessageMap(RemoveUndefined(v)));
 
             let validatable = property.validate(value);
 
@@ -79,9 +84,9 @@ describe("implicit incomplete", function() {
     describe("all valid", function() {
 
         let validator = {
-            name : new Validator('string'),
-            address : new Validator('string'),
-            user : new Validator('string'),
+            name : Type('string'),
+            address : Type('string'),
+            user : Type('string'),
         };
 
         let value = {
@@ -90,8 +95,9 @@ describe("implicit incomplete", function() {
             user : 'address',
         };
 
-        let property = new Map(validator,
-            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v)
+        let property = Map(validator,
+            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
+            MessageMap
         );
 
 
@@ -105,7 +111,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.name) {
 
                 expect(validatable.validatables.name.valid).toBe(true);
-                expect(validatable.validatables.name.message).toBe('name valid');
+                expect(validatable.validatables.name.message).toBe('value is type of "string"');
 
             } else {
 
@@ -116,7 +122,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.address) {
 
                 expect(validatable.validatables.address.valid).toBe(true);
-                expect(validatable.validatables.address.message).toBe('age valid');
+                expect(validatable.validatables.address.message).toBe('value is type of "string"');
 
             } else {
 
@@ -127,7 +133,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.user) {
 
                 expect(validatable.validatables.user.valid).toBe(true);
-                expect(validatable.validatables.user.message).toBe('address valid');
+                expect(validatable.validatables.user.message).toBe('value is type of "string"');
 
             } else {
 
@@ -149,7 +155,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.name) {
 
                 expect(validatable.validatables.name.valid).toBe(true);
-                expect(validatable.validatables.name.message).toBe('name valid');
+                expect(validatable.validatables.name.message).toBe('value is type of "string"');
 
             } else {
 
@@ -160,7 +166,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.address) {
 
                 expect(validatable.validatables.address.valid).toBe(true);
-                expect(validatable.validatables.address.message).toBe('age valid');
+                expect(validatable.validatables.address.message).toBe('value is type of "string"');
 
             } else {
 
@@ -171,7 +177,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.user) {
 
                 expect(validatable.validatables.user.valid).toBe(true);
-                expect(validatable.validatables.user.message).toBe('address valid');
+                expect(validatable.validatables.user.message).toBe('value is type of "string"');
 
             } else {
 
@@ -184,9 +190,9 @@ describe("implicit incomplete", function() {
     describe("mixed", function() {
 
         let validator = {
-            name : new Validator('string'),
-            age : new Validator('number'),
-            address : new Validator('string'),
+            name : Type('string'),
+            age : Type('number'),
+            address : Type('string'),
         };
 
         let value = {
@@ -195,8 +201,9 @@ describe("implicit incomplete", function() {
             address : 'address',
         };
 
-        let property = new Map(validator,
-            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v)
+        let property = Map(validator,
+            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
+            MessageMap
         );
 
         it(`and validation`, () => {
@@ -208,7 +215,7 @@ describe("implicit incomplete", function() {
 
             if(and.validatables.name) {
                 expect(and.validatables.name.valid).toBe(true);
-                expect(and.validatables.name.message).toBe('name valid');
+                expect(and.validatables.name.message).toBe('value is type of "string"');
 
             } else {
                 fail('validatable.validatables.name should exist');
@@ -216,7 +223,7 @@ describe("implicit incomplete", function() {
 
             if(and.validatables.age) {
                 expect(and.validatables.age.valid).toBe(false);
-                expect(and.validatables.age.message).toBe('15 invalid');
+                expect(and.validatables.age.message).toBe('value is not type of "number"');
 
             } else {
                 fail('validatable.validatables.age should exist');
@@ -237,14 +244,14 @@ describe("implicit incomplete", function() {
             expect(or.valid).toBe(true);
 
             if(or.validatables.name) {
-                expect(or.validatables.name.message).toBe('name valid');
+                expect(or.validatables.name.message).toBe('value is type of "string"');
                 expect(or.validatables.name.valid).toBe(true);
             } else {
                 fail('validatable.validatables.name should exist');
             }
 
             if(or.validatables.age) {
-                expect(or.validatables.age.message).toBe('15 invalid');
+                expect(or.validatables.age.message).toBe('value is not type of "number"');
                 expect(or.validatables.age.valid).toBe(false);
             } else {
                 fail('validatable.validatables.age should exist');
@@ -261,9 +268,9 @@ describe("implicit incomplete", function() {
     describe("all invalid", function() {
 
         let validator = {
-            name : new Validator('string'),
-            age : new Validator('number'),
-            address : new Validator('string'),
+            name : Type('string'),
+            age : Type('number'),
+            address : Type('string'),
         };
 
         let value = {
@@ -272,8 +279,9 @@ describe("implicit incomplete", function() {
             address : {},
         };
 
-        let property = new Map(validator,
-            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v)
+        let property = Map(validator,
+            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
+            MessageMap
         );
 
         it(`and validation`, () => {
@@ -285,7 +293,7 @@ describe("implicit incomplete", function() {
 
             if(and.validatables.name) {
                 expect(and.validatables.name.valid).toBe(false);
-                expect(and.validatables.name.message).toBe('[object Object] invalid');
+                expect(and.validatables.name.message).toBe('value is not type of "string"');
             } else {
                 fail('validatable.validatables.name should exist');
             }
@@ -309,7 +317,7 @@ describe("implicit incomplete", function() {
             expect(or.valid).toBe(false);
 
             if(or.validatables.name) {
-                expect(or.validatables.name.message).toBe('[object Object] invalid');
+                expect(or.validatables.name.message).toBe('value is not type of "string"');
                 expect(or.validatables.name.valid).toBe(false);
             } else {
                 fail('validatable.validatables.name should exist');
@@ -323,6 +331,359 @@ describe("implicit incomplete", function() {
                 fail('validatable.validatables.address should not exist');
             }
 
+        });
+    });
+});
+
+
+
+describe("recursive", function() {
+
+    describe("all valid", function() {
+
+        let validator = {
+            name : Type('string'),
+            address : Type('string'),
+            user : Type('string'),
+            info : Map({
+                age : Type('number'),
+                hobby : Type('string'),
+                no : Type('number'),
+            },(v)=>And(v), MessageMap)
+        };
+
+        let value = {
+            name : 'name',
+            address : 'age',
+            user : 'address',
+            info : {
+                age : 5,
+                hobby : 'string',
+                no : 6,
+            }
+        };
+
+        let property = Map(validator,
+            (v)=>And(v),
+            MessageMap
+        );
+
+
+        it(`and validation`, () => {
+
+            let validatable = property.validate(value);
+
+            expect(validatable.valid).toBe(true);
+            expect(validatable.value).toBe(value);
+
+            if(validatable.validatables.name) {
+
+                expect(validatable.validatables.name.valid).toBe(true);
+                expect(validatable.validatables.name.message).toBe('value is type of "string"');
+
+            } else {
+
+                fail('validatable.validatables.name should exist');
+            }
+
+
+            if(validatable.validatables.address) {
+
+                expect(validatable.validatables.address.valid).toBe(true);
+                expect(validatable.validatables.address.message).toBe('value is type of "string"');
+
+            } else {
+
+                fail('validatable.validatables.address should exist');
+            }
+
+
+            if(validatable.validatables.user) {
+
+                expect(validatable.validatables.user.valid).toBe(true);
+                expect(validatable.validatables.user.message).toBe('value is type of "string"');
+
+            } else {
+
+                fail('validatable.validatables.user should exist');
+            }
+
+            if(validatable.validatables.info) {
+
+                expect(validatable.validatables.info.valid).toBe(true);
+                expect(validatable.validatables.info.value).toBe(value.info);
+
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.age.valid).toBe(true);
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.age.message).toBe('value is type of "number"');
+
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.hobby.valid).toBe(true);
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.hobby.message).toBe('value is type of "string"');
+
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.no.valid).toBe(true);
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.no.message).toBe('value is type of "number"');
+
+            } else {
+
+                fail('validatable.validatables.info should exist');
+            }
+        });
+
+
+        it(`or validation`, () => {
+
+            property.validation = (v)=>Or(v);
+            property.validators.info.validation = (v)=>Or(v);
+            let validatable = property.validate(value);
+
+            expect(validatable.valid).toBe(true);
+            expect(validatable.value).toBe(value);
+
+
+            if(validatable.validatables.name) {
+
+                expect(validatable.validatables.name.valid).toBe(true);
+                expect(validatable.validatables.name.message).toBe('value is type of "string"');
+
+            } else {
+
+                fail('validatable.validatables.name should exist');
+            }
+
+
+            if(validatable.validatables.address) {
+
+                expect(validatable.validatables.address.valid).toBe(true);
+                expect(validatable.validatables.address.message).toBe('value is type of "string"');
+
+            } else {
+
+                fail('validatable.validatables.address should exist');
+            }
+
+
+            if(validatable.validatables.user) {
+
+                expect(validatable.validatables.user.valid).toBe(true);
+                expect(validatable.validatables.user.message).toBe('value is type of "string"');
+
+            } else {
+
+                fail('validatable.validatables.user should exist');
+            }
+
+            if(validatable.validatables.info) {
+
+                expect(validatable.validatables.info.valid).toBe(true);
+                expect(validatable.validatables.info.value).toBe(value.info);
+
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.age.valid).toBe(true);
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.age.message).toBe('value is type of "number"');
+
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.hobby.valid).toBe(true);
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.hobby.message).toBe('value is type of "string"');
+
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.no.valid).toBe(true);
+                // @ts-expect-error
+                expect(validatable.validatables.info.validatables.no.message).toBe('value is type of "number"');
+
+            } else {
+
+                fail('validatable.validatables.info should exist');
+            }
+
+        });
+    });
+
+
+    describe("mixed", function() {
+
+        let validator = {
+            name : Type('string'),
+            age : Type('number'),
+            address : Type('string'),
+            info : Map({
+                age : Type('number'),
+                hobby : Type('string'),
+                no : Type('number'),
+            },(v)=>And(v), MessageMap)
+        };
+
+        let value = {
+            name : 'name',
+            age : "15",
+            address : 'address',
+            info : {
+                age : 5,
+                hobby : 7,
+                no : 6,
+            }
+        };
+
+        let property = Map(validator,
+            (v)=>And(v),
+            MessageMap
+        );
+
+        it(`and validation`, () => {
+
+            let and = property.validate(value);
+
+            expect(and.valid).toBe(false);
+            expect(and.value).toBe(value);
+
+            if(and.validatables.name) {
+                expect(and.validatables.name.valid).toBe(true);
+                expect(and.validatables.name.message).toBe('value is type of "string"');
+
+            } else {
+                fail('validatable.validatables.name should exist');
+            }
+
+            if(and.validatables.age) {
+                expect(and.validatables.age.valid).toBe(false);
+                expect(and.validatables.age.message).toBe('value is not type of "number"');
+
+            } else {
+                fail('validatable.validatables.age should exist');
+            }
+
+            if(and.validatables.address) {
+                fail('validatable.validatables.address should exist');
+            }
+
+
+            if(and.validatables.info) {
+                fail('validatable.validatables.info should not exist');
+            }
+        });
+
+
+        it(`or validation `, () => {
+
+            property.validation = (v)=>Or(v);
+            property.validators.info.validation = (v)=>Or(v);
+
+            let or = property.validate(value);
+            expect(or.value).toBe(value);
+            expect(or.valid).toBe(true);
+
+            if(or.validatables.name) {
+                expect(or.validatables.name.message).toBe('value is type of "string"');
+                expect(or.validatables.name.valid).toBe(true);
+            } else {
+                fail('validatable.validatables.name should exist');
+            }
+
+            if(or.validatables.age) {
+                expect(or.validatables.age.message).toBe('value is not type of "number"');
+                expect(or.validatables.age.valid).toBe(false);
+            } else {
+                fail('validatable.validatables.age should exist');
+            }
+
+            if(or.validatables.address) {
+                fail('validatable.validatables.address should exist');
+            }
+
+            if(or.validatables.info) {
+
+                 fail('validatable.validatables.info should not exist');
+            }
+        });
+    });
+
+
+    describe("all invalid", function() {
+
+        let validator = {
+            name : Type('string'),
+            age : Type('number'),
+            address : Type('string'),
+            info : Map({
+                age : Type('number'),
+                hobby : Type('string'),
+                no : Type('number'),
+            },(v)=>And(v), MessageMap)
+        };
+
+        let value = {
+            name : {},
+            age : {},
+            address : {},
+            info : {
+                age : {},
+                hobby : {},
+                no : {},
+            }
+        };
+
+        let property = Map(validator,
+            (v)=>And(v),
+            MessageMap
+        );
+
+        it(`and validation`, () => {
+
+            let and = property.validate(value);
+
+            expect(and.valid).toBe(false);
+            expect(and.value).toEqual(value);
+
+            if(and.validatables.name) {
+                expect(and.validatables.name.valid).toBe(false);
+                expect(and.validatables.name.message).toBe('value is not type of "string"');
+            } else {
+                fail('validatable.validatables.name should exist');
+            }
+
+            if(and.validatables.age) {
+                fail('validatable.validatables.age should not exist');
+            }
+
+            if(and.validatables.address) {
+                fail('validatable.validatables.address should not exist');
+            }
+        });
+
+        it(`or validation `, () => {
+
+            property.validation = (v)=>Or(v);
+            property.validators.info.validation = (v)=>Or(v);
+
+            let or = property.validate(value);
+
+            expect(or.value).toEqual(value);
+            expect(or.valid).toBe(false);
+
+            if(or.validatables.name) {
+                expect(or.validatables.name.message).toBe('value is not type of "string"');
+                expect(or.validatables.name.valid).toBe(false);
+            } else {
+                fail('validatable.validatables.name should exist');
+            }
+
+            if(or.validatables.age) {
+                fail('validatable.validatables.age should not exist');
+            }
+
+            if(or.validatables.address) {
+                fail('validatable.validatables.address should not exist');
+            }
+
+            if(or.validatables.info) {
+                fail('validatable.validatables.info should not exist');
+            }
         });
     });
 });

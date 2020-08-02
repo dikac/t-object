@@ -1,34 +1,22 @@
 import Validator from "@dikac/t-validator/validator";
 import ValidatableInterface from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
-import ValueInterface from "@dikac/t-value/value";
 import ValidateValue from "./return/record/value";
-import MapPartialUnion from "../map-partial-union";
-import Message from "@dikac/t-message/message";
-import Typeof from "@dikac/t-type/validator/type-standard";
-import Validatables from "../validatable/validatables/validatables";
-import InferReturn from "@dikac/t-validator/return/return";
-import Validatable from "@dikac/t-validatable/validatable";
 import ValidatableValueCallback from "../validatable/value-callback";
-import MapReturn from "./return/record/record";
-
-
-type Return<Val, Container extends Record<keyof any, Validator>, MessageT> =
-    ValueInterface<Val> &
-    ValidatableInterface &
-    Validatables<MapReturn<Container>> &
-    Message<MessageT>
-;
+import MapReturn from "./return/record/infer";
+import Return from "@dikac/t-validator/return/return";
 
 
 export default class ValueCallback<
-    Val = unknown,
+    BaseT = unknown,
+    ValueT extends BaseT = BaseT,
     MessageT = unknown,
-    Container extends Record<any, Validator<Val>> = Record<any, Validator<Val>>,
+    Container extends Record<any, Validator<BaseT, ValueT>> = Record<any, Validator<BaseT, ValueT>>,
     Validatable extends ValidatableInterface = ValidatableInterface
 > implements Validator<
-    Val,
-    ValidatableValueCallback<Val, MessageT, Container, MapReturn<Container>, Validatable>
+    BaseT,
+    ValueT,
+    ValidatableValueCallback<BaseT, MessageT, Container, MapReturn<Container>, Validatable>
 > {
     constructor(
         public validators : Container,
@@ -37,12 +25,11 @@ export default class ValueCallback<
     ) {
     }
 
-    validate(argument: Val) : ValidatableValueCallback<Val, MessageT, Container, MapReturn<Container>, Validatable> {
-
+    validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, Container, MapReturn<Container>, Validatable>> {
 
         let handler = (value, validators) => ValidateValue(value, validators, false);
 
-        return <any> new ValidatableValueCallback(argument, this.validators, <any>handler, this.validation, this.message);
+        return new ValidatableValueCallback(argument, this.validators, handler, this.validation, this.message);
     }
 }
 

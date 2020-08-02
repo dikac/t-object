@@ -4,17 +4,16 @@ import ValueInterface from "@dikac/t-value/value";
 import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
-import PartialUnion from "../validator/return/record/partial-union";
-import MapPartialUnion from "../map-partial-union";
+import Record from "../record";
 
 
 export default class ValueCallback<
     Val = unknown,
     MessageT = unknown,
-    Container extends Record<any, Validator<Val>> = Record<any, Validator<Val>>,
+    Container extends Record<Validator<Val>> = Record<Validator<Val>>,
     Result extends
-        Record<any, ValidatableInterface> =
-        Record<any, ValidatableInterface>,
+        Partial<Record<ValidatableInterface>> =
+        Partial<Record<ValidatableInterface>>,
     Validatable extends ValidatableInterface = ValidatableInterface
 
 > implements

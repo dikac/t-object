@@ -3,30 +3,30 @@ import ValidatableInterface from "@dikac/t-validatable/validatable";
 import ValueInterface from "@dikac/t-value/value";
 import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
-import PartialUnion from "../map-partial";
 import Message from "@dikac/t-message/message";
-import MapPartialUnion from "../map-partial-union";
-import RecordValidatable from "../validator/return/record/record";
-import RecordParameter from "../validator/parameter/record/record";
+import RecordParameter from "../validator/parameter/base/record/infer";
+import Record from "../record";
+import RecordBase from "../validator/parameter/base/record/infer";
 
 
 export default class ValueCallback<
     MessageT = unknown,
-    Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
+    Container extends globalThis.Record<PropertyKey, Validator> = globalThis.Record<PropertyKey, Validator>,
     Result extends
-        MapPartialUnion<globalThis.Record<PropertyKey, ValidatableInterface & Message>> =
-        MapPartialUnion<globalThis.Record<PropertyKey, ValidatableInterface & Message>>,
-    Validatable extends ValidatableInterface = ValidatableInterface
-> implements ValueInterface<RecordParameter<Container>> , ValidatableInterface, Validatables<Result> {
+        Partial<Record<ValidatableInterface>> =
+        Partial<Record<ValidatableInterface>>,
+    Validatable extends ValidatableInterface = ValidatableInterface,
+    V extends RecordBase<Container> = RecordBase<Container>
+> implements ValueInterface<V>, ValidatableInterface, Validatables<Result>, Message<MessageT> {
 
-    readonly validatables : Result;
-    readonly valid : boolean;
-    readonly validatable : Validatable;
-    readonly message : MessageT;
-    readonly messages : Result;
+    public validatables : Result;
+    public valid : boolean;
+    public validatable : Validatable;
+    public message : MessageT;
+    public messages : Result;
 
     constructor(
-        readonly value: RecordParameter<Container>,
+        public value: V,
         public validators : Container,
         public handler : Function<[RecordParameter<Container>, Container], Result>,
         public validation : Function<[Result], Validatable>,

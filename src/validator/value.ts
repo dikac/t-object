@@ -1,44 +1,61 @@
 import Validator from "@dikac/t-validator/validator";
 import ValidatableInterface from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
-import ValueInterface from "@dikac/t-value/value";
 import ValidatableValueCallback from "../validatable/value-callback";
 import ValidateValue from "./return/record/value";
-import PartialUnion from "./return/record/partial-union";
-import RecordValidatable from "./return/record/record";
+import ReturnInfer from "./return/record/infer";
+import MapPartialUnion from "../map-partial-union";
+import PartialUnion from "../map-partial-union";
+import MapReturn from "./return/record/infer";
+import Return from "@dikac/t-validator/return/return";
 
-// export type ValidatorReturn<
-//     Val,
-//     Container extends Record<PropertyKey, Validator<Val>> = Record<PropertyKey, Validator<Val>>,
-//     Validatable extends ValidatableInterface = ValidatableInterface
-// > = ValueInterface<Val> & ValidatableInterface & {validatables : PartialUnion<Container>} & {validatable : Validatable};
-//
-// export default class ValueCallback<
-//     Val = unknown,
-//     MessageT = unknown,
-//     Container extends Record<PropertyKey, Validator<Val>> = Record<PropertyKey, Validator<Val>>,
-//     Validatable extends ValidatableInterface = ValidatableInterface
-// > implements Validator<
-//     Val,
-//     ValidatableValueCallback<Val, MessageT, Container,  PartialUnion<Container>, Validatable>
-// > {
-//     constructor(
-//         public validators : Container,
-//         public validation : Function<[PartialUnion<Container>], Validatable>,
-//         public message : Function<[PartialUnion<Container>], MessageT>
-//     ) {
-//     }
-//
-//     validate(argument: Val) : ValidatableValueCallback<Val, MessageT, Container, PartialUnion<Container>, Validatable> {
-//
-//         let handler = (value, validators) =>  ValidateValue(value, validators, true);
-//
-//         return <any> new ValidatableValueCallback(
-//             argument,
-//             this.validators,
-//             handler,
-//             this.validation,
-//             this.message
-//         );
-//     }
-// }
+interface ValueInterface<
+    BaseT = unknown,
+    ValueT extends BaseT = BaseT,
+    MessageT = unknown,
+    Container extends Record<any, Validator<BaseT, ValueT>> = Record<any, Validator<BaseT, ValueT>>,
+    Validatable extends ValidatableInterface = ValidatableInterface
+> extends Validator<
+    BaseT,
+    ValueT,
+    ValidatableValueCallback<BaseT, MessageT, Container, MapPartialUnion<MapReturn<Container>>, Validatable>
+>{
+     validators : Container,
+     validation : Function<[PartialUnion<ReturnInfer<Container>>], Validatable>,
+     message : Function<[PartialUnion<ReturnInfer<Container>>], MessageT>
+}
+
+
+export default class ValueCallback<
+    BaseT = unknown,
+    ValueT extends BaseT = BaseT,
+    MessageT = unknown,
+    Container extends Record<any, Validator<BaseT, ValueT>> = Record<any, Validator<BaseT, ValueT>>,
+    Validatable extends ValidatableInterface = ValidatableInterface
+> implements ValueInterface<
+    BaseT,
+    ValueT,
+    MessageT,
+    Container,
+    Validatable
+> {
+    constructor(
+        public validators : Container,
+        public validation : Function<[PartialUnion<ReturnInfer<Container>>], Validatable>,
+        public message : Function<[PartialUnion<ReturnInfer<Container>>], MessageT>
+    ) {
+    }
+
+    validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, Container, MapPartialUnion<MapReturn<Container>>, Validatable>> {
+
+        let handler = (value, validators) => <MapPartialUnion<MapReturn<Container>>> ValidateValue(value, validators, true);
+
+        return  new ValidatableValueCallback(
+            argument,
+            this.validators,
+            handler,
+            this.validation,
+            this.message
+        );
+    }
+}

@@ -1,5 +1,4 @@
 import Validators from "../../../dist/validator/validators/validators";
-import Validatable from "@dikac/t-validatable/validatable";
 import Validator from "@dikac/t-validator/validator";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

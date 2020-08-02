@@ -1,7 +1,7 @@
 import Validatable from "@dikac/t-validatable/validatable";
 
 export default interface Validatables<
-    Object extends Partial<Record<keyof any, Validatable>> = Partial<Record<keyof any, Validatable>>
+    Object extends Partial<Record<any, Validatable>> = Partial<Record<any, Validatable>>
 > {
 
     validatables : Object;
