@@ -2,7 +2,7 @@ import ValidatorType from "@dikac/t-validator/boolean/validator";
 import RecordParameter from "../../parameter/base/record/infer";
 import ThrowableValue from "../../../validatable/record/assert/throwable/value";
 import Validator from "@dikac/t-validator/validator";
-import MapPartialUnion from "../../../map-partial-union";
+import PartialUnion from "../../../partial-union";
 import InferReturn from "./infer";
 
 export default function Standard<
@@ -11,7 +11,7 @@ export default function Standard<
     values : RecordParameter<Validators>,
     validators : Validators,
     stopOnInvalid : true
-) : MapPartialUnion<InferReturn<Validators>>
+) : PartialUnion<InferReturn<Validators>>
 
 export default function Standard<
     Validators extends Record<PropertyKey, Validator>
@@ -27,7 +27,7 @@ export default function Standard<
     values : RecordParameter<Validators>,
     validators : Validators,
     stopOnInvalid : boolean
-) :  MapPartialUnion<InferReturn<Validators>> | InferReturn<Validators> {
+) :  PartialUnion<InferReturn<Validators>> | InferReturn<Validators> {
 
     let object : InferReturn<Validators> = <InferReturn<Validators>>{};
 

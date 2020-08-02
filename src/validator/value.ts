@@ -4,8 +4,7 @@ import Function from "@dikac/t-function/function";
 import ValidatableValueCallback from "../validatable/value-callback";
 import ValidateValue from "./return/record/value";
 import ReturnInfer from "./return/record/infer";
-import MapPartialUnion from "../map-partial-union";
-import PartialUnion from "../map-partial-union";
+import PartialUnion from "../partial-union";
 import MapReturn from "./return/record/infer";
 import Return from "@dikac/t-validator/return/return";
 
@@ -18,7 +17,7 @@ interface ValueInterface<
 > extends Validator<
     BaseT,
     ValueT,
-    ValidatableValueCallback<BaseT, MessageT, Container, MapPartialUnion<MapReturn<Container>>, Validatable>
+    ValidatableValueCallback<BaseT, MessageT, Container, PartialUnion<MapReturn<Container>>, Validatable>
 >{
      validators : Container,
      validation : Function<[PartialUnion<ReturnInfer<Container>>], Validatable>,
@@ -46,9 +45,9 @@ export default class ValueCallback<
     ) {
     }
 
-    validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, Container, MapPartialUnion<MapReturn<Container>>, Validatable>> {
+    validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, Container, PartialUnion<MapReturn<Container>>, Validatable>> {
 
-        let handler = (value, validators) => <MapPartialUnion<MapReturn<Container>>> ValidateValue(value, validators, true);
+        let handler = (value, validators) => <PartialUnion<MapReturn<Container>>> ValidateValue(value, validators, true);
 
         return  new ValidatableValueCallback(
             argument,

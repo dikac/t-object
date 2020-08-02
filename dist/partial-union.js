@@ -10,4 +10,4 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
 });
-//# sourceMappingURL=map-partial-union.js.map
+//# sourceMappingURL=partial-union.js.map

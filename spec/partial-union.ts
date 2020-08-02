@@ -1,4 +1,4 @@
-import PartialUnion from "../dist/map-partial-union";
+import PartialUnion from "../dist/partial-union";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
