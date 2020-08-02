@@ -5,7 +5,7 @@ import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";
 import ValidatorInterface from "@dikac/t-validator/validator";
 import Message from "@dikac/t-message/message";
-import MessageMap from "../../dist/message/return/record/map";
+import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
 import Instance from "@dikac/t-validator/parameter/instance/instance";
 

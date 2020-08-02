@@ -4,7 +4,7 @@ import Or from "../../dist/validatable/or";
 import ValidatablesInterface from "../../dist/validatable/validatables/validatables";
 import Validatables from "../../dist/validatable/validatables";
 import Validatable from "@dikac/t-validatable/validatable";
-import MessageMap from "../../dist/message/return/record/map";
+import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
 
 

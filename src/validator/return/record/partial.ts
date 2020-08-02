@@ -1,4 +1,3 @@
-
 import Validator from "@dikac/t-validator/validator";
 import InferReturn from "@dikac/t-validator/return/return";
 

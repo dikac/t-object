@@ -3,7 +3,7 @@ import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";
 import ValidatorInterface from "@dikac/t-validator/validator";
-import MessageMap from "../../dist/message/return/record/map";
+import MessageMap from "../../dist/message/message/record/map";
 import RemoveUndefined from "../../dist/remove-undefined";
 import Type from "@dikac/t-type/validator/type-standard";
 import Instance from "@dikac/t-validator/parameter/instance/instance";

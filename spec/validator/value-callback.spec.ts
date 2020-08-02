@@ -6,7 +6,7 @@ import ValidatablesInterface from "../../dist/validatable/validatables/validatab
 import Validatables from "../../dist/validatable/validatables";
 import ValidatorValidatable from "../../dist/validator/return/record/infer";
 import Validatable from "@dikac/t-validatable/validatable";
-import MessageMap from "../../dist/message/return/record/map";
+import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
 
 
