@@ -1,3 +1,3 @@
-import MessageInterface from "@dikac/t-message/message";
+import Message from "@dikac/t-message/message";
 import RecordInfer from "./infer";
-export default function Map<Instance extends Record<PropertyKey, MessageInterface>>(record: Instance): RecordInfer<Instance>;
+export default function Map<Instance extends Record<PropertyKey, Message>>(record: Instance): RecordInfer<Instance>;

@@ -11,7 +11,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const value_callback_1 = require("../validatable/value-callback");
     const value_1 = require("./return/record/value");
-    class ValueCallback {
+    class Value {
         constructor(validators, validation, message) {
             this.validators = validators;
             this.validation = validation;
@@ -22,6 +22,6 @@
             return new value_callback_1.default(argument, this.validators, handler, this.validation, this.message);
         }
     }
-    exports.default = ValueCallback;
+    exports.default = Value;
 });
 //# sourceMappingURL=value.js.map

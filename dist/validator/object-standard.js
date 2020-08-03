@@ -11,9 +11,9 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const object_1 = require("./object");
     const object_2 = require("../validatable/string/object");
-    function NotEmptyStandard() {
+    function ObjectStandard() {
         return new object_1.default(object_2.default);
     }
-    exports.default = NotEmptyStandard;
+    exports.default = ObjectStandard;
 });
 //# sourceMappingURL=object-standard.js.map

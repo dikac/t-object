@@ -1,5 +1,5 @@
 import Validator from "@dikac/t-validator/validator";
-import ValidatableInterface from "@dikac/t-validatable/validatable";
+import Validatable from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
 import ReturnInfer from "./return/record/infer";
 import ValidatableMapCallback from "../validatable/map-callback";
@@ -9,36 +9,36 @@ import RecordType from "./parameter/type/record/infer";
 import Return from "@dikac/t-validator/return/return";
 
 
-interface MapAllInterface<
+export interface MapAllInterface<
     RecordT extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    Validatable extends ValidatableInterface = ValidatableInterface,
+    ValidatableT extends Validatable = Validatable,
     MessageT = unknown
 > extends Validator<
     RecordBase<RecordT>,
     RecordBase<RecordT>,
-    ValidatableMapCallback<MessageT, RecordT, ReturnInfer<RecordT>, Validatable>
+    ValidatableMapCallback<MessageT, RecordT, ReturnInfer<RecordT>, ValidatableT>
 >{
      validators : RecordT,
-     validation : Function<[ReturnInfer<RecordT>], Validatable>,
+     validation : Function<[ReturnInfer<RecordT>], ValidatableT>,
      message : Function<[ReturnInfer<RecordT>], MessageT>
 };
 
 export default function MapAll<
     Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    Validatable extends ValidatableInterface = ValidatableInterface,
+    ValidatableT extends Validatable = Validatable,
     MessageT = unknown
     >(
     validators : Container,
-    validation : Function<[ReturnInfer<Container>], Validatable>,
+    validation : Function<[ReturnInfer<Container>], ValidatableT>,
     message : Function<[ReturnInfer<Container>], MessageT>
-) : MapAllInterface<Container, Validatable, MessageT> {
+) : MapAllInterface<Container, ValidatableT, MessageT> {
 
     return new MapAllClass(validators, validation, message)
 }
 
 export class MapAllClass<
     RecordT extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    ValidatableT extends ValidatableInterface = ValidatableInterface,
+    ValidatableT extends Validatable = Validatable,
     MessageT = unknown,
 > implements MapAllInterface<RecordT, ValidatableT, MessageT> {
     constructor(

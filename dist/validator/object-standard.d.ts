@@ -1,2 +1,2 @@
 import Object_ from "./object";
-export default function NotEmptyStandard(): Object_<string>;
+export default function ObjectStandard(): Object_<string>;

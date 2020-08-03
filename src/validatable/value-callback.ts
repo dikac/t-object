@@ -1,6 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
-import ValidatableInterface from "@dikac/t-validatable/validatable";
-import ValueInterface from "@dikac/t-value/value";
+import Validatable from "@dikac/t-validatable/validatable";
+import Value from "@dikac/t-value/value";
 import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
@@ -8,32 +8,31 @@ import Record from "../record";
 
 
 export default class ValueCallback<
-    Val = unknown,
+    ValueT = unknown,
     MessageT = unknown,
-    Container extends Record<Validator<Val>> = Record<Validator<Val>>,
+    RecordT extends Record<Validator<ValueT>> = Record<Validator<ValueT>>,
     Result extends
-        Partial<Record<ValidatableInterface>> =
-        Partial<Record<ValidatableInterface>>,
-    Validatable extends ValidatableInterface = ValidatableInterface
-
+        Partial<Record<Validatable>> =
+        Partial<Record<Validatable>>,
+    ValidatableT extends Validatable = Validatable
 > implements
-    ValueInterface<Val>,
-    ValidatableInterface,
+    Value<ValueT>,
+    Validatable,
     Validatables<Result>,
     Message<MessageT>
 {
 
     readonly validatables : Result;
     readonly valid : boolean;
-    readonly validatable : Validatable;
+    readonly validatable : ValidatableT;
     readonly message : MessageT;
     readonly messages : Result;
 
     constructor(
-        readonly value: Val,
-        public validators : Container,
-        public handler : Function<[Val, Container], Result>,
-        public validation : Function<[Result], Validatable>,
+        readonly value: ValueT,
+        public validators : RecordT,
+        public handler : Function<[ValueT, RecordT], Result>,
+        public validation : Function<[Result], ValidatableT>,
         message : Function<[Result], MessageT>,
     ) {
 

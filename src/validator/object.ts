@@ -7,19 +7,19 @@ import Function from "@dikac/t-function/function";
 import Instance from "@dikac/t-validator/parameter/instance/instance";
 import Return from "@dikac/t-validator/return/return";
 
-export default class Object_<Msg>
+export default class Object_<MessageT>
     implements
-        Validator<any, object, Readonly<Instance<object, Msg>>>,
-        Message<Function<[Readonly<Value> & Readonly<Validatable>], Msg>>
+        Validator<any, object, Readonly<Instance<object, MessageT>>>,
+        Message<Function<[Readonly<Value> & Readonly<Validatable>], MessageT>>
 {
 
     constructor(
-       public message : Function<[Readonly<Value> & Readonly<Validatable>], Msg>
+       public message : Function<[Readonly<Value> & Readonly<Validatable>], MessageT>
     ) {
     }
 
-    validate<Argument extends any>(value: Argument): Return<any, Argument, object, Readonly<Instance<object, Msg>>> {
+    validate<Argument extends any>(value: Argument): Return<any, Argument, object, Readonly<Instance<object, MessageT>>> {
 
-        return  ObjectValidatable<Msg, Argument>(value, this.message);
+        return  ObjectValidatable<MessageT, Argument>(value, this.message);
     }
 }

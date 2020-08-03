@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const value_callback_1 = require("../validatable/value-callback");
-    class ValueCallbackz {
+    class ValueCallback {
         constructor(validators, handler, validation, message) {
             this.validators = validators;
             this.handler = handler;
@@ -21,6 +21,6 @@
             return new value_callback_1.default(argument, this.validators, this.handler, this.validation, this.message);
         }
     }
-    exports.default = ValueCallbackz;
+    exports.default = ValueCallback;
 });
 //# sourceMappingURL=value-callback.js.map
