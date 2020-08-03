@@ -71,7 +71,7 @@ describe('explicit', () => {
     let result = extract.return;
     let value = extract.value;
 
-    describe('result', () => {
+    it('result', () => {
 
         expect(result.required).toBe('required');
         expect(result.nullable).toBe('nullable');
@@ -83,7 +83,7 @@ describe('explicit', () => {
         expect(result.optionalUnion).toBeUndefined();
     });
 
-    describe('value', () => {
+    it('value', () => {
 
         expect(value.optional).toBe('optional');
         expect(value.optionalUnion).toBeUndefined();

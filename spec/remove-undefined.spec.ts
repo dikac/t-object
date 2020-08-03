@@ -60,8 +60,7 @@ describe('compiler compatibility', () => {
 
 describe('data', () => {
 
-
-    describe('explicit', () => {
+    it('explicit', () => {
 
         let data = {
             required : 'required',

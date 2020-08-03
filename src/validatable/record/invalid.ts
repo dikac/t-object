@@ -7,8 +7,7 @@ import ValidatableInvalid from "@dikac/t-validatable/boolean/invalid";
  * filter all invalid {@link Validatable} while retain its original structure
  */
 export default function Invalid<
-    ValidatableT extends Validatable = Validatable,
-    Object extends Partial<Record<PropertyKey, ValidatableT>> = Partial<Record<PropertyKey, ValidatableT>>
+    Object extends Partial<Record<PropertyKey, Validatable>> = Partial<Record<PropertyKey, Validatable>>
 >(
     record : Object
 ) : Partial<Object> {
