@@ -10,12 +10,11 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function Object_(valid, value) {
-        let string = value.toString();
         if (valid) {
-            return `value "${string}" is object`;
+            return `value is object`;
         }
         else {
-            return `value "${string}" is not object`;
+            return `value is not object`;
         }
     }
     exports.default = Object_;
