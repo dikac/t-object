@@ -2,18 +2,17 @@ import Validatable from "@dikac/t-validatable/validatable";
 import ValidatablesInterface from "./validatables/validatables";
 import FunctionSingle from "@dikac/t-function/function-single";
 
-
 export default class Validatables<
-    Record extends Partial<globalThis.Record<PropertyKey, Validatable>>  = Partial<globalThis.Record<PropertyKey, Validatable>>,
+    RecordT extends Record<any, Validatable>  = Record<PropertyKey, Validatable>,
     Boolean extends boolean = boolean
 > implements
     Validatable,
-    ValidatablesInterface<Record>
+    ValidatablesInterface<RecordT>
 {
 
     constructor(
-        public validatables : Record,
-        public validation : FunctionSingle<Record, Boolean>
+        public validatables : RecordT,
+        public validation : FunctionSingle<RecordT, Boolean>
     ) {
     }
 

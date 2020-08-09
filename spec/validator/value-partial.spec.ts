@@ -1,9 +1,10 @@
-import Value from "../../dist/validator/value";
+import Value from "../../dist/validator/value-partial";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";
 import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
+import Message from "@dikac/t-message/message";
 
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
@@ -17,21 +18,21 @@ describe("compiler compatibility", function() {
 
     describe("implicit partial", function() {
 
-        let property = new Value(validator, (v)=>And(v), MessageMap);
+        let property = Value(validator, (v)=>And(v), MessageMap);
 
         let validatable = property.validate('data');
 
         let unknown : unknown = validatable.value;
-        // @ts-expect-error
+
         let string : string = validatable.value;
 
     });
 
     describe("explicit complete", function() {
 
-        let property = new Value<string, string, {name : string, address : string}, typeof validator>(validator,
-            (v)=>And(v),
-            (v)=><any>MessageMap(<any>v)
+        let property = Value<string, string, {name : string, address : string}, typeof validator>(validator,
+            And,
+            (v)=><{name : string, address : string}>MessageMap(<{name : Message<string>, address : Message<string>}>v)
         );
 
         let validatable = property.validate('data');
@@ -55,7 +56,7 @@ describe("implicit incomplete", function() {
 
         let value = 'data';
 
-        let property = new Value(
+        let property = Value(
             validator,
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
@@ -156,7 +157,7 @@ describe("implicit incomplete", function() {
             address : Type('string'),
         };
 
-        let property = new Value(
+        let property = Value(
             validator,
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
@@ -230,7 +231,7 @@ describe("implicit incomplete", function() {
         };
 
 
-        let property = new Value(
+        let property = Value(
             validator,
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
@@ -301,7 +302,7 @@ describe("recursive", function() {
             name : Type('string'),
             address : Type('string'),
             user : Type('string'),
-            info : new Value({
+            info : Value({
                 age : Type('string'),
                 hobby : Type('string'),
                 no : Type('string'),
@@ -310,7 +311,7 @@ describe("recursive", function() {
 
         let value = 'data';
 
-        let property = new Value(
+        let property = Value(
             validator,
             (v)=>And(v),
             MessageMap
@@ -386,8 +387,8 @@ describe("recursive", function() {
 
         it(`or validation`, () => {
 
-            property.validation = (v)=>Or(<Record<PropertyKey, Validatable>>v);
-            property.validators.info.validation = (v)=>Or(<Record<PropertyKey, Validatable>>v);
+            property.validation = Or;
+            property.validators.info.validation = Or;
 
             let validatable = property.validate(value);
 
@@ -464,14 +465,14 @@ describe("recursive", function() {
             name : Type('string'),
             age : Type('number'),
             address : Type('string'),
-            info : new Value({
+            info : Value({
                 age : Type('string'),
                 hobby : Type('number'),
                 no : Type('string'),
             }, (v)=>And(v), MessageMap)
         };
 
-        let property = new Value(
+        let property = Value(
             validator,
             (v)=>And(<Record<PropertyKey, Validatable>>v), MessageMap
         );
@@ -512,7 +513,7 @@ describe("recursive", function() {
         it(`or validation `, () => {
 
             property.validation = (v)=>Or(<Record<PropertyKey, Validatable>>v);
-            property.validators.info.validation = (v)=>Or(<Record<PropertyKey, Validatable>>v);
+            property.validators.info.validation = (v)=>Or(v);
 
             let or = property.validate('data');
             expect(or.value).toBe('data');
@@ -551,7 +552,7 @@ describe("recursive", function() {
             name : Type('string'),
             age : Type('number'),
             address : Type('string'),
-            info : new Value({
+            info : Value({
                 age : Type('string'),
                 hobby : Type('number'),
                 no : Type('string'),
@@ -559,7 +560,7 @@ describe("recursive", function() {
         };
 
 
-        let property = new Value(
+        let property = Value(
             validator,
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
@@ -596,7 +597,7 @@ describe("recursive", function() {
         it(`or validation `, () => {
 
             property.validation = (v)=>Or(<Record<PropertyKey, Validatable>>v);
-            property.validators.info.validation = (v)=>Or(<Record<PropertyKey, Validatable>>v);
+            property.validators.info.validation = (v)=>Or(v);
 
             let or = property.validate({});
 

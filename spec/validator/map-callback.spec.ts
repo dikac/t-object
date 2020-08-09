@@ -1,5 +1,6 @@
 import MapCallback from "../../dist/validator/map-callback";
-import ValidateValue from "../../dist/validator/return/record/standard";
+import ValidateMapPartial from "../../dist/validator/return/record/map-partial";
+import ValidateMap from "../../dist/validator/return/record/map";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";
@@ -7,7 +8,8 @@ import ValidatorInterface from "@dikac/t-validator/validator";
 import Message from "@dikac/t-message/message";
 import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
-import Instance from "@dikac/t-validator/parameter/instance/instance";
+import Instance from "@dikac/t-validator/validatable/instance";
+import MapCallbackFunction from "../../dist/validator/map-callback-function";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -35,11 +37,7 @@ describe("compiler compatibility", function() {
 
     describe("implicit complete", function() {
 
-        let property = MapCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
-            And,
-            MessageMap
-        );
+        let property = new MapCallback(validator, ValidateMap, And, MessageMap);
 
         let validatable = property.validate(value);
 
@@ -53,9 +51,9 @@ describe("compiler compatibility", function() {
 
         describe("auto", function() {
 
-            let property = MapCallback<globalThis.Record<keyof typeof validator, ValidatorInterface<string, string, Instance<string, string>>>>(validator,
-                (value, validators) => ValidateValue(value, validators, false),
-                (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
+            let property = new MapCallback<globalThis.Record<keyof typeof validator, ValidatorInterface<string, string, Instance<string, string>>>>(validator,
+                ValidateMap,
+                And,
                 MessageMap
             );
 
@@ -68,8 +66,8 @@ describe("compiler compatibility", function() {
 
         describe("direct", function() {
 
-            let property = MapCallback<TypeValidator>(validator,
-                (value, validators) => ValidateValue(value, validators, false),
+            let property = new MapCallback<TypeValidator>(validator,
+                ValidateMap,
                 (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
                 MessageMap
             );
@@ -84,9 +82,9 @@ describe("compiler compatibility", function() {
 
     describe("implicit partial", function() {
 
-        let property = MapCallback(validator,
+        let property = new MapCallback(validator,
             (value, validators) =>
-                <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+                <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -102,10 +100,10 @@ describe("compiler compatibility", function() {
 
         describe("auto", function() {
 
-            let property = MapCallback<globalThis.Record<keyof typeof validator, ValidatorInterface<any, string, Instance<any, string>>>>(
+            let property = new MapCallback<globalThis.Record<keyof typeof validator, ValidatorInterface<any, string, Instance<any, string>>>>(
                 validator,
                 (value, validators) =>
-                    <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+                    <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
                 (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
                 MessageMap
             );
@@ -119,10 +117,10 @@ describe("compiler compatibility", function() {
 
         describe("direct", function() {
 
-            let property = MapCallback<TypeValidator>(
+            let property = new MapCallback<TypeValidator>(
                 validator,
                 (value, validators) =>
-                    <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+                    <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
                 (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
                 (v)=>MessageMap(<globalThis.Record<any, Message>>v)
             );
@@ -165,11 +163,7 @@ describe("implicit complete", function() {
             address : 'address',
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
-            (v)=>And(v),
-            MessageMap
-        );
+        let property = new MapCallback(validator, ValidateMap, And, MessageMap);
 
         it(`and validation`, () => {
 
@@ -224,8 +218,8 @@ describe("implicit complete", function() {
             address : 'address',
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
+        let property = new MapCallback(validator,
+            (value, validators) => ValidateMap(value, validators),
             (v)=>And(v),
             MessageMap
         );
@@ -285,8 +279,7 @@ describe("implicit complete", function() {
             address : {},
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
+        let property = new MapCallback(validator, ValidateMap,
             (v)=>And(v),
             MessageMap
         );
@@ -345,8 +338,8 @@ describe("implicit incomplete", function() {
             user : 'address',
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+        let property = new MapCallback(validator,
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -452,8 +445,8 @@ describe("implicit incomplete", function() {
             address : 'address',
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+        let property = new MapCallback(validator,
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -531,8 +524,8 @@ describe("implicit incomplete", function() {
             address : {},
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+        let property = new MapCallback(validator,
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v), MessageMap
         );
 
@@ -597,12 +590,12 @@ describe("recursive", function() {
             name : Type('string'),
             address : Type('string'),
             user : Type('string'),
-            info : MapCallback({
+            info : MapCallbackFunction({
                 age : Type('number'),
                 hobby : Type('string'),
                 no : Type('number')
                 },
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
                 (v)=>And(v), MessageMap)
         };
 
@@ -617,8 +610,8 @@ describe("recursive", function() {
             }
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+        let property = new MapCallback(validator,
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -682,7 +675,6 @@ describe("recursive", function() {
             expect(validatable.validatables.info.validatables.no.message).toBe('value is type of "number"');
 
         });
-
 
         it(`or validation`, () => {
 
@@ -753,12 +745,12 @@ describe("recursive", function() {
             name : Type('string'),
             age : Type('number'),
             address : Type('string'),
-            info : MapCallback({
+            info : MapCallbackFunction({
                     age : Type('number'),
                     hobby : Type('string'),
                     no : Type('number')
                 },
-                (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+                (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
                 (v)=>And(v), MessageMap)
         };
 
@@ -773,8 +765,8 @@ describe("recursive", function() {
             }
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+        let property = new MapCallback(validator,
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -849,12 +841,12 @@ describe("recursive", function() {
             name : Type('string'),
             age : Type('number'),
             address : Type('string'),
-            info : MapCallback({
+            info : MapCallbackFunction({
                     age : Type('number'),
                     hobby : Type('string'),
                     no : Type('number')
                 },
-                (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+                (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
                 (v)=>And(v), MessageMap)
         };
 
@@ -869,8 +861,8 @@ describe("recursive", function() {
             }
         };
 
-        let property = MapCallback(validator,
-            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
+        let property = new MapCallback(validator,
+            (value, validators) => <Record<PropertyKey, Instance<any, string>>>ValidateMapPartial(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v), MessageMap
         );
 

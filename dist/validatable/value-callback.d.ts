@@ -4,8 +4,7 @@ import Value from "@dikac/t-value/value";
 import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
-import Record from "../record";
-export default class ValueCallback<ValueT = unknown, MessageT = unknown, RecordT extends Record<Validator<ValueT>> = Record<Validator<ValueT>>, Result extends Partial<Record<Validatable>> = Partial<Record<Validatable>>, ValidatableT extends Validatable = Validatable> implements Value<ValueT>, Validatable, Validatables<Result>, Message<MessageT> {
+export default class ValueCallback<ValueT = unknown, MessageT = unknown, RecordT extends Record<PropertyKey, Validator<ValueT>> = Record<PropertyKey, Validator<ValueT>>, Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>, ValidatableT extends Validatable = Validatable> implements Value<ValueT>, Validatable, Validatables<Result>, Message<MessageT> {
     readonly value: ValueT;
     validators: RecordT;
     handler: Function<[ValueT, RecordT], Result>;

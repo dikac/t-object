@@ -6,28 +6,11 @@ import PartialUnion from "../../../partial-union";
 import InferReturn from "./infer";
 
 export default function Map<
-    Validators extends Record<PropertyKey, Validator>
+    Validators extends Record<keyof Validators, Validator>
 >(
     values : RecordParameter<Validators>,
-    validators : Validators,
-    stopOnInvalid : true
-) : PartialUnion<InferReturn<Validators>>
-
-export default function Map<
-    Validators extends Record<PropertyKey, Validator>
->(
-    values : RecordParameter<Validators>,
-    validators : Validators,
-    stopOnInvalid : false
-) : InferReturn<Validators>
-
-export default function Map<
-    Validators extends Record<PropertyKey, Validator>
->(
-    values : RecordParameter<Validators>,
-    validators : Validators,
-    stopOnInvalid : boolean
-) :  PartialUnion<InferReturn<Validators>> | InferReturn<Validators> {
+    validators : Validators
+) : InferReturn<Validators> {
 
     let object : InferReturn<Validators> = <InferReturn<Validators>>{};
 
@@ -36,20 +19,8 @@ export default function Map<
         const validator = validators[property];
         const value = values[property];
 
-        if(ValidatorType(validator)) {
+        object[<PropertyKey>property] = validator.validate(value);
 
-            // @ts-ignore
-            object[property] = validator.validate(value);
-
-            if(stopOnInvalid && !object[property].valid) {
-
-                return object;
-            }
-
-            continue;
-        }
-
-        throw ThrowableValue(property);
     }
 
     return  object;

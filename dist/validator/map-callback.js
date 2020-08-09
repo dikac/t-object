@@ -9,23 +9,18 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.MapCallbackClass = void 0;
     const map_callback_1 = require("../validatable/map-callback");
-    function MapCallback(validators, handler, validation, message) {
-        return new MapCallbackClass(validators, handler, validation, message);
-    }
-    exports.default = MapCallback;
-    class MapCallbackClass {
-        constructor(validators, handler, validation, message) {
+    class MapCallback {
+        constructor(validators, map, validation, message) {
             this.validators = validators;
-            this.handler = handler;
+            this.map = map;
             this.validation = validation;
             this.message = message;
         }
         validate(argument) {
-            return new map_callback_1.default(argument, this.validators, this.handler, this.validation, this.message);
+            return new map_callback_1.default(argument, this.validators, this.map, this.validation, this.message);
         }
     }
-    exports.MapCallbackClass = MapCallbackClass;
+    exports.default = MapCallback;
 });
 //# sourceMappingURL=map-callback.js.map

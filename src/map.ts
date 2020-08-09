@@ -3,7 +3,7 @@
  *
  * {@template Value} is required, while {@tempalte Key} is optional to use for distinguish condition recursive {@template Container}
  */
-type Map<Container extends Record<PropertyKey, any>, Replace> = {
+type Map<Container extends Record<keyof Container, any>, Replace> = {
     [K in keyof Container] : Replace
 }
 

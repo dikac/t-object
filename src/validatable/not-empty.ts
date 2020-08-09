@@ -4,16 +4,16 @@ import Message from "@dikac/t-message/message";
 import Function from "@dikac/t-function/function";
 import NotEmptyArgument from "../boolean/not-empty";
 
-export default class NotEmpty<MessageT>
+export default class NotEmpty<ValueT extends object, MessageT>
     implements
-        Readonly<Value<object> & Message<MessageT> & Validatable>
+        Readonly<Value<ValueT> & Message<MessageT> & Validatable>
 
 {
     readonly valid : boolean;
 
     constructor(
-        readonly value : object,
-        private _message : Function<[Readonly<Value<object> & Validatable>], MessageT>,
+        readonly value : ValueT,
+        private _message : Function<[Readonly<Value<ValueT> & Validatable>], MessageT>,
     ) {
 
         this.valid = NotEmptyArgument(value);

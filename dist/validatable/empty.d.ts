@@ -2,10 +2,10 @@ import Value from "@dikac/t-value/value";
 import Validatable from "@dikac/t-validatable/validatable";
 import Message from "@dikac/t-message/message";
 import Function from "@dikac/t-function/function";
-export default class Empty<MessageT> implements Readonly<Value<object> & Message<MessageT> & Validatable> {
-    readonly value: object;
+export default class Empty<ValueT extends object, MessageT> implements Readonly<Value<ValueT> & Message<MessageT> & Validatable> {
+    readonly value: ValueT;
     private _message;
     readonly valid: boolean;
-    constructor(value: object, _message: Function<[Readonly<Value<object> & Validatable>], MessageT>);
+    constructor(value: ValueT, _message: Function<[Readonly<Value<ValueT> & Validatable>], MessageT>);
     get message(): MessageT;
 }

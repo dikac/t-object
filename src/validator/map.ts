@@ -1,66 +1,33 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
+import ReturnInfer from "./return/record/infer";
 import ValidatableMapCallback from "../validatable/map-callback";
-import ValidateMap from "./return/record/standard";
+import ValidateMap from "./return/record/map";
 import RecordBase from "./parameter/base/record/infer";
 import RecordType from "./parameter/type/record/infer";
+import Return from "@dikac/t-validator/validatable/simple";
+import MapCallback from "./map-callback";
+import {Interface} from "./map-callback";
 import PartialUnion from "../partial-union";
-import ReturnInfer from "./return/record/infer";
-import Return from "@dikac/t-validator/return/return";
+import Omit from "../omit";
+//import Infer from "./return/record/infer";
+import InferReturn from "@dikac/t-validator/validatable/infer";
 
-export interface MapInterface<
-    RecordT extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown
-> extends Validator<
-    RecordBase<RecordT>,
-    RecordBase<RecordT>,
-    ValidatableMapCallback<MessageT, RecordT, PartialUnion<ReturnInfer<RecordT>>, ValidatableT>
->{
-    validators : RecordT,
-    validation : Function<[PartialUnion<ReturnInfer<RecordT>>], ValidatableT>,
-    message : Function<[PartialUnion<ReturnInfer<RecordT>>], MessageT>,
-}
+// type ReturnInfer<Schema extends Record<any, Validator>> = {
+//     [Key in keyof Schema]  : InferReturn<Schema[Key]>
+// };
 
 export default function Map<
-    Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
+    Container extends Record<any, Validator> = Record<PropertyKey, Validator>,
     ValidatableT extends Validatable = Validatable,
     MessageT = unknown
 >(
     validators : Container,
-    validation : Function<[PartialUnion<ReturnInfer<Container>>], ValidatableT>,
-    message : Function<[PartialUnion<ReturnInfer<Container>>], MessageT>,
-) : MapInterface<Container, ValidatableT, MessageT> {
+    validation : Function<[ReturnInfer<Container>], ValidatableT>,
+    message : Function<[ReturnInfer<Container>], MessageT>,
+) : Interface<Container, ReturnInfer<Container>, ValidatableT, MessageT> {
 
-    return new MapClass(validators, validation, message)
+    return <Interface<Container, ReturnInfer<Container>, ValidatableT, MessageT>> new MapCallback(validators, ValidateMap, validation, message);
 }
 
-export class MapClass<
-    Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
-> implements MapInterface<Container, ValidatableT, MessageT> {
-    constructor(
-        public validators : Container,
-        public validation : Function<[PartialUnion<ReturnInfer<Container>>], ValidatableT>,
-        public message : Function<[PartialUnion<ReturnInfer<Container>>], MessageT>,
-    ) {
-    }
-
-    validate<Argument extends RecordBase<Container>>(
-        argument: Argument
-    ) : Return<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapCallback<MessageT, Container, PartialUnion<ReturnInfer<Container>>, ValidatableT>> {
-
-        let handler = (value, validators) => <PartialUnion<ReturnInfer<Container>>>ValidateMap(value, validators, true);
-
-        return <Return<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapCallback<MessageT, Container, PartialUnion<ReturnInfer<Container>>, ValidatableT>>>
-            new ValidatableMapCallback(
-            argument,
-            this.validators,
-            handler,
-            this.validation,
-            this.message
-        );
-    }
-}

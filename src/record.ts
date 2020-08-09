@@ -1,3 +1,3 @@
-
-type Record<Type> = globalThis.Record<any, Type>;
-export default Record;
+//
+// type Record<Type> = globalThis.Record<PropertyKey, Type>;
+// export default Record;

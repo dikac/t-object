@@ -6,8 +6,6 @@ import Guard from "@dikac/t-function/boolean/guard";
  * optionally {@param property} use to validate object property
  */
 
-
-
 export default function Record<
     Value
 >(

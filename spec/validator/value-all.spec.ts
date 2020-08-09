@@ -1,4 +1,4 @@
-import ValueAll from "../../dist/validator/value-all";
+import ValueAll from "../../dist/validator/value";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import ValidatablesInterface from "../../dist/validatable/validatables/validatables";
@@ -19,7 +19,7 @@ describe("compiler compatibility", function() {
 
     describe("implicit complete", function() {
 
-        let property = new ValueAll(validator, (v)=>And(v), MessageMap);
+        let property = ValueAll(validator, (v)=>And(v), MessageMap);
 
         let validatable = property.validate('data');
 
@@ -29,15 +29,22 @@ describe("compiler compatibility", function() {
         let record : Record<PropertyKey, Validatable> = validatable.validatables;
         let and : Validatables = validatable.validatable;
 
-        let unknown : unknown = validatable.value;
-        // @ts-expect-error
-        let string : string = validatable.value;
+        if(validatable.valid) {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+
+        } else {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+        }
 
     });
 
     describe("explicit complete", function() {
 
-        let property = new ValueAll<string>(validator,
+        let property = ValueAll<string>(validator,
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -63,7 +70,7 @@ describe("implicit complete", function() {
 
         let value = 'data';
 
-        let property = new ValueAll(validator, (v)=>And(v), MessageMap);
+        let property = ValueAll(validator, (v)=>And(v), MessageMap);
 
 
         it(`and validation`, () => {
@@ -113,7 +120,7 @@ describe("implicit complete", function() {
             address : Type('string'),
         };
 
-        let property = new ValueAll(validator,(v)=>And(v), MessageMap);
+        let property = ValueAll(validator,(v)=>And(v), MessageMap);
 
         it(`and validation`, () => {
 
@@ -164,7 +171,7 @@ describe("implicit complete", function() {
             address : Type('string'),
         };
 
-        let property = new ValueAll(validator,(v)=>And(v), MessageMap);
+        let property = ValueAll(validator,(v)=>And(v), MessageMap);
 
         it(`and validation`, () => {
 
@@ -213,7 +220,7 @@ describe("recursive", function() {
             name : Type('string'),
             address : Type('string'),
             user : Type('string'),
-            info : new ValueAll({
+            info : ValueAll({
                 age : Type('string'),
                 hobby : Type('string'),
                 no : Type('string'),
@@ -222,8 +229,7 @@ describe("recursive", function() {
 
         let value = 'data';
 
-        let property = new ValueAll(validator, (v)=>And(v), MessageMap);
-
+        let property = ValueAll(validator, (v)=>And(v), MessageMap);
 
         it(`and validation`, () => {
 
@@ -309,14 +315,14 @@ describe("recursive", function() {
             name : Type('string'),
             age : Type('number'),
             address : Type('string'),
-            info : new ValueAll({
+            info : ValueAll({
                 age : Type('string'),
                 hobby : Type('number'),
                 no : Type('string'),
             }, (v)=>And(v), MessageMap)
         };
 
-        let property = new ValueAll(validator,(v)=>And(v), MessageMap);
+        let property = ValueAll(validator,(v)=>And(v), MessageMap);
 
         it(`and validation`, () => {
 
@@ -403,14 +409,14 @@ describe("recursive", function() {
             name : Type('string'),
             age : Type('number'),
             address : Type('string'),
-            info : new ValueAll({
+            info : ValueAll({
                 age : Type('string'),
                 hobby : Type('number'),
                 no : Type('string'),
             }, (v)=>And(v), MessageMap)
         };
 
-        let property = new ValueAll(validator,(v)=>And(v), MessageMap);
+        let property = ValueAll(validator,(v)=>And(v), MessageMap);
 
         it(`and validation`, () => {
 

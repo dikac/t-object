@@ -1,66 +1,55 @@
+import ValidatorSimple from "@dikac/t-validator/simple";
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
+import Validation from "@dikac/t-validatable/validation/validation";
 import RecordParameter from "./parameter/base/record/infer";
+import FunctionS from "@dikac/t-function/function-single";
 import Function from "@dikac/t-function/function";
 import Validators from "./validators/validators";
 import Message from "@dikac/t-message/message";
-import ValidatableMapCallback from "../validatable/map-callback";
+import ValidatableMapCallback, {Interface as ValidatableMapCallbackInterface} from "../validatable/map-callback";
 import RecordBase from "./parameter/base/record/infer";
 import RecordType from "./parameter/type/record/infer";
-import Return from "@dikac/t-validator/return/return";
-import Instance from "@dikac/t-validator/parameter/instance/instance";
+import Return from "@dikac/t-validator/validatable/simple";
+import Instance from "@dikac/t-validator/validatable/instance";
+import PartialUnion from "../partial-union";
 
-export interface MapCallbackInterface<
-    Container extends Record<PropertyKey, Validator>,
-    Result extends Record<PropertyKey, Instance<unknown>>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
-> extends
-    Validator<
+export type Interface<
+    Container extends Record<any, Validator>,
+    Result extends Record<any, Instance>,
+    ValidatableT extends Validatable,
+    MessageT,
+> =
+    ValidatorSimple<
         RecordBase<Container>,
         RecordType<Container>,
-        ValidatableMapCallback<MessageT, Container, Result, ValidatableT>
-    >,
-    Validators<Container>, Message<Function<[Result], MessageT>>
-{
-     handler : Function<[RecordParameter<Container>, Container], Result>,
-     validation : Function<[Result], ValidatableT>,
-}
+        ValidatableMapCallbackInterface<MessageT, Container, Result, ValidatableT, RecordBase<Container>>
+    > &
+    Validation<FunctionS<Result, ValidatableT>> &
+    Validators<Container> &
+    Message<FunctionS<Result, MessageT>> &
+    {map : Function<[RecordParameter<Container>, Container], Result>}
 
-export default function MapCallback<
-    Container extends Record<any, Validator> = Record<any, Validator>,
-    Result extends Record<PropertyKey, Instance<unknown>> = Record<PropertyKey, Instance<unknown>>,
+export default class MapCallback<
+    Container extends Record<any, Validator> = Record<PropertyKey, Validator>,
+    Result extends Record<any, Instance> = Record<PropertyKey, Instance>,
     ValidatableT extends Validatable = Validatable,
     MessageT = unknown,
->(
-    validators : Container,
-    handler : Function<[RecordParameter<Container>, Container], Result>,
-    validation : Function<[Result], ValidatableT>,
-    message : Function<[Result], MessageT>
-) : MapCallbackInterface<Container, Result, ValidatableT, MessageT> {
-    return new MapCallbackClass(validators, handler, validation, message);
-}
-
-export class MapCallbackClass<
-    Container extends Record<any, Validator> = Record<any, Validator>,
-    Result extends Record<PropertyKey, Instance<unknown>> = Record<PropertyKey, Instance<unknown>>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
-> implements MapCallbackInterface<Container, Result, ValidatableT, MessageT> {
+> implements Interface <Container, Result, ValidatableT, MessageT> {
     constructor(
         public validators : Container,
-        public handler : Function<[RecordParameter<Container>, Container], Result>,
-        public validation : Function<[Result], ValidatableT>,
-        public message : Function<[Result], MessageT>
+        public map : Function<[RecordParameter<Container>, Container], Result>,
+        public validation : FunctionS<Result, ValidatableT>,
+        public message : FunctionS<Result, MessageT>
     ) {
     }
 
     validate<Argument extends RecordBase<Container>>(
         argument: Argument
-    ) : Return<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapCallback<MessageT, Container, Result, ValidatableT>> {
+    ) : Return<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapCallbackInterface<MessageT, Container, Result, ValidatableT, Argument>> {
 
-        return <Return<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapCallback<MessageT, Container, Result, ValidatableT>>>
-            new ValidatableMapCallback(argument, this.validators, this.handler, this.validation, this.message);
+        return <Return<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapCallbackInterface<MessageT, Container, Result, ValidatableT, Argument>>>
+            new ValidatableMapCallback(argument, this.validators, this.map, this.validation, this.message);
     }
 }
 

@@ -1,7 +1,7 @@
 import Validator from "@dikac/t-validator/validator";
-import InferType from "@dikac/t-validator/parameter/type/infer";
+import InferType from "@dikac/t-validator/type/infer";
 
-type Infer<Schema extends globalThis.Record<PropertyKey, Validator>> = {
+type Infer<Schema extends Record<keyof Schema, Validator>> = {
     [Key in keyof Schema] : InferType<Schema[Key]>
 };
 

@@ -6,31 +6,12 @@ import Validator from "@dikac/t-validator/validator";
 import PartialUnion from "../../../partial-union";
 
 export default function Value<
-    Val,
-    Validators extends Record<PropertyKey, Validator<Val>>
+    ValueT,
+    Validators extends Record<keyof Validators, Validator<ValueT>>,
     >(
-    value : Val,
-    validators : Validators,
-    stopOnInvalid : true
-) : PartialUnion<ValidatableRecord<Validators>>
-
-export default function Value<
-    Val,
-    Validators extends Record<PropertyKey, Validator<Val>>
-    >(
-    value : Val,
-    validators : Validators,
-    stopOnInvalid : false
-) : ValidatableRecord<Validators>
-
-export default function Value<
-    Val,
-    Validators extends Record<PropertyKey, Validator<Val>>
->(
-    value : Val,
-    validators : Validators,
-    stopOnInvalid = true
-) : PartialUnion<ValidatableRecord<Validators>>|ValidatableRecord<Validators> {
+    value : ValueT,
+    validators : Validators
+) : ValidatableRecord<Validators> {
 
     let object : ValidatableRecord<Validators> = <ValidatableRecord<Validators>>{};
 
@@ -38,27 +19,7 @@ export default function Value<
 
         const validator = validators[property];
 
-        if(ValidatorType(validator)) {
-
-            // @ts-ignore
-            object[property] = validator.validate(value);
-
-            if(stopOnInvalid && !object[property].valid) {
-
-                return object;
-            }
-
-            continue;
-        }
-
-        if(TypeObject(validator)) {
-
-            // @ts-ignore
-            object[property] = Value(validator,  value, stopOnInvalid);
-            continue;
-        }
-
-        throw ThrowableValue(property);
+        object[<PropertyKey>property] = validator.validate(value);
     }
 
     return  object;

@@ -1,5 +1,6 @@
 import ValueCallback from "../../dist/validator/value-callback";
 import ValidateValue from "../../dist/validator/return/record/value";
+import ValidateValuePartial from "../../dist/validator/return/record/value-partial";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import ValidatablesInterface from "../../dist/validatable/validatables/validatables";
@@ -8,7 +9,7 @@ import ValidatorValidatable from "../../dist/validator/return/record/infer";
 import Validatable from "@dikac/t-validatable/validatable";
 import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
-
+import Message from "@dikac/t-message/message";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -22,68 +23,103 @@ describe("compiler compatibility", function() {
     describe("implicit complete", function() {
 
         let property = new ValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false), (v)=>And(v),
+            (value, validators) => ValidateValue(value, validators),
+            And,
             MessageMap
         );
 
         let validatable = property.validate('data');
 
+        describe("implicit complete", function() {
 
-        let key : Validatable = validatable.validatables.name;
-        let validatables : ValidatablesInterface = validatable;
-        let record : Record<PropertyKey, Validatable> = validatable.validatables;
-        let and : Validatables = validatable.validatable;
+            let key : Validatable = validatable.validatables.name;
+            key = validatable.validatables.address;
 
-        let unknown : unknown = validatable.value;
-        // @ts-expect-error
-        let string : string = validatable.value;
+            let validatables : ValidatablesInterface = validatable;
 
+            let record : Record<PropertyKey, Validatable> = validatable.validatables;
+
+            let and : Validatables = validatable.validatable;
+
+            if(validatable.valid) {
+
+                let unknown : unknown = validatable.value;
+                let string : string = validatable.value;
+
+            } else {
+
+                let unknown : unknown = validatable.value;
+                let string : string = validatable.value;
+            }
+        });
     });
 
     describe("explicit complete", function() {
 
         let property = new ValueCallback<string>(validator,
-            (value, validators) => ValidateValue(value, validators, false),
+            (value, validators) => ValidateValue(value, validators),
             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
             MessageMap
         );
 
         let validatable = property.validate('data');
 
-        let unknown : unknown = validatable.value;
-        let string : string = validatable.value;
+        if(validatable.valid) {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+
+        } else {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+        }
 
     });
 
     describe("implicit partial", function() {
 
         let property = new ValueCallback(validator,
-            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
         );
 
         let validatable = property.validate('data');
 
-        let unknown : unknown = validatable.value;
-        // @ts-expect-error
-        let string : string = validatable.value;
+        if(validatable.valid) {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+
+        } else {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+        }
 
     });
 
     describe("explicit complete", function() {
 
-        let property = new ValueCallback<string>(validator,
-            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+        let property = new ValueCallback<unknown, string>(validator,
+            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
             (v)=>And(<Record<PropertyKey, Validatable>>v),
-            MessageMap
+            (v) => MessageMap(<Record<PropertyKey, Message>>v)
         );
 
         let validatable = property.validate('data');
 
+        if(validatable.valid) {
 
-        let unknown : unknown = validatable.value;
-        let string : string = validatable.value;
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+
+        } else {
+
+            let unknown : unknown = validatable.value;
+            let string : string = validatable.value;
+        }
 
     });
 });
@@ -102,7 +138,7 @@ describe("implicit complete", function() {
         let value = 'data';
 
         let property = new ValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
+            (value, validators) => ValidateValue(value, validators),
             (v)=>And(v),
             MessageMap
         );
@@ -143,7 +179,6 @@ describe("implicit complete", function() {
             expect(validatable.validatables.user.valid).toBe(true);
             expect(validatable.validatables.user.message).toBe('value is type of "string"');
         });
-
     });
 
 
@@ -156,7 +191,7 @@ describe("implicit complete", function() {
         };
 
         let property = new ValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
+            (value, validators) => ValidateValue(value, validators),
             (v)=>And(v),
             MessageMap
         );
@@ -211,7 +246,7 @@ describe("implicit complete", function() {
         };
 
         let property = new ValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators, false),
+            (value, validators) => ValidateValue(value, validators),
             (v)=>And(v),
             MessageMap
         );
@@ -267,7 +302,7 @@ describe("implicit incomplete", function() {
                 age : Type('string'),
                 hobby : Type('string'),
                 no : Type('string'),
-            }, (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+            }, (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
                 (v)=>And(v),
                 MessageMap)
         };
@@ -275,7 +310,7 @@ describe("implicit incomplete", function() {
         let value = 'data';
 
         let property = new ValueCallback(validator,
-            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -429,13 +464,13 @@ describe("implicit incomplete", function() {
                 age : Type('string'),
                 hobby : Type('number'),
                 no : Type('string'),
-            }, (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+            }, (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
             (v)=>And(v),
             MessageMap)
         };
 
         let property = new ValueCallback(validator,
-            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
         );
@@ -520,14 +555,14 @@ describe("implicit incomplete", function() {
                     age : Type('string'),
                     hobby : Type('number'),
                     no : Type('string'),
-                }, (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+                }, (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
                 (v)=>And(v),
                 MessageMap)
         };
 
 
         let property = new ValueCallback(validator,
-            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValue(value, validators, true),
+            (value, validators) => <ValidatorValidatable<typeof validator>>ValidateValuePartial(value, validators),
             (v)=>And(<Record<PropertyKey, Validatable>>v),
             MessageMap
         );

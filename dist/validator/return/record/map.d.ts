@@ -1,6 +1,4 @@
 import RecordParameter from "../../parameter/base/record/infer";
 import Validator from "@dikac/t-validator/validator";
-import PartialUnion from "../../../partial-union";
 import InferReturn from "./infer";
-export default function Map<Validators extends Record<PropertyKey, Validator>>(values: RecordParameter<Validators>, validators: Validators, stopOnInvalid: true): PartialUnion<InferReturn<Validators>>;
-export default function Map<Validators extends Record<PropertyKey, Validator>>(values: RecordParameter<Validators>, validators: Validators, stopOnInvalid: false): InferReturn<Validators>;
+export default function Map<Validators extends Record<keyof Validators, Validator>>(values: RecordParameter<Validators>, validators: Validators): InferReturn<Validators>;

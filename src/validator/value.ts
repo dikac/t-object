@@ -1,43 +1,32 @@
-import Validator from "@dikac/t-validator/validator";
+import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
 import ValidatableValueCallback from "../validatable/value-callback";
 import ValidateValue from "./return/record/value";
 import ReturnInfer from "./return/record/infer";
 import PartialUnion from "../partial-union";
+import Union from "../union";
 import MapReturn from "./return/record/infer";
-import Return from "@dikac/t-validator/return/return";
+import Return from "@dikac/t-validator/validatable/simple";
+import ValueCallback, {Interface} from "./value-callback";
 
-export default class Value<
+export default function Value<
     BaseT = unknown,
     ValueT extends BaseT = BaseT,
     MessageT = unknown,
     Container extends Record<any, Validator<BaseT, ValueT>> = Record<any, Validator<BaseT, ValueT>>,
     ValidatableT extends Validatable = Validatable
-> implements Validator<
-    BaseT,
-    ValueT,
-    ValidatableValueCallback<BaseT, MessageT, Container, PartialUnion<MapReturn<Container>>, ValidatableT>
-> {
-    constructor(
-        public validators : Container,
-        public validation : Function<[PartialUnion<ReturnInfer<Container>>], ValidatableT>,
-        public message : Function<[PartialUnion<ReturnInfer<Container>>], MessageT>
-    ) {
-    }
+>(
+    validators : Container,
+    validation : Function<[MapReturn<Container>], ValidatableT>,
+    message : Function<[MapReturn<Container>], MessageT>,
 
-    validate<Argument extends BaseT>(
-        argument: Argument
-    ) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, Container, PartialUnion<MapReturn<Container>>, ValidatableT>> {
+) : Interface<BaseT, ValueT, MessageT, Container, MapReturn<Container>, ValidatableT> {
 
-        let handler = (value, validators) => <PartialUnion<MapReturn<Container>>> ValidateValue(value, validators, true);
-
-        return  new ValidatableValueCallback(
-            argument,
-            this.validators,
-            handler,
-            this.validation,
-            this.message
-        );
-    }
+    return new ValueCallback(
+        validators,
+        ValidateValue,
+        validation,
+        message
+    );
 }
