@@ -26,7 +26,7 @@ describe('valid', function () {
             expect(convert.property3).toBe('c', 'property3');
             expect(convert.property4).toBe('d', 'property4');
 
-            convert.property5 = 'e'; // compiler pass
+            convert.property5 = 'e';
         }
     });
 

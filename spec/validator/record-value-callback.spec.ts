@@ -1,179 +1,310 @@
-// import RecordValueCallback from "../../dist/validator/record-value-callback";
-// import ValidateValue from "../../dist/validator/return/record/record-value";
-// import And from "../../dist/validatable/and";
-// import Or from "../../dist/validatable/or";
-// import Validatable from "@dikac/t-validatable/validatable";
-// import ValidatorInterface from "@dikac/t-validator/validator";
-// import Message from "@dikac/t-message/message";
-// import MessageMap from "../../dist/message/message/record/map";
-// import Type from "@dikac/t-type/validator/type-standard";
-// import Instance from "@dikac/t-validator/parameter/instance/instance";
-//
-// it("force console log", () => { spyOn(console, 'log').and.callThrough();});
-//
-// describe("compiler compatibility", function() {
-//
-//     type TypeValidatorValue = ValidatorInterface<any, number, Instance<any, string>>;
-//
-//     let v = Type("number");
-//
-//     type Type = {
-//         name : string,
-//         address : string,
-//     }
-//
-//     let value = {
-//         name : 'name',
-//         address : 'address',
-//     };
-//
-//     describe("implicit", function() {
-//
-//         let property = new RecordValueCallback(v,
-//             (value, v) => ValidateValue(value, v, false),
-//             And,
-//             (v)=>MessageMap(v)
-//         );
-//
-//
-//         let validatable = property.validate(value);
-//
-//         if(validatable.valid) {
-//
-//             let string : Type = validatable.value;
-//
-//         } else {
-//
-//             let unknown : unknown = validatable.value;
-//         }
-//
-//     });
-//     //
-//     // describe("explicit complete", function() {
-//     //
-//     //     describe("auto", function() {
-//     //
-//     //         let property = MapCallback<globalThis.Record<keyof typeof validator, ValidatorInterface<string, string, Instance<string, string>>>>(validator,
-//     //             (value, validators) => ValidateValue(value, validators, false),
-//     //             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
-//     //             MessageMap
-//     //         );
-//     //
-//     //         let validatable = property.validate(value);
-//     //
-//     //         let unknown : unknown = validatable.value;
-//     //         let record : Type = validatable.value;
-//     //
-//     //     });
-//     //
-//     //     describe("direct", function() {
-//     //
-//     //         let property = MapCallback<TypeValidator>(validator,
-//     //             (value, validators) => ValidateValue(value, validators, false),
-//     //             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
-//     //             MessageMap
-//     //         );
-//     //
-//     //         let validatable = property.validate(value);
-//     //
-//     //         let unknown : unknown = validatable.value;
-//     //         let record : Type = validatable.value;
-//     //
-//     //     });
-//     // });
-//     //
-//     // describe("implicit partial", function() {
-//     //
-//     //     let property = MapCallback(validator,
-//     //         (value, validators) =>
-//     //             <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
-//     //         (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
-//     //         MessageMap
-//     //     );
-//     //
-//     //     let validatable = property.validate(value);
-//     //
-//     //     let unknown : unknown = validatable.value;
-//     //     let val : Type = validatable.value;
-//     //
-//     // });
-//     //
-//     // describe("explicit complete", function() {
-//     //
-//     //     describe("auto", function() {
-//     //
-//     //         let property = MapCallback<globalThis.Record<keyof typeof validator, ValidatorInterface<any, string, Instance<any, string>>>>(
-//     //             validator,
-//     //             (value, validators) =>
-//     //                 <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
-//     //             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
-//     //             MessageMap
-//     //         );
-//     //
-//     //         let validatable = property.validate(value);
-//     //
-//     //         let unknown : unknown = validatable.value;
-//     //         let string : Type = validatable.value;
-//     //
-//     //     });
-//     //
-//     //     describe("direct", function() {
-//     //
-//     //         let property = MapCallback<TypeValidator>(
-//     //             validator,
-//     //             (value, validators) =>
-//     //                 <Record<PropertyKey, Instance<any, string>>>ValidateValue(value, validators, true),
-//     //             (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
-//     //             (v)=>MessageMap(<globalThis.Record<any, Message>>v)
-//     //         );
-//     //
-//     //         let validatable = property.validate(value);
-//     //
-//     //         let unknown : unknown = validatable.value;
-//     //         let string : Type = validatable.value;
-//     //
-//     //     });
-//     // });
-// });
-//
-//
-// let value = {
-//     name : 'name',
-//     // address : 1,
-//     // addressc : true,
-// };
-//
-// let ivalue = {
-//     name : 1,
-//     // address : 1,
-//     // addressc : true,
-// };
-//
-// type V = {
-//     name : string,
-//     // address : 1,
-//     // addressc : true,
-// };
-//
-// type IV = {
-//     name : number,
-//     // addressc : true,
-// };
-//
-// type Typed<
-//     Base extends Record<PropertyKey, unknown>,
-//     Type extends Record<PropertyKey, unknown>
-// > = Type extends Base ? Type : unknown;
-//
-// function cc<
-//     T extends Record<PropertyKey, unknown>,
-//     O extends Record<PropertyKey, unknown>
-//     >(c : O) : Typed<T, O> {
-//
-//     return <Typed<T, O> >  c;
-// }
-//
-// let a  = cc<Record<string, string>, V>(value);
-// let b  = cc<Record<string, string>, IV>(ivalue);
-//
-//
+import RecordValueCallback from "../../dist/validator/record-value-callback";
+import ValidateValue from "../../dist/validator/validatable/record/record-value";
+import ValidateValuePartial from "../../dist/validator/validatable/record/record-value-partial";
+import And from "../../dist/validatable/and";
+import Or from "../../dist/validatable/or";
+import Validatable from "@dikac/t-validatable/validatable";
+import ValidatorInterface from "@dikac/t-validator/simple";
+import Message from "@dikac/t-message/message";
+import MessageMap from "../../dist/message/message/record/map";
+import Type from "@dikac/t-type/validator/type-standard";
+import Instance from "@dikac/t-validator/validatable/validatable";
+
+it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+
+describe("compiler compatibility", function() {
+
+    type TypeValidatorValue = ValidatorInterface<unknown, string, Instance<unknown, string>>;
+
+    let validator = Type("string");
+
+    type Type = {
+        name : string,
+        address : string,
+    }
+
+    let value = {
+        name : 'name',
+        address : 'address',
+    };
+
+    describe("implicit", function() {
+
+        let property = new RecordValueCallback(validator, ValidateValue, And, (v)=>MessageMap(v)
+        );
+
+        let validatable = property.validate(value);
+
+        if(validatable.valid) {
+
+            let string : Type = validatable.value;
+
+        } else {
+
+            let unknown : unknown = validatable.value;
+        }
+
+    });
+
+    describe("explicit complete", function() {
+
+        describe("auto", function() {
+
+            let property = new RecordValueCallback<TypeValidatorValue>(validator,
+                (value, validators) => ValidateValue(value, validators),
+                (v)=>And(v),
+                MessageMap
+            );
+
+            let validatable = property.validate(value);
+
+            let unknown : unknown = validatable.value;
+            let record : Type = validatable.value;
+
+        });
+
+        describe("direct", function() {
+
+            let property = new RecordValueCallback<TypeValidatorValue>(validator,
+                (value, validators) => ValidateValue(value, validators),
+                (v)=>And(<globalThis.Record<any, Validatable>>v),
+                MessageMap
+            );
+
+            let validatable = property.validate(value);
+
+            let unknown : unknown = validatable.value;
+            let record : Type = validatable.value;
+
+        });
+    });
+
+    describe("implicit partial", function() {
+
+        let property = new RecordValueCallback(validator,
+            (value, validators) =>
+                <Record<PropertyKey, Instance<any, string>>>ValidateValuePartial(value, validators),
+            (v)=>And(<globalThis.Record<PropertyKey, Validatable>>v),
+            MessageMap
+        );
+
+        let validatable = property.validate(value);
+
+        let unknown : unknown = validatable.value;
+        let val : Type = validatable.value;
+
+    });
+
+    describe("explicit complete", function() {
+
+        describe("auto", function() {
+
+            let property = new RecordValueCallback<TypeValidatorValue>(
+                validator,
+                (value, validators) =>
+                    <Record<PropertyKey, Instance<any, string>>>ValidateValuePartial(value, validators),
+                (v)=>And(<globalThis.Record<any, Validatable>>v),
+                MessageMap
+            );
+
+            let validatable = property.validate(value);
+
+            let unknown : unknown = validatable.value;
+            let string : Type = validatable.value;
+
+        });
+
+        describe("direct", function() {
+
+            let property = new RecordValueCallback<TypeValidatorValue>(
+                validator,
+                (value, validators) =>
+                    <Record<PropertyKey, Instance<any, string>>>ValidateValuePartial(value, validators),
+                (v)=>And(<globalThis.Record<any, Validatable>>v),
+                (v)=>MessageMap(<globalThis.Record<any, Message>>v)
+            );
+
+            let validatable = property.validate(value);
+
+            let unknown : unknown = validatable.value;
+            let string : Type = validatable.value;
+
+        });
+    });
+});
+
+
+
+
+
+describe("implicit complete", function() {
+
+    describe("all valid", function() {
+
+        let validator = Type('string');
+
+        let property = new RecordValueCallback(validator,
+            (value, validators) => ValidateValue(value, validators),
+            (v)=>And(v),
+            MessageMap
+        );
+
+        it(`and validation`, () => {
+
+            let value = {
+                name : 'string',
+                address : 'string',
+                user : 'string',
+            };
+
+            let validatable = property.validate(value);
+
+            expect(validatable.valid).toBe(true);
+            expect(validatable.value).toBe(value);
+
+            expect(validatable.validatables.name.valid).toBe(true);
+            expect(validatable.validatables.name.message).toBe('value is type of "string"');
+
+            expect(validatable.validatables.address.valid).toBe(true);
+            expect(validatable.validatables.address.message).toBe('value is type of "string"');
+
+            expect(validatable.validatables.user.valid).toBe(true);
+            expect(validatable.validatables.user.message).toBe('value is type of "string"');
+        });
+
+
+        it(`or validation`, () => {
+
+            let value = {
+                name : 'string',
+                address : 'string',
+                user : 'string',
+            };
+
+            property.validation = (v)=>Or(v);
+            let validatable = property.validate(value);
+
+            expect(validatable.valid).toBe(true);
+            expect(validatable.value).toBe(value);
+
+            expect(validatable.validatables.name.valid).toBe(true);
+            expect(validatable.validatables.name.message).toBe('value is type of "string"');
+
+            expect(validatable.validatables.address.valid).toBe(true);
+            expect(validatable.validatables.address.message).toBe('value is type of "string"');
+
+            expect(validatable.validatables.user.valid).toBe(true);
+            expect(validatable.validatables.user.message).toBe('value is type of "string"');
+        });
+    });
+
+
+    describe("mixed", function() {
+
+        let validator = Type('string');
+
+        let value = {
+            name : 'string',
+            age : 1,
+            address : 'string',
+        };
+
+        let property = new RecordValueCallback(validator,
+            (value, validators) => ValidateValue(value, validators),
+            (v)=>And(v),
+            MessageMap
+        );
+
+        it(`and validation`, () => {
+
+            let and = property.validate(value);
+
+            expect<boolean>(and.valid).toBe(false);
+
+            expect(and.validatables.name.valid).toBe(true);
+            expect(and.validatables.name.message).toBe('value is type of "string"');
+
+            expect(and.validatables.age.valid).toBe(false);
+            expect(and.validatables.age.message).toBe('value is not type of "string"');
+
+            expect(and.validatables.address.valid).toBe(true);
+            expect(and.validatables.address.message).toBe('value is type of "string"');
+
+            expect(and.value).toBe(value);
+        });
+
+
+        it(`or validation `, () => {
+
+            property.validation = (v)=>Or(v);
+
+            let or = property.validate(value);
+
+            expect(or.valid).toBe(true);
+            expect(or.value).toBe(value);
+
+            expect(or.validatables.name.message).toBe('value is type of "string"');
+            expect(or.validatables.name.valid).toBe(true);
+
+            expect(or.validatables.age.message).toBe('value is not type of "string"');
+            expect(or.validatables.age.valid).toBe(false);
+
+            expect(or.validatables.address.message).toBe('value is type of "string"');
+            expect(or.validatables.address.valid).toBe(true);
+
+        });
+    });
+
+
+    describe("all invalid", function() {
+
+        let validator = Type('string');
+
+        let value = {
+            name : true,
+            age : true,
+            address : true,
+        }
+
+        let property = new RecordValueCallback(validator,
+            (value, validators) => ValidateValue(value, validators),
+            (v)=>And(v),
+            MessageMap
+        );
+
+        it(`and validation`, () => {
+
+            let and = property.validate(value);
+
+            expect<boolean>(and.valid).toBe(false);
+            expect(and.value).toEqual(value);
+
+            expect(and.validatables.name.valid).toBe(false);
+            expect(and.validatables.name.message).toBe('value is not type of "string"');
+
+            expect(and.validatables.age.valid).toBe(false);
+            expect(and.validatables.age.message).toBe('value is not type of "string"');
+
+            expect(and.validatables.address.valid).toBe(false);
+            expect(and.validatables.address.message).toBe('value is not type of "string"');
+        });
+
+        it(`or validation `, () => {
+
+            property.validation = (v)=>Or(v);
+
+            let or = property.validate(value);
+            expect<boolean>(or.valid).toBe(false);
+            expect(or.value).toEqual(value);
+
+            expect(or.validatables.name.message).toBe('value is not type of "string"');
+            expect(or.validatables.name.valid).toBe(false);
+
+            expect(or.validatables.age.message).toBe('value is not type of "string"');
+            expect(or.validatables.age.valid).toBe(false);
+
+            expect(or.validatables.address.message).toBe('value is not type of "string"');
+            expect(or.validatables.address.valid).toBe(false);
+        });
+    });
+});

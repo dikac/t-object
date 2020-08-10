@@ -1,11 +1,11 @@
 import ValueCallback from "../../dist/validator/value-callback";
-import ValidateValue from "../../dist/validator/return/record/value";
-import ValidateValuePartial from "../../dist/validator/return/record/value-partial";
+import ValidateValue from "../../dist/validator/validatable/record/value";
+import ValidateValuePartial from "../../dist/validator/validatable/record/value-partial";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import ValidatablesInterface from "../../dist/validatable/validatables/validatables";
 import Validatables from "../../dist/validatable/validatables";
-import ValidatorValidatable from "../../dist/validator/return/record/infer";
+import ValidatorValidatable from "../../dist/validator/validatable/record/infer";
 import Validatable from "@dikac/t-validatable/validatable";
 import MessageMap from "../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
@@ -39,7 +39,8 @@ describe("compiler compatibility", function() {
 
             let record : Record<PropertyKey, Validatable> = validatable.validatables;
 
-            let and : Validatables = validatable.validatable;
+            // @ts-expect-error
+            let and : Validatables = validatable.validatables;
 
             if(validatable.valid) {
 
@@ -200,7 +201,7 @@ describe("implicit complete", function() {
 
             let and = property.validate('data');
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
 
             expect(and.validatables.name.valid).toBe(true);
             expect(and.validatables.name.message).toBe('value is type of "string"');
@@ -255,7 +256,7 @@ describe("implicit complete", function() {
 
             let and = property.validate({});
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toEqual({});
 
             expect(and.validatables.name.valid).toBe(false);
@@ -273,7 +274,7 @@ describe("implicit complete", function() {
             property.validation = (v)=>Or(v);
 
             let or = property.validate({});
-            expect(or.valid).toBe(false);
+            expect<boolean>(or.valid).toBe(false);
             expect(or.value).toEqual({});
 
             expect(or.validatables.name.message).toBe('value is not type of "string"');
@@ -479,7 +480,7 @@ describe("implicit incomplete", function() {
 
             let and = property.validate('data');
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toBe('data');
 
             if(and.validatables.name) {
@@ -571,7 +572,7 @@ describe("implicit incomplete", function() {
 
             let and = property.validate({});
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toEqual({});
 
             if(and.validatables.name) {
@@ -605,7 +606,7 @@ describe("implicit incomplete", function() {
             let or = property.validate({});
 
             expect(or.value).toEqual({});
-            expect(or.valid).toBe(false);
+            expect<boolean>(or.valid).toBe(false);
 
             if(or.validatables.name) {
 

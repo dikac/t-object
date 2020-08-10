@@ -1,17 +1,9 @@
 import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
-import Validation from "@dikac/t-validatable/validation/validation";
-import RecordParameter from "./parameter/base/record/infer";
+import RecordParameter from "./base/record/infer";
 import FunctionS from "@dikac/t-function/function-single";
 import Function from "@dikac/t-function/function";
-import Validators from "./validators/validators";
-import Message from "@dikac/t-message/message";
-import ValidatableMapCallback from "../validatable/map-callback";
-import RecordBase from "./parameter/base/record/infer";
-import RecordType from "./parameter/type/record/infer";
-import Return from "@dikac/t-validator/validatable/simple";
-import Instance from "@dikac/t-validator/validatable/instance";
-import PartialUnion from "../partial-union";
+import Instance from "@dikac/t-validator/validatable/validatable";
 import MapCallback, {Interface} from "./map-callback";
 
 export default function MapCallbackFunction<

@@ -167,7 +167,7 @@ describe("implicit incomplete", function() {
 
             let and = property.validate('data');
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toBe('data');
 
             if(and.validatables.name) {
@@ -243,7 +243,7 @@ describe("implicit incomplete", function() {
 
 
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toEqual({});
 
             if(and.validatables.name) {
@@ -270,7 +270,7 @@ describe("implicit incomplete", function() {
             let or = property.validate({});
 
             expect(or.value).toEqual({});
-            expect(or.valid).toBe(false);
+            expect<boolean>(or.valid).toBe(false);
 
             if(or.validatables.name) {
 
@@ -481,7 +481,7 @@ describe("recursive", function() {
 
             let and = property.validate('data');
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toBe('data');
 
             if(and.validatables.name) {
@@ -570,7 +570,7 @@ describe("recursive", function() {
 
             let and = property.validate({});
 
-            expect(and.valid).toBe(false);
+            expect<boolean>(and.valid).toBe(false);
             expect(and.value).toEqual({});
 
             if(and.validatables.name) {
@@ -602,7 +602,7 @@ describe("recursive", function() {
             let or = property.validate({});
 
             expect(or.value).toEqual({});
-            expect(or.valid).toBe(false);
+            expect<boolean>(or.valid).toBe(false);
 
             if(or.validatables.name) {
 

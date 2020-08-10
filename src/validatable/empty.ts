@@ -4,6 +4,7 @@ import Message from "@dikac/t-message/message";
 import Function from "@dikac/t-function/function";
 import EmptyArgument from "../boolean/empty";
 
+
 export default class Empty<ValueT extends object, MessageT>
     implements
         Readonly<Value<ValueT> & Message<MessageT> & Validatable>

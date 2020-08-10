@@ -5,13 +5,6 @@ import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
-import Type from "@dikac/t-type/validator/type-standard";
-//
-// type Typed<
-//     Base extends globalThis.Record<PropertyKey, unknown>,
-//     Type extends globalThis.Record<PropertyKey, unknown>
-//     > = Type extends Base ? Type : unknown;
-
 
 export default class RecordCallback<
     MessageT = unknown,
@@ -24,10 +17,8 @@ export default class RecordCallback<
     Validatable,
     Validatables<Result>,
     Message<MessageT>
-    //Validator<{value:ValueValidator, key:KeyValidator}>
 {
 
-   // readonly validators : {value:ValueValidator, key:KeyValidator};
     readonly validatables : Result;
     readonly valid : boolean;
     readonly validatable : ValidatableT;
@@ -37,14 +28,12 @@ export default class RecordCallback<
     constructor(
         readonly value: ValueT,
         readonly validator : ValidatorT,
-        public handler : Function<[ValueT, ValidatorT], Result>,
+        public map : Function<[ValueT, ValidatorT], Result>,
         public validation : Function<[Result], ValidatableT>,
         message : Function<[Result], MessageT>,
     ) {
 
-       // this.validators = {value:validatorValue, key:keyValue};
-
-        this.validatables = this.handler(value, validator);
+        this.validatables = this.map(value, validator);
         this.messages = this.validatables;
 
         this.validatable = this.validation(this.validatables);

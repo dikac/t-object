@@ -11,7 +11,6 @@ describe(`compiler compatible`,function() {
 
         if(validatable.valid) {
 
-            // compiler pass
             let object : object = validatable.value;
             expect(object).toEqual({});
 

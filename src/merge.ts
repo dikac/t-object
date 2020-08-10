@@ -22,7 +22,6 @@ export default function Merge<Objects extends object[]>(...objects : Objects) : 
     // populate descriptor
     let descriptors : Map<PropertyKey, PropertyDescriptor> = new Map<PropertyKey, PropertyDescriptor>();
 
-
     for (let object of objects) {
 
         let prototype = Object.getPrototypeOf(object);
@@ -66,7 +65,6 @@ export default function Merge<Objects extends object[]>(...objects : Objects) : 
 
                 descriptors.set(property, descriptor);
             }
-
         }
     }
 

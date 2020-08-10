@@ -9,19 +9,13 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    //
-    // type Typed<
-    //     Base extends globalThis.Record<PropertyKey, unknown>,
-    //     Type extends globalThis.Record<PropertyKey, unknown>
-    //     > = Type extends Base ? Type : unknown;
     class RecordCallback {
-        constructor(value, validator, handler, validation, message) {
-            // this.validators = {value:validatorValue, key:keyValue};
+        constructor(value, validator, map, validation, message) {
             this.value = value;
             this.validator = validator;
-            this.handler = handler;
+            this.map = map;
             this.validation = validation;
-            this.validatables = this.handler(value, validator);
+            this.validatables = this.map(value, validator);
             this.messages = this.validatables;
             this.validatable = this.validation(this.validatables);
             this.valid = this.validatable.valid;

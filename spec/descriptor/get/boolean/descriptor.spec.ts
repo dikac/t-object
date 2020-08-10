@@ -38,8 +38,6 @@ describe("getter/setter", function() {
 
             if(descriptor) {
 
-               // console.log('xx descriptor xx');
-               // console.log(descriptor);
                 expect(Type(descriptor)).toBeTrue();
 
             } else {

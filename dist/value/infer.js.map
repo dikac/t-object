@@ -1,1 +1,1 @@
-{"version":3,"file":"infer.js","sourceRoot":"","sources":["../../src/value/infer.ts"],"names":[],"mappings":";;;;;;;;;;;;AAQA,EAAE;AACF,YAAY;AACZ,aAAa;AACb,aAAa;AACb,iBAAiB;AACjB,IAAI;AACJ,EAAE;AACF,aAAa;AACb,aAAa;AACb,aAAa;AACb,kBAAkB;AAClB,gBAAgB;AAChB,aAAa;AACb,IAAI;AACJ,EAAE;AACF,EAAE;AACF,mDAAmD;AACnD,+BAA+B;AAC/B,IAAI;AACJ,EAAE;AACF,gCAAgC;AAChC,iDAAiD"}
+{"version":3,"file":"infer.js","sourceRoot":"","sources":["../../src/value/infer.ts"],"names":[],"mappings":""}

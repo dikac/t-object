@@ -7,7 +7,6 @@ import Message from "@dikac/t-message/message";
 /*import Record from "../record";*/
 import InferType from "@dikac/t-validator/type/infer";
 import Validators from "../validator/validators/validators";
-import {O} from "ts-toolbelt";
 
 export default class RecordCallback<
     MessageT = unknown,

@@ -8,12 +8,12 @@ import { O } from "ts-toolbelt";
 export default class RecordCallback<MessageT = unknown, ValueT extends Record<any, unknown> = Record<any, unknown>, ValidatorT extends Validator<O.UnionOf<ValueT>> = Validator<O.UnionOf<ValueT>>, Result extends Record<any, Validatable> = Record<PropertyKey, Validatable>, ValidatableT extends Validatable = Validatable> implements Value<ValueT>, Validatable, Validatables<Result>, Message<MessageT> {
     readonly value: ValueT;
     readonly validator: ValidatorT;
-    handler: Function<[ValueT, ValidatorT], Result>;
+    map: Function<[ValueT, ValidatorT], Result>;
     validation: Function<[Result], ValidatableT>;
     readonly validatables: Result;
     readonly valid: boolean;
     readonly validatable: ValidatableT;
     readonly message: MessageT;
     readonly messages: Result;
-    constructor(value: ValueT, validator: ValidatorT, handler: Function<[ValueT, ValidatorT], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
+    constructor(value: ValueT, validator: ValidatorT, map: Function<[ValueT, ValidatorT], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
 }

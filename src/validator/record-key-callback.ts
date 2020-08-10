@@ -1,25 +1,22 @@
 import Validator from "@dikac/t-validator/validator";
+import SimpleValidator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
-import RecordParameter from "./parameter/base/record/infer";
 import Function from "@dikac/t-function/function";
-import Validators from "./validators/validators";
 import Message from "@dikac/t-message/message";
 import ValidatableRecordCallback from "../validatable/record-value-callback";
-import RecordBase from "./parameter/base/record/infer";
-import RecordType from "./parameter/type/record/infer";
 import Return from "@dikac/t-validator/validatable/simple";
-import {O} from "ts-toolbelt";
 import ValidatorContainer from "@dikac/t-validator/validator/validator";
 import Validation from "@dikac/t-validatable/validation/validation";
+import Replace from "@dikac/t-validatable/boolean/replace";
 
 export type Interface<
     BaseT extends Record<PropertyKey, unknown>,
     TypeT extends BaseT,
-    ValidatorT extends Validator<keyof BaseT, keyof TypeT>,
-    Result extends Record<keyof Result, Validatable>,
+    ValidatorT extends Validator<keyof BaseT, keyof TypeT>/*<keyof BaseT, keyof TypeT>*/,
+    Result extends Record<any, Validatable>,
     ValidatableT extends Validatable,
     MessageT,
-> = Validator<
+> = SimpleValidator<
     BaseT,
     TypeT,
     ValidatableRecordCallback<
@@ -52,9 +49,17 @@ export default class RecordCallbackClass<
     ) {
     }
 
+    validate<Argument extends TypeT>(
+        argument: Argument
+    ) : Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>
+
     validate<Argument extends BaseT>(
         argument: Argument
-    ) : Return<BaseT, Argument, TypeT, ValidatableRecordCallback<MessageT, BaseT, ValidatorT, Result, ValidatableT>> {
+    ) : Return<BaseT, Argument, TypeT, ValidatableRecordCallback<MessageT, BaseT, ValidatorT, Result, ValidatableT>>
+
+    validate<Argument extends BaseT>(
+        argument: Argument
+    ) {
 
         return new ValidatableRecordCallback(argument, this.validator, this.handler, this.validation, this.message) as
             Return<BaseT, Argument, TypeT, ValidatableRecordCallback<MessageT, BaseT, ValidatorT, Result, ValidatableT>>;

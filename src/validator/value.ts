@@ -1,13 +1,8 @@
 import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
-import ValidatableValueCallback from "../validatable/value-callback";
-import ValidateValue from "./return/record/value";
-import ReturnInfer from "./return/record/infer";
-import PartialUnion from "../partial-union";
-import Union from "../union";
-import MapReturn from "./return/record/infer";
-import Return from "@dikac/t-validator/validatable/simple";
+import ValidateValue from "./validatable/record/value";
+import MapReturn from "./validatable/record/infer";
 import ValueCallback, {Interface} from "./value-callback";
 
 export default function Value<
@@ -28,5 +23,5 @@ export default function Value<
         ValidateValue,
         validation,
         message
-    );
+    ) as Interface<BaseT, ValueT, MessageT, Container, MapReturn<Container>, ValidatableT>;
 }

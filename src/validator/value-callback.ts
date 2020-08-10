@@ -1,62 +1,13 @@
-import Validator from "@dikac/t-validator/simple";
+import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
-import ValidatableValueCallback from "../validatable/value-callback";
+import ValidatableValueCallback, {Interface as ValidatableValueCallbackInterface} from "../validatable/value-callback";
 import Message from "@dikac/t-message/message";
 import Return from "@dikac/t-validator/validatable/simple";
-import Value from "@dikac/t-value/value";
-import PartialUnion from "../partial-union";
-import MapReturn from "./return/record/infer";
-import ValidatorContainer from "@dikac/t-validator/validator/validator";
 import Validation from "@dikac/t-validatable/validation/validation";
 import Validators from "./validators/validators";
-import Instance from "@dikac/t-validator/validatable/instance";
-
-//
-// export type Interface<
-//     BaseT,
-//     ValueT extends BaseT,
-//     RecordT extends Record<keyof RecordT, Validator<BaseT, ValueT>>,
-//     Result extends
-//         Function<[ValueT, RecordT], Partial<Record<keyof Result, Validatable>>>,
-//     MessageT extends Function<[ReturnType<Result>], unknown>,
-//     ValidatableT extends Function<[ReturnType<Result>], Validatable>
-// > = Validator<
-//         BaseT,
-//         ValueT,
-//         ValidatableValueCallback<BaseT, RecordT, Result, MessageT, ValidatableT>
-//     > &
-//     Validators<RecordT> &
-//     Message<MessageT> &
-//     Validation<ValidatableT>;
-//
-// export default class ValueCallback<
-//     BaseT = unknown,
-//     ValueT extends BaseT = BaseT,
-//     RecordT extends Record<keyof RecordT, Validator<BaseT, ValueT>> = Record<PropertyKey, Validator<BaseT, ValueT>>,
-//     Result extends
-//         Function<[ValueT, RecordT], Partial<Record<keyof Result, Validatable>>> =
-//         Function<[ValueT, RecordT], Partial<Record<PropertyKey, Validatable>>>,
-//     MessageT extends Function<[ReturnType<Result>], unknown>= Function<[ReturnType<Result>], unknown>,
-//     ValidatableT extends Function<[ReturnType<Result>], Validatable> = Function<[ReturnType<Result>], Validatable>
-// > implements Interface<BaseT, ValueT, RecordT, Result, MessageT, ValidatableT> {
-//     constructor(
-//         public validators : RecordT,
-//         public handler : Result,
-//         public validation : ValidatableT,
-//         public message : MessageT
-//     ) {
-//     }
-//
-//     validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, RecordT, Result, MessageT, ValidatableT>> {
-//
-//         return <Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>>>
-//             new ValidatableValueCallback(argument, this.validators, this.handler, this.validation, this.message);
-//     }
-// }
-
-
-
+import Instance from "@dikac/t-validator/validatable/validatable";
+import Replace from "@dikac/t-validatable/boolean/replace";
 
 export type Interface<
     BaseT,
@@ -68,7 +19,8 @@ export type Interface<
 > = Validator<
         BaseT,
         ValueT,
-        ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>
+    boolean, true,
+    ValidatableValueCallbackInterface<BaseT, MessageT, RecordT, Result, ValidatableT>
     > &
     Validators<RecordT> &
     Message<Function<[Result], MessageT>> &
@@ -90,9 +42,11 @@ export default class ValueCallback<
     ) {
     }
 
-    validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>> {
+   validate<Argument extends ValueT>(argument: Argument) : Replace<ValidatableValueCallbackInterface<Argument, MessageT, RecordT, Result, ValidatableT>, true>;
+   validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValueCallbackInterface<Argument, MessageT, RecordT, Result, ValidatableT>>
 
-        return <Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>>>
-            new ValidatableValueCallback(argument, this.validators, this.handler, this.validation, this.message);
+    validate<Argument extends BaseT>(argument: Argument) {
+
+        return <ValidatableValueCallbackInterface<Argument, MessageT, RecordT, Result, ValidatableT> | Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>>> new ValidatableValueCallback(argument, this.validators, this.handler, this.validation, this.message);
     }
 }
