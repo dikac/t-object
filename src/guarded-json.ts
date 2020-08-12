@@ -11,7 +11,7 @@ import Fn from "@dikac/t-function/function";
  */
 export default function GuardedJson<Type>(
     json : {toString:()=>string}|string,
-    validator : Guard<any, Type>,
+    validator : Guard<unknown, Type>,
     error : Fn<[string, object], Error> = (json : string, object : object) => new TypeError('json string is not valid according to validator'),
     preprocess : Fn<[{[Key in keyof Type] : Type[Key]}], void> = () => {}
 ) : Type {

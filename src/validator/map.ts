@@ -6,8 +6,10 @@ import ValidateMap from "./validatable/record/map";
 import MapCallback from "./map-callback";
 import {Interface} from "./map-callback";
 
+
+
 export default function Map<
-    Container extends Record<any, Validator> = Record<any, Validator>,
+    Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
     ValidatableT extends Validatable = Validatable,
     MessageT = unknown
 >(

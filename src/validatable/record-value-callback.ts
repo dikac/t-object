@@ -8,9 +8,9 @@ import {O} from "ts-toolbelt";
 
 export default class RecordCallback<
     MessageT = unknown,
-    ValueT extends Record<any, unknown> = Record<any, unknown>,
+    ValueT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
     ValidatorT extends Validator<O.UnionOf<ValueT>> = Validator<O.UnionOf<ValueT>>,
-    Result extends Record<any, Validatable> = Record<PropertyKey, Validatable>,
+    Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
     ValidatableT extends Validatable = Validatable
 > implements
     Value<ValueT>,

@@ -8,7 +8,7 @@ import RemoveUndefined from "../../../remove-undefined";
 
 
 export default function Invalid<
-    Instance extends Record<keyof Instance, Message & Validatable>
+    Instance extends Record<PropertyKey, Message & Validatable>
 >(
     record : Instance
 ) : PartialUnion<RecordInfer<Instance>> {

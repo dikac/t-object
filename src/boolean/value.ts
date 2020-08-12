@@ -7,7 +7,7 @@ import Guard from "@dikac/t-function/boolean/guard";
 export default function Value<Type, Property extends PropertyKey, Object extends object = object>(
     object : object,
     property : Property,
-    validation : Guard<any, Type>
+    validation : Guard<unknown, Type>
 ) : object is Object & {[Key in Property] : Type} {
 
      // @ts-ignore

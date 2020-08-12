@@ -11,7 +11,7 @@ export default function ValuePartial<
     BaseT = unknown,
     ValueT extends BaseT = BaseT,
     MessageT = unknown,
-    Container extends Record<keyof Container, Validator<BaseT, ValueT>> = Record<PropertyKey, Validator<BaseT, ValueT>>,
+    Container extends Record<PropertyKey, Validator<BaseT, ValueT>> = Record<PropertyKey, Validator<BaseT, ValueT>>,
     ValidatableT extends Validatable = Validatable
 >(
     validators : Container,

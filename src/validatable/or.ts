@@ -4,7 +4,7 @@ import Validatables from "./validatables";
 
 
 export default function Or<
-    Object extends Record<any, Validatable>
+    Object extends Record<PropertyKey, Validatable>
 >(
     validatable : Object
 ) : Validatables<Object, boolean> {

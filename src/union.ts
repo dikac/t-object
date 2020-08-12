@@ -1,7 +1,7 @@
 import {Object} from "ts-toolbelt";
 
 
-type Union<Schema extends Record<keyof Schema, unknown>> =
+type Union<Schema extends Record<PropertyKey, any>> =
     Record<keyof Schema, Object.UnionOf<Schema>> |
     Schema
 ;

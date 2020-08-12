@@ -12,8 +12,8 @@ import Replace from "@dikac/t-validatable/boolean/replace";
 export type Interface<
     BaseT extends Record<PropertyKey, unknown>,
     TypeT extends BaseT,
-    ValidatorT extends Validator<keyof BaseT, keyof TypeT>/*<keyof BaseT, keyof TypeT>*/,
-    Result extends Record<any, Validatable>,
+    ValidatorT extends Validator<keyof BaseT, keyof TypeT>,
+    Result extends Record<PropertyKey, Validatable>,
     ValidatableT extends Validatable,
     MessageT,
 > = SimpleValidator<
@@ -36,7 +36,7 @@ export default class RecordCallbackClass<
     BaseT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
     TypeT extends BaseT = BaseT,
     ValidatorT extends Validator<keyof BaseT, keyof TypeT> = Validator<keyof BaseT, keyof TypeT>,
-    Result extends Record<keyof Result, Validatable> = Record<PropertyKey, Validatable>,
+    Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
     ValidatableT extends Validatable = Validatable,
     MessageT = unknown,
 > implements Interface<BaseT, TypeT, ValidatorT, Result, ValidatableT, MessageT> {

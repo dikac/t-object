@@ -7,8 +7,8 @@ import Instance from "@dikac/t-validator/validatable/validatable";
 import MapCallback, {Interface} from "./map-callback";
 
 export default function MapCallbackFunction<
-    Container extends Record<keyof Container, Validator> = Record<PropertyKey, Validator>,
-    Result extends Record<keyof Result, Instance> = Record<PropertyKey, Instance>,
+    Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
+    Result extends Record<PropertyKey, Instance> = Record<PropertyKey, Instance>,
     ValidatableT extends Validatable = Validatable,
     MessageT = unknown,
 > (

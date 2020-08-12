@@ -11,13 +11,13 @@ import ValidatableRecordCallback from "../validatable/record-value-callback";
 import Return from "@dikac/t-validator/validatable/simple";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Replace from "@dikac/t-validatable/boolean/replace";
-export declare type Interface<ValidatorT extends Validator, Result extends Record<keyof Result, Instance>, ValidatableT extends Validatable, MessageT> = SimpleValidator<Record<any, InferBase<ValidatorT>>, Record<any, InferType<ValidatorT>>, ValidatableRecordCallback<MessageT, Record<any, InferBase<ValidatorT>>, ValidatorT, Result, ValidatableT>> & ValidatorContainer<ValidatorT> & Message<Function<[Result], MessageT>> & Validation<Function<[Result], ValidatableT>>;
-export default class RecordValueCallback<ValidatorT extends Validator = Validator, Result extends Record<any, Instance> = Record<any, Instance>, ValidatableT extends Validatable = Validatable, MessageT = unknown> implements Interface<ValidatorT, Result, ValidatableT, MessageT> {
+export declare type Interface<ValidatorT extends Validator, Result extends Record<PropertyKey, Instance>, ValidatableT extends Validatable, MessageT> = SimpleValidator<Record<PropertyKey, InferBase<ValidatorT>>, Record<PropertyKey, InferType<ValidatorT>>, ValidatableRecordCallback<MessageT, Record<PropertyKey, InferBase<ValidatorT>>, ValidatorT, Result, ValidatableT>> & ValidatorContainer<ValidatorT> & Message<Function<[Result], MessageT>> & Validation<Function<[Result], ValidatableT>>;
+export default class RecordValueCallback<ValidatorT extends Validator = Validator, Result extends Record<PropertyKey, Instance> = Record<PropertyKey, Instance>, ValidatableT extends Validatable = Validatable, MessageT = unknown> implements Interface<ValidatorT, Result, ValidatableT, MessageT> {
     validator: ValidatorT;
-    handler: Function<[Record<any, InferBase<ValidatorT>>, ValidatorT], Result>;
+    handler: Function<[Record<PropertyKey, InferBase<ValidatorT>>, ValidatorT], Result>;
     validation: Function<[Result], ValidatableT>;
     message: Function<[Result], MessageT>;
-    constructor(validator: ValidatorT, handler: Function<[Record<any, InferBase<ValidatorT>>, ValidatorT], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
-    validate<Argument extends Record<any, InferType<ValidatorT>>>(argument: Argument): Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>;
-    validate<Argument extends Record<any, InferBase<ValidatorT>>>(argument: Argument): Return<Record<any, InferBase<ValidatorT>>, Argument, Record<any, InferType<ValidatorT>>, ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>>;
+    constructor(validator: ValidatorT, handler: Function<[Record<PropertyKey, InferBase<ValidatorT>>, ValidatorT], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
+    validate<Argument extends Record<PropertyKey, InferType<ValidatorT>>>(argument: Argument): Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>;
+    validate<Argument extends Record<PropertyKey, InferBase<ValidatorT>>>(argument: Argument): Return<Record<PropertyKey, InferBase<ValidatorT>>, Argument, Record<PropertyKey, InferType<ValidatorT>>, ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>>;
 }

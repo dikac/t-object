@@ -7,23 +7,23 @@ import ValidateRecordKey from "./validatable/record/record-key";
 import RecordKeyCallback, {Interface} from "./record-key-callback";
 
 export default function RecordKey<
-    BaseT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+    BaseT extends Record<PropertyKey, any> = Record<PropertyKey, any>,
     TypeT extends BaseT = BaseT,
     ValidatorT extends Validator<O.UnionOf<BaseT>, O.UnionOf<TypeT>> = Validator<O.UnionOf<BaseT>, O.UnionOf<TypeT>>,
     ValidatableT extends Validatable = Validatable,
     MessageT = unknown,
 >(
     validator : ValidatorT,
-    validation : Function<[Record<any, ReturnInfer<ValidatorT>>], ValidatableT>,
-    message : Function<[Record<any, ReturnInfer<ValidatorT>>], MessageT>,
-) : Interface<BaseT, TypeT, ValidatorT, Record<any, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> {
+    validation : Function<[Record<PropertyKey, ReturnInfer<ValidatorT>>], ValidatableT>,
+    message : Function<[Record<PropertyKey, ReturnInfer<ValidatorT>>], MessageT>,
+) : Interface<BaseT, TypeT, ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> {
 
     return new RecordKeyCallback(
         validator,
-        ValidateRecordKey,
+        (object, value)=><Record<PropertyKey, ReturnInfer<ValidatorT>>>ValidateRecordKey(object, value),
         validation,
         message
-    );
+    ) as Interface<BaseT, TypeT, ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT>;
 }
 
 

@@ -3,14 +3,14 @@ import Validator from "@dikac/t-validator/validator";
 import PartialUnion from "../../../partial-union";
 
 export default function ValuePartial<
-    Val,
-    Validators extends Record<keyof Validators, Validator<Val>>,
+    ValueT,
+    Validators extends Record<PropertyKey, Validator<ValueT>>,
 >(
-    value : Val,
+    value : ValueT,
     validators : Validators,
 ) : PartialUnion<ValidatableRecord<Validators>> {
 
-    let object : ValidatableRecord<Validators> = <ValidatableRecord<Validators>>{};
+    let object = {};
 
     for(let property in validators) {
 
@@ -18,11 +18,11 @@ export default function ValuePartial<
 
         object[<PropertyKey>property] = validator.validate(value);
 
-        if(!object[property].valid) {
+        if(!object[<PropertyKey>property].valid) {
 
             return object;
         }
     }
 
-    return  object;
+    return <ValidatableRecord<Validators>> object;
 }

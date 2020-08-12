@@ -5,7 +5,7 @@
  */
 export default function Object_<
     Assumption extends object
->(value : any) : value is Assumption {
+>(value : unknown) : value is Assumption {
 
     if(value === null) {
 

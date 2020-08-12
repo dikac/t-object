@@ -3,13 +3,13 @@ import Validator from "@dikac/t-validator/validator";
 import InferReturn from "./infer";
 
 export default function Map<
-    Validators extends Record<keyof Validators, Validator>
+    Validators extends Record<PropertyKey, Validator>
 >(
     values : RecordParameter<Validators>,
     validators : Validators
 ) : InferReturn<Validators> {
 
-    let object : InferReturn<Validators> = <InferReturn<Validators>>{};
+    let object = {};
 
     for(let property in validators) {
 
@@ -17,8 +17,7 @@ export default function Map<
         const value = values[property];
 
         object[<PropertyKey>property] = validator.validate(value);
-
     }
 
-    return  object;
+    return <InferReturn<Validators> > object;
 }

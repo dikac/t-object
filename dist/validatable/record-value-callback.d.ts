@@ -5,7 +5,7 @@ import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import { O } from "ts-toolbelt";
-export default class RecordCallback<MessageT = unknown, ValueT extends Record<any, unknown> = Record<any, unknown>, ValidatorT extends Validator<O.UnionOf<ValueT>> = Validator<O.UnionOf<ValueT>>, Result extends Record<any, Validatable> = Record<PropertyKey, Validatable>, ValidatableT extends Validatable = Validatable> implements Value<ValueT>, Validatable, Validatables<Result>, Message<MessageT> {
+export default class RecordCallback<MessageT = unknown, ValueT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, ValidatorT extends Validator<O.UnionOf<ValueT>> = Validator<O.UnionOf<ValueT>>, Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>, ValidatableT extends Validatable = Validatable> implements Value<ValueT>, Validatable, Validatables<Result>, Message<MessageT> {
     readonly value: ValueT;
     readonly validator: ValidatorT;
     map: Function<[ValueT, ValidatorT], Result>;

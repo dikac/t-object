@@ -8,16 +8,19 @@ export type Validation<Type extends object> = {
  * Check if {@param value} key and value valid according to {@param validation}
  * {@param validation} value is used for check {@param value} under the same property name
  */
-export default function Structure<Type extends object, V extends Validation<Type> = Validation<Type>>(
-    value : any,
-    validation : V
+export default function Structure<
+    Type extends object,
+    ValidationT extends Validation<Type> = Validation<Type>
+>(
+    value : object,
+    validation : ValidationT
 ) : value is Type {
 
     for (let property in validation) {
 
         let validator = validation[property];
 
-        if(!validator(value[property])) {
+        if(!validator(value[<PropertyKey>property])) {
 
             return false;
         }

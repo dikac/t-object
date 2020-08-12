@@ -3,7 +3,7 @@ import AndBoolean from "./record/boolean/and";
 import Validatables from "./validatables";
 
 export default function And<
-    Object extends Record<any, Validatable>
+    Object extends Record<PropertyKey, Validatable>
 >(
     validatable : Object
 ) : Validatables<Object, boolean> {

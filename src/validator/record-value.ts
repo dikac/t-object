@@ -11,14 +11,14 @@ export default function RecordValue<
     MessageT = unknown,
 >(
     validator : ValidatorT,
-    validation : Function<[Record<any, ReturnInfer<ValidatorT>>], ValidatableT>,
-    message : Function<[Record<any, ReturnInfer<ValidatorT>>], MessageT>,
-) : Interface</*BaseT, TypeT, */ValidatorT, Record<any, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> {
+    validation : Function<[Record<PropertyKey, ReturnInfer<ValidatorT>>], ValidatableT>,
+    message : Function<[Record<PropertyKey, ReturnInfer<ValidatorT>>], MessageT>,
+) : Interface<ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> {
 
     return new RecordValueCallback(
         validator,
         ValidateMap,
         validation,
         message
-    ) as Interface<ValidatorT, Record<any, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> ;
+    ) as Interface<ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> ;
 }

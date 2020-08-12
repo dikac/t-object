@@ -10,6 +10,6 @@ import Fn from "@dikac/t-function/function";
  */
 export default function GuardedJson<Type>(json: {
     toString: () => string;
-} | string, validator: Guard<any, Type>, error?: Fn<[string, object], Error>, preprocess?: Fn<[{
+} | string, validator: Guard<unknown, Type>, error?: Fn<[string, object], Error>, preprocess?: Fn<[{
     [Key in keyof Type]: Type[Key];
 }], void>): Type;

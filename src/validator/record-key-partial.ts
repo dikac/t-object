@@ -15,13 +15,13 @@ export default function RecordKeyPartial<
     MessageT = unknown,
 >(
     validator : ValidatorT,
-    validation : Function<[Union<Record<any, ReturnInfer<ValidatorT>>>], ValidatableT>,
-    message : Function<[Union<Record<any, ReturnInfer<ValidatorT>>>], MessageT>,
-) : Interface<BaseT, TypeT, ValidatorT, Union<Record<any, ReturnInfer<ValidatorT>>>, ValidatableT, MessageT> {
+    validation : Function<[Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>], ValidatableT>,
+    message : Function<[Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>], MessageT>,
+) : Interface<BaseT, TypeT, ValidatorT, Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>, ValidatableT, MessageT> {
 
     return new RecordKeyCallback(
         validator,
-        (value, validators)  => <Union<Record<any, ReturnInfer<ValidatorT>>>> ValidateRecordKeyPartial(value, validators),
+        (value, validators)  => <Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>> ValidateRecordKeyPartial(value, validators),
         validation,
         message
     );

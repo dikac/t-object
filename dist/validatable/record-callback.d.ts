@@ -6,7 +6,7 @@ import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import InferType from "@dikac/t-validator/type/infer";
 import Validators from "../validator/validators/validators";
-export default class RecordCallback<MessageT = unknown, ValueValidator extends Validator = Validator, KeyValidator extends Validator<PropertyKey> = Validator<PropertyKey>, Val extends Record<InferType<KeyValidator>, InferType<ValueValidator>> = Record<InferType<KeyValidator>, InferType<ValueValidator>>, Result extends Record<any, Validatable> = Record<PropertyKey, Validatable>, ValidatableT extends Validatable = Validatable> implements Value<Val>, Validatable, Validatables<Result>, Message<MessageT>, Validators<{
+export default class RecordCallback<MessageT = unknown, ValueValidator extends Validator = Validator, KeyValidator extends Validator<PropertyKey> = Validator<PropertyKey>, Val extends Record<InferType<KeyValidator>, InferType<ValueValidator>> = Record<InferType<KeyValidator>, InferType<ValueValidator>>, Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>, ValidatableT extends Validatable = Validatable> implements Value<Val>, Validatable, Validatables<Result>, Message<MessageT>, Validators<{
     value: ValueValidator;
     key: KeyValidator;
 }> {

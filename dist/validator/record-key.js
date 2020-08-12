@@ -12,7 +12,7 @@
     const record_key_1 = require("./validatable/record/record-key");
     const record_key_callback_1 = require("./record-key-callback");
     function RecordKey(validator, validation, message) {
-        return new record_key_callback_1.default(validator, record_key_1.default, validation, message);
+        return new record_key_callback_1.default(validator, (object, value) => record_key_1.default(object, value), validation, message);
     }
     exports.default = RecordKey;
 });

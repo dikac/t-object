@@ -4,7 +4,6 @@ import Value from "@dikac/t-value/value";
 import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
-/*import Record from "../record";*/
 import InferType from "@dikac/t-validator/type/infer";
 import Validators from "../validator/validators/validators";
 
@@ -13,7 +12,7 @@ export default class RecordCallback<
     ValueValidator extends Validator = Validator,
     KeyValidator extends Validator<PropertyKey> = Validator<PropertyKey>,
     Val extends Record<InferType<KeyValidator>, InferType<ValueValidator>> = Record<InferType<KeyValidator>, InferType<ValueValidator>>,
-    Result extends Record<any, Validatable> = Record<PropertyKey, Validatable>,
+    Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
     ValidatableT extends Validatable = Validatable
 > implements
     Value<Val>,

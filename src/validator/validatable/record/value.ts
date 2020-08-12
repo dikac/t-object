@@ -3,13 +3,13 @@ import Validator from "@dikac/t-validator/validator";
 
 export default function Value<
     ValueT,
-    Validators extends Record<keyof Validators, Validator<ValueT>>,
+    Validators extends Record<PropertyKey, Validator<ValueT>>,
 >(
     value : ValueT,
     validators : Validators
 ) : ValidatableRecord<Validators> {
 
-    let object : ValidatableRecord<Validators> = <ValidatableRecord<Validators>>{};
+    let object  = {};
 
     for(let property in validators) {
 
@@ -18,5 +18,5 @@ export default function Value<
         object[<PropertyKey>property] = validator.validate(value);
     }
 
-    return  object;
+    return <ValidatableRecord<Validators>> object;
 }

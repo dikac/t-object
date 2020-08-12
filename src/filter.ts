@@ -13,14 +13,14 @@ import Guard from "@dikac/t-function/boolean/guard";
 
 export default function Filter<
     Type extends O.UnionOf<Object>,
-    Object extends Record<keyof Object, any>
+    Object extends Record<PropertyKey, any>
 >(
     record : Object,
     filter : Guard<O.UnionOf<Object>, Type, [keyof Object]>,
 ) : O.Select<Object, Type>;
 
 export default function Filter<
-    Object extends Record<keyof Object, unknown>
+    Object extends Record<PropertyKey, unknown>
 >(
     record : Object,
     filter : Fn<[O.UnionOf<Object>, keyof Object], boolean>,
@@ -28,7 +28,7 @@ export default function Filter<
 
 export default function Filter<
     Type,
-    Object extends Record<keyof Object, Type> = Record<PropertyKey, Type>
+    Object extends Record<PropertyKey, Type> = Record<PropertyKey, Type>
 >(
     record : Object,
     filter : Fn<[Type, keyof Object], boolean>,
