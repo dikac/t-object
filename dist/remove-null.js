@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function RemoveUndefined(object) {
+    function RemoveNull(object) {
         for (let property in object) {
             if (object[property] === null) {
                 delete object[property];
@@ -17,6 +17,6 @@
         }
         return object;
     }
-    exports.default = RemoveUndefined;
+    exports.default = RemoveNull;
 });
 //# sourceMappingURL=remove-null.js.map
