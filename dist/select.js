@@ -9,19 +9,13 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function Record(object, value, property) {
-        for (const [prop, val] of Object.entries(object)) {
-            if (property) {
-                if (!property(prop)) {
-                    return false;
-                }
-            }
-            if (!value(val)) {
-                return false;
-            }
+    function Select(object, keys) {
+        const result = {};
+        for (const property of keys) {
+            result[property] = object[property];
         }
-        return true;
+        return result;
     }
-    exports.default = Record;
+    exports.default = Select;
 });
-//# sourceMappingURL=record.js.map
+//# sourceMappingURL=select.js.map

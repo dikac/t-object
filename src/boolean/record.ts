@@ -1,37 +1,36 @@
 import Guard from "@dikac/t-function/boolean/guard";
 
 /**
- * check if {@param obj} is certain type of record
+ * check if {@param object} is certain type of record
  * {@param value} use to validate object value
- * optionally {@param property} use to validate object property
  */
 
 export default function Record<
     Value
 >(
-    obj : object,
+    object : object,
     value : Guard<unknown, Value>,
-) : obj is Record<PropertyKey, Value>;
+) : object is Record<PropertyKey, Value>;
 
 export default function Record<
     Value,
     Key extends PropertyKey = PropertyKey
 >(
-    obj : object,
+    object : object,
     value : Guard<unknown, Value>,
     property : Guard<PropertyKey, Key>
-) : obj is Record<Key, Value>;
+) : object is Record<Key, Value>;
 
 export default function Record<
     Value,
     Key extends PropertyKey = PropertyKey
 >(
-    obj : object,
+    object : object,
     value : Guard<unknown, Value>,
     property ?: Guard<PropertyKey, Key>
-) : obj is Record<Key, Value> {
+) : object is Record<Key, Value> {
 
-    for(const [prop, val] of Object.entries(obj)) {
+    for(const [prop, val] of Object.entries(object)) {
 
         if(property) {
 

@@ -6,8 +6,6 @@ import {O} from "ts-toolbelt";
  *
  * {@template Replace} type of replace result
  *
- * {@param replace} is only called when {@param validation} result of value is true
- * {@param validation} is used for distinguish value to be used for {@param replace} or to be used for recursion
  */
 export default function MapCallback<
     Object extends Record<PropertyKey, Value>,
