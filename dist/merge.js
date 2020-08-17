@@ -4,14 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./descriptor/get/boolean/descriptor", "./descriptor/set/boolean/descriptor", "./descriptor/merge"], factory);
+        define(["require", "exports", "./descriptor/boolean/getter", "./descriptor/boolean/setter", "./descriptor/merge-getter-setter"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const descriptor_1 = require("./descriptor/get/boolean/descriptor");
-    const descriptor_2 = require("./descriptor/set/boolean/descriptor");
-    const merge_1 = require("./descriptor/merge");
+    const getter_1 = require("./descriptor/boolean/getter");
+    const setter_1 = require("./descriptor/boolean/setter");
+    const merge_getter_setter_1 = require("./descriptor/merge-getter-setter");
     /**
      * Merge object property, symbol and method, the latter object will replace former
      */
@@ -46,9 +46,9 @@
                         continue;
                     }
                 }
-                if ((descriptor_1.default(descriptor) || descriptor_2.default(descriptor)) &&
-                    (descriptor_1.default(descriptors.get(property) || {}) || descriptor_2.default(descriptors.get(property) || {}))) {
-                    descriptors.set(property, merge_1.default(descriptors.get(property) || {}, descriptor));
+                if ((getter_1.default(descriptor) || setter_1.default(descriptor)) &&
+                    (getter_1.default(descriptors.get(property) || {}) || setter_1.default(descriptors.get(property) || {}))) {
+                    descriptors.set(property, merge_getter_setter_1.default(descriptors.get(property) || {}, descriptor));
                 }
                 else {
                     descriptors.set(property, descriptor);

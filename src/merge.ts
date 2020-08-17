@@ -1,9 +1,9 @@
 import { UnionToIntersection, ValuesType } from 'utility-types';
-import GetterType from "./descriptor/get/boolean/descriptor";
-import SetterType from "./descriptor/set/boolean/descriptor";
-import MergeDescriptor from "./descriptor/merge";
-import Get from "./descriptor/get/get";
-import Set from "./descriptor/set/set";
+import GetterType from "./descriptor/boolean/getter";
+import SetterType from "./descriptor/boolean/setter";
+import MergeDescriptor from "./descriptor/merge-getter-setter";
+import Getter from "./descriptor/getter";
+import Setter from "./descriptor/setter";
 
 /**
  * Merge object property, symbol and method, the latter object will replace former
@@ -59,7 +59,7 @@ export default function Merge<Objects extends object[]>(...objects : Objects) : 
                 (GetterType(descriptors.get(property) || {}) || SetterType(descriptors.get(property) || {}))
             ) {
 
-                descriptors.set(property, MergeDescriptor(<Get|Set>descriptors.get(property) || {}, descriptor));
+                descriptors.set(property, MergeDescriptor(<Getter|Setter>descriptors.get(property) || {}, descriptor));
 
             } else {
 
