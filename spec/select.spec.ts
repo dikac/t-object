@@ -1,4 +1,3 @@
-import RemoveNull from "../dist/remove-null";
 import Select from "../dist/select";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
