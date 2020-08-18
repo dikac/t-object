@@ -2,17 +2,35 @@ import {Object, List} from "ts-toolbelt";
 import Value from "@dikac/t-value/value";
 import Return from "@dikac/t-function/return/return";
 
+/**
+ * extract {@template ObjectTemplate} by {@template Key}, extracted value will be
+ * removed from {@template ObjectTemplate}
+ */
 export default class Extract<
-    O extends object,
-    Key extends (keyof O)[] = (keyof O)[]
+    ObjectTemplate extends object,
+    Key extends (keyof ObjectTemplate)[] = (keyof ObjectTemplate)[]
 > implements
-    Readonly<Value<Omit<O, List.UnionOf<Key>>> & Return<Object.Pick<O, List.UnionOf<Key>>>>
+    Readonly<Value<Omit<ObjectTemplate, List.UnionOf<Key>>> & Return<Object.Pick<ObjectTemplate, List.UnionOf<Key>>>>
 {
-    readonly return : Object.Pick<O, List.UnionOf<Key>> = <Object.Pick<O, List.UnionOf<Key>>>{}
-    readonly value : Omit<O, List.UnionOf<Key>>;
+    /**
+     * extraction result
+     */
+    readonly return : Object.Pick<ObjectTemplate, List.UnionOf<Key>> = <Object.Pick<ObjectTemplate, List.UnionOf<Key>>>{}
 
+    /**
+     * contain original object source
+     */
+    readonly value : Omit<ObjectTemplate, List.UnionOf<Key>>;
+
+    /**
+     * @param value
+     * source
+     *
+     * @param keys
+     * key for extraction
+     */
     constructor(
-        value : O,
+        value : ObjectTemplate,
         readonly keys : Key
     ) {
 

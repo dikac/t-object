@@ -9,6 +9,9 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * assign all {@param source} value to all undefined value in {@param target}
+     */
     function AssignUndefined(target, source) {
         for (let property in source) {
             // @ts-ignore

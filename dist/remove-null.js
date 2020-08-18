@@ -9,6 +9,10 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * remove null from {@param object}
+     * @param object
+     */
     function RemoveNull(object) {
         for (let property in object) {
             if (object[property] === null) {

@@ -9,6 +9,15 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * get new object from {@param object} by {@param keys}
+     *
+     * @param object
+     * source
+     *
+     * @param keys
+     * key for selection
+     */
     function Select(object, keys) {
         const result = {};
         for (const property of keys) {
