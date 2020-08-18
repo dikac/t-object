@@ -2,30 +2,74 @@ import StrictAssign from "../dist/strict-assign";
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
 interface Data {
-    data1 ?: string;
-    data2 ?: number;
-    data3 ?: boolean;
+    string ?: string;
+    number ?: number;
+    boolean ?: boolean;
 }
+
+describe('compiler compatible', function () {
+
+    describe('partial', function () {
+
+        let target : Data = {
+            string : 'string'
+        }
+
+        let source  = {
+            number : 1,
+            boolean : false,
+        }
+
+        let result = StrictAssign(target, source);
+
+        // @ts-expect-error
+        let string : string = result.string;
+        let number : number = result.number;
+        let boolean : boolean = result.boolean;
+
+    });
+
+    describe('extra source', function () {
+
+        let target : Data = {
+            string : 'string'
+        }
+
+        let source = {
+            number : 1,
+            boolean : false,
+            object : {}
+        }
+
+        let result = StrictAssign(target, source);
+
+        // @ts-expect-error
+        let string : string = result.string;
+        let number : number = result.number;
+        let boolean : boolean = result.boolean;
+        let object : object = result.object;
+
+    });
+})
 
 describe('test', function () {
 
     let target : Data = {
-        data1 : 'string'
+        string : 'string'
     }
 
     let source : Data = {
-        data2 : 1,
-        data3 : false,
+        number : 1,
+        boolean : false,
     }
 
 
     it('check result', () => {
 
         let result = StrictAssign(target, source);
-        expect(result.data1).toBe('string');
-        expect(result.data2).toBe(1);
-        expect(result.data3).toBe(false);
+        expect(result.string).toBe('string');
+        expect(result.number).toBe(1);
+        expect(result.boolean).toBe(false);
 
     })
-
 })

@@ -1,5 +1,4 @@
 import Method from "../../boolean/method";
-import ObjectType from "../../boolean/object";
 import GetterInterface from "../getter";
 import BooleanType from "@dikac/t-boolean/boolean";
 

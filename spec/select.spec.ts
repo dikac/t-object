@@ -125,8 +125,8 @@ describe('plain object', () => {
 
     it('test value', () => {
 
-        expect(result.data1).toBe(result.data1);
-        expect(result.data2()).toBe(result.data2());
+        expect(result.data1).toBe(object.data1);
+        expect(result.data2()).toBe(object.data2());
         // @ts-expect-error
         expect(result.data3).toBe(undefined);
     });
