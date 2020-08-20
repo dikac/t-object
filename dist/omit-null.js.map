@@ -1,0 +1,1 @@
+{"version":3,"file":"omit-null.js","sourceRoot":"","sources":["../src/omit-null.ts"],"names":[],"mappings":";;;;;;;;;;;IAEA;;;OAGG;IACH,SAAwB,QAAQ,CAC5B,MAAU;QAGV,KAAI,IAAI,QAAQ,IAAI,MAAM,EAAE;YAExB,IAAG,MAAM,CAAC,QAAQ,CAAC,KAAK,IAAI,EAAE;gBAE1B,OAAO,MAAM,CAAC,QAAQ,CAAC,CAAC;aAC3B;SACJ;QAED,OAAO,MAAM,CAAC;IAClB,CAAC;IAbD,2BAaC"}

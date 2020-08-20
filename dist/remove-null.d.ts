@@ -1,6 +1,5 @@
-import { Object } from "ts-toolbelt";
+import OmitNull from "./omit-null";
 /**
- * remove null from {@param object}
- * @param object
+ * @deprecated use original {@link OmitNull}
  */
-export default function RemoveNull<O extends object>(object: O): Omit<O, Object.Keys<Object.Select<O, null>>>;
+export default OmitNull;

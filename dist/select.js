@@ -4,26 +4,17 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "./pick"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    const pick_1 = require("./pick");
     /**
-     * get new object from {@param object} by {@param keys}
-     *
-     * @param object
-     * source
-     *
-     * @param keys
-     * key for selection
+     * @deprecated use {@link Pick} instead
      */
     function Select(object, keys) {
-        const result = {};
-        for (const property of keys) {
-            result[property] = object[property];
-        }
-        return result;
+        return pick_1.default(object, ...keys);
     }
     exports.default = Select;
 });

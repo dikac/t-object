@@ -1,25 +1,13 @@
 import {List} from "ts-toolbelt";
+import Pick from "./pick";
 
 /**
- * get new object from {@param object} by {@param keys}
- *
- * @param object
- * source
- *
- * @param keys
- * key for selection
+ * @deprecated use {@link Pick} instead
  */
 export default function Select<
     ObjectT extends object,
     Key extends (keyof ObjectT)[]
->(object : ObjectT, keys : Key) : Pick<ObjectT, List.UnionOf<Key>> {
+>(object : ObjectT, keys : Key) : globalThis.Pick<ObjectT, List.UnionOf<Key>> {
 
-    const result = {};
-
-    for (const property of keys) {
-
-        result[<PropertyKey>property] = object[property];
-    }
-
-    return result as Pick<ObjectT, List.UnionOf<Key>>;
+    return Pick(object, ...keys)
 }

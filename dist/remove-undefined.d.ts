@@ -1,6 +1,5 @@
-import { Object } from "ts-toolbelt";
+import OmitUndefined from "./omit-undefined";
 /**
- * remove undefined from {@param object}
- * @param object
+ * @deprecated use original {@link OmitUndefined}
  */
-export default function RemoveUndefined<O extends object>(object: O): Omit<O, Object.Keys<Object.Select<O, undefined>>>;
+export default OmitUndefined;

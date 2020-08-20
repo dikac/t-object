@@ -4,23 +4,15 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "./omit-undefined"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    const omit_undefined_1 = require("./omit-undefined");
     /**
-     * remove undefined from {@param object}
-     * @param object
+     * @deprecated use original {@link OmitUndefined}
      */
-    function RemoveUndefined(object) {
-        for (let property in object) {
-            if (object[property] === undefined) {
-                delete object[property];
-            }
-        }
-        return object;
-    }
-    exports.default = RemoveUndefined;
+    exports.default = omit_undefined_1.default;
 });
 //# sourceMappingURL=remove-undefined.js.map
