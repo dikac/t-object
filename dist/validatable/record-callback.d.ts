@@ -11,7 +11,7 @@ export default class RecordCallback<MessageT = unknown, ValueValidator extends V
     key: KeyValidator;
 }> {
     readonly value: Val;
-    handler: Function<[Record<InferType<KeyValidator>, InferType<ValueValidator>>, KeyValidator, ValueValidator], Result>;
+    map: Function<[Record<InferType<KeyValidator>, InferType<ValueValidator>>, KeyValidator, ValueValidator], Result>;
     validation: Function<[Result], ValidatableT>;
     readonly validators: {
         value: ValueValidator;
@@ -22,5 +22,5 @@ export default class RecordCallback<MessageT = unknown, ValueValidator extends V
     readonly validatable: ValidatableT;
     readonly message: MessageT;
     readonly messages: Result;
-    constructor(value: Val, validatorValue: ValueValidator, keyValue: KeyValidator, handler: Function<[Record<InferType<KeyValidator>, InferType<ValueValidator>>, KeyValidator, ValueValidator], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
+    constructor(value: Val, validatorValue: ValueValidator, keyValue: KeyValidator, map: Function<[Record<InferType<KeyValidator>, InferType<ValueValidator>>, KeyValidator, ValueValidator], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
 }

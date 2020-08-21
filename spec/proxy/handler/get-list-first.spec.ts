@@ -1,4 +1,4 @@
-import GetterHandler from "../../../dist/proxy/handler/getter-list";
+import GetHandler from "../../../dist/proxy/handler/get-list-first";
 import Shuffle from "@dikac/t-array/shuffle";
 
 
@@ -16,7 +16,13 @@ class Getter  {
 }
 
 class Setter  {
-    set data(value) {}
+
+    public value : any
+
+    set data(value) {
+
+        this.value = value;
+    }
 }
 
 class Property {
@@ -42,13 +48,13 @@ describe('direct set', () => {
     let property1 = new Property('property 1');
     let property2 = new Property('property 2');
 
-    let getter = new GetterHandler<Type<string>>([property1, property2]);
+    let getter = new GetHandler([property1, property2]);
     let proxy = new Proxy<Type<string>>(<Type<string>>{}, getter)
 
     it('check value', ()=>{
 
         expect(proxy.data).toBe('property 1');
-        expect(getter.handler['data']).toBe(property1);
+        expect(getter.handle()['data']).toBe(property1);
     });
 
 });
@@ -59,8 +65,8 @@ describe('bind set', () => {
     let property1 = new Property('property 1');
     let property2 = new Property('property 2');
 
-    let getter = new GetterHandler<Type<string>>([property1, property2]);
-    getter.bind(handler);
+    let getter = new GetHandler([property1, property2]);
+    getter.bindTo(handler);
 
     let proxy = new Proxy<Type<string>>(<Type<string>>{}, handler)
 
@@ -69,7 +75,7 @@ describe('bind set', () => {
         it('check & recheck value', () => {
 
             expect(proxy.data).toBe('property 1');
-            expect(getter.handler['data']).toBe(property1);
+            expect(getter.handle()['data']).toBe(property1);
         });
     }
 
@@ -88,7 +94,7 @@ for(let i = 0; i < 5; i++) {
 
         Shuffle(list);
 
-        let getter = new GetterHandler<Type<string>>(list);
+        let getter = new GetHandler(list);
         let proxy = new Proxy<Type<string>>(<Type<string>>{}, getter);
 
         // retest
@@ -101,15 +107,15 @@ for(let i = 0; i < 5; i++) {
 
             it('compare instance', ()=> {
 
-                if(getter.handler['data'] === plain) {
+                if(getter.handle()['data'] === plain) {
 
                     expect(proxy.data).toBe('plain')
 
-                } else if(getter.handler['data'] instanceof Property) {
+                } else if(getter.handle()['data'] instanceof Property) {
 
                     expect(proxy.data).toBe('property')
 
-                } else if(getter.handler['data'] instanceof Getter) {
+                } else if(getter.handle()['data'] instanceof Getter) {
 
                     expect(proxy.data).toBe('getter')
 

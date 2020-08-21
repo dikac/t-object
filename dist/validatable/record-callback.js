@@ -10,12 +10,12 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class RecordCallback {
-        constructor(value, validatorValue, keyValue, handler, validation, message) {
+        constructor(value, validatorValue, keyValue, map, validation, message) {
             this.value = value;
-            this.handler = handler;
+            this.map = map;
             this.validation = validation;
             this.validators = { value: validatorValue, key: keyValue };
-            this.validatables = this.handler(value, keyValue, validatorValue);
+            this.validatables = this.map(value, keyValue, validatorValue);
             this.messages = this.validatables;
             this.validatable = this.validation(this.validatables);
             this.valid = this.validatable.valid;

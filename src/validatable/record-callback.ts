@@ -33,14 +33,14 @@ export default class RecordCallback<
         readonly value: Val,
         validatorValue : ValueValidator,
         keyValue : KeyValidator,
-        public handler : Function<[Record<InferType<KeyValidator>, InferType<ValueValidator>>, KeyValidator, ValueValidator], Result>,
+        public map : Function<[Record<InferType<KeyValidator>, InferType<ValueValidator>>, KeyValidator, ValueValidator], Result>,
         public validation : Function<[Result], ValidatableT>,
         message : Function<[Result], MessageT>,
     ) {
 
         this.validators = {value:validatorValue, key:keyValue};
 
-        this.validatables = this.handler(value, keyValue, validatorValue);
+        this.validatables = this.map(value, keyValue, validatorValue);
         this.messages = this.validatables;
 
         this.validatable = this.validation(this.validatables);
