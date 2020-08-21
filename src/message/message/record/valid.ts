@@ -4,7 +4,7 @@ import Message from "@dikac/t-message/message";
 import RecordInfer from "./infer";
 import PartialUnion from "../../../partial-union";
 import Map from "./map";
-import RemoveUndefined from "../../../remove-undefined";
+import RemoveUndefined from "../../../omit-undefined";
 
 
 export default function Valid<

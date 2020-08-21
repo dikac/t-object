@@ -4,7 +4,6 @@ import StrictOmit from "../dist/strict-omit";
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
 
-
 describe(' compatibility', function () {
 
     let source = {
@@ -20,10 +19,10 @@ describe(' compatibility', function () {
     let omit : globalThis.Omit<typeof source, 'string'|'number'> = result;
     let strictOmit : StrictOmit<typeof source, 'string'|'number'> = result;
 
-    // @ts expect error
+    // @ts-expect-error
     let string : string = result.string;
 
-    // @ts expect error
+    // @ts-expect-error
     let number : number = result.number;
     let boolean : boolean = result.boolean;
     let array : any[] = result.array;
@@ -47,10 +46,10 @@ describe(' test', function () {
     let omit : globalThis.Omit<typeof source, 'string'|'number'> = result;
     let strictOmit : StrictOmit<typeof source, 'string'|'number'> = result;
 
-    // @ts expect error
+    // @ts-expect-error
     expect(result.string).toBe(undefined);
 
-    // @ts expect error
+    // @ts-expect-error
     expect(result.number).toBe(undefined);
 
     expect(result.boolean).toBe(true);
