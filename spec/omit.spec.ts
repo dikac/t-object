@@ -1,76 +1,60 @@
 import Omit from "../dist/omit";
-import {Omit as UtilityTypesOmit} from "utility-types";
-import {Object} from "ts-toolbelt";
+import StrictOmit from "../dist/strict-omit";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
-interface Test {
-
-    string : string;
-    boolean : boolean;
-    number : number;
-}
 
 
-describe('compiler compatibility', function () {
+describe(' compatibility', function () {
 
-    let member : Omit<Test, 'string'>;
-    let members : Omit<Test, 'string'|'boolean'>;
-
-    // @ts-expect-error
-    let nonmember : Omit<Test, 'non'>;
-    // @ts-expect-error
-    let nonmembers : Omit<Test, 'non'|'non2'>;
-
-    let withValue : Omit<Test, 'string'> = {
+    let source = {
+        string : 'string',
+        number : 5,
         boolean : true,
-        number : 1,
+        array : [],
+        object : {},
     }
+
+    let result = Omit(source, 'string', 'number');
+
+    let omit : globalThis.Omit<typeof source, 'string'|'number'> = result;
+    let strictOmit : StrictOmit<typeof source, 'string'|'number'> = result;
+
+    // @ts expect error
+    let string : string = result.string;
+
+    // @ts expect error
+    let number : number = result.number;
+    let boolean : boolean = result.boolean;
+    let array : any[] = result.array;
+    let object : object = result.object;
 
 });
 
-describe('utility types compiler compatibility', function () {
 
-    let member : UtilityTypesOmit<Test, 'string'>;
-    let members : UtilityTypesOmit<Test, 'string'|'boolean'>;
+describe(' test', function () {
 
-    let nonmember : UtilityTypesOmit<Test, 'non'>;
-    let nonmembers : UtilityTypesOmit<Test, 'non'|'non2'>;
-
-    let withValue : UtilityTypesOmit<Test, 'string'> = {
+    let source = {
+        string : 'string',
+        number : 5,
         boolean : true,
-        number : 1,
+        array : [],
+        object : {},
     }
 
-});
+    let result = Omit(source, 'string', 'number');
 
-describe('ts toolbelt compiler compatibility', function () {
+    let omit : globalThis.Omit<typeof source, 'string'|'number'> = result;
+    let strictOmit : StrictOmit<typeof source, 'string'|'number'> = result;
 
-    let member : Object.Omit<Test, 'string'>;
-    let members : Object.Omit<Test, 'string'|'boolean'>;
+    // @ts expect error
+    expect(result.string).toBe(undefined);
 
-    let nonmember : Object.Omit<Test, 'non'>;
-    let nonmembers : Object.Omit<Test, 'non'|'non2'>;
+    // @ts expect error
+    expect(result.number).toBe(undefined);
 
-    let withValue : Object.Omit<Test, 'string'> = {
-        boolean : true,
-        number : 1,
-    }
-
-});
-
-describe('native compiler compatibility', function () {
-
-    let member : globalThis.Omit<Test, 'string'>;
-    let members : globalThis.Omit<Test, 'string'|'boolean'>;
-
-    let nonmember : globalThis.Omit<Test, 'non'>;
-    let nonmembers : globalThis.Omit<Test, 'non'|'non2'>;
-
-    let withValue : globalThis.Omit<Test, 'string'> = {
-        boolean : true,
-        number : 1,
-    }
+    expect(result.boolean).toBe(true);
+    expect(result.array).toEqual([]);
+    expect(result.object).toEqual({});
 
 });
-

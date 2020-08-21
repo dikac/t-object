@@ -1,6 +1,2 @@
-/**
- * Strict Omit
- * native, {@package utility-types}, {@package ts-toolbelt} does not provide strict
- */
-declare type Omit<Object extends object, Key extends keyof Object> = globalThis.Omit<Object, Key>;
-export default Omit;
+import { List } from "ts-toolbelt";
+export default function Omit<ObjectT extends object, Keys extends (keyof ObjectT)[]>(object: ObjectT, ...keys: Keys): Omit<ObjectT, List.UnionOf<Keys>>;
