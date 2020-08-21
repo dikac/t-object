@@ -17,7 +17,7 @@
      *
      * value is from the fist compatible object list
      */
-    class GetterList {
+    class GetListFirst {
         /**
          * @param handlers
          * list of object witch partially compatible
@@ -35,12 +35,16 @@
         reset() {
             this.handler = {};
         }
+        handle() {
+            return Object.assign({}, this.handler);
+        }
         /**
          * set handler to other {@link ProxyHandler<Target>}
          * @param handler
          */
-        bind(handler) {
+        bindTo(handler) {
             handler.get = (target, property, receiver) => this.get(target, property, receiver);
+            return handler;
         }
         /**
          * get the first compatible {@link handlers} property
@@ -63,6 +67,6 @@
             return undefined;
         }
     }
-    exports.default = GetterList;
+    exports.default = GetListFirst;
 });
-//# sourceMappingURL=getter-list.js.map
+//# sourceMappingURL=get-list-first.js.map

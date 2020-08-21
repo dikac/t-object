@@ -11,19 +11,19 @@ export declare type Interface<MessageT, ValidatorsT extends Record<any, Validato
 } & {
     validation: Function<[Result], ValidatableT>;
 } & {
-    handler: Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>;
+    map: Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>;
 } & {
     validators: ValidatorsT;
 };
 export default class ValueCallback<MessageT = unknown, ValidatorsT extends Record<any, Validator> = Record<any, Validator>, Result extends Record<any, Instance> = Record<any, Instance>, ValidatableT extends Validatable = Validatable, ValueT extends RecordBase<ValidatorsT> = RecordBase<ValidatorsT>> implements Interface<MessageT, ValidatorsT, Result, ValidatableT, ValueT> {
     value: ValueT;
     validators: ValidatorsT;
-    handler: Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>;
+    map: Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>;
     validation: Function<[Result], ValidatableT>;
     validatables: Result;
     valid: boolean;
     validatable: ValidatableT;
     message: MessageT;
     messages: Result;
-    constructor(value: ValueT, validators: ValidatorsT, handler: Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
+    constructor(value: ValueT, validators: ValidatorsT, map: Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>, validation: Function<[Result], ValidatableT>, message: Function<[Result], MessageT>);
 }

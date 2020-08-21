@@ -19,7 +19,7 @@ export type Interface<
     ValidatableContainer<ValidatableT> &
     {messages : Result} &
     {validation : Function<[Result], ValidatableT>} &
-    {handler : Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>} &
+    {map : Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>} &
     {validators : ValidatorsT}
 ;
 
@@ -41,12 +41,12 @@ export default class ValueCallback<
     constructor(
         public value: ValueT,
         public validators : ValidatorsT,
-        public handler : Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>,
+        public map : Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>,
         public validation : Function<[Result], ValidatableT>,
         message : Function<[Result], MessageT>,
     ) {
 
-        this.validatables = this.handler(value, this.validators);
+        this.validatables = this.map(value, this.validators);
         this.messages = this.validatables;
 
         this.validatable = this.validation(this.validatables);

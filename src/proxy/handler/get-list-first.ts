@@ -1,5 +1,7 @@
 import Property from "../../property/boolean/property";
 import Readable from "../../property/boolean/readable";
+import {List} from "ts-toolbelt";
+import {Required} from "utility-types";
 
 /**
  * construct or bind {@link ProxyHandler} for property getter from
@@ -7,19 +9,22 @@ import Readable from "../../property/boolean/readable";
  *
  * value is from the fist compatible object list
  */
-export default class GetterList<ObjectT extends object> implements ProxyHandler<ObjectT> {
+export default class GetListFirst<
+    ObjectT extends object,
+    Objects extends object[]
+> implements Required<ProxyHandler<ObjectT>, 'get'>  {
 
     /**
      * mapping for getter handler
      */
-    public handler : {[Key in keyof ObjectT] ?: Partial<ObjectT>} = {};
+    private handler : Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>> = {};
 
     /**
      * @param handlers
      * list of object witch partially compatible
      */
     constructor(
-        public handlers : Partial<ObjectT>[]
+        private handlers : Objects
     ) {
     }
 
@@ -31,13 +36,20 @@ export default class GetterList<ObjectT extends object> implements ProxyHandler<
         this.handler = {};
     }
 
+    handle () : Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>>  {
+
+        return Object.assign({}, this.handler);
+    }
+
     /**
      * set handler to other {@link ProxyHandler<Target>}
      * @param handler
      */
-    bind<Target extends ObjectT>(handler : ProxyHandler<Target>) {
+    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'get'> {
 
         handler.get = (target: ObjectT, property: PropertyKey, receiver: any) => this.get(target, property, receiver);
+
+        return handler as Required<ProxyHandler<Target>, 'get'>;
     }
 
     /**
