@@ -7,7 +7,7 @@ export default class ApplyListFirst<
     Objects extends object[]
 > extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'apply'> {
 
-    private callback ?: Function|null = null;
+    private callback ?: Function|null;
 
 
     reset() {
@@ -35,7 +35,6 @@ export default class ApplyListFirst<
                 throw new Error('Callable is not found')
             }
         }
-
 
         this.callback = null;
 

@@ -12,10 +12,6 @@
     const function_1 = require("@dikac/t-function/boolean/function");
     const multi_handlers_1 = require("./multi-handlers");
     class ApplyListFirst extends multi_handlers_1.default {
-        constructor() {
-            super(...arguments);
-            this.callback = null;
-        }
         reset() {
             this.callback = undefined;
         }
