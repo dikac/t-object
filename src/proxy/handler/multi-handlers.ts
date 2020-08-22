@@ -1,8 +1,3 @@
-import Property from "../../property/boolean/property";
-import Writable from "../../property/boolean/writable";
-import {Required} from "utility-types";
-import IsFunction from "@dikac/t-function/boolean/function";
-import FunctionType from "@dikac/t-function/function";
 import {List} from "ts-toolbelt";
 
 export default class MultiHandlers<

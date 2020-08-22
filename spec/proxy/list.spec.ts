@@ -8,7 +8,6 @@ import {InspectOptions} from "util";
 import {Object} from "ts-toolbelt";
 import GetOwnPropertyDescriptorListAll from "../../dist/proxy/handler/get-own-property-descriptor-list-all";
 import GetPrototypeOfListMerge from "../../dist/proxy/handler/prototype-of-list-merge";
-import Debug from "../../dist/proxy/handler/debug";
 
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});

@@ -1,11 +1,8 @@
 import {Required} from "utility-types";
-import Property from "../../property/boolean/property";
 import IsObject from "../../boolean/object";
 import Getter from "../../descriptor/boolean/getter";
 import Setter from "../../descriptor/boolean/setter";
 import MergeGetterSetter from "../../descriptor/merge-getter-setter";
-import SetterInterface from "../../descriptor/setter";
-import Empty from "../../boolean/empty";
 import MultiHandlers from "./multi-handlers";
 
 export default class PrototypeOfListMerge<

@@ -1,7 +1,7 @@
 import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
-import {List, Union} from "ts-toolbelt";
-import {UnionToIntersection, Unionize, Required} from "utility-types";
+import {List} from "ts-toolbelt";
+import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class SetListAll<

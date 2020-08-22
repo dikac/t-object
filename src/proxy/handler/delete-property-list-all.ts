@@ -1,5 +1,3 @@
-import Property from "../../property/boolean/property";
-import Writable from "../../property/boolean/writable";
 import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
