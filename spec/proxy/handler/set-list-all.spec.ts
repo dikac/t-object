@@ -7,7 +7,7 @@ it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 type Type<Value = any> = {data:Value};
 
 const plain = {
-    value : null,
+    value : 'null',
     set data(value) {
         this.value = value;
     }
@@ -63,8 +63,6 @@ describe('direct set', () => {
             expect(property1.data).toBe('value' + i);
             expect(property2.data).toBe('value' + i);
 
-            expect(handler.handle()['data'][0]).toBe(property1);
-            expect(handler.handle()['data'][1]).toBe(property2);
         }
 
     });
@@ -89,8 +87,6 @@ describe('bind set', () => {
             expect(property1.data).toBe('value' + i);
             expect(property2.data).toBe('value' + i);
 
-            expect(setter.handle()['data'][0]).toBe(property1);
-            expect(setter.handle()['data'][1]).toBe(property2);
         });
     }
 
@@ -123,15 +119,15 @@ for(let i = 0; i < 5; i++) {
 
                     if(object === plain) {
 
-                        expect(proxy.data).toBe('value' + i)
+                        expect(plain.value).toBe('value' + i)
 
                     } else if(object instanceof Property) {
 
-                        expect(proxy.data).toBe('value' + i)
+                        expect(object.data).toBe('value' + i)
 
                     } else if(object instanceof Setter) {
 
-                        expect(proxy.data).toBe('value' + i)
+                        expect(object.value).toBe('value' + i)
 
                     } else {
 

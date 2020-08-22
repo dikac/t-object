@@ -31,7 +31,7 @@ describe(' compatibility', function () {
 });
 
 
-describe(' test', function () {
+it(' test', function () {
 
     let source = {
         string : 'string',

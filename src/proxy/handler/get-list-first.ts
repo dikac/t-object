@@ -2,6 +2,8 @@ import Property from "../../property/boolean/property";
 import Readable from "../../property/boolean/readable";
 import {List} from "ts-toolbelt";
 import {Required} from "utility-types";
+import Function from "@dikac/t-function/boolean/function";
+import MultiHandlers from "./multi-handlers";
 
 /**
  * construct or bind {@link ProxyHandler} for property getter from
@@ -12,21 +14,14 @@ import {Required} from "utility-types";
 export default class GetListFirst<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'get'>  {
+> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'get'>  {
 
     /**
      * mapping for getter handler
      */
     private handler : Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>> = {};
 
-    /**
-     * @param handlers
-     * list of object witch partially compatible
-     */
-    constructor(
-        private handlers : Objects
-    ) {
-    }
+
 
     /**
      * reset cached mapping
@@ -34,11 +29,6 @@ export default class GetListFirst<
     reset() {
 
         this.handler = {};
-    }
-
-    handle () : Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>>  {
-
-        return Object.assign({}, this.handler);
     }
 
     /**
@@ -66,11 +56,20 @@ export default class GetListFirst<
             return this.handler[property][property];
         }
 
-        for (let handler of [target, ...this.handlers]) {
+        for (const handler of this.getHandler(target)) {
 
             if(Readable(handler, property)) {
 
-                this.handler[property] = handler;
+                if(Function(handler[property])) {
+
+                    this.handler[property] = {
+                        [property] : (...argument : any[]) => handler[property](...argument)
+                    }
+
+                } else {
+
+                    this.handler[property] = handler;
+                }
 
                 return handler[property];
             }

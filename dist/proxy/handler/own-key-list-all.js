@@ -4,16 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-array/unique"], factory);
+        define(["require", "exports", "@dikac/t-array/unique", "./multi-handlers"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const unique_1 = require("@dikac/t-array/unique");
-    class OwnKeyListAll {
-        constructor(handlers) {
-            this.handlers = handlers;
-        }
+    const multi_handlers_1 = require("./multi-handlers");
+    class OwnKeyListAll extends multi_handlers_1.default {
         reset() {
             this.keys = undefined;
         }
@@ -26,7 +24,7 @@
                 return this.keys;
             }
             this.keys = [];
-            for (let object of [target, ...this.handlers]) {
+            for (let object of this.getHandler(target)) {
                 this.keys.push(...Object.getOwnPropertySymbols(object));
                 this.keys.push(...Object.getOwnPropertyNames(object));
             }

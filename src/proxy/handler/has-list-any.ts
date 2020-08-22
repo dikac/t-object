@@ -1,18 +1,14 @@
 import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
 import {Required} from "utility-types";
+import MultiHandlers from "./multi-handlers";
 
-export default class SetterList<
+export default class HasListAny<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'has'>  {
+> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'has'>  {
 
     private handler : Partial<Record<keyof ObjectT, boolean>> = {};
-
-    constructor(
-        private handlers : Objects
-    ) {
-    }
 
     reset() {
 
@@ -35,7 +31,7 @@ export default class SetterList<
 
         this.handler[property] = false;
 
-        for (let handler of [target, ...this.handlers]) {
+        for (const handler of this.getHandler(target)) {
 
             if(Property(handler, property)) {
 

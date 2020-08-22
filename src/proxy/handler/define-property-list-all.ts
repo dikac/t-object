@@ -1,16 +1,13 @@
 import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
 import {Required} from "utility-types";
+import MultiHandlers from "./multi-handlers";
 
 export default class DefinePropertyListAll<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'defineProperty'> {
+>  extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'defineProperty'> {
 
-    constructor(
-        public handlers : Objects
-    ) {
-    }
 
     bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'defineProperty'> {
 
@@ -22,7 +19,7 @@ export default class DefinePropertyListAll<
 
         let result : boolean = true;
 
-        for (let object of [target, ...this.handlers]) {
+        for (let object of this.getHandler(target)) {
 
             result = Reflect.defineProperty(object, property , attributes) && result;
         }

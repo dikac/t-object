@@ -4,15 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "./multi-handlers"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class PreventExtensibleListAll {
-        constructor(handlers) {
-            this.handlers = handlers;
-        }
+    const multi_handlers_1 = require("./multi-handlers");
+    class PreventExtensibleListAll extends multi_handlers_1.default {
         reset() {
             this.extensible = undefined;
         }
@@ -22,7 +20,7 @@
         }
         preventExtensions(target) {
             let result = true;
-            for (let object of [target, ...this.handlers]) {
+            for (let object of this.getHandler(target)) {
                 result = Reflect.preventExtensions(object) && result;
             }
             return result;

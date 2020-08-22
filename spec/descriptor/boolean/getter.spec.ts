@@ -19,8 +19,6 @@ describe("getter/setter", function() {
             let prototype = Object.getPrototypeOf(object);
             let descriptor = Object.getOwnPropertyDescriptor(prototype, 'setter');
 
-           // console.log(descriptor);
-
             if(descriptor) {
 
                 expect(Type(descriptor)).toBeFalse();

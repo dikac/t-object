@@ -2,26 +2,19 @@ import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
 import Unique from "@dikac/t-array/unique";
 import {Required} from "utility-types";
+import MultiHandlers from "./multi-handlers";
 
 export default class GetOwnPropertyDescriptorListAll<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'getOwnPropertyDescriptor'> {
+> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'getOwnPropertyDescriptor'> {
 
-
-    public descriptor : Record<PropertyKey, PropertyDescriptor|undefined> = {};
-
-    constructor(
-        public handlers : Objects
-    ) {
-    }
-
+    private descriptor : Record<PropertyKey, PropertyDescriptor|undefined> = {};
 
     reset() {
 
         this.descriptor = {};
     }
-
 
     bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'> {
 
@@ -29,7 +22,6 @@ export default class GetOwnPropertyDescriptorListAll<
 
         return handler as Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'>;
     }
-
 
     getOwnPropertyDescriptor(target: ObjectT, property: PropertyKey) : PropertyDescriptor | undefined {
 
@@ -39,9 +31,9 @@ export default class GetOwnPropertyDescriptorListAll<
             return this.descriptor[property];
         }
 
-        let descriptors : PropertyDescriptor[] = [];
+        const descriptors : PropertyDescriptor[] = [];
 
-        for(const object of [target, ...this.handlers]) {
+        for(const object of this.getHandler(target)) {
 
             const descriptor = Reflect.getOwnPropertyDescriptor(object, property);
 
@@ -65,7 +57,7 @@ export default class GetOwnPropertyDescriptorListAll<
 
             const descriptor : PropertyDescriptor = <PropertyDescriptor> descriptors.shift();
 
-            for (let compare of descriptors) {
+            for (const compare of descriptors) {
 
                 for(const prop of ['configurable', 'enumerable', /*'value',*/ 'writable', 'get', 'set']) {
 

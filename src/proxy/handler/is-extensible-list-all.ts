@@ -2,18 +2,14 @@ import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
 import Unique from "@dikac/t-array/unique";
 import {Required} from "utility-types";
+import MultiHandlers from "./multi-handlers";
 
 export default class IsExtensibleListAll<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'isExtensible'>  {
+> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'isExtensible'>  {
 
     public extensible ?: boolean;
-
-    constructor(
-        public handlers : Objects[]
-    ) {
-    }
 
     reset() {
 
@@ -36,7 +32,7 @@ export default class IsExtensibleListAll<
 
         this.extensible = true;
 
-        for(let object of [target, ...this.handlers]) {
+        for(let object of this.getHandler(target)) {
 
             this.extensible = Object.isExtensible(object) && this.extensible;
         }

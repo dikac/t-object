@@ -1,1 +1,1 @@
-{"version":3,"file":"property.js","sourceRoot":"","sources":["../../../src/property/boolean/property.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;OAEG;IACH,SAAwB,QAAQ,CAAE,MAAe,EAAE,QAAsB;QAEpE,OAAO,QAAQ,IAAI,MAAM,CAAC;IAC/B,CAAC;IAHD,2BAGC"}
+{"version":3,"file":"property.js","sourceRoot":"","sources":["../../../src/property/boolean/property.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;OAEG;IACH,SAAwB,QAAQ,CAI5B,MAAgB,EAChB,QAAc;QAGb,OAAO,QAAQ,IAAI,MAAM,CAAC;IAC/B,CAAC;IATD,2BASC"}

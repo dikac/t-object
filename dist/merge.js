@@ -13,6 +13,7 @@
     const setter_1 = require("./descriptor/boolean/setter");
     const merge_getter_setter_1 = require("./descriptor/merge-getter-setter");
     /**
+     * @deprecated
      * Merge object property, symbol and method, the latter object will replace former
      */
     function Merge(...objects) {

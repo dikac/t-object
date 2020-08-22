@@ -2,19 +2,14 @@ import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
 import Unique from "@dikac/t-array/unique";
 import {Required} from "utility-types";
+import MultiHandlers from "./multi-handlers";
 
 export default class PreventExtensibleListAll<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'preventExtensions'>  {
+> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'preventExtensions'>  {
 
-    public extensible ?: boolean;
-
-    constructor(
-
-        public handlers : Objects
-    ) {
-    }
+    private extensible ?: boolean;
 
     reset() {
 
@@ -28,12 +23,11 @@ export default class PreventExtensibleListAll<
         return handler as Required<ProxyHandler<Target>, 'preventExtensions'>;
     }
 
-
     preventExtensions(target: ObjectT): boolean {
 
         let result : boolean = true;
 
-        for(let object of [target, ...this.handlers]) {
+        for(let object of this.getHandler(target)) {
 
             result = Reflect.preventExtensions(object) && result;
         }

@@ -1,16 +1,12 @@
 import Property from "../../property/boolean/property";
 import Writable from "../../property/boolean/writable";
 import {Required} from "utility-types";
+import MultiHandlers from "./multi-handlers";
 
 export default class DeletePropertyListAll<
     ObjectT extends object,
     Objects extends object[]
-> implements Required<ProxyHandler<ObjectT>, 'deleteProperty'> {
-
-    constructor(
-        public handlers : Objects
-    ) {
-    }
+>  extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'deleteProperty'> {
 
     bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'deleteProperty'> {
 
@@ -22,7 +18,7 @@ export default class DeletePropertyListAll<
 
         let deleted = false;
 
-        for (let handler of [target, ...this.handlers]) {
+        for (let handler of this.getHandler(target)) {
 
             deleted = (delete handler[property]) || deleted;
         }
