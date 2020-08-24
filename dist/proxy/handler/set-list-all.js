@@ -26,17 +26,19 @@
         }
         set(target, property, value, receiver) {
             if (property_1.default(this.settable, property)) {
-                for (let object of this.settable[property]) {
+                let list = this.settable[property];
+                for (let object of list) {
                     object[property] = value;
                 }
-                return this.settable[property].length;
+                return list.length !== 0;
             }
-            this.settable[property] = [];
+            const list = [];
             for (let handler of this.getHandler(target)) {
                 if (writable_1.default(handler, property)) {
-                    this.settable[property].push(handler);
+                    list.push(handler);
                 }
             }
+            this.settable[property] = list;
             return this.set(target, property, value, receiver);
         }
     }

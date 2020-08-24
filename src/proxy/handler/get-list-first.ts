@@ -53,7 +53,7 @@ export default class GetListFirst<
 
         if(Property(this.handler, property)) {
 
-            return this.handler[property][property];
+            return this.handler[<string|number>property][property];
         }
 
         for (const handler of this.getHandler(target)) {
@@ -62,20 +62,20 @@ export default class GetListFirst<
 
                 if(Function(handler[property])) {
 
-                    this.handler[property] = {
+                    (this.handler as Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>>)[<string|number>property] = {
                         [property] : (...argument : any[]) => handler[property](...argument)
                     }
 
                 } else {
 
-                    this.handler[property] = handler;
+                    (this.handler as Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>>)[property] = handler;
                 }
 
                 return handler[property];
             }
         }
 
-        this.handler[property] = {[property]:undefined}
+        (this.handler as Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>>)[property] = {[property]:undefined}
 
         return undefined;
     }

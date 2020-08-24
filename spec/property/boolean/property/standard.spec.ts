@@ -1,4 +1,4 @@
-import Property from "../../../dist/property/boolean/property";
+import Property from "../../../../dist/property/boolean/property";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -50,7 +50,7 @@ it(`not exist`, () => {
 
 it(`symbol`, () => {
 
-    expect(Property(new Map(), Symbol('iterator'))).toBe(false);
+    expect(Property(new Map(), Symbol.iterator)).toBe(true);
 });
 
 

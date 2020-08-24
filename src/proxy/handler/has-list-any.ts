@@ -25,16 +25,16 @@ export default class HasListAny<
 
         if(Property(this.handler, property)) {
 
-            return this.handler[property]
+            return this.handler[<string|number>property]
         }
 
-        this.handler[property] = false;
+        (this.handler as Partial<Record<keyof ObjectT, boolean>>)[<string|number>property] = false;
 
         for (const handler of this.getHandler(target)) {
 
             if(Property(handler, property)) {
 
-                this.handler[property] = true;
+                (this.handler  as Partial<Record<keyof ObjectT, boolean>>)[<string|number>property] = true;
                 break;
             }
         }
@@ -43,3 +43,4 @@ export default class HasListAny<
 
     }
 }
+

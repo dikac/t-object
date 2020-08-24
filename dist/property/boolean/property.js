@@ -9,9 +9,6 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * check if property exists
-     */
     function Property(object, property) {
         return property in object;
     }

@@ -9,7 +9,7 @@ export default class SetListAll<
     Objects extends object[] = object[]
 > extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'set'> {
 
-    private settable : Partial<Record<keyof List.UnionOf<Objects>, Partial<List.UnionOf<Objects>>[]>> = {};
+    private settable : Partial<Record<PropertyKey, Partial<List.UnionOf<Objects>>[]>> = {};
 
     reset() {
 
@@ -27,23 +27,27 @@ export default class SetListAll<
 
         if(Property(this.settable, property)) {
 
-            for(let object of this.settable[property]) {
+            let list = this.settable[<string|number>property] as Partial<List.UnionOf<Objects>>[];
+
+            for(let object of list) {
 
                 object[property] = value;
             }
 
-            return this.settable[property].length;
+            return list.length !== 0;
         }
 
-        this.settable[property] = [];
+        const list : Partial<List.UnionOf<Objects>>[] = [];
 
         for (let handler of this.getHandler(target)) {
 
             if(Writable(handler, property)) {
 
-                this.settable[property].push(handler);
+                list.push(handler);
             }
         }
+
+        (this.settable as Partial<Record<PropertyKey, Partial<List.UnionOf<Objects>>[]>>)[<string|number>property] = list;
 
         return this.set(target, property, value, receiver);
 
