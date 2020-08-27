@@ -17,10 +17,12 @@
      * @param preprocess
      * @constructor
      */
-    function GuardedJson(json, validator, error = (json, object) => new TypeError('json string is not valid according to validator'), preprocess = () => { }) {
+    function GuardedJson(json, validator, error = (json, object) => new TypeError('json string is not valid according to validator'), preprocess) {
         let string = json.toString();
         let object = JSON.parse(string);
-        preprocess(object);
+        if (preprocess) {
+            preprocess(object);
+        }
         if (validator(object)) {
             return object;
         }

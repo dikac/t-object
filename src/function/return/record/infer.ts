@@ -1,10 +1,11 @@
-import Function from "@dikac/t-function/function";
+import Callable from "@dikac/t-function/callable";
+
 
 /**
  * get record of returns from record of function
  */
 
 type Infer<Values extends object> = {
-    [Key in keyof Values]:  Values[Key] extends Function ? ReturnType<Values[Key]> : never
+    [Key in keyof Values]:  Values[Key] extends Callable ? ReturnType<Values[Key]> : never
 }
 export default Infer;

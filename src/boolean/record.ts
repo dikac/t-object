@@ -1,5 +1,3 @@
-import Guard from "@dikac/t-function/boolean/guard";
-
 /**
  * check if {@param object} is certain type of record
  * {@param value} use to validate object value
@@ -9,7 +7,7 @@ export default function Record<
     Value
 >(
     object : object,
-    value : Guard<unknown, Value>,
+    value : (value:unknown)=> value is Value,
 ) : object is Record<PropertyKey, Value>;
 
 export default function Record<
@@ -17,8 +15,8 @@ export default function Record<
     Key extends PropertyKey = PropertyKey
 >(
     object : object,
-    value : Guard<unknown, Value>,
-    property : Guard<PropertyKey, Key>
+    value : (value:unknown)=> value is Value,
+    property : (value:PropertyKey)=> value is Key
 ) : object is Record<Key, Value>;
 
 export default function Record<
@@ -26,8 +24,8 @@ export default function Record<
     Key extends PropertyKey = PropertyKey
 >(
     object : object,
-    value : Guard<unknown, Value>,
-    property ?: Guard<PropertyKey, Key>
+    value : (value:unknown)=> value is Value,
+    property ?: (value:PropertyKey)=> value is Key
 ) : object is Record<Key, Value> {
 
     for(const [prop, val] of Object.entries(object)) {

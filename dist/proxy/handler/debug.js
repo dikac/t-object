@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Debug {
-        constructor(handler = (name, argument) => console.log([name, argument])) {
+        constructor(handler = (name, args) => console.log([name, args])) {
             this.handler = handler;
         }
         getPrototypeOf(target) {

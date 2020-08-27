@@ -1,5 +1,3 @@
-import Function from "@dikac/t-function/function";
-import {O} from "ts-toolbelt";
 import Map from "./map";
 
 /**

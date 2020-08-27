@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function Property(message, property, delimiter = ' : ', conversion = (value) => value.toString()) {
+    function Property(message, property, delimiter = ' : ', conversion = (value) => value + '') {
         let string = property.toString() + delimiter + conversion(message.message);
         return { message: string };
     }

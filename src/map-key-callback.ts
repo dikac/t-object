@@ -1,5 +1,3 @@
-import Function from "@dikac/t-function/function";
-
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
  *
@@ -11,7 +9,7 @@ export default function MapKeyCallback<
     Replace extends PropertyKey = PropertyKey,
 >(
     object : Object,
-    replace : Function<[keyof Object, Object[keyof Object]], Replace>,
+    replace : (key : keyof Object, value : Object[keyof Object])=> Replace,
 ) : Record<Replace, Object[keyof Object]>;
 /**
  * support for partial type
@@ -22,7 +20,7 @@ export default function MapKeyCallback<
     Value = unknown,
 >(
     object : Object,
-    replace : Function<[keyof Object, Value|undefined], Replace>,
+    replace : (key : keyof Object, value : Value|undefined)=> Replace,
 ) : Partial<Record<Replace, Value>>;
 
 export default function MapKeyCallback<
@@ -30,7 +28,7 @@ export default function MapKeyCallback<
     Replace extends PropertyKey = PropertyKey,
 >(
     object : Object,
-    replace : Function<[keyof Object, Object[keyof Object]], Replace>,
+    replace : (key : keyof Object, value : Object[keyof Object])=> Replace,
 ) : Record<Replace, Object[keyof Object]> | Partial<Record<Replace, Object[keyof Object]>> {
 
     let result = {};

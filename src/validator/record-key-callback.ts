@@ -1,7 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
 import SimpleValidator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
-import Function from "@dikac/t-function/function";
 import Message from "@dikac/t-message/message";
 import ValidatableRecordCallback from "../validatable/record-value-callback";
 import Return from "@dikac/t-validator/validatable/simple";
@@ -10,59 +9,59 @@ import Validation from "@dikac/t-validatable/validation/validation";
 import Replace from "@dikac/t-validatable/boolean/replace";
 
 export type Interface<
-    BaseT extends Record<PropertyKey, unknown>,
-    TypeT extends BaseT,
-    ValidatorT extends Validator<keyof BaseT, keyof TypeT>,
+    Base extends Record<PropertyKey, unknown>,
+    Type extends Base,
+    ValidatorType extends Validator<keyof Base, keyof Type>,
     Result extends Record<PropertyKey, Validatable>,
-    ValidatableT extends Validatable,
-    MessageT,
+    ValidatableType extends Validatable,
+    MessageType,
 > = SimpleValidator<
-    BaseT,
-    TypeT,
+    Base,
+    Type,
     ValidatableRecordCallback<
-        MessageT,
-        BaseT,
-        ValidatorT,
+        MessageType,
+        Base,
+        ValidatorType,
         Result,
-        ValidatableT
+        ValidatableType
         >
     > &
-    ValidatorContainer<ValidatorT> &
-    Message<Function<[Result], MessageT>> &
-    Validation<Function<[Result], ValidatableT>>
+    ValidatorContainer<ValidatorType> &
+    Message<(result:Result)=>MessageType> &
+    Validation<(result:Result)=>ValidatableType>
     ;
 
 export default class RecordCallbackClass<
-    BaseT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-    TypeT extends BaseT = BaseT,
-    ValidatorT extends Validator<keyof BaseT, keyof TypeT> = Validator<keyof BaseT, keyof TypeT>,
+    Base extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+    Type extends Base = Base,
+    ValidatorType extends Validator<keyof Base, keyof Type> = Validator<keyof Base, keyof Type>,
     Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
-> implements Interface<BaseT, TypeT, ValidatorT, Result, ValidatableT, MessageT> {
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown,
+> implements Interface<Base, Type, ValidatorType, Result, ValidatableType, MessageType> {
 
     constructor(
-        public validator : ValidatorT,
-        public handler : Function<[BaseT, ValidatorT], Result>,
-        public validation : Function<[Result], ValidatableT>,
-        public message : Function<[Result], MessageT>
+        public validator : ValidatorType,
+        public handler : (base:Base, validator:ValidatorType)=>Result,
+        public validation : (result:Result)=>ValidatableType,
+        public message : (result:Result)=>MessageType
     ) {
     }
 
-    validate<Argument extends TypeT>(
+    validate<Argument extends Type>(
         argument: Argument
-    ) : Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>
+    ) : Replace<ValidatableRecordCallback<MessageType, Argument, ValidatorType, Result, ValidatableType>, true>
 
-    validate<Argument extends BaseT>(
+    validate<Argument extends Base>(
         argument: Argument
-    ) : Return<BaseT, Argument, TypeT, ValidatableRecordCallback<MessageT, BaseT, ValidatorT, Result, ValidatableT>>
+    ) : Return<Base, Argument, Type, ValidatableRecordCallback<MessageType, Base, ValidatorType, Result, ValidatableType>>
 
-    validate<Argument extends BaseT>(
+    validate<Argument extends Base>(
         argument: Argument
     ) {
 
         return new ValidatableRecordCallback(argument, this.validator, this.handler, this.validation, this.message) as
-            Return<BaseT, Argument, TypeT, ValidatableRecordCallback<MessageT, BaseT, ValidatorT, Result, ValidatableT>>;
+            Return<Base, Argument, Type, ValidatableRecordCallback<MessageType, Base, ValidatorType, Result, ValidatableType>>;
     }
 }
 

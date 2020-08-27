@@ -1,6 +1,5 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import Function from "@dikac/t-function/function";
 import {O} from "ts-toolbelt";
 import ReturnInfer from "@dikac/t-validator/validatable/infer";
 import ValidateRecordKeyPartial from "./validatable/record/record-key-partial";
@@ -15,8 +14,8 @@ export default function RecordKeyPartial<
     MessageT = unknown,
 >(
     validator : ValidatorT,
-    validation : Function<[Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>], ValidatableT>,
-    message : Function<[Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>], MessageT>,
+    validation : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>)=>ValidatableT,
+    message : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>)=>MessageT,
 ) : Interface<BaseT, TypeT, ValidatorT, Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>, ValidatableT, MessageT> {
 
     return new RecordKeyCallback(

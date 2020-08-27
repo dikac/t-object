@@ -1,10 +1,9 @@
-import Function from "@dikac/t-function/function";
 
 
 export default  class Debug<ObjectT extends object> implements Required<ProxyHandler<ObjectT>> {
 
     constructor(
-        public  handler : Function<[string, any[]]> = (name : string, argument : any[]) => console.log([name, argument])
+        public  handler :(handler:string, args:any[])=>void = (name : string, args : any[]) => console.log([name, args])
     ) {
     }
 

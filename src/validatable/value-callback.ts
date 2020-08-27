@@ -2,7 +2,6 @@ import Validator from "@dikac/t-validator/validator";
 import ValidatorValidatable from "@dikac/t-validator/validatable/validatable";
 import Validatable from "@dikac/t-validatable/validatable";
 import Value from "@dikac/t-value/value";
-import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import Messages from "../message/messages/messages";
@@ -32,9 +31,9 @@ export default class ValueCallback<
     constructor(
         readonly value: ValueT,
         readonly validators : RecordT,
-        readonly map : Function<[ValueT, RecordT], Result>,
-        readonly validation : Function<[Result], ValidatableT>,
-        readonly messageFactory : Function<[Result], MessageT>,
+        readonly map : (value:ValueT, validator:RecordT)=>Result,
+        readonly validation : (result:Result)=>ValidatableT,
+        readonly messageFactory : (result:Result)=>MessageT,
     ) {
 
     }

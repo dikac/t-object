@@ -1,7 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import Value from "@dikac/t-value/value";
-import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
@@ -28,9 +27,9 @@ export default class RecordCallback<
     constructor(
         readonly value: ValueT,
         readonly validator : ValidatorT,
-        public map : Function<[ValueT, ValidatorT], Result>,
-        public validation : Function<[Result], ValidatableT>,
-        message : Function<[Result], MessageT>,
+        public map : (value:ValueT, validators:ValidatorT)=>Result,
+        public validation : (result:Result)=>ValidatableT,
+        message : (result:Result)=>MessageT,
     ) {
 
         this.validatables = this.map(value, validator);

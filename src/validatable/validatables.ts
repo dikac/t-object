@@ -1,6 +1,5 @@
 import Validatable from "@dikac/t-validatable/validatable";
 import ValidatablesInterface from "./validatables/validatables";
-import FunctionSingle from "@dikac/t-function/function-single";
 
 export default class Validatables<
     RecordT extends Record<PropertyKey, Validatable>  = Record<PropertyKey, Validatable>,
@@ -12,7 +11,7 @@ export default class Validatables<
 
     constructor(
         public validatables : RecordT,
-        public validation : FunctionSingle<RecordT, Boolean>
+        public validation : (value:RecordT)=>Boolean
     ) {
     }
 

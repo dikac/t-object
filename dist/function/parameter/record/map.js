@@ -1,3 +1,6 @@
+/**
+ * map record of parameters {@link any[]} to record of function with the same parameter
+ */
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);

@@ -1,3 +1,7 @@
+/**
+ * check if {@param object} is certain type of record
+ * {@param value} use to validate object value
+ */
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);

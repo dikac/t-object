@@ -3,8 +3,6 @@ import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import Validation from "@dikac/t-validatable/validation/validation";
 import RecordParameter from "./base/record/infer";
-import FunctionS from "@dikac/t-function/function-single";
-import Function from "@dikac/t-function/function";
 import Validators from "./validators/validators";
 import Message from "@dikac/t-message/message";
 import ValidatableMapCallback, {Interface as ValidatableMapCallbackInterface} from "../validatable/map-callback";
@@ -25,10 +23,10 @@ export type Interface<
         RecordType<Container>,
         ValidatableMapCallbackInterface<MessageT, Container, Result, ValidatableT, RecordBase<Container>>
     > &
-    Validation<FunctionS<Result, ValidatableT>> &
+    Validation<(result:Result)=>ValidatableT> &
     Validators<Container> &
-    Message<FunctionS<Result, MessageT>> &
-    {map : Function<[RecordParameter<Container>, Container], Result>}
+    Message<(result:Result)=>MessageT> &
+    {map : (record:RecordParameter<Container>, Container)=>Result}
 
 export default class MapCallback<
     Container extends Record<any, Validator> = Record<PropertyKey, Validator>,
@@ -38,9 +36,9 @@ export default class MapCallback<
 > implements Interface <Container, Result, ValidatableT, MessageT> {
     constructor(
         public validators : Container,
-        public map : Function<[RecordParameter<Container>, Container], Result>,
-        public validation : FunctionS<Result, ValidatableT>,
-        public message : FunctionS<Result, MessageT>
+        public map : (record:RecordParameter<Container>, Container)=>Result,
+        public validation : (result:Result)=>ValidatableT,
+        public message : (result:Result)=>MessageT
     ) {
     }
 

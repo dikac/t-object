@@ -1,7 +1,6 @@
-import Function from "@dikac/t-function/function";
 export default class Debug<ObjectT extends object> implements Required<ProxyHandler<ObjectT>> {
-    handler: Function<[string, any[]]>;
-    constructor(handler?: Function<[string, any[]]>);
+    handler: (handler: string, args: any[]) => void;
+    constructor(handler?: (handler: string, args: any[]) => void);
     getPrototypeOf(target: ObjectT): object | null;
     setPrototypeOf(target: ObjectT, v: any): boolean;
     apply(target: ObjectT, thisArg: any, argArray: any): any;

@@ -1,6 +1,5 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import Function from "@dikac/t-function/function";
 import {O} from "ts-toolbelt";
 import ReturnInfer from "@dikac/t-validator/validatable/infer";
 import ValidateRecordKey from "./validatable/record/record-key";
@@ -14,8 +13,8 @@ export default function RecordKey<
     MessageT = unknown,
 >(
     validator : ValidatorT,
-    validation : Function<[Record<PropertyKey, ReturnInfer<ValidatorT>>], ValidatableT>,
-    message : Function<[Record<PropertyKey, ReturnInfer<ValidatorT>>], MessageT>,
+    validation : (record:Record<PropertyKey, ReturnInfer<ValidatorT>>)=>ValidatableT,
+    message : (record:Record<PropertyKey, ReturnInfer<ValidatorT>>)=>MessageT,
 ) : Interface<BaseT, TypeT, ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> {
 
     return new RecordKeyCallback(

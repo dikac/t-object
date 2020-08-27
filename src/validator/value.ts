@@ -1,6 +1,5 @@
 import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
-import Function from "@dikac/t-function/function";
 import ValidateValue from "./validatable/record/value";
 import MapReturn from "./validatable/record/infer";
 import ValueCallback, {Interface} from "./value-callback";
@@ -13,8 +12,8 @@ export default function Value<
     ValidatableT extends Validatable = Validatable
 >(
     validators : Container,
-    validation : Function<[MapReturn<Container>], ValidatableT>,
-    message : Function<[MapReturn<Container>], MessageT>,
+    validation : (result:MapReturn<Container>) => ValidatableT,
+    message : (result:MapReturn<Container>) => MessageT,
 
 ) : Interface<BaseT, ValueT, MessageT, Container, MapReturn<Container>, ValidatableT> {
 

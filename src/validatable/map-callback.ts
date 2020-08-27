@@ -1,7 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import ValidatableContainer from "@dikac/t-validatable/validatable/validatable";
-import Function from "@dikac/t-function/function";
 import Validatables from "./validatables/validatables";
 import RecordParameter from "../validator/base/record/infer";
 import RecordBase from "../validator/base/record/infer";
@@ -18,8 +17,8 @@ export type Interface<
     Validatables<Result> &
     ValidatableContainer<ValidatableT> &
     {messages : Result} &
-    {validation : Function<[Result], ValidatableT>} &
-    {map : Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>} &
+    {validation : (result:Result)=>ValidatableT} &
+    {map : (values : RecordParameter<ValidatorsT>, validators : ValidatorsT)=>Result} &
     {validators : ValidatorsT}
 ;
 
@@ -41,9 +40,9 @@ export default class ValueCallback<
     constructor(
         public value: ValueT,
         public validators : ValidatorsT,
-        public map : Function<[RecordParameter<ValidatorsT>, ValidatorsT], Result>,
-        public validation : Function<[Result], ValidatableT>,
-        message : Function<[Result], MessageT>,
+        public map : (values : RecordParameter<ValidatorsT>, validators : ValidatorsT)=>Result,
+        public validation : (result : Result)=>ValidatableT,
+        message : (result : Result)=>MessageT,
     ) {
 
         this.validatables = this.map(value, this.validators);
