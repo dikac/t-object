@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
-     * set return from {@param factory} to getter for {@param object}
+     * set {@param value} for getter value for {@param object}
      * should be used inside getter callback
      *
      * @param object
@@ -18,15 +18,17 @@
      * @param property
      * getter key
      *
-     * @param factory
+     * @param value
+     * value tobe memoized
+     *
+     * @param configurable {@default true}
      */
-    function MemoizeGetter(object, property, factory) {
-        const value = factory();
+    function MemoizeGetter(object, property, value, configurable = true) {
         return Object.defineProperty(object, property, {
             get() {
                 return value;
             },
-            configurable: true
+            configurable: configurable
         })[property];
     }
     exports.default = MemoizeGetter;

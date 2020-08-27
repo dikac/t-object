@@ -8,7 +8,7 @@ describe('plain', () => {
 
         get data ()  {
 
-            return MemoizeGetter(this, 'data', () =>'string');
+            return MemoizeGetter(this, 'data', 'string');
         }
     }
 
@@ -23,7 +23,7 @@ describe('different type', () => {
         get data () : number {
 
         // @ts-expect-error
-            return MemoizeGetter(this, 'data', () =>'string');
+            return MemoizeGetter(this, 'data', 'string');
         }
     }
     // @ts-expect-error
@@ -43,7 +43,7 @@ describe('class', () => {
 
             get data ()  {
 
-                return MemoizeGetter(this, 'data', () =>'string');
+                return MemoizeGetter(this, 'data', 'string');
             }
         }
 
@@ -58,7 +58,7 @@ describe('class', () => {
 
             get data ()  {
 
-                return MemoizeGetter(this, 'data', () =>'string');
+                return MemoizeGetter(this, 'data', 'string');
             }
         }
 
@@ -77,7 +77,7 @@ describe('not exists', () => {
             get data ()  {
 
                 // @ts-expect-error
-                return MemoizeGetter(object, 'c', () =>'string');
+                return MemoizeGetter(object, 'c', 'string');
             }
         }
 
@@ -91,7 +91,7 @@ describe('not exists', () => {
 
             get data ()  {
 
-                return MemoizeGetter(this, 'c', () =>'string');
+                return MemoizeGetter(this, 'c', 'string');
             }
         }
 

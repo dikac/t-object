@@ -4,6 +4,7 @@ import Value from "@dikac/t-value/value";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
+import MemoizeGetter from "../value/value/memoize-getter";
 
 export default class RecordCallback<
     MessageT = unknown,
@@ -18,25 +19,32 @@ export default class RecordCallback<
     Message<MessageT>
 {
 
+
     readonly validatables : Result;
     readonly valid : boolean;
     readonly validatable : ValidatableT;
-    readonly message : MessageT;
     readonly messages : Result;
+    private messageFactory : (result:Result)=>MessageT
 
     constructor(
         readonly value: ValueT,
         readonly validator : ValidatorT,
-        public map : (value:ValueT, validators:ValidatorT)=>Result,
-        public validation : (result:Result)=>ValidatableT,
+        map : (value:ValueT, validators:ValidatorT)=>Result,
+        validation : (result:Result)=>ValidatableT,
         message : (result:Result)=>MessageT,
     ) {
 
-        this.validatables = this.map(value, validator);
+        this.messageFactory = message;
+
+        this.validatables = map(value, validator);
         this.messages = this.validatables;
 
-        this.validatable = this.validation(this.validatables);
+        this.validatable = validation(this.validatables);
         this.valid = this.validatable.valid;
-        this.message = message(this.validatables);
+    }
+
+    get message() : MessageT {
+
+        return MemoizeGetter(this, 'message', this.messageFactory(this.validatables));
     }
 }

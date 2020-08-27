@@ -10,10 +10,8 @@ describe('plain', () => {
 
         get data ()  {
 
-            return MemoizeGetter(this, 'data', () =>{
-                called++;
-                return Math.random().toString();
-            });
+            called++;
+            return MemoizeGetter(this, 'data', Math.random().toString());
         }
     }
 
@@ -54,10 +52,8 @@ describe('class', () => {
 
         get data ()  {
 
-            return MemoizeGetter(this, 'data', () =>{
-                called++;
-                return Math.random().toString();
-            });
+            called++;
+            return MemoizeGetter(this, 'data', Math.random().toString());
         }
     }
 

@@ -5,6 +5,7 @@ import Value from "@dikac/t-value/value";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import Messages from "../message/messages/messages";
+import MemoizeGetter from "../value/value/memoize-getter";
 
 export type Interface<
     ValueT,
@@ -45,13 +46,7 @@ export default class ValueCallback<
 
     get validatable () : ValidatableT {
 
-        const validatable = this.validation(this.validatables);
-
-        return Object.defineProperty(this, 'validatable', {
-            get() {
-                return validatable;
-            }
-        }).validatable;
+        return  MemoizeGetter(this, 'validatable', this.validation(this.validatables));
     }
 
     get messages() : Result {
@@ -61,24 +56,12 @@ export default class ValueCallback<
 
     get validatables() : Result {
 
-        const validatables = this.map(this.value, this.validators);
-
-        return Object.defineProperty(this, 'validatables', {
-            get() {
-                return validatables;
-            }
-        }).validatables;
+        return  MemoizeGetter(this, 'validatables', this.map(this.value, this.validators));
     }
 
     get message() : MessageT {
 
-        const message = this.messageFactory(this.validatables);
-
-        return Object.defineProperty(this, 'message', {
-            get() {
-                return message;
-            }
-        }).message;
+        return  MemoizeGetter(this, 'message', this.messageFactory(this.validatables));
 
     }
 }

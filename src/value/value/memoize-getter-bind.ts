@@ -44,7 +44,7 @@ export default function MemoizeGetterBind<
     return Object.defineProperty(object, property, {
         configurable : true,
         get() {
-            return MemoizeGetter(object, <keyof This>property, factory);
+            return MemoizeGetter(object, <keyof This>property, factory());
         }
     });
 }

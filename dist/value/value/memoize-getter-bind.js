@@ -14,7 +14,7 @@
         return Object.defineProperty(object, property, {
             configurable: true,
             get() {
-                return memoize_getter_1.default(object, property, factory);
+                return memoize_getter_1.default(object, property, factory());
             }
         });
     }

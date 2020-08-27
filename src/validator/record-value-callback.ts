@@ -47,7 +47,8 @@ export default class RecordValueCallback<
 
     validate<Argument extends Record<PropertyKey, InferBase<ValidatorT>>>(argument: Argument) {
 
-        return new ValidatableRecordCallback(argument, this.validator, this.handler, this.validation, this.message);
+        return <Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>>
+            new ValidatableRecordCallback(argument, this.validator, this.handler, this.validation, this.message);
     }
 }
 

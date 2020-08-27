@@ -6,7 +6,6 @@ import NotEmptyArgument from "../boolean/not-empty";
 export default class NotEmpty<ValueT extends object, MessageT>
     implements
         Readonly<Value<ValueT> & Message<MessageT> & Validatable>
-
 {
     readonly valid : boolean;
 
