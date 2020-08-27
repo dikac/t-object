@@ -5,8 +5,8 @@ import Function from "@dikac/t-function/function";
  * {@template Replace} type of replace result
  *
  */
-export default function MapKeyCallback<Object extends Record<PropertyKey, Value>, Replace extends PropertyKey = PropertyKey, Value = unknown>(object: Object, replace: Function<[keyof Object, Value], Replace>): Record<Replace, Value>;
+export default function MapKeyCallback<Object extends object, Replace extends PropertyKey = PropertyKey>(object: Object, replace: Function<[keyof Object, Object[keyof Object]], Replace>): Record<Replace, Object[keyof Object]>;
 /**
  * support for partial type
  */
-export default function MapKeyCallback<Object extends Partial<Record<PropertyKey, Value>>, Replace extends PropertyKey = PropertyKey, Value = unknown>(object: Object, replace: Function<[keyof Object, Value | undefined], Replace>): Partial<Record<Replace, Value>>;
+export default function MapKeyCallback<Object extends Partial<object>, Replace extends PropertyKey = PropertyKey, Value = unknown>(object: Object, replace: Function<[keyof Object, Value | undefined], Replace>): Partial<Record<Replace, Value>>;
