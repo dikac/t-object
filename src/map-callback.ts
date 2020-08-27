@@ -1,5 +1,6 @@
 import Function from "@dikac/t-function/function";
 import {O} from "ts-toolbelt";
+import Map from "./map";
 
 /**
  * Calls {@param replace} on each property value from {@param object} recursively
@@ -8,31 +9,30 @@ import {O} from "ts-toolbelt";
  *
  */
 export default function MapCallback<
-    Object extends Record<PropertyKey, Value>,
-    Value = unknown,
+    Object extends Record<PropertyKey, unknown>,
     Replace = unknown
 >(
     object : Object,
-    replace : Function<[Value, keyof Object], Replace>,
-) : O.Replace<Object, Value, Replace>;
+    replace : (value : Object[keyof Object], key : keyof Object) => Replace,
+) : Map<Object, Replace>;
+/**
+ * support for partial type
+ */
+export default function MapCallback<
+    Object extends Partial<Record<PropertyKey, unknown>>,
+    Replace = unknown
+>(
+    object : Object,
+    replace : (value : Object[keyof Object]|undefined, key : keyof Object) => Replace,
+) : Partial<Map<Object, Replace>>;
 
 export default function MapCallback<
-    Object extends Partial<Record<PropertyKey, Value>>,
-    Value = unknown,
+    Object extends Record<PropertyKey, unknown>,
     Replace = unknown
 >(
     object : Object,
-    replace : Function<[Value|undefined, keyof Object], Replace>,
-) : Partial<O.Replace<Object, Value, Replace>>;
-
-export default function MapCallback<
-    Object extends Record<PropertyKey, Value>,
-    Value = unknown,
-    Replace = unknown
->(
-    object : Object,
-    replace : Function<[Value, keyof Object], Replace>,
-) : O.Replace<Object, Value, Replace> | Partial<O.Replace<Object, Value, Replace>> {
+    replace : (value : Object[keyof Object], key : keyof Object) => Replace,
+) : Map<Object, Replace> | Partial<Map<Object, Replace>> {
 
     let result = {};
 
@@ -43,6 +43,6 @@ export default function MapCallback<
         result[<PropertyKey>property] = replace(value, property);
     }
 
-    return <O.Replace<Object, Value, Replace>> result;
+    return <Map<Object, Replace>> result;
 }
 

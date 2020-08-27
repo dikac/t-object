@@ -2,8 +2,6 @@ import AssignUndefined from "../dist/assign-undefined";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
-
-
 describe('destination undefined', () => {
 
     let target = {

@@ -91,7 +91,7 @@ let data = {
 
 describe('implicit', function () {
 
-    let result = Map<typeof data, any, string>(data,  (v:any) => 'data');
+    let result = Map<typeof data, string>(data,  (v:any) => 'data');
 
     it(`check value`, () => {
 
