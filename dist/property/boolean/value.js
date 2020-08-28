@@ -1,3 +1,7 @@
+/**
+ * check if property {@param property} in {@param object} type is {@template Type}
+ * {@param validation} is use for validate value type
+ */
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);

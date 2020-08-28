@@ -5,7 +5,6 @@ import BaseValue from "@dikac/t-value/value";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import Messages from "../message/messages/messages";
-import MemoizeGetter from "../value/value/memoize-getter";
 
 export default interface Value <
     ValueT,

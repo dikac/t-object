@@ -1,7 +1,3 @@
-import {Required} from "utility-types";
-import {O} from "ts-toolbelt";
-import Replace from "../../replace";
-
 /**
  * check if property {@param property} in {@param object} type is {@template Type}
  * {@param validation} is use for validate value type
