@@ -9,6 +9,17 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * implementation of {@link globalThis.Omit}
+     *
+     * get new object from {@param object} except key in {@param keys}
+     *
+     * @param object
+     * source
+     *
+     * @param keys
+     * key for exclusion
+     */
     function Omit(object, ...keys) {
         let result = {};
         for (let [property, value] of Object.entries(object)) {

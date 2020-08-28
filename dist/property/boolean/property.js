@@ -10,6 +10,10 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const symbol_1 = require("../../symbol/boolean/symbol");
+    /**
+     * check if {@param value} is valid object key/property
+     * @param value
+     */
     function Property(value) {
         switch (typeof value) {
             case "number":

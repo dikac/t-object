@@ -1,3 +1,6 @@
+/**
+ * Replace {@template Object} value with {@template Replace} at {@template Property}
+ */
 type Replace<
     Object extends any,
     Property extends keyof Object,
