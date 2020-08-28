@@ -1,8 +1,8 @@
 import { Required } from "utility-types";
 import MultiHandlers from "./multi-handlers";
-export default class GetOwnPropertyDescriptorListAll<ObjectT extends object, Objects extends object[]> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'getOwnPropertyDescriptor'> {
+export default class GetOwnPropertyDescriptorListAll<Target extends object, Objects extends object[]> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'> {
     private descriptor;
     reset(): void;
-    bindTo<Target extends ObjectT>(handler: ProxyHandler<Target>): Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'>;
-    getOwnPropertyDescriptor(target: ObjectT, property: PropertyKey): PropertyDescriptor | undefined;
+    bindTo<Argument extends Target>(handler: ProxyHandler<Argument>): Required<ProxyHandler<Argument>, 'getOwnPropertyDescriptor'>;
+    getOwnPropertyDescriptor(target: Target, property: PropertyKey): PropertyDescriptor | undefined;
 }

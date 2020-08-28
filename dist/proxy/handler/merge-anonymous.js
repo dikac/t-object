@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../property/boolean/property"], factory);
+        define(["require", "exports", "../../property/boolean/exists"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_1 = require("../../property/boolean/property");
+    const exists_1 = require("../../property/boolean/exists");
     function MergeAnonymous(...handlers) {
         let result = {};
         const properties = [
@@ -18,7 +18,7 @@
         ];
         for (let handler of handlers) {
             for (let property of properties) {
-                if (property_1.default(handler, property)) {
+                if (exists_1.default(handler, property)) {
                     result[property] = (...argument) => handler[property](...argument);
                 }
             }

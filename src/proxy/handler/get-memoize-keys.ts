@@ -4,8 +4,8 @@ import {Required} from "utility-types";
  * memoize {@template ObjectT} value from keys list
  */
 export default class GetMemoizeKeys<
-    ObjectT extends object
-> implements Required<ProxyHandler<ObjectT>, 'get'>  {
+    Target extends object
+> implements Required<ProxyHandler<Target>, 'get'>  {
 
     /**
      * mapping for memoized result
@@ -41,17 +41,17 @@ export default class GetMemoizeKeys<
     }
 
     /**
-     * set handler to other {@link ProxyHandler<Target>}
+     * set handler to other {@link ProxyHandler<Argument>}
      * @param handler
      */
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'get'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'get'> {
 
-        handler.get = (target: ObjectT, property: PropertyKey, receiver: any) => this.get(target, property, receiver);
+        handler.get = (target: Target, property: PropertyKey, receiver: any) => this.get(target, property, receiver);
 
-        return handler as Required<ProxyHandler<Target>, 'get'>;
+        return handler as Required<ProxyHandler<Argument>, 'get'>;
     }
 
-    get(target: ObjectT, property: PropertyKey, receiver: any): any {
+    get(target: Target, property: PropertyKey, receiver: any): any {
 
         if(this.keys.includes(property)) {
 

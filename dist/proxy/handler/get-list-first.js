@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../property/boolean/property", "../../property/boolean/readable", "@dikac/t-function/boolean/function", "./multi-handlers"], factory);
+        define(["require", "exports", "../../property/boolean/exists", "../../property/boolean/readable", "@dikac/t-function/boolean/function", "./multi-handlers"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_1 = require("../../property/boolean/property");
+    const exists_1 = require("../../property/boolean/exists");
     const readable_1 = require("../../property/boolean/readable");
     const function_1 = require("@dikac/t-function/boolean/function");
     const multi_handlers_1 = require("./multi-handlers");
@@ -34,7 +34,7 @@
             this.handler = {};
         }
         /**
-         * set handler to other {@link ProxyHandler<Target>}
+         * set handler to other {@link ProxyHandler<Argument>}
          * @param handler
          */
         bindTo(handler) {
@@ -49,7 +49,7 @@
          * @param receiver
          */
         get(target, property, receiver) {
-            if (property_1.default(this.handler, property)) {
+            if (exists_1.default(this.handler, property)) {
                 return this.handler[property][property];
             }
             for (const handler of this.getHandler(target)) {

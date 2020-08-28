@@ -2,18 +2,18 @@ import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class DefinePropertyListAll<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
->  extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'defineProperty'> {
+>  extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'defineProperty'> {
 
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'defineProperty'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'defineProperty'> {
 
-        handler.defineProperty = (target: ObjectT, property: PropertyKey, attributes: PropertyDescriptor) => this.defineProperty(target, property, attributes);
-        return handler as Required<ProxyHandler<Target>, 'defineProperty'>;
+        handler.defineProperty = (target: Target, property: PropertyKey, attributes: PropertyDescriptor) => this.defineProperty(target, property, attributes);
+        return handler as Required<ProxyHandler<Argument>, 'defineProperty'>;
     }
 
-    defineProperty(target: ObjectT, property: PropertyKey, attributes: PropertyDescriptor): boolean {
+    defineProperty(target: Target, property: PropertyKey, attributes: PropertyDescriptor): boolean {
 
         let result : boolean = true;
 

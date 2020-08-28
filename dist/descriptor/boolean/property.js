@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../property/boolean/property", "@dikac/t-boolean/boolean"], factory);
+        define(["require", "exports", "../../property/boolean/exists", "@dikac/t-boolean/boolean"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_1 = require("../../property/boolean/property");
+    const exists_1 = require("../../property/boolean/exists");
     const boolean_1 = require("@dikac/t-boolean/boolean");
     function Property(value) {
         if (!boolean_1.default(value.enumerable)) {
@@ -21,7 +21,7 @@
         if (value.writable !== true) {
             return false;
         }
-        if (!property_1.default(value, 'value')) {
+        if (!exists_1.default(value, 'value')) {
             return false;
         }
         return true;

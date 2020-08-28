@@ -39,7 +39,7 @@
             this.memoize.clear();
         }
         /**
-         * set handler to other {@link ProxyHandler<Target>}
+         * set handler to other {@link ProxyHandler<Argument>}
          * @param handler
          */
         bindTo(handler) {

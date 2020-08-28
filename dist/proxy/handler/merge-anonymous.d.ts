@@ -1,2 +1,2 @@
 import Merge from "@dikac/t-array/merge";
-export default function MergeAnonymous<ObjectT extends object, Handlers extends ProxyHandler<ObjectT>[]>(...handlers: Handlers): Merge<Handlers>;
+export default function MergeAnonymous<Target extends object, Handlers extends ProxyHandler<Target>[]>(...handlers: Handlers): Merge<Handlers>;

@@ -3,9 +3,9 @@ import IsFunction from "@dikac/t-function/boolean/function";
 import MultiHandlers from "./multi-handlers";
 
 export default class ApplyListFirst<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'apply'> {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'apply'> {
 
     private callback ?: Function|null;
 
@@ -15,14 +15,14 @@ export default class ApplyListFirst<
         this.callback = undefined;
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'apply'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'apply'> {
 
-        handler.apply = (target: ObjectT, thisArg: any, argArray ?: any) => this.apply(target, thisArg, argArray);
+        handler.apply = (target: Target, thisArg: any, argArray ?: any) => this.apply(target, thisArg, argArray);
 
-        return handler as Required<ProxyHandler<Target>, 'apply'>;
+        return handler as Required<ProxyHandler<Argument>, 'apply'>;
     }
 
-    apply(target: ObjectT, thisArg: any, argArray ?: any) : any {
+    apply(target: Target, thisArg: any, argArray ?: any) : any {
 
         if(this.callback !== undefined) {
 

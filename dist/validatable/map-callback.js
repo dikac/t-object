@@ -4,24 +4,26 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "../value/value/memoize-getter"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class ValueCallback {
+    const memoize_getter_1 = require("../value/value/memoize-getter");
+    class MapCallback {
         constructor(value, validators, map, validation, message) {
             this.value = value;
             this.validators = validators;
-            this.map = map;
-            this.validation = validation;
-            this.validatables = this.map(value, this.validators);
+            this.validatables = map(value, this.validators);
             this.messages = this.validatables;
-            this.validatable = this.validation(this.validatables);
+            this.validatable = validation(this.validatables);
             this.valid = this.validatable.valid;
-            this.message = message(this.validatables);
+            this.messageFactory = message;
+        }
+        get message() {
+            return memoize_getter_1.default(this, 'message', this.messageFactory(this.validatables));
         }
     }
-    exports.default = ValueCallback;
+    exports.default = MapCallback;
 });
 //# sourceMappingURL=map-callback.js.map

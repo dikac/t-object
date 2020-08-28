@@ -1,9 +1,9 @@
 import Merge from "@dikac/t-array/merge";
-import Property from "../../property/boolean/property";
+import Exists from "../../property/boolean/exists";
 
 export default function MergeAnonymous<
-    ObjectT extends object,
-    Handlers extends ProxyHandler<ObjectT>[]
+    Target extends object,
+    Handlers extends ProxyHandler<Target>[]
 >(... handlers : Handlers) : Merge<Handlers>  {
 
     let result : Merge<Handlers> = <Merge<Handlers>>{};
@@ -17,7 +17,7 @@ export default function MergeAnonymous<
 
         for(let property of properties) {
 
-            if(Property(handler, property)) {
+            if(Exists(handler, property)) {
 
                 result[property] = (... argument : any[]) => handler[property](...argument);
             }

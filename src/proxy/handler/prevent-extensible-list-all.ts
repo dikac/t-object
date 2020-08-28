@@ -2,9 +2,9 @@ import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class PreventExtensibleListAll<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'preventExtensions'>  {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'preventExtensions'>  {
 
     private extensible ?: boolean;
 
@@ -13,14 +13,14 @@ export default class PreventExtensibleListAll<
         this.extensible = undefined;
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'preventExtensions'>  {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'preventExtensions'>  {
 
-        handler.preventExtensions = (target: ObjectT) => this.preventExtensions(target);
+        handler.preventExtensions = (target: Target) => this.preventExtensions(target);
 
-        return handler as Required<ProxyHandler<Target>, 'preventExtensions'>;
+        return handler as Required<ProxyHandler<Argument>, 'preventExtensions'>;
     }
 
-    preventExtensions(target: ObjectT): boolean {
+    preventExtensions(target: Target): boolean {
 
         let result : boolean = true;
 

@@ -1,4 +1,4 @@
-import Property from "../../property/boolean/property";
+import Exists from "../../property/boolean/exists";
 import Readable from "../../property/boolean/readable";
 import {List} from "ts-toolbelt";
 import {Required} from "utility-types";
@@ -12,9 +12,9 @@ import MultiHandlers from "./multi-handlers";
  * value is from the fist compatible object list
  */
 export default class GetListFirst<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'get'>  {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'get'>  {
 
     /**
      * mapping for getter handler
@@ -32,14 +32,14 @@ export default class GetListFirst<
     }
 
     /**
-     * set handler to other {@link ProxyHandler<Target>}
+     * set handler to other {@link ProxyHandler<Argument>}
      * @param handler
      */
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'get'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'get'> {
 
-        handler.get = (target: ObjectT, property: PropertyKey, receiver: any) => this.get(target, property, receiver);
+        handler.get = (target: Target, property: PropertyKey, receiver: any) => this.get(target, property, receiver);
 
-        return handler as Required<ProxyHandler<Target>, 'get'>;
+        return handler as Required<ProxyHandler<Argument>, 'get'>;
     }
 
     /**
@@ -49,9 +49,9 @@ export default class GetListFirst<
      * @param property
      * @param receiver
      */
-    get(target: ObjectT, property: PropertyKey, receiver: any): any {
+    get(target: Target, property: PropertyKey, receiver: any): any {
 
-        if(Property(this.handler, property)) {
+        if(Exists(this.handler, property)) {
 
             return this.handler[<string|number>property][property];
         }

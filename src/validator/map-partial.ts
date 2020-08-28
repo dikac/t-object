@@ -3,7 +3,7 @@ import Validatable from "@dikac/t-validatable/validatable";
 import ReturnInfer from "./validatable/record/infer";
 import ValidateMap from "./validatable/record/map-partial";
 import MapCallback from "./map-callback";
-import {Interface} from "./map-callback";
+import Map from "./map";
 import Union from "../union";
 
 export default function MapPartial<
@@ -14,9 +14,9 @@ export default function MapPartial<
     validators : Container,
     validation : (result:Union<ReturnInfer<Container>>)=>ValidatableT,
     message : (result:Union<ReturnInfer<Container>>)=>MessageT,
-) : Omit<Interface<Container, Union<ReturnInfer<Container>>, ValidatableT, MessageT>, 'map'> {
+) : Omit<Map<Container, Union<ReturnInfer<Container>>, ValidatableT, MessageT>, 'map'> {
 
-    return <Omit<Interface<Container, Union<ReturnInfer<Container>>, ValidatableT, MessageT>, 'map'>> new MapCallback(
+    return <Omit<Map<Container, Union<ReturnInfer<Container>>, ValidatableT, MessageT>, 'map'>> new MapCallback(
         validators,
         (value, validators) => <Union<ReturnInfer<Container>>>ValidateMap(value, validators),
         validation,

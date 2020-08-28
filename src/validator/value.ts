@@ -1,26 +1,30 @@
-import Validator from "@dikac/t-validator/simple";
+import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import ValidateValue from "./validatable/record/value";
-import MapReturn from "./validatable/record/infer";
-import ValueCallback, {Interface} from "./value-callback";
+import ValidatableValueCallback from "../validatable/value-callback";
+import ValidatableValue from "../validatable/value";
+import Message from "@dikac/t-message/message";
+import Return from "@dikac/t-validator/validatable/simple";
+import Validation from "@dikac/t-validatable/validation/validation";
+import Validators from "./validators/validators";
+import Instance from "@dikac/t-validator/validatable/validatable";
+import Replace from "@dikac/t-validatable/boolean/replace";
 
-export default function Value<
-    BaseT = unknown,
-    ValueT extends BaseT = BaseT,
-    MessageT = unknown,
-    Container extends Record<any, Validator<BaseT, ValueT>> = Record<any, Validator<BaseT, ValueT>>,
-    ValidatableT extends Validatable = Validatable
->(
-    validators : Container,
-    validation : (result:MapReturn<Container>) => ValidatableT,
-    message : (result:MapReturn<Container>) => MessageT,
+export default interface Value<
+    Base,
+    Value extends Base,
+    MessageType,
+    RecordType extends Record<any, Validator<Base, Value>>,
+    Result extends Record<any, Instance>,
+    ValidatableT extends Validatable
+> extends
+    Validator<
+        Base,
+        Value,
+        boolean, true,
+        ValidatableValue<Base, MessageType, RecordType, Result, ValidatableT>
+    >,
+    Validators<RecordType>,
+    Message<(result:Result)=>MessageType>,
+    Validation<(result:Result)=>ValidatableT>
+{}
 
-) : Interface<BaseT, ValueT, MessageT, Container, MapReturn<Container>, ValidatableT> {
-
-    return new ValueCallback(
-        validators,
-        ValidateValue,
-        validation,
-        message
-    ) as Interface<BaseT, ValueT, MessageT, Container, MapReturn<Container>, ValidatableT>;
-}

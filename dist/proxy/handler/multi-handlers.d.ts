@@ -1,7 +1,7 @@
 import { List } from "ts-toolbelt";
-export default class MultiHandlers<ObjectT extends object, Objects extends object[]> {
+export default class MultiHandlers<Target extends object, Objects extends object[]> {
     private handlers;
     private withTarget;
     constructor(handlers: Objects, withTarget?: boolean);
-    protected getHandler(target: ObjectT): Objects | List.Prepend<Objects, ObjectT>;
+    protected getHandler(target: Target): Objects | List.Prepend<Objects, Target>;
 }

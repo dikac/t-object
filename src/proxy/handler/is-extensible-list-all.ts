@@ -2,9 +2,9 @@ import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class IsExtensibleListAll<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'isExtensible'>  {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'isExtensible'>  {
 
     public extensible ?: boolean;
 
@@ -13,14 +13,14 @@ export default class IsExtensibleListAll<
         this.extensible = undefined;
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'isExtensible'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'isExtensible'> {
 
-        handler.isExtensible = (target: ObjectT) => this.isExtensible(target);
+        handler.isExtensible = (target: Target) => this.isExtensible(target);
 
-        return handler as Required<ProxyHandler<Target>, 'isExtensible'>;
+        return handler as Required<ProxyHandler<Argument>, 'isExtensible'>;
     }
 
-    isExtensible(target: ObjectT): boolean {
+    isExtensible(target: Target): boolean {
 
         if(this.extensible !== undefined) {
 

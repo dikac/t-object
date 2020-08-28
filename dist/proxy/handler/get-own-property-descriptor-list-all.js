@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../property/boolean/property", "./multi-handlers"], factory);
+        define(["require", "exports", "../../property/boolean/exists", "./multi-handlers"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_1 = require("../../property/boolean/property");
+    const exists_1 = require("../../property/boolean/exists");
     const multi_handlers_1 = require("./multi-handlers");
     class GetOwnPropertyDescriptorListAll extends multi_handlers_1.default {
         constructor() {
@@ -24,7 +24,7 @@
             return handler;
         }
         getOwnPropertyDescriptor(target, property) {
-            if (property_1.default(this.descriptor, property)) {
+            if (exists_1.default(this.descriptor, property)) {
                 // @ts-ignore
                 return this.descriptor[property];
             }

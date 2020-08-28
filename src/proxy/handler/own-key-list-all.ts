@@ -3,9 +3,9 @@ import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class OwnKeyListAll<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'ownKeys'> {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'ownKeys'> {
 
     private keys ?: PropertyKey[];
 
@@ -14,14 +14,14 @@ export default class OwnKeyListAll<
         this.keys = undefined;
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'ownKeys'>  {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'ownKeys'>  {
 
-        handler.ownKeys = (target: ObjectT) => this.ownKeys(target);
+        handler.ownKeys = (target: Target) => this.ownKeys(target);
 
-        return <Required<ProxyHandler<Target>, 'ownKeys'>> handler;
+        return <Required<ProxyHandler<Argument>, 'ownKeys'>> handler;
     }
 
-    ownKeys(target: ObjectT): PropertyKey[] {
+    ownKeys(target: Target): PropertyKey[] {
 
         if(this.keys) {
 

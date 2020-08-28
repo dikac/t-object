@@ -1,40 +1,40 @@
-import Property from "../../property/boolean/property";
+import Exists from "../../property/boolean/exists";
 import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class HasListAny<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'has'>  {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'has'>  {
 
-    private handler : Partial<Record<keyof ObjectT, boolean>> = {};
+    private handler : Partial<Record<keyof Target, boolean>> = {};
 
     reset() {
 
         this.handler = {};
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'has'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'has'> {
 
-        handler.has = (target: ObjectT, property: PropertyKey) => this.has(target, property);
+        handler.has = (target: Target, property: PropertyKey) => this.has(target, property);
 
-        return handler as Required<ProxyHandler<Target>, 'has'>;
+        return handler as Required<ProxyHandler<Argument>, 'has'>;
     }
 
-    has(target: ObjectT, property: PropertyKey): boolean {
+    has(target: Target, property: PropertyKey): boolean {
 
-        if(Property(this.handler, property)) {
+        if(Exists(this.handler, property)) {
 
             return this.handler[<string|number>property]
         }
 
-        (this.handler as Partial<Record<keyof ObjectT, boolean>>)[<string|number>property] = false;
+        (this.handler as Partial<Record<keyof Target, boolean>>)[<string|number>property] = false;
 
         for (const handler of this.getHandler(target)) {
 
-            if(Property(handler, property)) {
+            if(Exists(handler, property)) {
 
-                (this.handler  as Partial<Record<keyof ObjectT, boolean>>)[<string|number>property] = true;
+                (this.handler  as Partial<Record<keyof Target, boolean>>)[<string|number>property] = true;
                 break;
             }
         }

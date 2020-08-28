@@ -2,7 +2,8 @@ import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
 import RecordParameter from "./base/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
-import MapCallback, {Interface} from "./map-callback";
+import MapCallback from "./map-callback";
+import Map from "./map";
 
 export default function MapCallbackFunction<
     Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
@@ -14,7 +15,7 @@ export default function MapCallbackFunction<
     map : (argument:RecordParameter<Container>, validators:Container)=>Result,
     validation : (result:Result)=>ValidatableT,
     message : (result:Result)=>MessageT
-) : Interface <Container, Result, ValidatableT, MessageT> {
+) : Map <Container, Result, ValidatableT, MessageT> {
 
     return new MapCallback(validators, map, validation, message);
 }

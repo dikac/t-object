@@ -1,7 +1,7 @@
 import {List} from "ts-toolbelt";
 
 export default class MultiHandlers<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
 > {
 
@@ -11,11 +11,11 @@ export default class MultiHandlers<
     ) {
     }
 
-    protected getHandler(target: ObjectT) : Objects | List.Prepend<Objects, ObjectT> {
+    protected getHandler(target: Target) : Objects | List.Prepend<Objects, Target> {
 
         if(this.withTarget) {
 
-            return [target, ...this.handlers] as List.Prepend<Objects, ObjectT>;
+            return [target, ...this.handlers] as List.Prepend<Objects, Target>;
 
         } else {
 

@@ -1,11 +1,11 @@
-import Property from "../../property/boolean/property";
+import Exists from "../../property/boolean/exists";
 import {Required} from "utility-types";
 import MultiHandlers from "./multi-handlers";
 
 export default class GetOwnPropertyDescriptorListAll<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'getOwnPropertyDescriptor'> {
+> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'> {
 
     private descriptor : Record<PropertyKey, PropertyDescriptor|undefined> = {};
 
@@ -14,16 +14,16 @@ export default class GetOwnPropertyDescriptorListAll<
         this.descriptor = {};
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'getOwnPropertyDescriptor'> {
 
-        handler.getOwnPropertyDescriptor = (target: ObjectT, p: PropertyKey) => this.getOwnPropertyDescriptor(target, p);
+        handler.getOwnPropertyDescriptor = (target: Target, p: PropertyKey) => this.getOwnPropertyDescriptor(target, p);
 
-        return handler as Required<ProxyHandler<Target>, 'getOwnPropertyDescriptor'>;
+        return handler as Required<ProxyHandler<Argument>, 'getOwnPropertyDescriptor'>;
     }
 
-    getOwnPropertyDescriptor(target: ObjectT, property: PropertyKey) : PropertyDescriptor | undefined {
+    getOwnPropertyDescriptor(target: Target, property: PropertyKey) : PropertyDescriptor | undefined {
 
-        if(Property(this.descriptor, property)) {
+        if(Exists(this.descriptor, property)) {
 
             // @ts-ignore
             return this.descriptor[property];

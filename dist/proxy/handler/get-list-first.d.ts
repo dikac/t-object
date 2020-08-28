@@ -6,7 +6,7 @@ import MultiHandlers from "./multi-handlers";
  *
  * value is from the fist compatible object list
  */
-export default class GetListFirst<ObjectT extends object, Objects extends object[]> extends MultiHandlers<ObjectT, Objects> implements Required<ProxyHandler<ObjectT>, 'get'> {
+export default class GetListFirst<Target extends object, Objects extends object[]> extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'get'> {
     /**
      * mapping for getter handler
      */
@@ -16,10 +16,10 @@ export default class GetListFirst<ObjectT extends object, Objects extends object
      */
     reset(): void;
     /**
-     * set handler to other {@link ProxyHandler<Target>}
+     * set handler to other {@link ProxyHandler<Argument>}
      * @param handler
      */
-    bindTo<Target extends ObjectT>(handler: ProxyHandler<Target>): Required<ProxyHandler<Target>, 'get'>;
+    bindTo<Argument extends Target>(handler: ProxyHandler<Argument>): Required<ProxyHandler<Argument>, 'get'>;
     /**
      * get the first compatible {@link handlers} property
      *
@@ -27,5 +27,5 @@ export default class GetListFirst<ObjectT extends object, Objects extends object
      * @param property
      * @param receiver
      */
-    get(target: ObjectT, property: PropertyKey, receiver: any): any;
+    get(target: Target, property: PropertyKey, receiver: any): any;
 }

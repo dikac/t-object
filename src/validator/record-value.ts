@@ -5,19 +5,19 @@ import ValidateMap from "./validatable/record/record-value";
 import RecordValueCallback, {Interface} from "./record-value-callback";
 
 export default function RecordValue<
-    ValidatorT extends Validator = Validator,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
+    ValidatorType extends Validator = Validator,
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown,
 >(
-    validator : ValidatorT,
-    validation : (record : Record<PropertyKey, ReturnInfer<ValidatorT>>) => ValidatableT,
-    message : (record : Record<PropertyKey, ReturnInfer<ValidatorT>>) => MessageT,
-) : Interface<ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> {
+    validator : ValidatorType,
+    validation : (record : Record<PropertyKey, ReturnInfer<ValidatorType>>) => ValidatableType,
+    message : (record : Record<PropertyKey, ReturnInfer<ValidatorType>>) => MessageType,
+) : Interface<ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType> {
 
     return new RecordValueCallback(
         validator,
         ValidateMap,
         validation,
         message
-    ) as Interface<ValidatorT, Record<PropertyKey, ReturnInfer<ValidatorT>>, ValidatableT, MessageT> ;
+    ) as Interface<ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType> ;
 }

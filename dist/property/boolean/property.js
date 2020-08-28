@@ -4,13 +4,19 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "../../symbol/boolean/symbol"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function Property(object, property) {
-        return property in object;
+    const symbol_1 = require("../../symbol/boolean/symbol");
+    function Property(value) {
+        switch (typeof value) {
+            case "number":
+            case "string":
+                return true;
+        }
+        return symbol_1.default(value);
     }
     exports.default = Property;
 });

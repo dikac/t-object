@@ -6,9 +6,9 @@ import MergeGetterSetter from "../../descriptor/merge-getter-setter";
 import MultiHandlers from "./multi-handlers";
 
 export default class PrototypeOfListMerge<
-    ObjectT extends object,
+    Target extends object,
     Objects extends object[]
-> extends MultiHandlers<ObjectT, Objects> implements ProxyHandler<ObjectT>  {
+> extends MultiHandlers<Target, Objects> implements ProxyHandler<Target>  {
 
     private object : object = new class {};
     private generated : boolean = false;
@@ -19,19 +19,19 @@ export default class PrototypeOfListMerge<
         this.object = new class {};
     }
 
-    bindTo<Target extends ObjectT>(handler : ProxyHandler<Target>) : Required<ProxyHandler<Target>, 'has'> {
+    bindTo<Argument extends Target>(handler : ProxyHandler<Argument>) : Required<ProxyHandler<Argument>, 'has'> {
 
-        handler.getPrototypeOf = (target: ObjectT) => this.getPrototypeOf(target);
+        handler.getPrototypeOf = (target: Target) => this.getPrototypeOf(target);
 
-        return handler as Required<ProxyHandler<Target>, 'has'>;
+        return handler as Required<ProxyHandler<Argument>, 'has'>;
     }
 
-    setPrototypeOf(target: ObjectT, value: any): boolean {
+    setPrototypeOf(target: Target, value: any): boolean {
 
         return Reflect.setPrototypeOf(Object.getPrototypeOf(this.object), value);
     }
 
-    getPrototypeOf(target: ObjectT): object | null {
+    getPrototypeOf(target: Target): object | null {
 
         if(this.generated) {
 

@@ -26,28 +26,28 @@ export type Interface<
     Validation<(result:Result)=>ValidatableTemplate>
 
 export default class RecordValueCallback<
-    ValidatorT extends Validator = Validator,
+    ValidatorType extends Validator = Validator,
     Result extends Record<PropertyKey, Instance> = Record<PropertyKey, Instance>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
-> implements Interface<ValidatorT, Result, ValidatableT, MessageT> {
+    ValidatableType extends Validatable = Validatable,
+    Message = unknown,
+> implements Interface<ValidatorType, Result, ValidatableType, Message> {
     constructor(
-        public validator : ValidatorT,
-        public handler : (record:Record<PropertyKey, InferBase<ValidatorT>>, validator : ValidatorT)=>Result,
-        public validation : (result:Result)=>ValidatableT,
-        public message : (result:Result)=>MessageT
+        public validator : ValidatorType,
+        public handler : (record:Record<PropertyKey, InferBase<ValidatorType>>, validator : ValidatorType)=>Result,
+        public validation : (result:Result)=>ValidatableType,
+        public message : (result:Result)=>Message
     ) {
     }
 
-    validate<Argument extends Record<PropertyKey, InferType<ValidatorT>>>(argument: Argument)
-        : Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>
+    validate<Argument extends Record<PropertyKey, InferType<ValidatorType>>>(argument: Argument)
+        : Replace<ValidatableRecordCallback<Message, Argument, ValidatorType, Result, ValidatableType>, true>
 
-    validate<Argument extends Record<PropertyKey, InferBase<ValidatorT>>>(argument: Argument)
-        : Return<Record<PropertyKey, InferBase<ValidatorT>>, Argument, Record<PropertyKey, InferType<ValidatorT>>, ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>>
+    validate<Argument extends Record<PropertyKey, InferBase<ValidatorType>>>(argument: Argument)
+        : Return<Record<PropertyKey, InferBase<ValidatorType>>, Argument, Record<PropertyKey, InferType<ValidatorType>>, ValidatableRecordCallback<Message, Argument, ValidatorType, Result, ValidatableType>>
 
-    validate<Argument extends Record<PropertyKey, InferBase<ValidatorT>>>(argument: Argument) {
+    validate<Argument extends Record<PropertyKey, InferBase<ValidatorType>>>(argument: Argument) {
 
-        return <Replace<ValidatableRecordCallback<MessageT, Argument, ValidatorT, Result, ValidatableT>, true>>
+        return <Replace<ValidatableRecordCallback<Message, Argument, ValidatorType, Result, ValidatableType>, true>>
             new ValidatableRecordCallback(argument, this.validator, this.handler, this.validation, this.message);
     }
 }

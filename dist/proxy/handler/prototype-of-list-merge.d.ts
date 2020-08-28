@@ -1,10 +1,10 @@
 import { Required } from "utility-types";
 import MultiHandlers from "./multi-handlers";
-export default class PrototypeOfListMerge<ObjectT extends object, Objects extends object[]> extends MultiHandlers<ObjectT, Objects> implements ProxyHandler<ObjectT> {
+export default class PrototypeOfListMerge<Target extends object, Objects extends object[]> extends MultiHandlers<Target, Objects> implements ProxyHandler<Target> {
     private object;
     private generated;
     reset(): void;
-    bindTo<Target extends ObjectT>(handler: ProxyHandler<Target>): Required<ProxyHandler<Target>, 'has'>;
-    setPrototypeOf(target: ObjectT, value: any): boolean;
-    getPrototypeOf(target: ObjectT): object | null;
+    bindTo<Argument extends Target>(handler: ProxyHandler<Argument>): Required<ProxyHandler<Argument>, 'has'>;
+    setPrototypeOf(target: Target, value: any): boolean;
+    getPrototypeOf(target: Target): object | null;
 }

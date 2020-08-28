@@ -1,32 +1,14 @@
-import {Required} from "utility-types";
+import SymbolType from "../../symbol/boolean/symbol";
 
-/**
- * check if property exists
- */
+export default function Property(
+    value : unknown
+) : value is PropertyKey {
 
-export default function Property<
-    ObjectT extends object,
-    Key extends keyof ObjectT,
->(
-     object : ObjectT,
-     property : Key
-) : object is (Key extends keyof ObjectT ? Required<ObjectT, Key> : ObjectT);
+    switch (typeof value) {
+        case "number" :
+        case "string" :
+            return true;
+    }
 
-export default function Property<
-    ObjectT extends object,
-    Key extends PropertyKey
->(
-    object : ObjectT,
-    property : Key
-) : object is ObjectT & Record<Key, any>;
-
-export default function Property<
-    ObjectT extends object,
-    Key extends PropertyKey
->(
-    object : ObjectT,
-    property : Key
-) : boolean {
-
-     return property in object;
+    return SymbolType(value);
 }

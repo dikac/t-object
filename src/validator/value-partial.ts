@@ -4,7 +4,8 @@ import ValidateValuePartial from "./validatable/record/value-partial";
 import ReturnInfer from "./validatable/record/infer";
 import Union from "../union";
 import MapReturn from "./validatable/record/infer";
-import ValueCallback, {Interface} from "./value-callback";
+import ValueCallback from "./value-callback";
+import ValueInterface from "./value";
 
 export default function ValuePartial<
     BaseT = unknown,
@@ -16,9 +17,9 @@ export default function ValuePartial<
     validators : Container,
     validation : (result:Union<ReturnInfer<Container>>) => ValidatableT,
     message : (result:Union<ReturnInfer<Container>>) => MessageT,
-) : Interface<BaseT, ValueT, MessageT, Container, Union<MapReturn<Container>>, ValidatableT> {
+) : ValueInterface<BaseT, ValueT, MessageT, Container, Union<MapReturn<Container>>, ValidatableT> {
 
-    return <Interface<BaseT, ValueT, MessageT, Container, Union<MapReturn<Container>>, ValidatableT>> new ValueCallback(
+    return <ValueInterface<BaseT, ValueT, MessageT, Container, Union<MapReturn<Container>>, ValidatableT>> new ValueCallback(
         validators,
         (value, validators)  => <Union<MapReturn<Container>>> ValidateValuePartial(value, validators),
         validation,

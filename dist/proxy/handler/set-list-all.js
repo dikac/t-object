@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../property/boolean/property", "../../property/boolean/writable", "./multi-handlers"], factory);
+        define(["require", "exports", "../../property/boolean/exists", "../../property/boolean/writable", "./multi-handlers"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const property_1 = require("../../property/boolean/property");
+    const exists_1 = require("../../property/boolean/exists");
     const writable_1 = require("../../property/boolean/writable");
     const multi_handlers_1 = require("./multi-handlers");
     class SetListAll extends multi_handlers_1.default {
@@ -25,7 +25,7 @@
             return handler;
         }
         set(target, property, value, receiver) {
-            if (property_1.default(this.settable, property)) {
+            if (exists_1.default(this.settable, property)) {
                 let list = this.settable[property];
                 for (let object of list) {
                     object[property] = value;

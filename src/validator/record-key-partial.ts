@@ -7,20 +7,20 @@ import RecordKeyCallback, {Interface} from "./record-key-callback";
 import Union from "../union";
 
 export default function RecordKeyPartial<
-    BaseT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-    TypeT extends BaseT = BaseT,
-    ValidatorT extends Validator<O.UnionOf<BaseT>, O.UnionOf<TypeT>> = Validator<O.UnionOf<BaseT>, O.UnionOf<TypeT>>,
-    ValidatableT extends Validatable = Validatable,
+    Base extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+    Type extends Base = Base,
+    ValidatorType extends Validator<O.UnionOf<Base>, O.UnionOf<Type>> = Validator<O.UnionOf<Base>, O.UnionOf<Type>>,
+    ValidatableType extends Validatable = Validatable,
     MessageT = unknown,
 >(
-    validator : ValidatorT,
-    validation : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>)=>ValidatableT,
-    message : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>)=>MessageT,
-) : Interface<BaseT, TypeT, ValidatorT, Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>, ValidatableT, MessageT> {
+    validator : ValidatorType,
+    validation : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>ValidatableType,
+    message : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>MessageT,
+) : Interface<Base, Type, ValidatorType, Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageT> {
 
     return new RecordKeyCallback(
         validator,
-        (value, validators)  => <Union<Record<PropertyKey, ReturnInfer<ValidatorT>>>> ValidateRecordKeyPartial(value, validators),
+        (value, validators)  => <Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>> ValidateRecordKeyPartial(value, validators),
         validation,
         message
     );

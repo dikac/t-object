@@ -1,1 +1,0 @@
-{"version":3,"file":"key.js","sourceRoot":"","sources":["../../../src/key/boolean/key.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,wDAAqD;IAErD,SAAwB,GAAG,CAAiC,KAAW;QAEnE,QAAQ,OAAO,KAAK,EAAE;YAClB,KAAK,QAAQ,CAAE;YACf,KAAK,QAAQ;gBACT,OAAO,IAAI,CAAC;SACnB;QAED,OAAO,gBAAU,CAAC,KAAK,CAAC,CAAC;IAE7B,CAAC;IAVD,sBAUC"}
