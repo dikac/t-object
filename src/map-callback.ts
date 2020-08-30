@@ -1,7 +1,7 @@
 import Map from "./map";
 
 /**
- * Calls {@param replace} on each property value from {@param object} recursively
+ * Calls {@param replace} on each property value from {@param object}
  *
  * {@template Replace} type of replace result
  *
