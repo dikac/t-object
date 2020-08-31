@@ -4,7 +4,6 @@ import Name from "../../dist/string/name";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
 
-
 let map = new Map<object, [boolean, string]>();
 
 map.set({}, [true, 'empty object']);
@@ -22,9 +21,9 @@ for(let [value, [valid, message]] of map) {
             expect(validatable.value).toBe(value, value);
 
             if(validatable.valid) {
-                expect(validatable.message).toBe(`value "${Name(value)}" is empty object`);
+                expect(validatable.message).toBe(`"${Name(value)}" is empty object`);
             } else {
-                expect(validatable.message).toBe(`value "${Name(value)}" is not empty object`);
+                expect(validatable.message).toBe(`"${Name(value)}" is not empty object`);
             }
         });
     });

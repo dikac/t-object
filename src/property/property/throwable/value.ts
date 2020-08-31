@@ -1,4 +1,4 @@
-import PropertyValueArgument from "../../../boolean/string/value";
+import PropertyValueArgument from "../../../assert/string/value";
 import PropertyInterface from "../property";
 import Value from "@dikac/t-value/value";
 

@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../../../boolean/string/value"], factory);
+        define(["require", "exports", "../../../../assert/string/value"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const value_1 = require("../../../../boolean/string/value");
+    const value_1 = require("../../../../assert/string/value");
     function Value(valid, property) {
         return value_1.default(valid, property, 'Validator or record of Validator');
     }

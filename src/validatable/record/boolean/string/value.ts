@@ -1,4 +1,4 @@
-import ValueMessage from "../../../../boolean/string/value";
+import ValueMessage from "../../../../assert/string/value";
 
 export default function Value(valid: boolean, property: PropertyKey) {
 

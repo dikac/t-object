@@ -4,20 +4,27 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../string/name"], factory);
+        define(["require", "exports", "../../string/name", "@dikac/t-message/sentence"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const name_1 = require("../../string/name");
+    const sentence_1 = require("@dikac/t-message/sentence");
+    const sentence = new sentence_1.default(false, '', {
+        invalid: 'is not',
+        valid: 'is',
+    }, 'empty object');
+    /**
+     * string intended for not empty object
+     *
+     * @param valid
+     * @param value
+     */
     function NotEmpty(valid, value) {
-        let string = name_1.default(value);
-        if (valid) {
-            return `value "${string}" is not empty object`;
-        }
-        else {
-            return `value "${string}" must not empty object`;
-        }
+        sentence.subject = '"' + name_1.default(value) + '"';
+        sentence.valid = valid;
+        return sentence.message;
     }
     exports.default = NotEmpty;
 });

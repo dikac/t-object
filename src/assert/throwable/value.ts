@@ -1,4 +1,4 @@
-import PropertyValueMessage from "../../boolean/string/value";
+import PropertyValueMessage from "../string/value";
 
 export default function Value(property : PropertyKey, type : string) : Error {
 

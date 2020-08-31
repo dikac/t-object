@@ -1,4 +1,4 @@
-import PropertyValueArgumentValidation from "../../../boolean/string/value-validation";
+import PropertyValueArgumentValidation from "../../../assert/string/value-validation";
 import PropertyInterface from "../property";
 import Value from "@dikac/t-value/value";
 import Validation from "@dikac/t-boolean/validation/validation";

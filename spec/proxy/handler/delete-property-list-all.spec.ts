@@ -21,7 +21,7 @@ describe('direct set', () => {
         };
 
         let getter = new DeletePropertyHandler([object, class_]);
-        let proxy = new Proxy<{data:string}>(original, getter)
+        let proxy = new Proxy<{data?:string}>(original, getter)
 
         expect(class_.data).toBe('class');
         expect(original.data).toBe('original');
@@ -40,7 +40,7 @@ describe('bind', () => {
     it('delete', ()=>{
 
         class Class  {
-            data : string = 'class'
+            data ?: string = 'class'
         }
 
         let object = {
@@ -49,7 +49,7 @@ describe('bind', () => {
 
         let class_ = new Class;
 
-        let original = {
+        let original : Class = {
             data : 'original'
         };
 
