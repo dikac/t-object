@@ -190,11 +190,11 @@ describe("implicit complete", function() {
 
     describe("mixed", function() {
 
-        let validator = new Callbacks<string, string>(function (result){
-            return result.value + ' ' + (result.valid ? 'valid' : 'true');
-        }, function (value) {
+        let validator = new Callbacks<string, string>(function (value) {
             return  ['name', 'address'].includes(value);
-        });
+        }, function (result){
+            return result.value + ' ' + (result.valid ? 'valid' : 'true');
+        }, );
 
         let value = {
             name : 'string',
@@ -250,11 +250,11 @@ describe("implicit complete", function() {
 
     describe("all invalid", function() {
 
-        let validator = new Callbacks<string, string>(function (result){
-            return result.value + ' ' + (result.valid ? 'valid' : 'true');
-        }, function (value) {
+        let validator = new Callbacks<string, string>(function (value) {
             return ! ['name', 'age', 'address'].includes(value);
-        });
+        },function (result){
+            return result.value + ' ' + (result.valid ? 'valid' : 'true');
+        }, );
 
         let property = RecordValueCallback(validator,
             (v)=>And(v),

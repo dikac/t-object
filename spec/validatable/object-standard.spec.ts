@@ -53,13 +53,8 @@ describe(`compiler compatible`,function() {
             expect(e).toBeInstanceOf(Error);
         }
 
-        try {
-            // @ts-expect-error
-            validatable.value = true;
-            fail('exception should thrown');
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-        }
+        // @ts-expect-error
+        validatable.value = true;
 
         try {
             // @ts-expect-error
