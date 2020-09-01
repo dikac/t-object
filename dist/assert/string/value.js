@@ -4,24 +4,24 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-message/sentence"], factory);
+        define(["require", "exports", "@dikac/t-string/message/sentence"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const sentence_1 = require("@dikac/t-message/sentence");
-    const sentence = new sentence_1.default(false, '', {
-        invalid: 'value is not',
-        valid: 'value is',
-    }, '');
+    const sentence_1 = require("@dikac/t-string/message/sentence");
     /**
      * {@param valid} type is valid or not
      * {@param property} object property
      * {@param type} expected type
      */
     function Value(valid, property, type) {
-        sentence.subject = property.toString();
-        sentence.object = type;
+        const sentence = new sentence_1.default(valid, '', {
+            invalid: 'value is not',
+            valid: 'value is',
+        }, '');
+        sentence.value = property.toString();
+        sentence.type = type;
         sentence.valid = valid;
         return sentence.message;
     }

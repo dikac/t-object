@@ -11,7 +11,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const object_1 = require("../../assert/string/object");
     function Object_(object) {
-        return object_1.default(object.valid);
+        return object_1.default(object.valid, object.value);
     }
     exports.default = Object_;
 });

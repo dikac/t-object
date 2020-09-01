@@ -1,13 +1,6 @@
-import Sentence from "@dikac/t-message/sentence";
+import Sentence from "@dikac/t-string/message/sentence";
 
-const sentence = new Sentence(
-    false,
-    '',
-    {
-        invalid:'value is not',
-        valid:'value is',
-    }, ''
-);
+
 
 /**
  * {@param valid} type is valid or not
@@ -20,8 +13,17 @@ export default function Value(
     type : string
 ) : string {
 
-    sentence.subject = property.toString();
-    sentence.object = type;
+    const sentence = new Sentence(
+        valid,
+        '',
+        {
+            invalid:'value is not',
+            valid:'value is',
+        }, ''
+    );
+
+    sentence.value = property.toString();
+    sentence.type = type;
     sentence.valid = valid;
 
     return sentence.message;

@@ -2,28 +2,50 @@ import ObjectMessage from "../../../dist/assert/string/object";
 
 it("enable console log", () => {spyOn(console, 'log').and.callThrough()});
 
-describe('true',() =>{
+describe('infinity',() =>{
 
-    it(`subject`, () => {
-        expect(ObjectMessage(true, 'value')).toBe('value is object');
-        expect(ObjectMessage(false, 'value')).toBe('value is not object');
+    it(`positive`, () => {
+        expect(ObjectMessage(true, Infinity )).toBe('type is object');
+        expect(ObjectMessage(false, Infinity )).toBe('type number is not object');
     });
 
-    it(`no subject`, () => {
-        expect(ObjectMessage(true)).toBe('is object');
-        expect(ObjectMessage(false)).toBe('is not object');
+    it(`number`, () => {
+        expect(ObjectMessage(true, -Infinity)).toBe('type is object');
+        expect(ObjectMessage(false, -Infinity)).toBe('type number is not object');
     });
 });
 
-describe('false',() =>{
+describe('integer',() =>{
 
-    it(`subject`, () => {
-        expect(ObjectMessage(true, 'value' )).toBe('value is object');
-        expect(ObjectMessage(false, 'value' )).toBe('value is not object');
+    it(`positive`, () => {
+        expect(ObjectMessage(true, 1 )).toBe('type is object');
+        expect(ObjectMessage(false, 1 )).toBe('type number is not object');
     });
 
-    it(`no subject`, () => {
-        expect(ObjectMessage(true)).toBe('is object');
-        expect(ObjectMessage(false)).toBe('is not object');
+    it(`number`, () => {
+        expect(ObjectMessage(true, -1)).toBe('type is object');
+        expect(ObjectMessage(false, -1)).toBe('type number is not object');
     });
+});
+
+describe('float',() =>{
+
+    it(`float`, () => {
+        expect(ObjectMessage(true, 1.1)).toBe('type is object');
+        expect(ObjectMessage(false, 1.1)).toBe('type number is not object');
+    });
+
+    it(`float`, () => {
+        expect(ObjectMessage(true, -1.1)).toBe('type is object');
+        expect(ObjectMessage(false, -1.1)).toBe('type number is not object');
+    });
+});
+
+describe('nan',() =>{
+
+    it(`float`, () => {
+        expect(ObjectMessage(true, NaN)).toBe('type is object');
+        expect(ObjectMessage(false, NaN)).toBe('type number is not object');
+    });
+
 });

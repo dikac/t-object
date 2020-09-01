@@ -73,7 +73,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.name) {
 
                 expect(validatable.validatables.name.valid).toBe(true);
-                expect(validatable.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.name.message).toBe('string');
 
             } else {
 
@@ -84,7 +84,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.address) {
 
                 expect(validatable.validatables.address.valid).toBe(true);
-                expect(validatable.validatables.address.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.address.message).toBe('string');
 
             } else {
 
@@ -95,7 +95,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.user) {
 
                 expect(validatable.validatables.user.valid).toBe(true);
-                expect(validatable.validatables.user.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.user.message).toBe('string');
 
             } else {
 
@@ -117,7 +117,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.name) {
 
                 expect(validatable.validatables.name.valid).toBe(true);
-                expect(validatable.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.name.message).toBe('string');
 
             } else {
 
@@ -128,7 +128,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.address) {
 
                 expect(validatable.validatables.address.valid).toBe(true);
-                expect(validatable.validatables.address.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.address.message).toBe('string');
 
             } else {
 
@@ -139,7 +139,7 @@ describe("implicit incomplete", function() {
             if(validatable.validatables.user) {
 
                 expect(validatable.validatables.user.valid).toBe(true);
-                expect(validatable.validatables.user.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.user.message).toBe('string');
 
             } else {
 
@@ -172,7 +172,7 @@ describe("implicit incomplete", function() {
 
             if(and.validatables.name) {
                 expect(and.validatables.name.valid).toBe(true);
-                expect(and.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof and.validatables.name.message).toBe('string');
 
             } else {
                 fail('validatable.validatables.name should exist');
@@ -180,7 +180,7 @@ describe("implicit incomplete", function() {
 
             if(and.validatables.age) {
                 expect(and.validatables.age.valid).toBe(false);
-                expect(and.validatables.age.message).toBe('value is not type of "number"');
+                expect(typeof and.validatables.age.message).toBe('string');
 
             } else {
                 fail('validatable.validatables.age should exist');
@@ -201,14 +201,14 @@ describe("implicit incomplete", function() {
             expect(or.valid).toBe(true);
 
             if(or.validatables.name) {
-                expect(or.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof or.validatables.name.message).toBe('string');
                 expect(or.validatables.name.valid).toBe(true);
             } else {
                 fail('validatable.validatables.name should exist');
             }
 
             if(or.validatables.age) {
-                expect(or.validatables.age.message).toBe('value is not type of "number"');
+                expect(typeof or.validatables.age.message).toBe('string');
                 expect(or.validatables.age.valid).toBe(false);
             } else {
                 fail('validatable.validatables.age should exist');
@@ -249,7 +249,7 @@ describe("implicit incomplete", function() {
             if(and.validatables.name) {
 
                 expect(and.validatables.name.valid).toBe(false);
-                expect(and.validatables.name.message).toBe('value is not type of "string"');
+                expect(typeof and.validatables.name.message).toBe('string');
             } else {
                 fail('validatable.validatables.name should exist');
             }
@@ -274,7 +274,7 @@ describe("implicit incomplete", function() {
 
             if(or.validatables.name) {
 
-                expect(or.validatables.name.message).toBe('value is not type of "string"');
+                expect(typeof or.validatables.name.message).toBe('string');
                 expect(or.validatables.name.valid).toBe(false);
             } else {
                 fail('validatable.validatables.name should exist');
@@ -327,7 +327,7 @@ describe("recursive", function() {
             if(validatable.validatables.name) {
 
                 expect(validatable.validatables.name.valid).toBe(true);
-                expect(validatable.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.name.message).toBe('string');
 
             } else {
 
@@ -338,7 +338,7 @@ describe("recursive", function() {
             if(validatable.validatables.address) {
 
                 expect(validatable.validatables.address.valid).toBe(true);
-                expect(validatable.validatables.address.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.address.message).toBe('string');
 
             } else {
 
@@ -349,7 +349,7 @@ describe("recursive", function() {
             if(validatable.validatables.user) {
 
                 expect(validatable.validatables.user.valid).toBe(true);
-                expect(validatable.validatables.user.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.user.message).toBe('string');
 
             } else {
 
@@ -364,17 +364,17 @@ describe("recursive", function() {
                 // @ts-expect-error
                 expect(validatable.validatables.info.validatables.age.valid).toBe(true);
                 // @ts-expect-error
-                expect(validatable.validatables.info.validatables.age.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.info.validatables.age.message).toBe('string');
 
                 // @ts-expect-error
                 expect(validatable.validatables.info.validatables.hobby.valid).toBe(true);
                 // @ts-expect-error
-                expect(validatable.validatables.info.validatables.hobby.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.info.validatables.hobby.message).toBe('string');
 
                 // @ts-expect-error
                 expect(validatable.validatables.info.validatables.no.valid).toBe(true);
                 // @ts-expect-error
-                expect(validatable.validatables.info.validatables.no.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.info.validatables.no.message).toBe('string');
 
 
             } else {
@@ -399,7 +399,7 @@ describe("recursive", function() {
             if(validatable.validatables.name) {
 
                 expect(validatable.validatables.name.valid).toBe(true);
-                expect(validatable.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.name.message).toBe('string');
 
             } else {
 
@@ -410,7 +410,7 @@ describe("recursive", function() {
             if(validatable.validatables.address) {
 
                 expect(validatable.validatables.address.valid).toBe(true);
-                expect(validatable.validatables.address.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.address.message).toBe('string');
 
             } else {
 
@@ -421,7 +421,7 @@ describe("recursive", function() {
             if(validatable.validatables.user) {
 
                 expect(validatable.validatables.user.valid).toBe(true);
-                expect(validatable.validatables.user.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.user.message).toBe('string');
 
             } else {
 
@@ -436,17 +436,17 @@ describe("recursive", function() {
                 // @ts-expect-error
                 expect(validatable.validatables.info.validatables.age.valid).toBe(true);
                 // @ts-expect-error
-                expect(validatable.validatables.info.validatables.age.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.info.validatables.age.message).toBe('string');
 
                 // @ts-expect-error
                 expect(validatable.validatables.info.validatables.hobby.valid).toBe(true);
                 // @ts-expect-error
-                expect(validatable.validatables.info.validatables.hobby.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.info.validatables.hobby.message).toBe('string');
 
                 // @ts-expect-error
                 expect(validatable.validatables.info.validatables.no.valid).toBe(true);
                 // @ts-expect-error
-                expect(validatable.validatables.info.validatables.no.message).toBe('value is type of "string"');
+                expect(typeof validatable.validatables.info.validatables.no.message).toBe('string');
 
 
             } else {
@@ -486,7 +486,7 @@ describe("recursive", function() {
 
             if(and.validatables.name) {
                 expect(and.validatables.name.valid).toBe(true);
-                expect(and.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof and.validatables.name.message).toBe('string');
 
             } else {
                 fail('validatable.validatables.name should exist');
@@ -494,7 +494,7 @@ describe("recursive", function() {
 
             if(and.validatables.age) {
                 expect(and.validatables.age.valid).toBe(false);
-                expect(and.validatables.age.message).toBe('value is not type of "number"');
+                expect(typeof and.validatables.age.message).toBe('string');
 
             } else {
                 fail('validatable.validatables.age should exist');
@@ -520,14 +520,14 @@ describe("recursive", function() {
             expect(or.valid).toBe(true);
 
             if(or.validatables.name) {
-                expect(or.validatables.name.message).toBe('value is type of "string"');
+                expect(typeof or.validatables.name.message).toBe('string');
                 expect(or.validatables.name.valid).toBe(true);
             } else {
                 fail('validatable.validatables.name should exist');
             }
 
             if(or.validatables.age) {
-                expect(or.validatables.age.message).toBe('value is not type of "number"');
+                expect(typeof or.validatables.age.message).toBe('string');
                 expect(or.validatables.age.valid).toBe(false);
             } else {
                 fail('validatable.validatables.age should exist');
@@ -576,7 +576,7 @@ describe("recursive", function() {
             if(and.validatables.name) {
 
                 expect(and.validatables.name.valid).toBe(false);
-                expect(and.validatables.name.message).toBe('value is not type of "string"');
+                expect(typeof and.validatables.name.message).toBe('string');
             } else {
                 fail('validatable.validatables.name should exist');
             }
@@ -606,8 +606,9 @@ describe("recursive", function() {
 
             if(or.validatables.name) {
 
-                expect(or.validatables.name.message).toBe('value is not type of "string"');
+                expect(typeof or.validatables.name.message).toBe('string');
                 expect(or.validatables.name.valid).toBe(false);
+
             } else {
                 fail('validatable.validatables.name should exist');
             }

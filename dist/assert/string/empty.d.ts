@@ -3,5 +3,6 @@
  *
  * @param valid
  * @param value
+ * @param subject
  */
-export default function Empty(valid: boolean, value: object): string;
+export default function Empty(valid: boolean, value: object, subject?: string): string;
