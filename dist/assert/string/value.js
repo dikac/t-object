@@ -20,8 +20,8 @@
             invalid: 'value is not',
             valid: 'value is',
         }, '');
-        sentence.value = property.toString();
-        sentence.type = type;
+        sentence.subject = property.toString();
+        sentence.object = type;
         sentence.valid = valid;
         return sentence.message;
     }

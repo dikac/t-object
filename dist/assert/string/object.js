@@ -11,11 +11,11 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const sentences_is_1 = require("@dikac/t-string/message/sentences-is");
     function Object_(valid, value, subject = 'type', conversion = value => typeof value) {
-        let sentence = new sentences_is_1.default(valid);
-        sentence.type.push('object');
-        sentence.value.push(subject);
+        let sentence = sentences_is_1.default(valid);
+        sentence.object.push('object');
+        sentence.subject.push(subject);
         if (!valid) {
-            sentence.value.push(conversion(value));
+            sentence.subject.push(conversion(value));
         }
         return sentence.message;
     }

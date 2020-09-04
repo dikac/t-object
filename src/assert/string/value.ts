@@ -1,7 +1,4 @@
 import Sentence from "@dikac/t-string/message/sentence";
-
-
-
 /**
  * {@param valid} type is valid or not
  * {@param property} object property
@@ -22,8 +19,8 @@ export default function Value(
         }, ''
     );
 
-    sentence.value = property.toString();
-    sentence.type = type;
+    sentence.subject = property.toString();
+    sentence.object = type;
     sentence.valid = valid;
 
     return sentence.message;

@@ -19,14 +19,14 @@
      * @param subject
      */
     function NotEmpty(valid, value, subject = '') {
-        const sentence = new sentences_is_1.default(valid);
-        sentence.expectation = {
+        const sentence = sentences_is_1.default(valid);
+        sentence.predicate = {
             invalid: ['is not'],
             valid: ['is'],
         };
-        sentence.value.push(subject);
-        sentence.value.push(name_1.default(value));
-        sentence.type = ['empty object'];
+        sentence.subject.push(subject);
+        sentence.subject.push(name_1.default(value));
+        sentence.object = ['empty object'];
         return sentence.message;
     }
     exports.default = NotEmpty;

@@ -19,10 +19,10 @@
      * @param subject
      */
     function Empty(valid, value, subject = '') {
-        const sentence = new sentences_is_1.default(valid);
-        sentence.value.push(subject);
-        sentence.value.push(name_1.default(value));
-        sentence.type = ['empty object'];
+        const sentence = sentences_is_1.default(valid);
+        sentence.subject.push(subject);
+        sentence.subject.push(name_1.default(value));
+        sentence.object = ['empty object'];
         return sentence.message;
     }
     exports.default = Empty;

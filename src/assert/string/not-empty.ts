@@ -11,16 +11,16 @@ import SentencesIs from "@dikac/t-string/message/sentences-is";
 
 export default function NotEmpty(valid : boolean, value : object, subject : string = '') : string {
 
-    const sentence = new SentencesIs(valid,);
+    const sentence = SentencesIs(valid);
 
-    sentence.expectation = {
+    sentence.predicate = {
         invalid:['is not'],
         valid:['is'],
     };
 
-    sentence.value.push(subject);
-    sentence.value.push(Name(value));
-    sentence.type = ['empty object'];
+    sentence.subject.push(subject);
+    sentence.subject.push(Name(value));
+    sentence.object = ['empty object'];
 
     return sentence.message;
 }

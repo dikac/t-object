@@ -8,13 +8,13 @@ export default function Object_(
     conversion : (value:unknown)=>string = value=>typeof value
 ) : string {
 
-    let sentence = new SentencesIs(valid);
-    sentence.type.push('object');
-    sentence.value.push(subject);
+    let sentence = SentencesIs(valid);
+    sentence.object.push('object');
+    sentence.subject.push(subject);
 
     if(!valid) {
 
-        sentence.value.push(conversion(value));
+        sentence.subject.push(conversion(value));
     }
 
     return sentence.message;

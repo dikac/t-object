@@ -1,7 +1,6 @@
 import Name from "../../string/name";
 import SentencesIs from "@dikac/t-string/message/sentences-is";
 
-
 /**
  * string intended for empty object
  *
@@ -16,10 +15,10 @@ export default function Empty(
     subject : string = '',
 ) : string {
 
-    const sentence = new SentencesIs(valid);
+    const sentence = SentencesIs(valid);
 
-    sentence.value.push(subject);
-    sentence.value.push(Name(value));
-    sentence.type = ['empty object'];
+    sentence.subject.push(subject);
+    sentence.subject.push(Name(value));
+    sentence.object = ['empty object'];
     return sentence.message;
 }
