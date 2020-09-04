@@ -1,4 +1,4 @@
-import AssignUndefined from "../dist/assign-undefined";
+import Default from "../dist/default";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -15,7 +15,7 @@ describe('destination undefined', () => {
         data4 : 'b',
     };
 
-    let result = AssignUndefined(target, source);
+    let result = Default(target, source);
 
     it(`check object`, () => {
 
@@ -54,7 +54,7 @@ describe('source undefined', () => {
 
     };
 
-    let result = AssignUndefined(target, source);
+    let result = Default(target, source);
 
     it(`check object`, () => {
 
@@ -96,7 +96,7 @@ describe('both set', () => {
         data4 : 'd',
     };
 
-    let result = AssignUndefined(target, source);
+    let result = Default(target, source);
 
     it(`check object`, () => {
 
@@ -139,7 +139,7 @@ describe('target mixed', () => {
         data4 : 'b',
     };
 
-    let result = AssignUndefined(target, source);
+    let result = Default(target, source);
 
     it(`check object`, () => {
 
@@ -184,7 +184,7 @@ describe('target & source mixed', () => {
         data5 : 'c',
     };
 
-    let result = AssignUndefined(target, source);
+    let result = Default(target, source);
 
     it(`check object`, () => {
 
@@ -224,7 +224,7 @@ describe('both undefined', () => {
         data4 : undefined,
     };
 
-    let result = AssignUndefined(target, source);
+    let result = Default(target, source);
 
     it(`check object`, () => {
 

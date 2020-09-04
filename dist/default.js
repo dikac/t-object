@@ -12,7 +12,7 @@
     /**
      * assign all {@param source} value to all undefined value in {@param target}
      */
-    function AssignUndefined(target, source) {
+    function Default(target, source) {
         for (let property in source) {
             // @ts-ignore
             if (target[property] === undefined) {
@@ -22,6 +22,6 @@
         }
         return target;
     }
-    exports.default = AssignUndefined;
+    exports.default = Default;
 });
-//# sourceMappingURL=assign-undefined.js.map
+//# sourceMappingURL=default.js.map
