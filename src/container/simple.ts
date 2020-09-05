@@ -1,10 +1,9 @@
-import Container from "./container";
+import HandlerAlreadyExist from "./string/handler-already-exist";
+import Callable from "./function/callable";
+import Simple from "../builder/simple";
 
 /**
- * create simple {@see Container} without context & option
+ * @deprecated
+ * use original instead
  */
-export default function Simple<Type extends object>() : Container<Type, void, void> {
-
-    return new Container<Type, void, void>(undefined)
-
-}
+export default Simple;

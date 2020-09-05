@@ -1,4 +1,6 @@
-export default function HandlerAlreadyExist(property : PropertyKey) : string {
-
-    return `handler ${property.toString()} already exists`;
-}
+import HandlerAlreadyExist from "../../builder/string/handler-already-exist";
+/**
+ * @deprecated
+ * use original instead
+ */
+export default HandlerAlreadyExist;

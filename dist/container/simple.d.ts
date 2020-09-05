@@ -1,5 +1,6 @@
-import Container from "./container";
+import Simple from "../builder/simple";
 /**
- * create simple {@see Container} without context & option
+ * @deprecated
+ * use original instead
  */
-export default function Simple<Type extends object>(): Container<Type, void, void>;
+export default Simple;

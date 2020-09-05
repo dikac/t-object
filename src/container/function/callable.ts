@@ -1,13 +1,6 @@
-type Callable<
-    Type extends object,
-    Property extends keyof Type,
-    Context extends any,
-    Option extends any
-> = (
-    target:Type,
-    key : Property,
-    context : Context,
-    option : Option
-)=>void
-
+import Callable from "../../builder/function/callable";
+/**
+ * @deprecated
+ * use original instead
+ */
 export default Callable;

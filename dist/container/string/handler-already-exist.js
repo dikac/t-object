@@ -4,14 +4,16 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "../../builder/string/handler-already-exist"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function HandlerAlreadyExist(property) {
-        return `handler ${property.toString()} already exists`;
-    }
-    exports.default = HandlerAlreadyExist;
+    const handler_already_exist_1 = require("../../builder/string/handler-already-exist");
+    /**
+     * @deprecated
+     * use original instead
+     */
+    exports.default = handler_already_exist_1.default;
 });
 //# sourceMappingURL=handler-already-exist.js.map

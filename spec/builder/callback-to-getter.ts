@@ -1,4 +1,4 @@
-import Container from "../../dist/container/container";
+import Container from "../../dist/builder/builder";
 import MemoizeGetterBind from "../../dist/set-getter-callback";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

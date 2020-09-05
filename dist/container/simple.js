@@ -4,18 +4,16 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./container"], factory);
+        define(["require", "exports", "../builder/simple"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const container_1 = require("./container");
+    const simple_1 = require("../builder/simple");
     /**
-     * create simple {@see Container} without context & option
+     * @deprecated
+     * use original instead
      */
-    function Simple() {
-        return new container_1.default(undefined);
-    }
-    exports.default = Simple;
+    exports.default = simple_1.default;
 });
 //# sourceMappingURL=simple.js.map
