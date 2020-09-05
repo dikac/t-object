@@ -1,5 +1,4 @@
 import HasProperty from "../../property/boolean/exists";
-import BooleanType from "@dikac/t-boolean/boolean";
 
 import PropertyInterface from "../property";
 

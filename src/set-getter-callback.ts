@@ -1,7 +1,5 @@
-import SetGetter from "./value/set-getter";
 import {O} from "ts-toolbelt";
 import {Required} from "utility-types";
-import SetProperty from "./value/set-property";
 import SetPropertyCallback from "./set-property-callback";
 
 /**
