@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const memoize_property_1 = require("./memoize-property");
-    function MemoizePropertyBind(object, property, factory, writable, configurable) {
+    function MemoizePropertyBind(object, property, factory, writable = true, configurable = true) {
         return Object.defineProperty(object, property, {
             configurable: true,
             get() {

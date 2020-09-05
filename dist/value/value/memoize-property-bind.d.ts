@@ -14,5 +14,5 @@ import { Required } from "utility-types";
  * @param factory
  * @param configurable
  */
-export default function MemoizePropertyBind<This extends object, Key extends keyof This>(object: This, property: Key, factory: () => This[Key], writable: boolean, configurable: boolean): O.Readonly<Required<This, Key>>;
-export default function MemoizePropertyBind<This extends object, Key extends PropertyKey, Type>(object: This, property: Key, factory: () => Type, writable: boolean, configurable: boolean): Omit<This, Key> & O.Readonly<Record<Key, Type>>;
+export default function MemoizePropertyBind<This extends object, Key extends keyof This>(object: This, property: Key, factory: () => This[Key], writable?: boolean, configurable?: boolean): O.Readonly<Required<This, Key>>;
+export default function MemoizePropertyBind<This extends object, Key extends PropertyKey, Type>(object: This, property: Key, factory: () => Type, writable?: boolean, configurable?: boolean): Omit<This, Key> & O.Readonly<Record<Key, Type>>;

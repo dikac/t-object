@@ -23,8 +23,8 @@ export default function MemoizePropertyBind<
     object : This,
     property : Key,
     factory : ()=>This[Key],
-    writable : boolean,
-    configurable : boolean
+    writable ?: boolean,
+    configurable ?: boolean
 ) : O.Readonly<Required<This, Key>>
 
 export default function MemoizePropertyBind<
@@ -35,8 +35,8 @@ export default function MemoizePropertyBind<
     object : This,
     property : Key,
     factory : ()=>Type,
-    writable : boolean,
-    configurable : boolean
+    writable ?: boolean,
+    configurable ?: boolean
 ) : Omit<This, Key> & O.Readonly<Record<Key, Type>>
 
 export default function MemoizePropertyBind<
@@ -46,8 +46,8 @@ export default function MemoizePropertyBind<
     object : This,
     property : PropertyKey,
     factory : ()=>Type,
-    writable : boolean,
-    configurable : boolean
+    writable : boolean = true,
+    configurable : boolean = true
 ) {
 
     return Object.defineProperty(object, property, {
