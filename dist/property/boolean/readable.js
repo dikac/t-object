@@ -4,14 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../descriptor/boolean/getter", "../../descriptor/boolean/property", "../../descriptor/from-object"], factory);
+        define(["require", "exports", "../../descriptor/boolean/getter", "../../descriptor/from-object", "./exists"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const getter_1 = require("../../descriptor/boolean/getter");
-    const property_1 = require("../../descriptor/boolean/property");
     const from_object_1 = require("../../descriptor/from-object");
+    const exists_1 = require("./exists");
     /**
      * check if property is readable
      */
@@ -20,12 +20,10 @@
         if (!descriptor) {
             return false;
         }
-        // property
-        // all descriptor property must true
-        if (property_1.default(descriptor)) {
+        if (exists_1.default(descriptor, 'value')) {
             return true;
         }
-        // setter
+        // getter
         if (getter_1.default(descriptor)) {
             return true;
         }

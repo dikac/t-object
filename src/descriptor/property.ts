@@ -1,5 +1,5 @@
 
-type Property = Required<Pick<PropertyDescriptor, 'enumerable'|'configurable'|'writable'|'value'>>
+type Property = Required<Pick<PropertyDescriptor, 'value'>>
 
 export default Property;
 

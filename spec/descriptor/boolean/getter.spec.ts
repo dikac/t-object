@@ -1,7 +1,5 @@
 import Type from "../../../dist/descriptor/boolean/getter";
 
-
-
 describe("getter/setter", function() {
 
     describe("class", function() {

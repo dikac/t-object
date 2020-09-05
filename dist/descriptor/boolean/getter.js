@@ -4,24 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../boolean/method", "@dikac/t-boolean/boolean"], factory);
+        define(["require", "exports", "../../boolean/method"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const method_1 = require("../../boolean/method");
-    const boolean_1 = require("@dikac/t-boolean/boolean");
     function Getter(value) {
-        if (!method_1.default(value, 'get')) {
-            return false;
-        }
-        if (!boolean_1.default(value.enumerable)) {
-            return false;
-        }
-        if (value.configurable !== true) {
-            return false;
-        }
-        return true;
+        return method_1.default(value, 'get');
     }
     exports.default = Getter;
 });

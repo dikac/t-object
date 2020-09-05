@@ -1,6 +1,7 @@
 import SetDescriptor from "../../descriptor/boolean/setter";
 import PropertyDescriptor from "../../descriptor/boolean/property";
 import Descriptor from "../../descriptor/from-object";
+import HasProperty from "./exists";
 
 /**
  * check if property is writable
@@ -10,12 +11,13 @@ export default function Writable (object : object, property : PropertyKey) : boo
     let descriptor = Descriptor(object, property);
 
     if(!descriptor) {
+
         return false;
     }
 
     // property
     // all descriptor property must true
-    if(PropertyDescriptor(descriptor)) {
+    if(PropertyDescriptor(descriptor) && HasProperty(descriptor, 'writable') && descriptor.writable) {
 
         return true;
     }

@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../descriptor/boolean/setter", "../../descriptor/boolean/property", "../../descriptor/from-object"], factory);
+        define(["require", "exports", "../../descriptor/boolean/setter", "../../descriptor/boolean/property", "../../descriptor/from-object", "./exists"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -12,6 +12,7 @@
     const setter_1 = require("../../descriptor/boolean/setter");
     const property_1 = require("../../descriptor/boolean/property");
     const from_object_1 = require("../../descriptor/from-object");
+    const exists_1 = require("./exists");
     /**
      * check if property is writable
      */
@@ -22,7 +23,7 @@
         }
         // property
         // all descriptor property must true
-        if (property_1.default(descriptor)) {
+        if (property_1.default(descriptor) && exists_1.default(descriptor, 'writable') && descriptor.writable) {
             return true;
         }
         // setter

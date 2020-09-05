@@ -10,19 +10,24 @@
  * @param value
  * value tobe memoized
  *
+ * @param writable
+ *
  * @param configurable {@default true}
  */
-import MemoizeProperty from "./memoize-property";
-
-export default function MemoizeGetter<
+export default function MemoizeProperty<
     This extends object,
     Type,
 >(
     object : This,
     property : keyof This,
     value : Type,
+    writable : boolean,
     configurable : boolean = true,
 ) : Type {
 
-    return MemoizeProperty(object, property, value, false, configurable);
+    return Object.defineProperty(object, property, {
+        value : value,
+        writable : writable,
+        configurable : configurable
+    })[property];
 }

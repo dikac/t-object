@@ -1,6 +1,7 @@
 import GetDescriptor from "../../descriptor/boolean/getter";
 import PropertyDescriptor from "../../descriptor/boolean/property";
 import Descriptor from "../../descriptor/from-object";
+import HasProperty from "./exists";
 
 /**
  * check if property is readable
@@ -10,17 +11,16 @@ export default function Readable (object : object, property : PropertyKey) : boo
     let descriptor = Descriptor(object, property);
 
     if(!descriptor) {
+
         return false;
     }
 
-    // property
-    // all descriptor property must true
-    if(PropertyDescriptor(descriptor)) {
+    if(HasProperty(descriptor, 'value')) {
 
         return true;
     }
 
-    // setter
+    // getter
     if(GetDescriptor(descriptor)) {
 
         return true;

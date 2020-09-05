@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./memoize-property"], factory);
+        define(["require", "exports"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -21,12 +21,17 @@
      * @param value
      * value tobe memoized
      *
+     * @param writable
+     *
      * @param configurable {@default true}
      */
-    const memoize_property_1 = require("./memoize-property");
-    function MemoizeGetter(object, property, value, configurable = true) {
-        return memoize_property_1.default(object, property, value, false, configurable);
+    function MemoizeProperty(object, property, value, writable, configurable = true) {
+        return Object.defineProperty(object, property, {
+            value: value,
+            writable: writable,
+            configurable: configurable
+        })[property];
     }
-    exports.default = MemoizeGetter;
+    exports.default = MemoizeProperty;
 });
-//# sourceMappingURL=memoize-getter.js.map
+//# sourceMappingURL=memoize-property.js.map

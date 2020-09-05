@@ -10,6 +10,7 @@ import { Required } from "utility-types";
  * getter key
  *
  * @param factory
+ * @param configurable
  */
-export default function MemoizeGetterBind<This extends object, Key extends keyof This>(object: This, property: Key, factory: () => This[Key]): O.Readonly<Required<This, Key>>;
-export default function MemoizeGetterBind<This extends object, Key extends PropertyKey, Type>(object: This, property: Key, factory: () => Type): Omit<This, Key> & O.Readonly<Record<Key, Type>>;
+export default function MemoizeGetterBind<This extends object, Key extends keyof This>(object: This, property: Key, factory: () => This[Key], configurable?: boolean): O.Readonly<Required<This, Key>>;
+export default function MemoizeGetterBind<This extends object, Key extends PropertyKey, Type>(object: This, property: Key, factory: () => Type, configurable?: boolean): Omit<This, Key> & O.Readonly<Record<Key, Type>>;

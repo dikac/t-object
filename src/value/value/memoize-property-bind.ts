@@ -1,8 +1,6 @@
-import MemoizeGetter from "./memoize-getter";
+import MemoizeGetter from "./memoize-property";
 import {O} from "ts-toolbelt";
 import {Required} from "utility-types";
-import MemoizeProperty from "./memoize-property";
-import MemoizePropertyBind from "./memoize-property-bind";
 
 /**
  * set return from {@param factory} to getter for {@param object}
@@ -13,20 +11,23 @@ import MemoizePropertyBind from "./memoize-property-bind";
  * @param property
  * getter key
  *
+ * @param writable
+ *
  * @param factory
  * @param configurable
  */
-export default function MemoizeGetterBind<
+export default function MemoizePropertyBind<
     This extends object,
     Key extends keyof This
 >(
     object : This,
     property : Key,
     factory : ()=>This[Key],
-    configurable ?: boolean
+    writable : boolean,
+    configurable : boolean
 ) : O.Readonly<Required<This, Key>>
 
-export default function MemoizeGetterBind<
+export default function MemoizePropertyBind<
     This extends object,
     Key extends PropertyKey,
     Type
@@ -34,18 +35,25 @@ export default function MemoizeGetterBind<
     object : This,
     property : Key,
     factory : ()=>Type,
-    configurable ?: boolean
+    writable : boolean,
+    configurable : boolean
 ) : Omit<This, Key> & O.Readonly<Record<Key, Type>>
 
-export default function MemoizeGetterBind<
+export default function MemoizePropertyBind<
     This extends object,
     Type
 >(
     object : This,
     property : PropertyKey,
     factory : ()=>Type,
-    configurable : boolean = true,
+    writable : boolean,
+    configurable : boolean
 ) {
 
-    return MemoizePropertyBind(object, property, factory, false, configurable);
+    return Object.defineProperty(object, property, {
+        configurable : true,
+        get() {
+            return MemoizeGetter(object, <keyof This>property, factory(), writable, configurable);
+        }
+    });
 }
