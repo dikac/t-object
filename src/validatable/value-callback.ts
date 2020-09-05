@@ -1,7 +1,7 @@
 import Validator from "@dikac/t-validator/validator";
 import ValidatorValidatable from "@dikac/t-validator/validatable/validatable";
 import Validatable from "@dikac/t-validatable/validatable";
-import MemoizeGetter from "../value/value/memoize-getter";
+import SetGetter from "../value/set-getter";
 import Value from "./value";
 
 export default class ValueCallback<
@@ -29,7 +29,7 @@ export default class ValueCallback<
 
     get validatable () : ValidatableT {
 
-        return  MemoizeGetter(this, 'validatable', this.validation(this.validatables));
+        return  SetGetter(this, 'validatable', this.validation(this.validatables));
     }
 
     get messages() : Result {
@@ -39,12 +39,12 @@ export default class ValueCallback<
 
     get validatables() : Result {
 
-        return  MemoizeGetter(this, 'validatables', this.map(this.value, this.validators));
+        return  SetGetter(this, 'validatables', this.map(this.value, this.validators));
     }
 
     get message() : MessageT {
 
-        return  MemoizeGetter(this, 'message', this.messageFactory(this.validatables));
+        return  SetGetter(this, 'message', this.messageFactory(this.validatables));
 
     }
 }

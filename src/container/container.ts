@@ -56,7 +56,7 @@ export default class Container<
 
         for(let [property, value] of this) {
 
-            value(target, property, this.context, option);
+            value(<Type>target, property, this.context, option);
         }
 
         return target as Type;

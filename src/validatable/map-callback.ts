@@ -4,7 +4,7 @@ import RecordParameter from "../validator/base/record/infer";
 import RecordBase from "../validator/base/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Map from "./map";
-import MemoizeGetter from "../value/value/memoize-getter";
+import SetGetter from "../value/set-getter";
 
 export default class MapCallback<
     MessageT = unknown,
@@ -39,6 +39,6 @@ export default class MapCallback<
 
     get message() : MessageT {
 
-        return MemoizeGetter(this, 'message', this.messageFactory(this.validatables));
+        return SetGetter(this, 'message', this.messageFactory(this.validatables));
     }
 }

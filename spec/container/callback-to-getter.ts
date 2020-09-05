@@ -1,5 +1,5 @@
 import Container from "../../dist/container/container";
-import MemoizeGetterBind from "../../dist/value/value/memoize-getter-bind";
+import MemoizeGetterBind from "../../dist/set-getter-callback";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 

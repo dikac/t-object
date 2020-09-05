@@ -4,7 +4,7 @@ import Value from "@dikac/t-value/value";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
-import MemoizeGetter from "../value/value/memoize-getter";
+import SetGetter from "../value/set-getter";
 
 export default class RecordCallback<
     MessageT = unknown,
@@ -45,6 +45,6 @@ export default class RecordCallback<
 
     get message() : MessageT {
 
-        return MemoizeGetter(this, 'message', this.messageFactory(this.validatables));
+        return SetGetter(this, 'message', this.messageFactory(this.validatables));
     }
 }

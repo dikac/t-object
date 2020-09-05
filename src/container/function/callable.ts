@@ -4,7 +4,7 @@ type Callable<
     Context extends any,
     Option extends any
 > = (
-    target:Partial<Type>,
+    target:Type,
     key : Property,
     context : Context,
     option : Option

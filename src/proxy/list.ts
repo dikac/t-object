@@ -6,7 +6,6 @@ export default function List<Objects extends object[]>(
     factories : ((argument:Objects)=>ProxyHandler<Partial<Merge<Objects>>>)[]
 ) : Merge<Objects> {
 
-
     let handlers : ProxyHandler<Partial<Merge<Objects>>>[] = [];
 
     for (let factory of factories) {
