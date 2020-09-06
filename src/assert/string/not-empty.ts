@@ -14,8 +14,8 @@ export default function NotEmpty(valid : boolean, value : object, subject : stri
     const sentence = SentencesIs(valid);
 
     sentence.predicate = {
-        invalid:['is not'],
-        valid:['is'],
+        invalid:['is'],
+        valid:['is not'],
     };
 
     sentence.subject.push(subject);

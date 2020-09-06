@@ -21,8 +21,8 @@
     function NotEmpty(valid, value, subject = '') {
         const sentence = sentences_is_1.default(valid);
         sentence.predicate = {
-            invalid: ['is not'],
-            valid: ['is'],
+            invalid: ['is'],
+            valid: ['is not'],
         };
         sentence.subject.push(subject);
         sentence.subject.push(name_1.default(value));
