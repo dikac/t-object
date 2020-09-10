@@ -1,1 +1,1 @@
-export default function Object(value: unknown, error?: (value: unknown) => Error): object;
+export default function Object_(value: unknown, error?: (value: unknown) => Error): object;

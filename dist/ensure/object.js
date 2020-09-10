@@ -11,10 +11,10 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const object_1 = require("../assert/object");
     const object_2 = require("../assert/throwable/object");
-    function Object(value, error = object_2.default) {
+    function Object_(value, error = object_2.default) {
         object_1.default(value, error);
         return value;
     }
-    exports.default = Object;
+    exports.default = Object_;
 });
 //# sourceMappingURL=object.js.map
