@@ -1,15 +1,15 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.33.2",
+  "version": "0.33.3",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
-    "@dikac/t-array": "^0.23.8",
+    "@dikac/t-array": "^0.23.9",
     "@dikac/t-boolean": "^0.9.3",
     "@dikac/t-class": "^0.1.2",
     "@dikac/t-function": "^0.12.4",
     "@dikac/t-message": "^0.10.3",
-    "@dikac/t-string": "^0.13.7",
+    "@dikac/t-string": "^0.14.1",
     "@dikac/t-validatable": "^0.18.8",
     "@dikac/t-validator": "^0.16.5",
     "@dikac/t-value": "^0.12.6",

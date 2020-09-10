@@ -16,13 +16,11 @@
      * {@param type} expected type
      */
     function Value(valid, property, type) {
-        const sentence = new sentence_1.default(valid, '', {
-            invalid: 'value is not',
-            valid: 'value is',
-        }, '');
+        const sentence = new sentence_1.default(valid);
+        sentence.reject = 'value is not';
+        sentence.accept = 'value is';
         sentence.subject = property.toString();
-        sentence.object = type;
-        sentence.valid = valid;
+        sentence.expect = type;
         return sentence.message;
     }
     exports.default = Value;

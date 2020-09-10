@@ -11,11 +11,12 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const sentences_1 = require("@dikac/t-string/message/sentences");
     const name_1 = require("../../string/name");
-    function Sentence(valid, target, property, predicate, object) {
+    function Sentence(valid, target, property, accept, reject, object) {
         let sentence = new sentences_1.default(valid);
         sentence.subject = [name_1.default(target) + '.' + property.toLocaleString()];
-        sentence.predicate = predicate;
-        sentence.object = object;
+        sentence.accept = accept;
+        sentence.reject = reject;
+        sentence.expect = object;
         return sentence;
     }
     exports.default = Sentence;

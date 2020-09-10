@@ -12,10 +12,10 @@
     const sentences_1 = require("@dikac/t-string/message/sentences");
     function NameNotFound(valid, value, subject = 'type', conversion = value => typeof value) {
         let sentence = new sentences_1.default(valid);
-        sentence.predicate.valid = ['have'];
-        sentence.predicate.invalid = ['does not have'];
+        sentence.accept = ['have'];
+        sentence.reject = ['does not have'];
         sentence.subject.push(subject);
-        sentence.object.push('prototype name');
+        sentence.expect.push('prototype name');
         if (!valid) {
             sentence.subject.push(conversion(value));
         }

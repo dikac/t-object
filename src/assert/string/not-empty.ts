@@ -1,5 +1,5 @@
 import Name from "../../string/name";
-import SentencesIs from "@dikac/t-string/message/sentences-is";
+import SentencesMust from "@dikac/t-string/message/sentences-must";
 
 /**
  * string intended for not empty object
@@ -11,16 +11,15 @@ import SentencesIs from "@dikac/t-string/message/sentences-is";
 
 export default function NotEmpty(valid : boolean, value : object, subject : string = '') : string {
 
-    const sentence = SentencesIs(valid);
+    const sentence = SentencesMust(valid);
 
-    sentence.predicate = {
-        invalid:['is'],
-        valid:['is not'],
-    };
+    sentence.accept = ['is'];
+    sentence.reject = ['is not'];
 
     sentence.subject.push(subject);
     sentence.subject.push(Name(value));
-    sentence.object = ['empty object'];
+
+    sentence.expect = ['empty object'];
 
     return sentence.message;
 }

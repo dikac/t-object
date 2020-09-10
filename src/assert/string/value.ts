@@ -10,18 +10,14 @@ export default function Value(
     type : string
 ) : string {
 
-    const sentence = new Sentence(
-        valid,
-        '',
-        {
-            invalid:'value is not',
-            valid:'value is',
-        }, ''
-    );
+    const sentence = new Sentence(valid);
+
+    sentence.reject = 'value is not';
+    sentence.accept = 'value is';
+
 
     sentence.subject = property.toString();
-    sentence.object = type;
-    sentence.valid = valid;
+    sentence.expect = type;
 
     return sentence.message;
 }
