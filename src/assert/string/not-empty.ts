@@ -9,12 +9,16 @@ import SentencesMust from "@dikac/t-string/message/sentences-must";
  * @param subject
  */
 
-export default function NotEmpty(valid : boolean, value : object, subject : string = '') : string {
+export default function NotEmpty(
+    valid : boolean,
+    value : object,
+    subject : string = ''
+) : string {
 
     const sentence = SentencesMust(valid);
 
-    sentence.accept = ['is'];
-    sentence.reject = ['is not'];
+    sentence.accept = ['is not'];
+    sentence.reject = ['must not'];
 
     sentence.subject.push(subject);
     sentence.subject.push(Name(value));

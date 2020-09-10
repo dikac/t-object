@@ -20,8 +20,8 @@
      */
     function NotEmpty(valid, value, subject = '') {
         const sentence = sentences_must_1.default(valid);
-        sentence.accept = ['is'];
-        sentence.reject = ['is not'];
+        sentence.accept = ['is not'];
+        sentence.reject = ['must not'];
         sentence.subject.push(subject);
         sentence.subject.push(name_1.default(value));
         sentence.expect = ['empty object'];
