@@ -1,6 +1,6 @@
 import StringType from "../string/object";
 
-export default function String(
+export default function Object(
     string : unknown,
     subject : string = 'type',
     conversion : (value:unknown)=>string = value=>typeof value

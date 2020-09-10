@@ -1,6 +1,6 @@
 import Guard from "../boolean/object";
 import Callback from "@dikac/t-function/assert/callback";
-import StringError from "./throwable/string";
+import StringError from "./throwable/object";
 
 export default function Object_(
     value : unknown,
