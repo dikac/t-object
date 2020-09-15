@@ -10,22 +10,6 @@ import Instance from "@dikac/t-validator/validatable/validatable";
 import ValidatableReplace from "@dikac/t-validatable/boolean/replace";
 import Simple from "@dikac/t-validator/validatable/simple";
 
-// export type Interface<
-//     Container extends Record<any, Validator>,
-//     Result extends Record<any, Instance>,
-//     ValidatableT extends Validatable,
-//     MessageT,
-// > =
-//     ValidatorSimple<
-//         RecordBase<Container>,
-//         RecordType<Container>,
-//         ValidatableMapInterface<MessageT, Container, Result, ValidatableT, RecordBase<Container>>
-//     > &
-//     Validation<(result:Result)=>ValidatableT> &
-//     Validators<Container> &
-//     Message<(result:Result)=>MessageT> &
-//     {map : (record:RecordParameter<Container>, validators : Container)=>Result}
-
 export default class MapCallback<
     Container extends Record<any, Validator> = Record<PropertyKey, Validator>,
     Result extends Record<any, Instance> = Record<PropertyKey, Instance>,

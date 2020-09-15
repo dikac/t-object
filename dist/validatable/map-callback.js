@@ -17,15 +17,15 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../value/value/record/map", "../value/value/set-getter", "../value/value/set-property"], factory);
+        define(["require", "exports", "../value/value/set-getter", "../value/value/set-property", "../pick"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var _value;
     Object.defineProperty(exports, "__esModule", { value: true });
-    const map_1 = require("../value/value/record/map");
     const set_getter_1 = require("../value/value/set-getter");
     const set_property_1 = require("../value/value/set-property");
+    const pick_1 = require("../pick");
     class MapCallback {
         constructor(value, validators, map, validation, message) {
             this.validators = validators;
@@ -39,19 +39,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
             return this.validatable.valid;
         }
         get validatable() {
-            const validatable = this.validation(this.validatables);
-            return set_property_1.default(this, 'validatable', validatable);
+            return set_property_1.default(this, 'validatable', this.validation(this.validatables));
         }
         get messages() {
             return this.validatables;
         }
         get validatables() {
-            const validatables = this.map(__classPrivateFieldGet(this, _value), this.validators);
-            return set_property_1.default(this, 'validatables', validatables);
+            return set_property_1.default(this, 'validatables', this.map(__classPrivateFieldGet(this, _value), this.validators));
         }
         get value() {
-            const value = map_1.default(this.validatables);
-            return set_property_1.default(this, 'value', value);
+            return set_property_1.default(this, 'value', pick_1.default(__classPrivateFieldGet(this, _value), ...Object.keys(this.validatables)));
         }
         get message() {
             return set_getter_1.default(this, 'message', this.messageFactory(this.validatables));

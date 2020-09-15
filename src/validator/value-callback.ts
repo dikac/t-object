@@ -28,6 +28,7 @@ export default class ValueCallback<
 
     validate<Argument extends BaseT>(argument: Argument) {
 
-        return <ValidatableValue<Argument, MessageT, RecordT, Result, ValidatableT> | Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>>> new ValidatableValueCallback(argument, this.validators, this.handler, this.validation, this.message);
+        return <ValidatableValue<Argument, MessageT, RecordT, Result, ValidatableT> | Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>>>
+            new ValidatableValueCallback(argument, this.validators, this.handler, this.validation, this.message);
     }
 }

@@ -7,6 +7,7 @@ import Instance from "@dikac/t-validator/validatable/validatable";
 import Map from "./map";
 import SetGetter from "../value/value/set-getter";
 import SetProperty from "../value/value/set-property";
+import Pick from "../pick";
 
 export default class MapCallback<
     MessageT = unknown,
@@ -40,9 +41,7 @@ export default class MapCallback<
 
     get validatable() : ValidatableT {
 
-        const validatable = this.validation(this.validatables);
-
-        return SetProperty(this, 'validatable', validatable);
+        return SetProperty(this, 'validatable', this.validation(this.validatables));
     }
 
     get messages () : Result {
@@ -52,16 +51,12 @@ export default class MapCallback<
 
     get validatables() : Result {
 
-        const validatables = this.map(this.#value, this.validators);
-
-        return SetProperty(this, 'validatables', validatables);
+        return SetProperty(this, 'validatables', this.map(this.#value, this.validators));
     }
 
     get value () : ValueT {
 
-        const value = MapValue(this.validatables) as ValueT;
-
-        return SetProperty(this, 'value', value);
+        return SetProperty(this, 'value', Pick(this.#value, ...Object.keys(this.validatables)) as ValueT);
     }
 
     get message() : MessageT {
