@@ -1,4 +1,4 @@
-import MemoizeGetter from "./value/set-property";
+import MemoizeGetter from "./value/value/set-property";
 import {O} from "ts-toolbelt";
 import {Required} from "utility-types";
 

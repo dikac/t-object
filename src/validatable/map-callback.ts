@@ -1,10 +1,12 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import RecordParameter from "../validator/base/record/infer";
+import MapValue from "../value/value/record/map";
 import RecordBase from "../validator/base/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Map from "./map";
-import SetGetter from "../value/set-getter";
+import SetGetter from "../value/value/set-getter";
+import SetProperty from "../value/value/set-property";
 
 export default class MapCallback<
     MessageT = unknown,
@@ -14,28 +16,53 @@ export default class MapCallback<
     ValueT extends RecordBase<ValidatorsT> = RecordBase<ValidatorsT>
 > implements Map<MessageT, ValidatorsT, Result, ValidatableT, ValueT> {
 
-    public validatables : Result;
-    public valid : boolean;
-    public validatable : ValidatableT;
     private messageFactory : (result : Result)=>MessageT;
-    public messages : Result;
+
+    #value : ValueT;
 
     constructor(
-        public value: ValueT,
+        value: ValueT,
         public validators : ValidatorsT,
-        map : (values : RecordParameter<ValidatorsT>, validators : ValidatorsT)=>Result,
-        validation : (result : Result)=>ValidatableT,
+        private map : (values : RecordParameter<ValidatorsT>, validators : ValidatorsT)=>Result,
+        private validation : (result : Result)=>ValidatableT,
         message : (result : Result)=>MessageT,
     ) {
 
-        this.validatables = map(value, this.validators);
-        this.messages = this.validatables;
+        this.#value = value;
 
-        this.validatable = validation(this.validatables);
-        this.valid = this.validatable.valid;
         this.messageFactory = message;
     }
 
+    get valid() : boolean {
+
+        return this.validatable.valid;
+    }
+
+    get validatable() : ValidatableT {
+
+        const validatable = this.validation(this.validatables);
+
+        return SetProperty(this, 'validatable', validatable);
+    }
+
+    get messages () : Result {
+
+        return this.validatables;
+    }
+
+    get validatables() : Result {
+
+        const validatables = this.map(this.#value, this.validators);
+
+        return SetProperty(this, 'validatables', validatables);
+    }
+
+    get value () : ValueT {
+
+        const value = MapValue(this.validatables) as ValueT;
+
+        return SetProperty(this, 'value', value);
+    }
 
     get message() : MessageT {
 

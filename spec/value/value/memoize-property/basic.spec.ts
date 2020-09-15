@@ -1,6 +1,6 @@
-import SetProperty from "../../../dist/value/set-property";
-import Readable from "../../../dist/property/boolean/readable";
-import Writable from "../../../dist/property/boolean/writable";
+import SetProperty from "../../../../dist/value/value/set-property";
+import Readable from "../../../../dist/property/boolean/readable";
+import Writable from "../../../../dist/property/boolean/writable";
 
 it("enable console log", () => spyOn(console, 'log').and.callThrough());
 

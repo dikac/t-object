@@ -1,4 +1,4 @@
-import SetProperty from "../../../dist/value/set-property";
+import SetGetter from "../../../../dist/value/value/set-getter";
 
 it("enable console log", () => spyOn(console, 'log').and.callThrough());
 
@@ -8,7 +8,7 @@ describe('plain', () => {
 
         get data ()  {
 
-            return SetProperty(this, 'data', 'string');
+            return SetGetter(this, 'data', 'string');
         }
     }
 
@@ -23,7 +23,7 @@ describe('different type', () => {
         get data () : number {
 
         // @ts-expect-error
-            return SetProperty(this, 'data', 'string');
+            return SetGetter(this, 'data', 'string');
         }
     }
     // @ts-expect-error
@@ -43,7 +43,7 @@ describe('class', () => {
 
             get data ()  {
 
-                return SetProperty(this, 'data', 'string');
+                return SetGetter(this, 'data', 'string');
             }
         }
 
@@ -58,7 +58,7 @@ describe('class', () => {
 
             get data ()  {
 
-                return SetProperty(this, 'data', 'string');
+                return SetGetter(this, 'data', 'string');
             }
         }
 
@@ -77,7 +77,7 @@ describe('not exists', () => {
             get data ()  {
 
                 // @ts-expect-error
-                return SetProperty(object, 'c', 'string');
+                return SetGetter(object, 'c', 'string');
             }
         }
 
@@ -91,7 +91,7 @@ describe('not exists', () => {
 
             get data ()  {
 
-                return SetProperty(this, 'c', 'string');
+                return SetGetter(this, 'c', 'string');
             }
         }
 

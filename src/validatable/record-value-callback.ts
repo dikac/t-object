@@ -4,7 +4,7 @@ import Value from "@dikac/t-value/value";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
-import SetGetter from "../value/set-getter";
+import SetGetter from "../value/value/set-getter";
 
 export default class RecordCallback<
     MessageT = unknown,

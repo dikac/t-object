@@ -1,7 +1,7 @@
 import Validator from "@dikac/t-validator/validator";
 import ValidatorValidatable from "@dikac/t-validator/validatable/validatable";
 import Validatable from "@dikac/t-validatable/validatable";
-import SetGetter from "../value/set-getter";
+import SetGetter from "../value/value/set-getter";
 import Value from "./value";
 
 export default class ValueCallback<

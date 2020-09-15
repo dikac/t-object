@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./value/set-property"], factory);
+        define(["require", "exports", "./value/value/set-property"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const set_property_1 = require("./value/set-property");
+    const set_property_1 = require("./value/value/set-property");
     function SetPropertyCallback(object, property, factory, writable = true, configurable = true) {
         return Object.defineProperty(object, property, {
             configurable: true,
