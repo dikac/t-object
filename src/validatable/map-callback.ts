@@ -55,7 +55,7 @@ export default class MapCallback<
 
     get value () : ValueType {
 
-        return SetProperty(this, 'value', Pick(this.#value, ...Object.keys(this.validatables)) as ValueType);
+        return SetProperty(this, 'value', Pick(this.#value, ...Object.keys(this.validators)) as ValueType);
     }
 
     get message() : MessageType {

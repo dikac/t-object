@@ -60,7 +60,7 @@ describe("flat", function() {
         property.validation = (v)=>Or(<globalThis.Record<PropertyKey, Validatable>>v);
 
         let or = property.validate(value);
-        expect(or.value).not.toEqual(value);
+        expect(or.value).toEqual(value);
         expect(or.valid).toBe(true);
 
         if(or.validatables.name) {
@@ -119,7 +119,7 @@ describe("recursive", function() {
         let and = property.validate(value);
 
         expect(and.valid).toBe(false);
-        expect(and.value).not.toEqual(value);
+        expect(and.value).toEqual(value);
 
         if(and.validatables.name) {
             expect(and.validatables.name.valid).toBe(true);
@@ -154,7 +154,7 @@ describe("recursive", function() {
         property.validators.info.validation = (v)=>Or(v);
 
         let or = property.validate(value);
-        expect(or.value).not.toEqual(value);
+        expect(or.value).toEqual(value);
         expect(or.valid).toBe(true);
 
         if(or.validatables.name) {

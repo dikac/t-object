@@ -11,7 +11,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     class Debug {
         constructor(handler = (name, args) => console.log([name, args])) {
-            this.map = handler;
+            this.handler = handler;
         }
         getPrototypeOf(target) {
             return Object.getPrototypeOf(target);

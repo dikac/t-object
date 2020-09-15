@@ -48,7 +48,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
             return set_property_1.default(this, 'validatables', this.map(__classPrivateFieldGet(this, _value), this.validators));
         }
         get value() {
-            return set_property_1.default(this, 'value', pick_1.default(__classPrivateFieldGet(this, _value), ...Object.keys(this.validatables)));
+            return set_property_1.default(this, 'value', pick_1.default(__classPrivateFieldGet(this, _value), ...Object.keys(this.validators)));
         }
         get message() {
             return set_getter_1.default(this, 'message', this.messageFactory(this.validatables));

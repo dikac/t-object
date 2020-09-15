@@ -13,7 +13,7 @@
     class RecordCallbackClass {
         constructor(validator, handler, validation, message) {
             this.validator = validator;
-            this.map = handler;
+            this.handler = handler;
             this.validation = validation;
             this.message = message;
         }
