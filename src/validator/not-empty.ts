@@ -10,7 +10,6 @@ export default class NotEmpty<MessageT>
         Validator<object, object, boolean, boolean, NotEmptyValidatable<object, MessageT>>,
         Message<(result:Readonly<Value & Validatable>)=>MessageT>
 {
-
     constructor(
        public message : (result:Readonly<Value<object> & Validatable>)=>MessageT
     ) {

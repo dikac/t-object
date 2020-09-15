@@ -6,7 +6,6 @@ import PartialUnion from "../../../partial-union";
 import Map from "./map";
 import RemoveUndefined from "../../../omit-undefined";
 
-
 export default function Invalid<
     Instance extends Record<PropertyKey, Message & Validatable>
 >(

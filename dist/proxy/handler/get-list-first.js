@@ -25,7 +25,7 @@
             /**
              * mapping for getter handler
              */
-            this.handler = {};
+            this.map = {};
         }
         /**
          * reset cached mapping

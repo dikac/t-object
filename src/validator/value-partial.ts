@@ -7,21 +7,46 @@ import MapReturn from "./validatable/record/infer";
 import ValueCallback from "./value-callback";
 import ValueInterface from "./value";
 
+/**
+ * more specific implementation of {@link ValueCallback}
+ *
+ * @param validators
+ * record of {@link Validator} to be used against {@template BaseType} or {@template ValueType}
+ *
+ * @param validation
+ *
+ * @param message
+ *
+ * @template BaseType
+ * Base value type for all {@link Validator}
+ *
+ * @template ValueType
+ * value type {@link Validator}
+ *
+ * @template MessageType
+ * message type {@link Validator}
+ *
+ * @template Validators
+ * type of {@param validators}
+ *
+ * @template ValidatableType
+ * result after processing {@template Validators} with {@template BaseType} or {@template ValueType}
+ */
 export default function ValuePartial<
     BaseType = unknown,
     ValueType extends BaseType = BaseType,
     MessageType = unknown,
-    Container extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>,
+    Validators extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>,
     ValidatableType extends Validatable = Validatable
 >(
-    validators : Container,
-    validation : (result:Union<ReturnInfer<Container>>) => ValidatableType,
-    message : (result:Union<ReturnInfer<Container>>) => MessageType,
-) : ValueInterface<BaseType, ValueType, MessageType, Container, Union<MapReturn<Container>>, ValidatableType> {
+    validators : Validators,
+    validation : (result:Union<ReturnInfer<Validators>>) => ValidatableType,
+    message : (result:Union<ReturnInfer<Validators>>) => MessageType,
+) : ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType> {
 
-    return <ValueInterface<BaseType, ValueType, MessageType, Container, Union<MapReturn<Container>>, ValidatableType>> new ValueCallback(
+    return <ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType>> new ValueCallback(
         validators,
-        (value, validators)  => <Union<MapReturn<Container>>> ValidateValuePartial(value, validators),
+        (value, validators)  => <Union<MapReturn<Validators>>> ValidateValuePartial(value, validators),
         validation,
         message
     );

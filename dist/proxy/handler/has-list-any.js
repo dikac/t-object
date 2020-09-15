@@ -14,7 +14,7 @@
     class HasListAny extends multi_handlers_1.default {
         constructor() {
             super(...arguments);
-            this.handler = {};
+            this.map = {};
         }
         reset() {
             this.handler = {};

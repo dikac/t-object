@@ -1,7 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import RecordParameter from "../validator/base/record/infer";
-import MapValue from "../value/value/record/map";
 import RecordBase from "../validator/base/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Map from "./map";

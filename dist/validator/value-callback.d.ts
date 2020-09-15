@@ -5,12 +5,46 @@ import Return from "@dikac/t-validator/validatable/simple";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Replace from "@dikac/t-validatable/boolean/replace";
 import Value from "./value";
-export default class ValueCallback<BaseType = unknown, ValueType extends BaseType = BaseType, MessageType = unknown, RecordType extends Record<any, Validator<BaseType, ValueType>> = Record<any, Validator<BaseType, ValueType>>, Result extends Record<any, Instance> = Record<any, Instance>, ValidatableType extends Validatable = Validatable> implements Value<BaseType, ValueType, MessageType, RecordType, Result, ValidatableType> {
-    validators: RecordType;
-    handler: (base: BaseType, record: RecordType) => Result;
-    validation: (result: Result) => ValidatableType;
-    message: (result: Result) => MessageType;
-    constructor(validators: RecordType, handler: (base: BaseType, record: RecordType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
-    validate<Argument extends ValueType>(argument: Argument): Replace<ValidatableValue<Argument, MessageType, RecordType, Result, ValidatableType>, true>;
-    validate<Argument extends BaseType>(argument: Argument): Return<BaseType, Argument, ValueType, ValidatableValue<Argument, MessageType, RecordType, Result, ValidatableType>>;
+/**
+ * Base {@link Validator} for validating value with record of {@link Validator}
+ *
+ * @template BaseType
+ * Base value type for all {@link Validator}
+ *
+ * @template ValueType
+ * value type {@link Validator}
+ *
+ * @template MessageType
+ * message type {@link Validator}
+ *
+ * @template ValidatorsType
+ * record of {@link Validator} to be used against {@template BaseType} or {@template ValueType}
+ *
+ * @template Validatables
+ * result after processing {@template ValidatorsType} with {@template BaseType} or {@template ValueType}
+ *
+ * @template ValidatableType
+ * final result after processing {@template Validatables}
+ */
+export default class ValueCallback<BaseType = unknown, ValueType extends BaseType = BaseType, MessageType = unknown, ValidatorsType extends Record<any, Validator<BaseType, ValueType>> = Record<any, Validator<BaseType, ValueType>>, Validatables extends Record<any, Instance> = Record<any, Instance>, ValidatableType extends Validatable = Validatable> implements Value<BaseType, ValueType, MessageType, ValidatorsType, Validatables, ValidatableType> {
+    validators: ValidatorsType;
+    map: (base: BaseType, record: ValidatorsType) => Validatables;
+    validation: (result: Validatables) => ValidatableType;
+    message: (result: Validatables) => MessageType;
+    /**
+     * @param validators
+     * record of {@link Validator}
+     *
+     * @param map
+     * process value and {@param validators} to list of {@link Instance}
+     *
+     * @param validation
+     * process result of {@param map} to single {@link Validatable}
+     *
+     * @param message
+     * process result of {@param map} to single {@link Message}
+     */
+    constructor(validators: ValidatorsType, map: (base: BaseType, record: ValidatorsType) => Validatables, validation: (result: Validatables) => ValidatableType, message: (result: Validatables) => MessageType);
+    validate<Argument extends ValueType>(argument: Argument): Replace<ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>, true>;
+    validate<Argument extends BaseType>(argument: Argument): Return<BaseType, Argument, ValueType, ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>>;
 }
