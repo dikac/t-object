@@ -12,9 +12,9 @@ import {List} from "ts-toolbelt";
  * key for selection
  */
 export default function Pick<
-    ObjectT extends object,
-    Key extends (keyof ObjectT)[]
->(object : ObjectT, ...keys : Key) : globalThis.Pick<ObjectT, List.UnionOf<Key>> {
+    ObjectType extends object,
+    Key extends (keyof ObjectType)[]
+>(object : ObjectType, ...keys : Key) : globalThis.Pick<ObjectType, List.UnionOf<Key>> {
 
     const result = {};
 
@@ -23,5 +23,5 @@ export default function Pick<
         result[<PropertyKey>property] = object[property];
     }
 
-    return result as globalThis.Pick<ObjectT, List.UnionOf<Key>>;
+    return result as globalThis.Pick<ObjectType, List.UnionOf<Key>>;
 }

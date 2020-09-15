@@ -8,14 +8,14 @@ import Map from "./map";
 export default function MapCallbackFunction<
     Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
     Result extends Record<PropertyKey, Instance> = Record<PropertyKey, Instance>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown,
 > (
     validators : Container,
     map : (argument:RecordParameter<Container>, validators:Container)=>Result,
-    validation : (result:Result)=>ValidatableT,
-    message : (result:Result)=>MessageT
-) : Map <Container, Result, ValidatableT, MessageT> {
+    validation : (result:Result)=>ValidatableType,
+    message : (result:Result)=>MessageType
+) : Map <Container, Result, ValidatableType, MessageType> {
 
     return new MapCallback(validators, map, validation, message);
 }

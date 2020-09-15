@@ -12,17 +12,17 @@ import Instance from "@dikac/t-validator/validatable/validatable";
 export default interface Map<
     Container extends Record<any, Validator>,
     Result extends Record<any, Instance>,
-    ValidatableT extends Validatable,
-    MessageT,
+    ValidatableType extends Validatable,
+    MessageType,
 > extends
     ValidatorSimple<
         RecordBase<Container>,
         RecordType<Container>,
-        ValidatableMap<MessageT, Container, Result, ValidatableT, RecordBase<Container>>
+        ValidatableMap<MessageType, Container, Result, ValidatableType, RecordBase<Container>>
     > ,
-    Validation<(result:Result)=>ValidatableT> ,
+    Validation<(result:Result)=>ValidatableType> ,
     Validators<Container>,
-    Message<(result:Result)=>MessageT>
+    Message<(result:Result)=>MessageType>
 {}
 
 

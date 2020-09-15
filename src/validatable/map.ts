@@ -8,16 +8,16 @@ import Messages from "../message/messages/messages";
 import Validators from "../validator/validators/validators";
 
 export default interface Map<
-    MessageT,
-    ValidatorsT extends Record<any, Validator>,
+    MessageType,
+    ValidatorsType extends Record<any, Validator>,
     Result extends Record<any, Instance>,
-    ValidatableT extends Validatable,
-    ValueT extends RecordBase<ValidatorsT>
+    ValidatableType extends Validatable,
+    ValueType extends RecordBase<ValidatorsType>
 > extends
-    Instance<ValueT, MessageT>,
+    Instance<ValueType, MessageType>,
     Validatable,
     Validatables<Result>,
-    ValidatableContainer<ValidatableT>,
+    ValidatableContainer<ValidatableType>,
     Messages<Result>,
-    Validators<ValidatorsT>
+    Validators<ValidatorsType>
 {}

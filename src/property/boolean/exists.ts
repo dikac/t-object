@@ -5,26 +5,26 @@ import {Required} from "utility-types";
  */
 
 export default function Exists<
-    ObjectT extends object,
-    Key extends keyof ObjectT,
+    ObjectType extends object,
+    Key extends keyof ObjectType,
 >(
-     object : ObjectT,
+     object : ObjectType,
      property : Key
-) : object is (Key extends keyof ObjectT ? Required<ObjectT, Key> : ObjectT);
+) : object is (Key extends keyof ObjectType ? Required<ObjectType, Key> : ObjectType);
 
 export default function Exists<
-    ObjectT extends object,
+    ObjectType extends object,
     Key extends PropertyKey
 >(
-    object : ObjectT,
+    object : ObjectType,
     property : Key
-) : object is ObjectT & Record<Key, any>;
+) : object is ObjectType & Record<Key, any>;
 
 export default function Exists<
-    ObjectT extends object,
+    ObjectType extends object,
     Key extends PropertyKey
 >(
-    object : ObjectT,
+    object : ObjectType,
     property : Key
 ) : boolean {
 

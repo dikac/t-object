@@ -12,16 +12,16 @@ export default interface Value<
     MessageType,
     RecordType extends Record<any, Validator<Base, Value>>,
     Result extends Record<any, Instance>,
-    ValidatableT extends Validatable
+    ValidatableType extends Validatable
 > extends
     Validator<
         Base,
         Value,
         boolean, true,
-        ValidatableValue<Base, MessageType, RecordType, Result, ValidatableT>
+        ValidatableValue<Base, MessageType, RecordType, Result, ValidatableType>
     >,
     Validators<RecordType>,
     Message<(result:Result)=>MessageType>,
-    Validation<(result:Result)=>ValidatableT>
+    Validation<(result:Result)=>ValidatableType>
 {}
 

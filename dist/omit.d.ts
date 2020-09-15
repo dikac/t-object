@@ -10,4 +10,4 @@ import { List } from "ts-toolbelt";
  * @param keys
  * key for exclusion
  */
-export default function Omit<ObjectT extends object, Keys extends (keyof ObjectT)[]>(object: ObjectT, ...keys: Keys): Omit<ObjectT, List.UnionOf<Keys>>;
+export default function Omit<ObjectType extends object, Keys extends (keyof ObjectType)[]>(object: ObjectType, ...keys: Keys): Omit<ObjectType, List.UnionOf<Keys>>;

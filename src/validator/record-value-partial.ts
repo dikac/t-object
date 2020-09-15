@@ -7,18 +7,18 @@ import RecordValueCallback, {Interface} from "./record-value-callback";
 import Union from "../union";
 
 export default function RecordValuePartial<
-    ValidatorT extends Validator = Validator,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
+    ValidatorType extends Validator = Validator,
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown,
 > (
-    validator : ValidatorT,
-    validation : (record : Record<any, ReturnInfer<ValidatorT>>)=>ValidatableT,
-    message : (record : Record<any, ReturnInfer<ValidatorT>>)=>MessageT,
-) : Interface<ValidatorT, Union<Record<any, ReturnInfer<ValidatorT>>>, ValidatableT, MessageT>  {
+    validator : ValidatorType,
+    validation : (record : Record<any, ReturnInfer<ValidatorType>>)=>ValidatableType,
+    message : (record : Record<any, ReturnInfer<ValidatorType>>)=>MessageType,
+) : Interface<ValidatorType, Union<Record<any, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType>  {
 
     return new RecordValueCallback(
             validator,
-        (value, validators)  => <Union<MapInterface<any, ReturnInfer<ValidatorT>>>>  ValidateMap(value, validators),
+        (value, validators)  => <Union<MapInterface<any, ReturnInfer<ValidatorType>>>>  ValidateMap(value, validators),
         validation,
         message
     );

@@ -7,16 +7,16 @@ import Message from "@dikac/t-message/message";
 import Messages from "../message/messages/messages";
 
 export default interface Value <
-    ValueT,
-    MessageT,
-    RecordT extends Record<PropertyKey, Validator<ValueT>>,
+    ValueType,
+    MessageType,
+    RecordType extends Record<PropertyKey, Validator<ValueType>>,
     Result extends Record<PropertyKey, ValidatorValidatable>,
-    ValidatableT extends Validatable
+    ValidatableType extends Validatable
 > extends
-    Readonly<BaseValue<ValueT>>,
+    Readonly<BaseValue<ValueType>>,
     Readonly<Validatable<boolean>>,
     Readonly<Validatables<Result>>,
     Readonly<Messages<Result>>,
-    Readonly<Message<MessageT>>
+    Readonly<Message<MessageType>>
 {};
 

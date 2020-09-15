@@ -5,12 +5,12 @@ import MapInterface from "../../../map";
 import Return from "@dikac/t-validator/validatable/infer";
 
 export default function RecordVKeyPartial<
-    RecordT extends Record<PropertyKey, any>,
-    Value extends Validator<keyof RecordT>,
+    RecordType extends Record<PropertyKey, any>,
+    Value extends Validator<keyof RecordType>,
 >(
-    object : RecordT,
+    object : RecordType,
     value : Value,
-) : PartialUnion<MapInterface<RecordT, Return<Value>>> {
+) : PartialUnion<MapInterface<RecordType, Return<Value>>> {
 
     let result = {};
 

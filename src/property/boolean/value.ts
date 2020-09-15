@@ -4,16 +4,16 @@
  */
 
 export default function Value<
-    ObjectT extends object,
-    Property extends keyof ObjectT,
-    Type extends ObjectT[Property] = ObjectT[Property],
+    ObjectType extends object,
+    Property extends keyof ObjectType,
+    Type extends ObjectType[Property] = ObjectType[Property],
 >(
-    object : ObjectT,
+    object : ObjectType,
     property : Property,
-    validation : (value:ObjectT[Property])=>value is Type
+    validation : (value:ObjectType[Property])=>value is Type
 
 ) : object is {
-    [Key in keyof ObjectT] : Key extends  Property ? (Type extends ObjectT[Key] ? Type : ObjectT[Key]) : ObjectT[Key]
+    [Key in keyof ObjectType] : Key extends  Property ? (Type extends ObjectType[Key] ? Type : ObjectType[Key]) : ObjectType[Key]
 }
 
 export default function Value<

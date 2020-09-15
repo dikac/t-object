@@ -8,27 +8,27 @@ import Replace from "@dikac/t-validatable/boolean/replace";
 import Value from "./value";
 
 export default class ValueCallback<
-    BaseT = unknown,
-    ValueT extends BaseT = BaseT,
-    MessageT = unknown,
-    RecordT extends Record<any, Validator<BaseT, ValueT>> = Record<any, Validator<BaseT, ValueT>>,
+    BaseType = unknown,
+    ValueType extends BaseType = BaseType,
+    MessageType = unknown,
+    RecordType extends Record<any, Validator<BaseType, ValueType>> = Record<any, Validator<BaseType, ValueType>>,
     Result extends Record<any, Instance> = Record<any, Instance>,
-    ValidatableT extends Validatable = Validatable
-> implements Value<BaseT, ValueT, MessageT, RecordT, Result, ValidatableT> {
+    ValidatableType extends Validatable = Validatable
+> implements Value<BaseType, ValueType, MessageType, RecordType, Result, ValidatableType> {
     constructor(
-        public validators : RecordT,
-        public handler : (base : BaseT, record : RecordT) => Result,
-        public validation : (result : Result)=>ValidatableT,
-        public message : (result : Result)=>MessageT
+        public validators : RecordType,
+        public handler : (base : BaseType, record : RecordType) => Result,
+        public validation : (result : Result)=>ValidatableType,
+        public message : (result : Result)=>MessageType
     ) {
     }
 
-   validate<Argument extends ValueT>(argument: Argument) : Replace<ValidatableValue<Argument, MessageT, RecordT, Result, ValidatableT>, true>;
-   validate<Argument extends BaseT>(argument: Argument) : Return<BaseT, Argument, ValueT, ValidatableValue<Argument, MessageT, RecordT, Result, ValidatableT>>
+   validate<Argument extends ValueType>(argument: Argument) : Replace<ValidatableValue<Argument, MessageType, RecordType, Result, ValidatableType>, true>;
+   validate<Argument extends BaseType>(argument: Argument) : Return<BaseType, Argument, ValueType, ValidatableValue<Argument, MessageType, RecordType, Result, ValidatableType>>
 
-    validate<Argument extends BaseT>(argument: Argument) {
+    validate<Argument extends BaseType>(argument: Argument) {
 
-        return <ValidatableValue<Argument, MessageT, RecordT, Result, ValidatableT> | Return<BaseT, Argument, ValueT, ValidatableValueCallback<BaseT, MessageT, RecordT, Result, ValidatableT>>>
+        return <ValidatableValue<Argument, MessageType, RecordType, Result, ValidatableType> | Return<BaseType, Argument, ValueType, ValidatableValueCallback<BaseType, MessageType, RecordType, Result, ValidatableType>>>
             new ValidatableValueCallback(argument, this.validators, this.handler, this.validation, this.message);
     }
 }

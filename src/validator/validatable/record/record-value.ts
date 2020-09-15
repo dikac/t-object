@@ -6,12 +6,12 @@ import Return from "@dikac/t-validator/validatable/infer";
 
 
 export default function RecordValue<
-    RecordT extends Record<PropertyKey, any>,
-    Value extends Validator<O.UnionOf<RecordT>>,
+    RecordType extends Record<PropertyKey, any>,
+    Value extends Validator<O.UnionOf<RecordType>>,
 >(
-    object : RecordT,
+    object : RecordType,
     value : Value,
-) : MapInterface<RecordT, Return<Value>> {
+) : MapInterface<RecordType, Return<Value>> {
 
     let result = {};
 
@@ -20,5 +20,5 @@ export default function RecordValue<
         result[k] = value.validate(<InferType<Value>>v)
     }
 
-    return <MapInterface<RecordT, Return<Value>>> result;
+    return <MapInterface<RecordType, Return<Value>>> result;
 }

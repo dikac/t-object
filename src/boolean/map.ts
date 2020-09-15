@@ -9,10 +9,10 @@ export type Validation<Type extends object> = {
  */
 export default function Map<
     Type extends object,
-    ValidationT extends Validation<Type> = Validation<Type>
+    ValidationType extends Validation<Type> = Validation<Type>
 >(
     value : object,
-    validation : ValidationT
+    validation : ValidationType
 ) : value is Type {
 
     for (let property in validation) {

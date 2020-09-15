@@ -10,23 +10,23 @@ import SetProperty from "../value/value/set-property";
 import Pick from "../pick";
 
 export default class MapCallback<
-    MessageT = unknown,
-    ValidatorsT extends Record<any, Validator> = Record<any, Validator>,
+    MessageType = unknown,
+    ValidatorsType extends Record<any, Validator> = Record<any, Validator>,
     Result extends Record<any, Instance> = Record<any, Instance>,
-    ValidatableT extends Validatable = Validatable,
-    ValueT extends RecordBase<ValidatorsT> = RecordBase<ValidatorsT>
-> implements Map<MessageT, ValidatorsT, Result, ValidatableT, ValueT> {
+    ValidatableType extends Validatable = Validatable,
+    ValueType extends RecordBase<ValidatorsType> = RecordBase<ValidatorsType>
+> implements Map<MessageType, ValidatorsType, Result, ValidatableType, ValueType> {
 
-    private messageFactory : (result : Result)=>MessageT;
+    private messageFactory : (result : Result)=>MessageType;
 
-    #value : ValueT;
+    #value : ValueType;
 
     constructor(
-        value: ValueT,
-        public validators : ValidatorsT,
-        private map : (values : RecordParameter<ValidatorsT>, validators : ValidatorsT)=>Result,
-        private validation : (result : Result)=>ValidatableT,
-        message : (result : Result)=>MessageT,
+        value: ValueType,
+        public validators : ValidatorsType,
+        private map : (values : RecordParameter<ValidatorsType>, validators : ValidatorsType)=>Result,
+        private validation : (result : Result)=>ValidatableType,
+        message : (result : Result)=>MessageType,
     ) {
 
         this.#value = value;
@@ -39,7 +39,7 @@ export default class MapCallback<
         return this.validatable.valid;
     }
 
-    get validatable() : ValidatableT {
+    get validatable() : ValidatableType {
 
         return SetProperty(this, 'validatable', this.validation(this.validatables));
     }
@@ -54,12 +54,12 @@ export default class MapCallback<
         return SetProperty(this, 'validatables', this.map(this.#value, this.validators));
     }
 
-    get value () : ValueT {
+    get value () : ValueType {
 
-        return SetProperty(this, 'value', Pick(this.#value, ...Object.keys(this.validatables)) as ValueT);
+        return SetProperty(this, 'value', Pick(this.#value, ...Object.keys(this.validatables)) as ValueType);
     }
 
-    get message() : MessageT {
+    get message() : MessageType {
 
         return SetGetter(this, 'message', this.messageFactory(this.validatables));
     }

@@ -2,16 +2,16 @@ import Validatable from "@dikac/t-validatable/validatable";
 import ValidatablesInterface from "./validatables/validatables";
 
 export default class Validatables<
-    RecordT extends Record<PropertyKey, Validatable>  = Record<PropertyKey, Validatable>,
+    RecordType extends Record<PropertyKey, Validatable>  = Record<PropertyKey, Validatable>,
     Boolean extends boolean = boolean
 > implements
     Validatable,
-    ValidatablesInterface<RecordT>
+    ValidatablesInterface<RecordType>
 {
 
     constructor(
-        public validatables : RecordT,
-        public validation : (value:RecordT)=>Boolean
+        public validatables : RecordType,
+        public validation : (value:RecordType)=>Boolean
     ) {
     }
 

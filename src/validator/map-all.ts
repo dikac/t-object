@@ -9,14 +9,14 @@ import Map from "./map";
 
 export default function MapAll<
     Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown
 >(
     validators : Container,
-    validation : (result:ReturnInfer<Container>)=>ValidatableT,
-    message : (result:ReturnInfer<Container>)=>MessageT,
-) : Map<Container, ReturnInfer<Container>, ValidatableT, MessageT> {
+    validation : (result:ReturnInfer<Container>)=>ValidatableType,
+    message : (result:ReturnInfer<Container>)=>MessageType,
+) : Map<Container, ReturnInfer<Container>, ValidatableType, MessageType> {
 
-    return <Map<Container, ReturnInfer<Container>, ValidatableT, MessageT>> new MapCallback(validators, ValidateMap, validation, message);
+    return <Map<Container, ReturnInfer<Container>, ValidatableType, MessageType>> new MapCallback(validators, ValidateMap, validation, message);
 }
 

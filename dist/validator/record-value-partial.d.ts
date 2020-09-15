@@ -3,4 +3,4 @@ import Validatable from "@dikac/t-validatable/validatable";
 import ReturnInfer from "@dikac/t-validator/validatable/infer";
 import { Interface } from "./record-value-callback";
 import Union from "../union";
-export default function RecordValuePartial<ValidatorT extends Validator = Validator, ValidatableT extends Validatable = Validatable, MessageT = unknown>(validator: ValidatorT, validation: (record: Record<any, ReturnInfer<ValidatorT>>) => ValidatableT, message: (record: Record<any, ReturnInfer<ValidatorT>>) => MessageT): Interface<ValidatorT, Union<Record<any, ReturnInfer<ValidatorT>>>, ValidatableT, MessageT>;
+export default function RecordValuePartial<ValidatorType extends Validator = Validator, ValidatableType extends Validatable = Validatable, MessageType = unknown>(validator: ValidatorType, validation: (record: Record<any, ReturnInfer<ValidatorType>>) => ValidatableType, message: (record: Record<any, ReturnInfer<ValidatorType>>) => MessageType): Interface<ValidatorType, Union<Record<any, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType>;

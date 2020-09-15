@@ -8,18 +8,18 @@ import ValueCallback from "./value-callback";
 import ValueInterface from "./value";
 
 export default function ValuePartial<
-    BaseT = unknown,
-    ValueT extends BaseT = BaseT,
-    MessageT = unknown,
-    Container extends Record<PropertyKey, Validator<BaseT, ValueT>> = Record<PropertyKey, Validator<BaseT, ValueT>>,
-    ValidatableT extends Validatable = Validatable
+    BaseType = unknown,
+    ValueType extends BaseType = BaseType,
+    MessageType = unknown,
+    Container extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>,
+    ValidatableType extends Validatable = Validatable
 >(
     validators : Container,
-    validation : (result:Union<ReturnInfer<Container>>) => ValidatableT,
-    message : (result:Union<ReturnInfer<Container>>) => MessageT,
-) : ValueInterface<BaseT, ValueT, MessageT, Container, Union<MapReturn<Container>>, ValidatableT> {
+    validation : (result:Union<ReturnInfer<Container>>) => ValidatableType,
+    message : (result:Union<ReturnInfer<Container>>) => MessageType,
+) : ValueInterface<BaseType, ValueType, MessageType, Container, Union<MapReturn<Container>>, ValidatableType> {
 
-    return <ValueInterface<BaseT, ValueT, MessageT, Container, Union<MapReturn<Container>>, ValidatableT>> new ValueCallback(
+    return <ValueInterface<BaseType, ValueType, MessageType, Container, Union<MapReturn<Container>>, ValidatableType>> new ValueCallback(
         validators,
         (value, validators)  => <Union<MapReturn<Container>>> ValidateValuePartial(value, validators),
         validation,

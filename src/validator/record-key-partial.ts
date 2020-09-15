@@ -11,12 +11,12 @@ export default function RecordKeyPartial<
     Type extends Base = Base,
     ValidatorType extends Validator<O.UnionOf<Base>, O.UnionOf<Type>> = Validator<O.UnionOf<Base>, O.UnionOf<Type>>,
     ValidatableType extends Validatable = Validatable,
-    MessageT = unknown,
+    MessageType = unknown,
 >(
     validator : ValidatorType,
     validation : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>ValidatableType,
-    message : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>MessageT,
-) : Interface<Base, Type, ValidatorType, Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageT> {
+    message : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>MessageType,
+) : Interface<Base, Type, ValidatorType, Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType> {
 
     return new RecordKeyCallback(
         validator,

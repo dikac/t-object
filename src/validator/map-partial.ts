@@ -8,15 +8,15 @@ import Union from "../union";
 
 export default function MapPartial<
     Container extends Record<any, Validator> = Record<PropertyKey, Validator>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown
 >(
     validators : Container,
-    validation : (result:Union<ReturnInfer<Container>>)=>ValidatableT,
-    message : (result:Union<ReturnInfer<Container>>)=>MessageT,
-) : Omit<Map<Container, Union<ReturnInfer<Container>>, ValidatableT, MessageT>, 'map'> {
+    validation : (result:Union<ReturnInfer<Container>>)=>ValidatableType,
+    message : (result:Union<ReturnInfer<Container>>)=>MessageType,
+) : Omit<Map<Container, Union<ReturnInfer<Container>>, ValidatableType, MessageType>, 'map'> {
 
-    return <Omit<Map<Container, Union<ReturnInfer<Container>>, ValidatableT, MessageT>, 'map'>> new MapCallback(
+    return <Omit<Map<Container, Union<ReturnInfer<Container>>, ValidatableType, MessageType>, 'map'>> new MapCallback(
         validators,
         (value, validators) => <Union<ReturnInfer<Container>>>ValidateMap(value, validators),
         validation,

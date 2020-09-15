@@ -1,18 +1,18 @@
-export default class Debug<ObjectT extends object> implements Required<ProxyHandler<ObjectT>> {
+export default class Debug<ObjectType extends object> implements Required<ProxyHandler<ObjectType>> {
     handler: (handler: string, args: any[]) => void;
     constructor(handler?: (handler: string, args: any[]) => void);
-    getPrototypeOf(target: ObjectT): object | null;
-    setPrototypeOf(target: ObjectT, v: any): boolean;
-    apply(target: ObjectT, thisArg: any, argArray: any): any;
-    construct(target: ObjectT, argArray: any, newTarget: any): Object;
-    defineProperty(target: ObjectT, p: PropertyKey, attributes: PropertyDescriptor): boolean;
-    deleteProperty(target: ObjectT, p: PropertyKey): boolean;
-    enumerate(target: ObjectT): PropertyKey[];
-    get(target: ObjectT, p: PropertyKey, receiver: any): any;
-    getOwnPropertyDescriptor(target: ObjectT, p: PropertyKey): PropertyDescriptor | undefined;
-    has(target: ObjectT, p: PropertyKey): boolean;
-    isExtensible(target: ObjectT): boolean;
-    ownKeys(target: ObjectT): PropertyKey[];
-    preventExtensions(target: ObjectT): boolean;
-    set(target: ObjectT, p: PropertyKey, value: any, receiver: any): boolean;
+    getPrototypeOf(target: ObjectType): object | null;
+    setPrototypeOf(target: ObjectType, v: any): boolean;
+    apply(target: ObjectType, thisArg: any, argArray: any): any;
+    construct(target: ObjectType, argArray: any, newTarget: any): Object;
+    defineProperty(target: ObjectType, p: PropertyKey, attributes: PropertyDescriptor): boolean;
+    deleteProperty(target: ObjectType, p: PropertyKey): boolean;
+    enumerate(target: ObjectType): PropertyKey[];
+    get(target: ObjectType, p: PropertyKey, receiver: any): any;
+    getOwnPropertyDescriptor(target: ObjectType, p: PropertyKey): PropertyDescriptor | undefined;
+    has(target: ObjectType, p: PropertyKey): boolean;
+    isExtensible(target: ObjectType): boolean;
+    ownKeys(target: ObjectType): PropertyKey[];
+    preventExtensions(target: ObjectType): boolean;
+    set(target: ObjectType, p: PropertyKey, value: any, receiver: any): boolean;
 }

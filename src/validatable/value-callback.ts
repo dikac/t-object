@@ -5,19 +5,19 @@ import SetGetter from "../value/value/set-getter";
 import Value from "./value";
 
 export default class ValueCallback<
-    ValueT = unknown,
-    MessageT = unknown,
-    RecordT extends Record<PropertyKey, Validator<ValueT>> = Record<PropertyKey, Validator<ValueT>>,
+    ValueType = unknown,
+    MessageType = unknown,
+    RecordType extends Record<PropertyKey, Validator<ValueType>> = Record<PropertyKey, Validator<ValueType>>,
     Result extends Record<PropertyKey, ValidatorValidatable> = Record<PropertyKey, ValidatorValidatable>,
-    ValidatableT extends Validatable = Validatable
-> implements Value<ValueT, MessageT, RecordT, Result, ValidatableT> {
+    ValidatableType extends Validatable = Validatable
+> implements Value<ValueType, MessageType, RecordType, Result, ValidatableType> {
 
     constructor(
-        readonly value: ValueT,
-        readonly validators : RecordT,
-        readonly map : (value:ValueT, validator:RecordT)=>Result,
-        readonly validation : (result:Result)=>ValidatableT,
-        readonly messageFactory : (result:Result)=>MessageT,
+        readonly value: ValueType,
+        readonly validators : RecordType,
+        readonly map : (value:ValueType, validator:RecordType)=>Result,
+        readonly validation : (result:Result)=>ValidatableType,
+        readonly messageFactory : (result:Result)=>MessageType,
     ) {
 
     }
@@ -27,7 +27,7 @@ export default class ValueCallback<
         return this.validatable.valid;
     }
 
-    get validatable () : ValidatableT {
+    get validatable () : ValidatableType {
 
         return  SetGetter(this, 'validatable', this.validation(this.validatables));
     }
@@ -42,7 +42,7 @@ export default class ValueCallback<
         return  SetGetter(this, 'validatables', this.map(this.value, this.validators));
     }
 
-    get message() : MessageT {
+    get message() : MessageType {
 
         return  SetGetter(this, 'message', this.messageFactory(this.validatables));
 

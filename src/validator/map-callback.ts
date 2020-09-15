@@ -13,31 +13,31 @@ import Simple from "@dikac/t-validator/validatable/simple";
 export default class MapCallback<
     Container extends Record<any, Validator> = Record<PropertyKey, Validator>,
     Result extends Record<any, Instance> = Record<PropertyKey, Instance>,
-    ValidatableT extends Validatable = Validatable,
-    MessageT = unknown,
-> implements Map <Container, Result, ValidatableT, MessageT> {
+    ValidatableType extends Validatable = Validatable,
+    MessageType = unknown,
+> implements Map <Container, Result, ValidatableType, MessageType> {
     constructor(
         public validators : Container,
         public map : (record:RecordParameter<Container>, validators : Container)=>Result,
-        public validation : (result:Result)=>ValidatableT,
-        public message : (result:Result)=>MessageT
+        public validation : (result:Result)=>ValidatableType,
+        public message : (result:Result)=>MessageType
     ) {
     }
 
     validate<Argument extends RecordType<Container>>(
         argument: Argument
-    ) : ValidatableReplace<ValidatableMapInterface<MessageT, Container, Result, ValidatableT, Argument>, true>;
+    ) : ValidatableReplace<ValidatableMapInterface<MessageType, Container, Result, ValidatableType, Argument>, true>;
 
     validate<Argument extends RecordBase<Container>>(
         argument: Argument
-    ) : Simple<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapInterface<MessageT, Container, Result, ValidatableT, RecordBase<Container>>>;
+    ) : Simple<RecordBase<Container>, Argument, RecordType<Container>, ValidatableMapInterface<MessageType, Container, Result, ValidatableType, RecordBase<Container>>>;
 
     validate<Argument extends RecordBase<Container>>(
         argument: Argument
     ) {
 
         return new ValidatableMapCallback(argument, this.validators, this.map, this.validation, this.message) as
-            ValidatableReplace<ValidatableMapInterface<MessageT, Container, Result, ValidatableT, Argument>, true>;
+            ValidatableReplace<ValidatableMapInterface<MessageType, Container, Result, ValidatableType, Argument>, true>;
     }
 }
 

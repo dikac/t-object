@@ -10,18 +10,18 @@ export default function ValueAll<
     Value extends Base = Base,
     Message = unknown,
     Validators extends Record<any, Validator<Base, Value>> = Record<any, Validator<Base, Value>>,
-    ValidatableT extends Validatable = Validatable
+    ValidatableType extends Validatable = Validatable
 >(
     validators : Validators,
-    validation : (result:MapReturn<Validators>) => ValidatableT,
+    validation : (result:MapReturn<Validators>) => ValidatableType,
     message : (result:MapReturn<Validators>) => Message,
 
-) : ValueInterface<Base, Value, Message, Validators, MapReturn<Validators>, ValidatableT> {
+) : ValueInterface<Base, Value, Message, Validators, MapReturn<Validators>, ValidatableType> {
 
     return new ValueCallback(
         validators,
         ValidateValue,
         validation,
         message
-    ) as ValueInterface<Base, Value, Message, Validators, MapReturn<Validators>, ValidatableT>;
+    ) as ValueInterface<Base, Value, Message, Validators, MapReturn<Validators>, ValidatableType>;
 }

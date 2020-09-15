@@ -6,12 +6,12 @@ import {O} from "ts-toolbelt";
 import Return from "@dikac/t-validator/validatable/infer";
 
 export default function RecordValue<
-    RecordT extends Record<PropertyKey, any>,
-    Value extends Validator<O.UnionOf<RecordT>>,
+    RecordType extends Record<PropertyKey, any>,
+    Value extends Validator<O.UnionOf<RecordType>>,
 >(
-    object : RecordT,
+    object : RecordType,
     value : Value,
-) : PartialUnion<MapInterface<RecordT, Return<Value>>>  {
+) : PartialUnion<MapInterface<RecordType, Return<Value>>>  {
 
     let result = {};
 

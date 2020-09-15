@@ -7,31 +7,31 @@ import {O} from "ts-toolbelt";
 import SetGetter from "../value/value/set-getter";
 
 export default class RecordCallback<
-    MessageT = unknown,
-    ValueT extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-    ValidatorT extends Validator<O.UnionOf<ValueT>> = Validator<O.UnionOf<ValueT>>,
+    MessageType = unknown,
+    ValueType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+    ValidatorType extends Validator<O.UnionOf<ValueType>> = Validator<O.UnionOf<ValueType>>,
     Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
-    ValidatableT extends Validatable = Validatable
+    ValidatableType extends Validatable = Validatable
 > implements
-    Value<ValueT>,
+    Value<ValueType>,
     Validatable,
     Validatables<Result>,
-    Message<MessageT>
+    Message<MessageType>
 {
 
 
     readonly validatables : Result;
     readonly valid : boolean;
-    readonly validatable : ValidatableT;
+    readonly validatable : ValidatableType;
     readonly messages : Result;
-    private messageFactory : (result:Result)=>MessageT
+    private messageFactory : (result:Result)=>MessageType
 
     constructor(
-        readonly value: ValueT,
-        readonly validator : ValidatorT,
-        map : (value:ValueT, validators:ValidatorT)=>Result,
-        validation : (result:Result)=>ValidatableT,
-        message : (result:Result)=>MessageT,
+        readonly value: ValueType,
+        readonly validator : ValidatorType,
+        map : (value:ValueType, validators:ValidatorType)=>Result,
+        validation : (result:Result)=>ValidatableType,
+        message : (result:Result)=>MessageType,
     ) {
 
         this.messageFactory = message;
@@ -43,7 +43,7 @@ export default class RecordCallback<
         this.valid = this.validatable.valid;
     }
 
-    get message() : MessageT {
+    get message() : MessageType {
 
         return SetGetter(this, 'message', this.messageFactory(this.validatables));
     }

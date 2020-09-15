@@ -4,17 +4,17 @@ import RecordParameter from "../validator/base/record/infer";
 import RecordBase from "../validator/base/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Map from "./map";
-export default class MapCallback<MessageT = unknown, ValidatorsT extends Record<any, Validator> = Record<any, Validator>, Result extends Record<any, Instance> = Record<any, Instance>, ValidatableT extends Validatable = Validatable, ValueT extends RecordBase<ValidatorsT> = RecordBase<ValidatorsT>> implements Map<MessageT, ValidatorsT, Result, ValidatableT, ValueT> {
+export default class MapCallback<MessageType = unknown, ValidatorsType extends Record<any, Validator> = Record<any, Validator>, Result extends Record<any, Instance> = Record<any, Instance>, ValidatableType extends Validatable = Validatable, ValueType extends RecordBase<ValidatorsType> = RecordBase<ValidatorsType>> implements Map<MessageType, ValidatorsType, Result, ValidatableType, ValueType> {
     #private;
-    validators: ValidatorsT;
+    validators: ValidatorsType;
     private map;
     private validation;
     private messageFactory;
-    constructor(value: ValueT, validators: ValidatorsT, map: (values: RecordParameter<ValidatorsT>, validators: ValidatorsT) => Result, validation: (result: Result) => ValidatableT, message: (result: Result) => MessageT);
+    constructor(value: ValueType, validators: ValidatorsType, map: (values: RecordParameter<ValidatorsType>, validators: ValidatorsType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
     get valid(): boolean;
-    get validatable(): ValidatableT;
+    get validatable(): ValidatableType;
     get messages(): Result;
     get validatables(): Result;
-    get value(): ValueT;
-    get message(): MessageT;
+    get value(): ValueType;
+    get message(): MessageType;
 }
