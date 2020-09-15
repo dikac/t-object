@@ -4,8 +4,8 @@
   "description": "Typescript object",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
-    "@dikac/t-array": "^0.24.0",
-    "@dikac/t-boolean": "^0.9.3",
+    "@dikac/t-array": "^0.24.1",
+    "@dikac/t-boolean": "^0.9.4",
     "@dikac/t-class": "^0.1.4",
     "@dikac/t-function": "^0.12.5",
     "@dikac/t-message": "^0.10.5",
