@@ -17,12 +17,6 @@
         constructor(context) {
             this.context = context;
             this.container = new Map();
-            this.event = {
-                preBuild: new Set(),
-                build: new Set(),
-                postBuild: new Set(),
-            };
-            Object.freeze(this.event);
         }
         clear() {
             this.container.clear();
@@ -46,12 +40,9 @@
             return this.container[Symbol.iterator]();
         }
         build(target = {}, option) {
-            this.event.preBuild.forEach(value => value(target, this.context, option));
             for (let [property, value] of this) {
                 value(target, property, this.context, option);
-                this.event.build.forEach(value => value(target, property, this.context, option));
             }
-            this.event.postBuild.forEach(value => value(target, this.context, option));
             return target;
         }
     }
