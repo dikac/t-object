@@ -10,6 +10,9 @@ import ValueInterface from "./value";
 /**
  * more specific implementation of {@link ValueCallback}
  *
+ * Validate value with record of {@link Validator}
+ * stop on encounter {@param stop} result from {@link Validator}
+ *
  * @param validators
  * record of {@link Validator} to be used against {@template BaseType} or {@template ValueType}
  *
@@ -42,11 +45,12 @@ export default function ValuePartial<
     validators : Validators,
     validation : (result:Union<ReturnInfer<Validators>>) => ValidatableType,
     message : (result:Union<ReturnInfer<Validators>>) => MessageType,
+    stop : boolean = false,
 ) : ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType> {
 
     return <ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType>> new ValueCallback(
         validators,
-        (value, validators)  => <Union<MapReturn<Validators>>> ValidateValuePartial(value, validators),
+        (value, validators)  => <Union<MapReturn<Validators>>> ValidateValuePartial(value, validators, stop),
         validation,
         message
     );

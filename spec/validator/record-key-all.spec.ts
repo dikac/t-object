@@ -1,4 +1,4 @@
-import RecordValueCallback from "../../dist/validator/record-key";
+import RecordValueCallback from "../../dist/validator/record-key-all";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";

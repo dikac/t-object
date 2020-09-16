@@ -7,29 +7,7 @@ import Return from "@dikac/t-validator/validatable/simple";
 import ValidatorContainer from "@dikac/t-validator/validator/validator";
 import Validation from "@dikac/t-validatable/validation/validation";
 import Replace from "@dikac/t-validatable/boolean/replace";
-
-export type Interface<
-    Base extends Record<PropertyKey, unknown>,
-    Type extends Base,
-    ValidatorType extends Validator<keyof Base, keyof Type>,
-    Result extends Record<PropertyKey, Validatable>,
-    ValidatableType extends Validatable,
-    MessageType,
-> = SimpleValidator<
-    Base,
-    Type,
-    ValidatableRecordCallback<
-        MessageType,
-        Base,
-        ValidatorType,
-        Result,
-        ValidatableType
-        >
-    > &
-    ValidatorContainer<ValidatorType> &
-    Message<(result:Result)=>MessageType> &
-    Validation<(result:Result)=>ValidatableType>
-    ;
+import RecordKey from "./record-key";
 
 export default class RecordCallbackClass<
     Base extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
@@ -38,7 +16,7 @@ export default class RecordCallbackClass<
     Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
     ValidatableType extends Validatable = Validatable,
     MessageType = unknown,
-> implements Interface<Base, Type, ValidatorType, Result, ValidatableType, MessageType> {
+> implements RecordKey<Base, Type, ValidatorType, Result, ValidatableType, MessageType> {
 
     constructor(
         public validator : ValidatorType,

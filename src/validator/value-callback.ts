@@ -9,7 +9,7 @@ import Value from "./value";
 import Message from "@dikac/t-message/message";
 
 /**
- * Base {@link Validator} for validating value with record of {@link Validator}
+ * Base implementation of {@link Value}
  *
  * @template BaseType
  * Base value type for all {@link Validator}

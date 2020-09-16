@@ -11,7 +11,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const value_callback_1 = require("../validatable/value-callback");
     /**
-     * Base {@link Validator} for validating value with record of {@link Validator}
+     * Base implementation of {@link Value}
      *
      * @template BaseType
      * Base value type for all {@link Validator}

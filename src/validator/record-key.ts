@@ -1,40 +1,34 @@
 import Validator from "@dikac/t-validator/validator";
+import SimpleValidator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
-import {O} from "ts-toolbelt";
-import ReturnInfer from "@dikac/t-validator/validatable/infer";
-import ValidateRecordKey from "./validatable/record/record-key";
-import RecordKeyCallback, {Interface} from "./record-key-callback";
+import Message from "@dikac/t-message/message";
+import ValidatableRecordCallback from "../validatable/record-value-callback";
+import Return from "@dikac/t-validator/validatable/simple";
+import ValidatorContainer from "@dikac/t-validator/validator/validator";
+import Validation from "@dikac/t-validatable/validation/validation";
+import Replace from "@dikac/t-validatable/boolean/replace";
 
-export default function RecordKey<
-    Base extends Record<PropertyKey, any> = Record<PropertyKey, any>,
-    Type extends Base = Base,
-    ValidatorType extends Validator<O.UnionOf<Base>, O.UnionOf<Type>> = Validator<O.UnionOf<Base>, O.UnionOf<Type>>,
-    ValidatableType extends Validatable = Validatable,
-    MessageType = unknown,
->(
-    validator : ValidatorType,
-    validation : (record:Record<PropertyKey, ReturnInfer<ValidatorType>>)=>ValidatableType,
-    message : (record:Record<PropertyKey, ReturnInfer<ValidatorType>>)=>MessageType,
-) : Interface<Base, Type, ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType> {
+type RecordKey<
+    Base extends Record<PropertyKey, unknown>,
+    Type extends Base,
+    ValidatorType extends Validator<keyof Base, keyof Type>,
+    Result extends Record<PropertyKey, Validatable>,
+    ValidatableType extends Validatable,
+    MessageType,
+> = SimpleValidator<
+    Base,
+    Type,
+    ValidatableRecordCallback<
+        MessageType,
+        Base,
+        ValidatorType,
+        Result,
+        ValidatableType
+        >
+    > &
+    ValidatorContainer<ValidatorType> &
+    Message<(result:Result)=>MessageType> &
+    Validation<(result:Result)=>ValidatableType>
+;
 
-    return new RecordKeyCallback(
-        validator,
-        (object, value)=><Record<PropertyKey, ReturnInfer<ValidatorType>>>ValidateRecordKey(object, value),
-        validation,
-        message
-    ) as Interface<Base, Type, ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType>;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default RecordKey;

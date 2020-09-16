@@ -14,6 +14,9 @@
     /**
      * more specific implementation of {@link ValueCallback}
      *
+     * Validate value with record of {@link Validator}
+     * stop on encounter {@param stop} result from {@link Validator}
+     *
      * @param validators
      * record of {@link Validator} to be used against {@template BaseType} or {@template ValueType}
      *
@@ -36,8 +39,8 @@
      * @template ValidatableType
      * result after processing {@template Validators} with {@template BaseType} or {@template ValueType}
      */
-    function ValuePartial(validators, validation, message) {
-        return new value_callback_1.default(validators, (value, validators) => value_partial_1.default(value, validators), validation, message);
+    function ValuePartial(validators, validation, message, stop = false) {
+        return new value_callback_1.default(validators, (value, validators) => value_partial_1.default(value, validators, stop), validation, message);
     }
     exports.default = ValuePartial;
 });

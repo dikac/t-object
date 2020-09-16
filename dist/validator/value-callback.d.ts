@@ -6,7 +6,7 @@ import Instance from "@dikac/t-validator/validatable/validatable";
 import Replace from "@dikac/t-validatable/boolean/replace";
 import Value from "./value";
 /**
- * Base {@link Validator} for validating value with record of {@link Validator}
+ * Base implementation of {@link Value}
  *
  * @template BaseType
  * Base value type for all {@link Validator}

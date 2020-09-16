@@ -8,6 +8,7 @@ export default function ValuePartial<
 >(
     value : ValueT,
     validators : Validators,
+    stop : boolean = false
 ) : PartialUnion<ValidatableRecord<Validators>> {
 
     let object = {};
@@ -18,7 +19,7 @@ export default function ValuePartial<
 
         object[<PropertyKey>property] = validator.validate(value);
 
-        if(!object[<PropertyKey>property].valid) {
+        if(object[<PropertyKey>property].valid === stop) {
 
             return object;
         }

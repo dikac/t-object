@@ -1,4 +1,4 @@
-import RecordValue from "../../dist/validator/record-value";
+import RecordValue from "../../dist/validator/record-value-all";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
 import Validatable from "@dikac/t-validatable/validatable";

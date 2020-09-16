@@ -1,23 +1,28 @@
+import SimpleValidator from "@dikac/t-validator/simple";
 import Validator from "@dikac/t-validator/validator";
+import InferBase from "@dikac/t-validator/base/infer";
+import InferType from "@dikac/t-validator/type/infer";
+import ValidatorContainer from "@dikac/t-validator/validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import ReturnInfer from "@dikac/t-validator/validatable/infer";
-import ValidateMap from "./validatable/record/record-value";
-import RecordValueCallback, {Interface} from "./record-value-callback";
+import Validation from "@dikac/t-validatable/validation/validation";
+import Message from "@dikac/t-message/message";
+import ValidatableRecordCallback from "../validatable/record-value-callback";
+import Return from "@dikac/t-validator/validatable/simple";
+import Instance from "@dikac/t-validator/validatable/validatable";
+import Replace from "@dikac/t-validatable/boolean/replace";
 
-export default function RecordValue<
-    ValidatorType extends Validator = Validator,
-    ValidatableType extends Validatable = Validatable,
-    MessageType = unknown,
->(
-    validator : ValidatorType,
-    validation : (record : Record<PropertyKey, ReturnInfer<ValidatorType>>) => ValidatableType,
-    message : (record : Record<PropertyKey, ReturnInfer<ValidatorType>>) => MessageType,
-) : Interface<ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType> {
+type RecordValue<
+    ValidatorTemplate extends Validator,
+    Result extends Record<PropertyKey, Instance>,
+    ValidatableTemplate extends Validatable ,
+    MessageTemplate,
+> =
+    SimpleValidator<
+        Record<PropertyKey, InferBase<ValidatorTemplate>>,
+        Record<PropertyKey, InferType<ValidatorTemplate>>,
+        ValidatableRecordCallback<MessageTemplate, Record<PropertyKey, InferBase<ValidatorTemplate>>, ValidatorTemplate, Result, ValidatableTemplate>> &
+    ValidatorContainer<ValidatorTemplate> &
+    Message<(result:Result)=>MessageTemplate> &
+    Validation<(result:Result)=>ValidatableTemplate>
 
-    return new RecordValueCallback(
-        validator,
-        ValidateMap,
-        validation,
-        message
-    ) as Interface<ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType> ;
-}
+export default RecordValue;

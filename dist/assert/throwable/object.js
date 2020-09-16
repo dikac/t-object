@@ -10,9 +10,9 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const object_1 = require("../string/object");
-    function Object(string, subject = 'type', conversion = value => typeof value) {
+    function Object_(string, subject = 'type', conversion = value => typeof value) {
         return new Error(object_1.default(false, string, subject, conversion));
     }
-    exports.default = Object;
+    exports.default = Object_;
 });
 //# sourceMappingURL=object.js.map

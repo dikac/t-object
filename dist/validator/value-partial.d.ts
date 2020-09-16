@@ -7,6 +7,9 @@ import ValueInterface from "./value";
 /**
  * more specific implementation of {@link ValueCallback}
  *
+ * Validate value with record of {@link Validator}
+ * stop on encounter {@param stop} result from {@link Validator}
+ *
  * @param validators
  * record of {@link Validator} to be used against {@template BaseType} or {@template ValueType}
  *
@@ -29,4 +32,4 @@ import ValueInterface from "./value";
  * @template ValidatableType
  * result after processing {@template Validators} with {@template BaseType} or {@template ValueType}
  */
-export default function ValuePartial<BaseType = unknown, ValueType extends BaseType = BaseType, MessageType = unknown, Validators extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>, ValidatableType extends Validatable = Validatable>(validators: Validators, validation: (result: Union<ReturnInfer<Validators>>) => ValidatableType, message: (result: Union<ReturnInfer<Validators>>) => MessageType): ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType>;
+export default function ValuePartial<BaseType = unknown, ValueType extends BaseType = BaseType, MessageType = unknown, Validators extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>, ValidatableType extends Validatable = Validatable>(validators: Validators, validation: (result: Union<ReturnInfer<Validators>>) => ValidatableType, message: (result: Union<ReturnInfer<Validators>>) => MessageType, stop?: boolean): ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType>;
