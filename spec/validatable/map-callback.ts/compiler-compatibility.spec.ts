@@ -6,8 +6,6 @@ import ValidatableInfer from "../../../dist/validator/validatable/record/infer";
 import And from "../../../dist/validatable/and";
 import MessageMap from "../../../dist/message/message/record/map";
 import Validatable from "@dikac/t-validatable/validatable";
-import ValidateMapPartial from "../../../dist/validator/validatable/record/map-partial";
-import Message from "@dikac/t-message/message";
 import Type from "@dikac/t-type/validator/type-standard";
 
 let validator = {

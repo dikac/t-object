@@ -1,5 +1,3 @@
-import PropertyType from "../../../dist/property/boolean/value";
-import Type from "../../../dist/boolean/object";
 import Sentence from "../../../dist/property/message/sentence";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
