@@ -31,7 +31,6 @@
     "ts-cleaner": "^1.0.5",
     "typescript": "^4.0.2"
   },
-  "type": "module",
   "scripts": {
     "spec-run-js": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
     "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
