@@ -1,26 +1,13 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+import ValidatableRecordCallback from "../validatable/record-value-callback";
+export default class RecordCallbackClass {
+    constructor(validator, handler, validation, message) {
+        this.validator = validator;
+        this.handler = handler;
+        this.validation = validation;
+        this.message = message;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../validatable/record-value-callback"], factory);
+    validate(argument) {
+        return new ValidatableRecordCallback(argument, this.validator, this.handler, this.validation, this.message);
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const record_value_callback_1 = require("../validatable/record-value-callback");
-    class RecordCallbackClass {
-        constructor(validator, handler, validation, message) {
-            this.validator = validator;
-            this.handler = handler;
-            this.validation = validation;
-            this.message = message;
-        }
-        validate(argument) {
-            return new record_value_callback_1.default(argument, this.validator, this.handler, this.validation, this.message);
-        }
-    }
-    exports.default = RecordCallbackClass;
-});
+}
 //# sourceMappingURL=record-key-callback.js.map

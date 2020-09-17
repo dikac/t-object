@@ -1,1 +1,1 @@
-{"version":3,"file":"object.js","sourceRoot":"","sources":["../../src/boolean/object.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;;;OAIG;IACH,SAAwB,OAAO,CAAC,KAAe;QAE3C,IAAG,KAAK,KAAK,IAAI,EAAE;YAEf,OAAO,KAAK,CAAC;SAChB;QAED,OAAO,OAAO,KAAK,KAAK,QAAQ,CAAC;IACrC,CAAC;IARD,0BAQC"}
+{"version":3,"file":"object.js","sourceRoot":"","sources":["../../src/boolean/object.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AACH,MAAM,CAAC,OAAO,UAAU,OAAO,CAAC,KAAe;IAE3C,IAAG,KAAK,KAAK,IAAI,EAAE;QAEf,OAAO,KAAK,CAAC;KAChB;IAED,OAAO,OAAO,KAAK,KAAK,QAAQ,CAAC;AACrC,CAAC"}

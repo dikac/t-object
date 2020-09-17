@@ -1,63 +1,50 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * memoize {@template ObjectT} value from keys list
+ */
+export default class GetMemoizeKeys {
     /**
-     * memoize {@template ObjectT} value from keys list
+     * @param keys
+     * keys to be memoized
      */
-    class GetMemoizeKeys {
+    constructor(keys) {
+        this.keys = keys;
         /**
-         * @param keys
-         * keys to be memoized
+         * mapping for memoized result
          */
-        constructor(keys) {
-            this.keys = keys;
-            /**
-             * mapping for memoized result
-             */
-            this.memoize = new Map();
-        }
-        /**
-         * reset memoize key
-         *
-         * @param key
-         */
-        reset(key) {
-            this.memoize.delete(key);
-        }
-        /**
-         * reset all memoize
-         */
-        resets() {
-            this.memoize.clear();
-        }
-        /**
-         * set handler to other {@link ProxyHandler<Argument>}
-         * @param handler
-         */
-        bindTo(handler) {
-            handler.get = (target, property, receiver) => this.get(target, property, receiver);
-            return handler;
-        }
-        get(target, property, receiver) {
-            if (this.keys.includes(property)) {
-                if (this.memoize.has(property)) {
-                    return this.memoize.get(property);
-                }
-                const value = target[property];
-                this.memoize.set(property, value);
-                return value;
-            }
-            return target[property];
-        }
+        this.memoize = new Map();
     }
-    exports.default = GetMemoizeKeys;
-});
+    /**
+     * reset memoize key
+     *
+     * @param key
+     */
+    reset(key) {
+        this.memoize.delete(key);
+    }
+    /**
+     * reset all memoize
+     */
+    resets() {
+        this.memoize.clear();
+    }
+    /**
+     * set handler to other {@link ProxyHandler<Argument>}
+     * @param handler
+     */
+    bindTo(handler) {
+        handler.get = (target, property, receiver) => this.get(target, property, receiver);
+        return handler;
+    }
+    get(target, property, receiver) {
+        if (this.keys.includes(property)) {
+            if (this.memoize.has(property)) {
+                return this.memoize.get(property);
+            }
+            const value = target[property];
+            this.memoize.set(property, value);
+            return value;
+        }
+        return target[property];
+    }
+}
 //# sourceMappingURL=get-memoize-keys.js.map

@@ -1,23 +1,10 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+export default class Validatables {
+    constructor(validatables, validation) {
+        this.validatables = validatables;
+        this.validation = validation;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+    get valid() {
+        return this.validation(this.validatables);
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class Validatables {
-        constructor(validatables, validation) {
-            this.validatables = validatables;
-            this.validation = validation;
-        }
-        get valid() {
-            return this.validation(this.validatables);
-        }
-    }
-    exports.default = Validatables;
-});
+}
 //# sourceMappingURL=validatables.js.map

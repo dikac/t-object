@@ -1,4 +1,4 @@
-import * as isPlainObject from "is-plain-object"
+import isPlainObject from "is-plain-object"
 
 /**
  * Check if plain object ({})

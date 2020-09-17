@@ -1,4 +1,4 @@
-import * as IsEmptyObject from "is-empty-object";
+import IsEmptyObject from "is-empty-object";
 
 /**
  * check if object is empty (contain zero property & method)

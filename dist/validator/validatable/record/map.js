@@ -1,23 +1,10 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+export default function Map(values, validators) {
+    let object = {};
+    for (let property in validators) {
+        const validator = validators[property];
+        const value = values[property];
+        object[property] = validator.validate(value);
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function Map(values, validators) {
-        let object = {};
-        for (let property in validators) {
-            const validator = validators[property];
-            const value = values[property];
-            object[property] = validator.validate(value);
-        }
-        return object;
-    }
-    exports.default = Map;
-});
+    return object;
+}
 //# sourceMappingURL=map.js.map

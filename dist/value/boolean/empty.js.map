@@ -1,1 +1,1 @@
-{"version":3,"file":"empty.js","sourceRoot":"","sources":["../../../src/value/boolean/empty.ts"],"names":[],"mappings":";;;;;;;;;;;IACA,+CAAgD;IAEhD,SAAwB,KAAK,CACzB,MAAsB;QAGtB,OAAO,eAAa,CAAC,MAAM,CAAC,KAAK,CAAC,CAAA;IACtC,CAAC;IALD,wBAKC"}
+{"version":3,"file":"empty.js","sourceRoot":"","sources":["../../../src/value/boolean/empty.ts"],"names":[],"mappings":"AACA,OAAO,aAAa,MAAM,qBAAqB,CAAC;AAEhD,MAAM,CAAC,OAAO,UAAU,KAAK,CACzB,MAAsB;IAGtB,OAAO,aAAa,CAAC,MAAM,CAAC,KAAK,CAAC,CAAA;AACtC,CAAC"}

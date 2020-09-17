@@ -1,21 +1,8 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+export default function RecordValue(object, value) {
+    let result = {};
+    for (const k of Object.keys(object)) {
+        result[k] = value.validate(k);
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function RecordValue(object, value) {
-        let result = {};
-        for (const k of Object.keys(object)) {
-            result[k] = value.validate(k);
-        }
-        return result;
-    }
-    exports.default = RecordValue;
-});
+    return result;
+}
 //# sourceMappingURL=record-key.js.map

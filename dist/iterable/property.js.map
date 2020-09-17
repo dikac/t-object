@@ -1,1 +1,1 @@
-{"version":3,"file":"property.js","sourceRoot":"","sources":["../../src/iterable/property.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;OAEG;IACH,QAAwB,CAAC,CAAC,QAAQ,CAA+B,MAA8B;QAE3F,KAAK,MAAM,QAAQ,IAAI,MAAM,EAAE;YAE3B,MAAM,QAAQ,CAAC;SAClB;IACL,CAAC;IAND,2BAMC"}
+{"version":3,"file":"property.js","sourceRoot":"","sources":["../../src/iterable/property.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,OAAO,SAAU,CAAC,CAAC,QAAQ,CAA+B,MAA8B;IAE3F,KAAK,MAAM,QAAQ,IAAI,MAAM,EAAE;QAE3B,MAAM,QAAQ,CAAC;KAClB;AACL,CAAC"}

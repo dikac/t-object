@@ -1,1 +1,1 @@
-{"version":3,"file":"strict-assign.js","sourceRoot":"","sources":["../src/strict-assign.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;;OAGG;IACH,SAAwB,YAAY,CAIhC,MAAc,EACd,MAAc;QAGd,OAAO,MAAM,CAAC,MAAM,CAAC,MAAM,EAAE,MAAM,CAAC,CAAC;IACzC,CAAC;IATD,+BASC"}
+{"version":3,"file":"strict-assign.js","sourceRoot":"","sources":["../src/strict-assign.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,MAAM,CAAC,OAAO,UAAU,YAAY,CAIhC,MAAc,EACd,MAAc;IAGd,OAAO,MAAM,CAAC,MAAM,CAAC,MAAM,EAAE,MAAM,CAAC,CAAC;AACzC,CAAC"}

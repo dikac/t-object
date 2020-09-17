@@ -1,1 +1,1 @@
-{"version":3,"file":"method.js","sourceRoot":"","sources":["../../src/boolean/method.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;OAEG;IACH,SAAwB,MAAM,CAAC,MAAe,EAAE,QAAsB;QAElE,OAAO,OAAO,MAAM,CAAC,QAAQ,CAAC,KAAK,UAAU,CAAC;IAClD,CAAC;IAHD,yBAGC"}
+{"version":3,"file":"method.js","sourceRoot":"","sources":["../../src/boolean/method.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,OAAO,UAAU,MAAM,CAAC,MAAe,EAAE,QAAsB;IAElE,OAAO,OAAO,MAAM,CAAC,QAAQ,CAAC,KAAK,UAAU,CAAC;AAClD,CAAC"}

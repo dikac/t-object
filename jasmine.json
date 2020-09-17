@@ -1,16 +1,12 @@
 {
-
   "spec_dir": "dist-spec",
-
-
   "spec_files": [
     "**/*.spec.js",
     "!**/entity"
   ],
-
-
   "stopSpecOnExpectationFailure": false,
-
-
-  "random": false
+  "random": false,
+  "helpers": [
+    "../node_modules/babel-register/lib/node.js"
+  ]
 }
