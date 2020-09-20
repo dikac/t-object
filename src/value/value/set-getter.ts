@@ -24,5 +24,8 @@ export default function SetGetter<
     configurable : boolean = true,
 ) : Type {
 
-    return SetProperty(object, property, value, false, configurable);
+    return Object.defineProperty(object, property, {
+        get : ()=>value,
+        configurable : configurable
+    })[property];
 }

@@ -1,0 +1,14 @@
+import SetGetter from "../value/value/set-getter";
+import Default from "../default";
+const defaults = { suffix: '', configurable: true };
+export default function MemoizeAccessor(configuration = defaults) {
+    configuration = Default(configuration, defaults);
+    return function (target, property, descriptor) {
+        const symbol = Symbol(property + configuration.suffix);
+        Object.defineProperty(target, symbol, descriptor);
+        descriptor.get = function () {
+            return SetGetter(this, property, target[symbol], configuration.configurable);
+        };
+    };
+}
+//# sourceMappingURL=memoize-accessor.js.map
