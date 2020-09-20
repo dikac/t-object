@@ -1,7 +1,5 @@
 import MemoizeAccessor from "../../../dist/function/memoize-accessor";
-import SetGetter from "../../../dist/value/value/set-getter";
 import Getter from "../../../dist/descriptor/boolean/getter";
-import truncate from "@dikac/t-string/truncate";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 

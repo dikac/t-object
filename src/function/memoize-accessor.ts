@@ -1,8 +1,5 @@
 import SetGetter from "../value/value/set-getter";
 import Default from "../default";
-import ObjectPick from "../pick";
-import SetGetterCallback from "../set-getter-callback";
-import SetPropertyCallback from "../set-property-callback";
 import Suffix from "@dikac/t-string/suffix/suffix";
 
 const defaults = {suffix:'', configurable:true}

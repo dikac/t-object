@@ -1,4 +1,3 @@
-import SetProperty from "./set-property";
 /**
  * set {@param value} for getter value for {@param object}
  * should be used inside getter callback

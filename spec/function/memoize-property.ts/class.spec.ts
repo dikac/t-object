@@ -1,5 +1,4 @@
 import MemoizeProperty from "../../../dist/function/memoize-property";
-import SetGetter from "../../../dist/value/value/set-getter";
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
