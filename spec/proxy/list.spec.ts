@@ -502,22 +502,22 @@ describe('plain object', () => {
 describe('function', () => {
 
 
-    // let proxy = new Proxy(function (value){
-    //     console.log(value);
-    // }, new Debug);
-    //
-    // // @ts-ignore
-    // proxy.value = 1;
-    // // @ts-ignore
-    // proxy(5);
-    //
-    //
-    // let proxy2 = new Proxy({}, new Debug);
-    //
-    // // @ts-ignore
-    // proxy2.value = 1;
-    // // @ts-ignore
-    // proxy2(5);
+// let proxy = new Proxy(function (value){
+//     console.log(value);
+// }, new Debug);
+//
+// // @ts-ignore
+// proxy.value = 1;
+// // @ts-ignore
+// proxy(5);
+//
+//
+// let proxy2 = new Proxy({}, new Debug);
+//
+// // @ts-ignore
+// proxy2.value = 1;
+// // @ts-ignore
+// proxy2(5);
 //
 //     describe('with accessor', () => {
 //
