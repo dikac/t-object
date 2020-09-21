@@ -8,7 +8,7 @@ export default function MapPartial<
 >(
     values : RecordParameter<Validators>,
     validators : Validators,
-) : PartialUnion<InferReturn<Validators>> {
+) : Partial<InferReturn<Validators>> {
 
     let object = {};
 

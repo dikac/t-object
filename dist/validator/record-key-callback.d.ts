@@ -1,15 +1,18 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import ValidatableRecordCallback from "../validatable/record-value-callback";
+import ValidatableRecord from "../validatable/record-value";
 import Return from "@dikac/t-validator/validatable/simple";
 import Replace from "@dikac/t-validatable/boolean/replace";
 import RecordKey from "./record-key";
-export default class RecordCallbackClass<Base extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, Type extends Base = Base, ValidatorType extends Validator<keyof Base, keyof Type> = Validator<keyof Base, keyof Type>, Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>, ValidatableType extends Validatable = Validatable, MessageType = unknown> implements RecordKey<Base, Type, ValidatorType, Result, ValidatableType, MessageType> {
+import Instance from "@dikac/t-validator/validatable/validatable";
+import InferBase from "@dikac/t-validator/base/infer";
+import InferType from "@dikac/t-validator/type/infer";
+export default class RecordCallbackClass<ValidatorType extends Validator<PropertyKey> = Validator<PropertyKey>, Result extends Record<PropertyKey, Instance> = Record<PropertyKey, Instance>, ValidatableType extends Validatable = Validatable, MessageType = unknown> implements RecordKey<ValidatorType, Result, ValidatableType, MessageType> {
     validator: ValidatorType;
-    handler: (base: Base, validator: ValidatorType) => Result;
+    handler: (base: Record<InferBase<ValidatorType>, any>, validator: ValidatorType) => Result;
     validation: (result: Result) => ValidatableType;
     message: (result: Result) => MessageType;
-    constructor(validator: ValidatorType, handler: (base: Base, validator: ValidatorType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
-    validate<Argument extends Type>(argument: Argument): Replace<ValidatableRecordCallback<MessageType, Argument, ValidatorType, Result, ValidatableType>, true>;
-    validate<Argument extends Base>(argument: Argument): Return<Base, Argument, Type, ValidatableRecordCallback<MessageType, Base, ValidatorType, Result, ValidatableType>>;
+    constructor(validator: ValidatorType, handler: (base: Record<InferBase<ValidatorType>, any>, validator: ValidatorType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
+    validate<Argument extends Record<InferType<ValidatorType>, any>>(argument: Argument): Replace<ValidatableRecord<MessageType, Argument, ValidatorType, Result, ValidatableType>, true>;
+    validate<Argument extends Record<InferBase<ValidatorType>, any>>(argument: Argument): Return<Record<InferBase<ValidatorType>, any>, Argument, Record<InferBase<ValidatorType>, any>, ValidatableRecord<MessageType, Record<InferBase<ValidatorType>, any>, ValidatorType, Result, ValidatableType>>;
 }

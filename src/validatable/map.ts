@@ -9,8 +9,8 @@ import Validators from "../validator/validators/validators";
 
 export default interface Map<
     MessageType,
-    ValidatorsType extends Record<any, Validator>,
-    Result extends Record<any, Instance>,
+    ValidatorsType extends Record<PropertyKey, Validator>,
+    Result extends Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable,
     ValueType extends RecordBase<ValidatorsType>
 > extends

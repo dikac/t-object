@@ -35,7 +35,7 @@ describe("compiler compatibility", function() {
 
     describe("explicit complete", function() {
 
-        let property = Value<Record<PropertyKey, any>, Record<string, any>, TypeValidatorValue>(validator, And, MessageMap);
+        let property = Value/*<Record<PropertyKey, any>, Record<string, any>, TypeValidatorValue>*/(validator, And, MessageMap);
 
         let validatable = property.validate(value);
 

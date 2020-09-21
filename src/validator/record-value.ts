@@ -6,7 +6,7 @@ import ValidatorContainer from "@dikac/t-validator/validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import Validation from "@dikac/t-validatable/validation/validation";
 import Message from "@dikac/t-message/message";
-import ValidatableRecordCallback from "../validatable/record-value-callback";
+import ValidatableRecord from "../validatable/record-value";
 import Instance from "@dikac/t-validator/validatable/validatable";
 
 type RecordValue<
@@ -18,7 +18,7 @@ type RecordValue<
     SimpleValidator<
         Record<PropertyKey, InferBase<ValidatorTemplate>>,
         Record<PropertyKey, InferType<ValidatorTemplate>>,
-        ValidatableRecordCallback<MessageTemplate, Record<PropertyKey, InferBase<ValidatorTemplate>>, ValidatorTemplate, Result, ValidatableTemplate>> &
+        ValidatableRecord<MessageTemplate, Record<PropertyKey, InferBase<ValidatorTemplate>>, ValidatorTemplate, Result, ValidatableTemplate>> &
     ValidatorContainer<ValidatorTemplate> &
     Message<(result:Result)=>MessageTemplate> &
     Validation<(result:Result)=>ValidatableTemplate>

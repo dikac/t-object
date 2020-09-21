@@ -17,6 +17,10 @@ export default function MapAll<
     message : (result:ReturnInfer<Container>)=>MessageType,
 ) : Map<Container, ReturnInfer<Container>, ValidatableType, MessageType> {
 
-    return <Map<Container, ReturnInfer<Container>, ValidatableType, MessageType>> new MapCallback(validators, ValidateMap, validation, message);
+    return <Map<Container, ReturnInfer<Container>, ValidatableType, MessageType>> new MapCallback(validators, (record, validators1) => {
+
+        return ValidateMap(record, validators1);
+
+    }, validation, message);
 }
 

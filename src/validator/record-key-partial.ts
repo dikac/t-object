@@ -8,16 +8,14 @@ import Union from "../union";
 import RecordKey from "./record-key";
 
 export default function RecordKeyPartial<
-    Base extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-    Type extends Base = Base,
-    ValidatorType extends Validator<O.UnionOf<Base>, O.UnionOf<Type>> = Validator<O.UnionOf<Base>, O.UnionOf<Type>>,
+    ValidatorType extends Validator = Validator,
     ValidatableType extends Validatable = Validatable,
     MessageType = unknown,
 >(
     validator : ValidatorType,
     validation : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>ValidatableType,
     message : (partial:Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>MessageType,
-) : RecordKey<Base, Type, ValidatorType, Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType> {
+) : RecordKey<ValidatorType, Union<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType> {
 
     return new RecordKeyCallback(
         validator,

@@ -2,8 +2,11 @@ import Validator from "@dikac/t-validator/validator";
 import SimpleValidator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
 import Message from "@dikac/t-message/message";
-import ValidatableRecordCallback from "../validatable/record-value-callback";
 import ValidatorContainer from "@dikac/t-validator/validator/validator";
 import Validation from "@dikac/t-validatable/validation/validation";
-declare type RecordKey<Base extends Record<PropertyKey, unknown>, Type extends Base, ValidatorType extends Validator<keyof Base, keyof Type>, Result extends Record<PropertyKey, Validatable>, ValidatableType extends Validatable, MessageType> = SimpleValidator<Base, Type, ValidatableRecordCallback<MessageType, Base, ValidatorType, Result, ValidatableType>> & ValidatorContainer<ValidatorType> & Message<(result: Result) => MessageType> & Validation<(result: Result) => ValidatableType>;
-export default RecordKey;
+import Instance from "@dikac/t-validator/validatable/validatable";
+import InferBase from "@dikac/t-validator/base/infer";
+import ValidatableRecord from "../validatable/record-value";
+declare type RecordValue<ValidatorTemplate extends Validator<PropertyKey>, Result extends Record<PropertyKey, Instance>, ValidatableTemplate extends Validatable, MessageTemplate> = SimpleValidator<Record<InferBase<ValidatorTemplate>, any>, Record<InferBase<ValidatorTemplate>, any>, //        Record<InferType<ValidatorTemplate>, any>,
+ValidatableRecord<MessageTemplate, Record<PropertyKey, InferBase<ValidatorTemplate>>, ValidatorTemplate, Result, ValidatableTemplate>> & ValidatorContainer<ValidatorTemplate> & Message<(result: Result) => MessageTemplate> & Validation<(result: Result) => ValidatableTemplate>;
+export default RecordValue;

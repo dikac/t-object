@@ -5,18 +5,23 @@ import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
 import SetGetter from "../value/value/set-getter";
+import RecordValue from "./record-value";
 
-export default class RecordCallback<
+export default class RecordValueCallback<
     MessageType = unknown,
     ValueType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
     ValidatorType extends Validator<O.UnionOf<ValueType>> = Validator<O.UnionOf<ValueType>>,
     Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
     ValidatableType extends Validatable = Validatable
-> implements
+> implements RecordValue<MessageType,
+    ValueType,
+ValidatorType,
+Result,
+ValidatableType>/*
     Value<ValueType>,
     Validatable,
     Validatables<Result>,
-    Message<MessageType>
+    Message<MessageType>*/
 {
 
 

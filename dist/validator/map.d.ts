@@ -8,5 +8,5 @@ import ValidatableMap from "../validatable/map";
 import RecordBase from "./base/record/infer";
 import RecordType from "./type/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
-export default interface Map<Container extends Record<any, Validator>, Result extends Record<any, Instance>, ValidatableType extends Validatable, MessageType> extends ValidatorSimple<RecordBase<Container>, RecordType<Container>, ValidatableMap<MessageType, Container, Result, ValidatableType, RecordBase<Container>>>, Validation<(result: Result) => ValidatableType>, Validators<Container>, Message<(result: Result) => MessageType> {
+export default interface Map<Container extends Record<PropertyKey, Validator>, Result extends Partial<Record<PropertyKey, Instance>>, ValidatableType extends Validatable, MessageType> extends ValidatorSimple<RecordBase<Container>, RecordType<Container>, ValidatableMap<MessageType, Container, Result, ValidatableType, RecordBase<Container>>>, Validation<(result: Result) => ValidatableType>, Validators<Container>, Message<(result: Result) => MessageType> {
 }
