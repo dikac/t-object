@@ -1,6 +1,5 @@
 import ValidatableRecord from "./infer";
 import Validator from "@dikac/t-validator/validator";
-import PartialUnion from "../../../partial-union";
 
 export default function ValuePartial<
     ValueT,
@@ -9,7 +8,7 @@ export default function ValuePartial<
     value : ValueT,
     validators : Validators,
     stop : boolean = false
-) : PartialUnion<ValidatableRecord<Validators>> {
+) : Partial<ValidatableRecord<Validators>> {
 
     let object = {};
 

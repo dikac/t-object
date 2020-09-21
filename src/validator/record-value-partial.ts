@@ -4,7 +4,6 @@ import ReturnInfer from "@dikac/t-validator/validatable/infer";
 import MapInterface from "../map";
 import ValidateMap from "./validatable/record/record-value-partial";
 import RecordValueCallback from "./record-value-callback";
-import Union from "../union";
 import RecordValue from "./record-value";
 
 export default function RecordValuePartial<
@@ -13,13 +12,13 @@ export default function RecordValuePartial<
     MessageType = unknown,
 > (
     validator : ValidatorType,
-    validation : (record : Record<any, ReturnInfer<ValidatorType>>)=>ValidatableType,
-    message : (record : Record<any, ReturnInfer<ValidatorType>>)=>MessageType,
-) : RecordValue<ValidatorType, Union<Record<any, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType>  {
+    validation : (record : Record<PropertyKey, ReturnInfer<ValidatorType>>)=>ValidatableType,
+    message : (record : Record<PropertyKey, ReturnInfer<ValidatorType>>)=>MessageType,
+) : RecordValue<ValidatorType, Partial<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType>  {
 
     return new RecordValueCallback(
             validator,
-        (value, validators)  => <Union<MapInterface<any, ReturnInfer<ValidatorType>>>>  ValidateMap(value, validators),
+        (value, validators)  =>  ValidateMap(value, validators),
         validation,
         message
     );

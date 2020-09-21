@@ -29,4 +29,4 @@ import ValueInterface from "./value";
  * @template ValidatableType
  * result after processing {@template Validators} with {@template BaseType} or {@template ValueType}
  */
-export default function ValueAll<Base = unknown, Value extends Base = Base, Message = unknown, Validators extends Record<any, Validator<Base, Value>> = Record<any, Validator<Base, Value>>, ValidatableType extends Validatable = Validatable>(validators: Validators, validation: (result: MapReturn<Validators>) => ValidatableType, message: (result: MapReturn<Validators>) => Message): ValueInterface<Base, Value, Message, Validators, MapReturn<Validators>, ValidatableType>;
+export default function ValueAll<Base = unknown, Value extends Base = Base, Message = unknown, Validators extends Record<PropertyKey, Validator<Base, Value>> = Record<PropertyKey, Validator<Base, Value>>, ValidatableType extends Validatable = Validatable>(validators: Validators, validation: (result: MapReturn<Validators>) => ValidatableType, message: (result: MapReturn<Validators>) => Message): ValueInterface<Base, Value, Message, Validators, MapReturn<Validators>, ValidatableType>;

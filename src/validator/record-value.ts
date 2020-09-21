@@ -11,7 +11,7 @@ import Instance from "@dikac/t-validator/validatable/validatable";
 
 type RecordValue<
     ValidatorTemplate extends Validator,
-    Result extends Record<PropertyKey, Instance>,
+    Result extends Partial<Record<PropertyKey, Instance>>,
     ValidatableTemplate extends Validatable ,
     MessageTemplate,
 > =

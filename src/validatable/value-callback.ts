@@ -8,7 +8,7 @@ export default class ValueCallback<
     ValueType = unknown,
     MessageType = unknown,
     RecordType extends Record<PropertyKey, Validator<ValueType>> = Record<PropertyKey, Validator<ValueType>>,
-    Result extends Record<PropertyKey, ValidatorValidatable> = Record<PropertyKey, ValidatorValidatable>,
+    Result extends Partial<Record<PropertyKey, ValidatorValidatable>> = Partial<Record<PropertyKey, ValidatorValidatable>>,
     ValidatableType extends Validatable = Validatable
 > implements Value<ValueType, MessageType, RecordType, Result, ValidatableType> {
 
@@ -19,7 +19,6 @@ export default class ValueCallback<
         readonly validation : (result:Result)=>ValidatableType,
         readonly messageFactory : (result:Result)=>MessageType,
     ) {
-
     }
 
     get valid() : boolean {

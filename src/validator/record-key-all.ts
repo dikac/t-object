@@ -1,6 +1,5 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import {O} from "ts-toolbelt";
 import ReturnInfer from "@dikac/t-validator/validatable/infer";
 import ValidateRecordKey from "./validatable/record/record-key";
 import RecordKeyCallback from "./record-key-callback";

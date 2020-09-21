@@ -36,7 +36,7 @@ export default function ValueAll<
     Base = unknown,
     Value extends Base = Base,
     Message = unknown,
-    Validators extends Record<any, Validator<Base, Value>> = Record<any, Validator<Base, Value>>,
+    Validators extends Record<PropertyKey, Validator<Base, Value>> = Record<PropertyKey, Validator<Base, Value>>,
     ValidatableType extends Validatable = Validatable
 >(
     validators : Validators,

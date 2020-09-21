@@ -4,7 +4,6 @@ import ReturnInfer from "./validatable/record/infer";
 import ValidateMap from "./validatable/record/map-partial";
 import MapCallback from "./map-callback";
 import Map from "./map";
-import Union from "../union";
 
 export default function MapPartial<
     Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,

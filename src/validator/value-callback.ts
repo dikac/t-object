@@ -33,8 +33,8 @@ export default class ValueCallback<
     BaseType = unknown,
     ValueType extends BaseType = BaseType,
     MessageType = unknown,
-    ValidatorsType extends Record<any, Validator<BaseType, ValueType>> = Record<any, Validator<BaseType, ValueType>>,
-    Validatables extends Record<any, Instance> = Record<any, Instance>,
+    ValidatorsType extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>,
+    Validatables extends Partial<Record<PropertyKey, Instance>> = Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable = Validatable
 > implements Value<BaseType, ValueType, MessageType, ValidatorsType, Validatables, ValidatableType> {
     /**

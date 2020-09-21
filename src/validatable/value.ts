@@ -10,7 +10,7 @@ export default interface Value <
     ValueType,
     MessageType,
     RecordType extends Record<PropertyKey, Validator<ValueType>>,
-    Result extends Record<PropertyKey, ValidatorValidatable>,
+    Result extends Partial<Record<PropertyKey, ValidatorValidatable>>,
     ValidatableType extends Validatable
 > extends
     Readonly<BaseValue<ValueType>>,

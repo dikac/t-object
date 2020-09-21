@@ -6,13 +6,12 @@ import Value from "@dikac/t-value/value";
 import Validatables from "./validatables/validatables";
 import Message from "@dikac/t-message/message";
 import {O} from "ts-toolbelt";
-import SetGetter from "../value/value/set-getter";
 
 export default interface RecordValue<
     MessageType = unknown,
     ValueType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
     ValidatorType extends Validator<O.UnionOf<ValueType>> = Validator<O.UnionOf<ValueType>>,
-    Result extends Record<PropertyKey, Validatable> = Record<PropertyKey, Validatable>,
+    Result extends Partial<Record<PropertyKey, Validatable>> = Partial<Record<PropertyKey, Validatable>>,
     ValidatableType extends Validatable = Validatable
 > extends
     ValidatorContainer<ValidatorType>,
