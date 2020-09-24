@@ -6,16 +6,16 @@ import MapCallback from "./map-callback";
 import Map from "./map";
 
 export default function MapCallbackFunction<
-    Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
+    Validators extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
     Result extends Partial<Record<PropertyKey, Instance>> = Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable = Validatable,
     MessageType = unknown,
 > (
-    validators : Container,
-    map : (argument:RecordParameter<Container>, validators:Container)=>Result,
+    validators : Validators,
+    map : (argument:RecordParameter<Validators>, validators:Validators)=>Result,
     validation : (result:Result)=>ValidatableType,
     message : (result:Result)=>MessageType
-) : Map <Container, Result, ValidatableType, MessageType> {
+) : Map <Validators, Result, ValidatableType, MessageType> {
 
     return new MapCallback(validators, map, validation, message);
 }

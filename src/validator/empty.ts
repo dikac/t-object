@@ -4,19 +4,19 @@ import Message from "@dikac/t-message/message";
 import Value from "@dikac/t-value/value";
 import EmptyValidatable from "../validatable/empty";
 
-export default class Empty<MessageT>
+export default class Empty<MessageType>
     implements
-        Validator<object, object, boolean, boolean, EmptyValidatable<object, MessageT>>,
-        Message<(result:Readonly<Value<object> & Validatable>)=>MessageT>
+        Validator<object, object, boolean, boolean, EmptyValidatable<object, MessageType>>,
+        Message<(result:Readonly<Value<object> & Validatable>)=>MessageType>
 {
 
     constructor(
-       public message : (result:Readonly<Value<object> & Validatable>)=>MessageT
+       public message : (result:Readonly<Value<object> & Validatable>)=>MessageType
     ) {
     }
 
-    validate<Argument extends object>(value: Argument) : EmptyValidatable<Argument, MessageT>   {
+    validate<Argument extends object>(value: Argument) : EmptyValidatable<Argument, MessageType>   {
 
-        return new EmptyValidatable<Argument, MessageT>(value, this.message);
+        return new EmptyValidatable<Argument, MessageType>(value, this.message);
     }
 }

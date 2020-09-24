@@ -2,10 +2,10 @@ import ValidatableRecord from "./infer";
 import Validator from "@dikac/t-validator/validator";
 
 export default function ValuePartial<
-    ValueT,
-    Validators extends Record<PropertyKey, Validator<ValueT>>,
+    ValueType,
+    Validators extends Record<PropertyKey, Validator<ValueType>>,
 >(
-    value : ValueT,
+    value : ValueType,
     validators : Validators,
     stop : boolean = false
 ) : Partial<ValidatableRecord<Validators>> {
