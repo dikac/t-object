@@ -8,6 +8,8 @@
     "target": "es2016",
     "outDir": "dist",
     "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration" : true,
     "strictNullChecks": true,

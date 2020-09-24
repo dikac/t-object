@@ -1,4 +1,3 @@
-import SetProperty from "./set-property";
 /**
  * set {@param value} for getter value for {@param object}
  * should be used inside getter callback
@@ -24,5 +23,8 @@ export default function SetGetter<
     configurable : boolean = true,
 ) : Type {
 
-    return SetProperty(object, property, value, false, configurable);
+    return Object.defineProperty(object, property, {
+        get : ()=>value,
+        configurable : configurable
+    })[property];
 }

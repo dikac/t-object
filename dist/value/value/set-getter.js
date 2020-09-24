@@ -1,4 +1,3 @@
-import SetProperty from "./set-property";
 /**
  * set {@param value} for getter value for {@param object}
  * should be used inside getter callback
@@ -14,6 +13,9 @@ import SetProperty from "./set-property";
  * @param configurable {@default true}
  */
 export default function SetGetter(object, property, value, configurable = true) {
-    return SetProperty(object, property, value, false, configurable);
+    return Object.defineProperty(object, property, {
+        get: () => value,
+        configurable: configurable
+    })[property];
 }
 //# sourceMappingURL=set-getter.js.map
