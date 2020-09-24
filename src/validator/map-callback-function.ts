@@ -7,7 +7,7 @@ import Map from "./map";
 
 export default function MapCallbackFunction<
     Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
-    Result extends Record<PropertyKey, Instance> = Record<PropertyKey, Instance>,
+    Result extends Partial<Record<PropertyKey, Instance>> = Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable = Validatable,
     MessageType = unknown,
 > (

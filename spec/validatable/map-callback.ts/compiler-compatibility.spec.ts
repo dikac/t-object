@@ -53,7 +53,7 @@ describe("explicit", function() {
             validator,
             ValidateMap,
             And,
-            MessageMap
+            result => MessageMap(result)
         );
 
         let unknown : unknown = validatable.value;

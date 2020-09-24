@@ -5,13 +5,13 @@ import ValidatableRecord from "../validatable/record-value";
 import Return from "@dikac/t-validator/validatable/simple";
 import Replace from "@dikac/t-validatable/boolean/replace";
 import RecordKey from "./record-key";
-import Instance from "@dikac/t-validator/validatable/validatable";
+import ValidatorValidatable from "@dikac/t-validator/validatable/validatable";
 import InferBase from "@dikac/t-validator/base/infer";
 import InferType from "@dikac/t-validator/type/infer";
 
 export default class RecordKeyCallback<
     ValidatorType extends Validator<PropertyKey> = Validator<PropertyKey>,
-    Result extends Partial<Record<PropertyKey, Instance>> = Partial<Record<PropertyKey, Instance>>,
+    Result extends Partial<Record<PropertyKey, ValidatorValidatable>> = Partial<Record<PropertyKey, ValidatorValidatable>>,
     ValidatableType extends Validatable = Validatable,
     MessageType = unknown,
 > implements RecordKey< ValidatorType, Result, ValidatableType, MessageType> {
