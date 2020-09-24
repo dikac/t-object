@@ -15,6 +15,7 @@ export default class RecordValueCallback<
     ValidatableType extends Validatable = Validatable,
     Message = unknown,
 > implements RecordValue<ValidatorType, Result, ValidatableType, Message> {
+
     constructor(
         public validator : ValidatorType,
         public handler : (record:Partial<Record<PropertyKey, InferBase<ValidatorType>>>, validator : ValidatorType)=>Result,
