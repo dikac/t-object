@@ -3,6 +3,7 @@ import ValidatorValidatable from "@dikac/t-validator/validatable/validatable";
 import Validatable from "@dikac/t-validatable/validatable";
 import SetGetter from "../value/value/set-getter";
 import Value from "./value";
+import MemoizeAccessor from "../function/memoize-accessor";
 
 export default class ValueCallback<
     ValueType = unknown,
@@ -12,13 +13,17 @@ export default class ValueCallback<
     ValidatableType extends Validatable = Validatable
 > implements Value<ValueType, MessageType, RecordType, Result, ValidatableType> {
 
+    #message : (result:Result)=>MessageType;
+
     constructor(
         readonly value: ValueType,
         readonly validators : RecordType,
         readonly map : (value:ValueType, validator:RecordType)=>Result,
         readonly validation : (result:Result)=>ValidatableType,
-        readonly messageFactory : (result:Result)=>MessageType,
+        message : (result:Result)=>MessageType,
     ) {
+
+        this.#message = message;
     }
 
     get valid() : boolean {
@@ -26,9 +31,10 @@ export default class ValueCallback<
         return this.validatable.valid;
     }
 
+    @MemoizeAccessor()
     get validatable () : ValidatableType {
 
-        return  SetGetter(this, 'validatable', this.validation(this.validatables));
+        return this.validation(this.validatables);
     }
 
     get messages() : Result {
@@ -36,14 +42,16 @@ export default class ValueCallback<
         return this.validatables;
     }
 
+    @MemoizeAccessor()
     get validatables() : Result {
 
-        return  SetGetter(this, 'validatables', this.map(this.value, this.validators));
+        return this.map(this.value, this.validators);
     }
 
+    @MemoizeAccessor()
     get message() : MessageType {
 
-        return  SetGetter(this, 'message', this.messageFactory(this.validatables));
+        return this.#message(this.validatables);
 
     }
 }

@@ -7,11 +7,15 @@ let result : string;
 
 class Test {
 
+    get random() : string {
+        return Math.random().toString();
+    }
+
     @MemoizeProperty()
     get data () : string {
 
         called++;
-        return Math.random().toString();
+        return this.random;
     }
 }
 

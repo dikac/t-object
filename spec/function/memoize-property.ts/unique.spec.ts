@@ -5,9 +5,13 @@ it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
 class Test {
 
+    get random() : string {
+        return Math.random().toString();
+    }
+
     @MemoizeProperty()
     get data () : string {
-        return Math.random().toString();
+        return this.random;
     }
 }
 
