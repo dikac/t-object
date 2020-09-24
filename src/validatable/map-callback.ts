@@ -10,8 +10,8 @@ import Pick from "../pick";
 
 export default class MapCallback<
     MessageType = unknown,
-    ValidatorsType extends Record<any, Validator> = Record<any, Validator>,
-    Result extends Record<any, Instance> = Record<any, Instance>,
+    ValidatorsType extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>,
+    Result extends Partial<Record<PropertyKey, Instance>> = Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable = Validatable,
     ValueType extends RecordBase<ValidatorsType> = RecordBase<ValidatorsType>
 > implements Map<MessageType, ValidatorsType, Result, ValidatableType, ValueType> {

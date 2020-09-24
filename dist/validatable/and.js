@@ -1,5 +1,6 @@
 import AndBoolean from "./record/boolean/and";
 import Validatables from "./validatables";
+// TODO ADD SPEC FOR PARTIAL
 export default function And(validatable) {
     return new Validatables(validatable, AndBoolean);
 }

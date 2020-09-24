@@ -8,6 +8,7 @@ import MessageMap from "../../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import MapCallbackFunction from "../../../dist/validator/map-callback-function";
+import InferReturn from "../../../dist/validator/validatable/record/infer";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -26,7 +27,7 @@ describe("flat", function() {
         address : {},
     };
 
-    let property = new MapCallback(validator, ValidateMap, And, MessageMap);
+    let property = new MapCallback<typeof validator, InferReturn<typeof validator>>(validator, ValidateMap, And, MessageMap);
 
     it(`and validation`, () => {
 

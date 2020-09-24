@@ -31,8 +31,8 @@ export default interface Value<
     Base,
     Value extends Base,
     MessageType,
-    RecordType extends Record<any, Validator<Base, Value>>,
-    Result extends Record<any, Instance>,
+    RecordType extends Record<PropertyKey, Validator<Base, Value>>,
+    Result extends Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable
 > extends
     Validator<

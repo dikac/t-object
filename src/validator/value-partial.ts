@@ -2,7 +2,6 @@ import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
 import ValidateValuePartial from "./validatable/record/value-partial";
 import ReturnInfer from "./validatable/record/infer";
-import Union from "../union";
 import MapReturn from "./validatable/record/infer";
 import ValueCallback from "./value-callback";
 import ValueInterface from "./value";
@@ -43,14 +42,14 @@ export default function ValuePartial<
     ValidatableType extends Validatable = Validatable
 >(
     validators : Validators,
-    validation : (result:Union<ReturnInfer<Validators>>) => ValidatableType,
-    message : (result:Union<ReturnInfer<Validators>>) => MessageType,
+    validation : (result:Partial<ReturnInfer<Validators>>) => ValidatableType,
+    message : (result:Partial<ReturnInfer<Validators>>) => MessageType,
     stop : boolean = false,
-) : ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType> {
+) : ValueInterface<BaseType, ValueType, MessageType, Validators, Partial<MapReturn<Validators>>, ValidatableType> {
 
-    return <ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType>> new ValueCallback(
+    return <ValueInterface<BaseType, ValueType, MessageType, Validators, Partial<MapReturn<Validators>>, ValidatableType>> new ValueCallback(
         validators,
-        (value, validators)  => <Union<MapReturn<Validators>>> ValidateValuePartial(value, validators, stop),
+        (value, validators)  => ValidateValuePartial(value, validators, stop),
         validation,
         message
     );

@@ -1,7 +1,5 @@
 import Validator from "@dikac/t-validator/validator";
-import PartialUnion from "../../../partial-union";
 import MapInterface from "../../../map";
-
 import Return from "@dikac/t-validator/validatable/infer";
 
 export default function RecordVKeyPartial<
@@ -10,7 +8,7 @@ export default function RecordVKeyPartial<
 >(
     object : RecordType,
     value : Value,
-) : PartialUnion<MapInterface<RecordType, Return<Value>>> {
+) : Partial<MapInterface<RecordType, Return<Value>>> {
 
     let result = {};
 

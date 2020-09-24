@@ -4,7 +4,6 @@ import Writable from "../../../dist/property/boolean/writable";
 import GetOwnPropertyDescriptorListAll from "../../../dist/proxy/handler/get-own-property-descriptor-list-all";
 
 
-
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
 

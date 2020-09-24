@@ -1,6 +1,5 @@
 import RecordParameter from "../../base/record/infer";
 import Validator from "@dikac/t-validator/validator";
-import PartialUnion from "../../../partial-union";
 import InferReturn from "./infer";
 
 export default function MapPartial<
@@ -8,7 +7,7 @@ export default function MapPartial<
 >(
     values : RecordParameter<Validators>,
     validators : Validators,
-) : PartialUnion<InferReturn<Validators>> {
+) : Partial<InferReturn<Validators>> {
 
     let object = {};
 

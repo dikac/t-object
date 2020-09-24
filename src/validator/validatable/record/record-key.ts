@@ -1,9 +1,8 @@
 import Validator from "@dikac/t-validator/validator";
 import MapInterface from "../../../map";
-
 import Return from "@dikac/t-validator/validatable/infer";
 
-export default function RecordValue<
+export default function RecordKey<
     RecordType extends Record<PropertyKey, any>,
     Value extends Validator<keyof RecordType>,
 >(

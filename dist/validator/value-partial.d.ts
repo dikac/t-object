@@ -1,7 +1,6 @@
 import Validator from "@dikac/t-validator/simple";
 import Validatable from "@dikac/t-validatable/validatable";
 import ReturnInfer from "./validatable/record/infer";
-import Union from "../union";
 import MapReturn from "./validatable/record/infer";
 import ValueInterface from "./value";
 /**
@@ -32,4 +31,4 @@ import ValueInterface from "./value";
  * @template ValidatableType
  * result after processing {@template Validators} with {@template BaseType} or {@template ValueType}
  */
-export default function ValuePartial<BaseType = unknown, ValueType extends BaseType = BaseType, MessageType = unknown, Validators extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>, ValidatableType extends Validatable = Validatable>(validators: Validators, validation: (result: Union<ReturnInfer<Validators>>) => ValidatableType, message: (result: Union<ReturnInfer<Validators>>) => MessageType, stop?: boolean): ValueInterface<BaseType, ValueType, MessageType, Validators, Union<MapReturn<Validators>>, ValidatableType>;
+export default function ValuePartial<BaseType = unknown, ValueType extends BaseType = BaseType, MessageType = unknown, Validators extends Record<PropertyKey, Validator<BaseType, ValueType>> = Record<PropertyKey, Validator<BaseType, ValueType>>, ValidatableType extends Validatable = Validatable>(validators: Validators, validation: (result: Partial<ReturnInfer<Validators>>) => ValidatableType, message: (result: Partial<ReturnInfer<Validators>>) => MessageType, stop?: boolean): ValueInterface<BaseType, ValueType, MessageType, Validators, Partial<MapReturn<Validators>>, ValidatableType>;

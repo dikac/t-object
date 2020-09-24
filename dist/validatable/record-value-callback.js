@@ -1,5 +1,5 @@
 import SetGetter from "../value/value/set-getter";
-export default class RecordCallback {
+export default class RecordValueCallback {
     constructor(value, validator, map, validation, message) {
         this.value = value;
         this.validator = validator;

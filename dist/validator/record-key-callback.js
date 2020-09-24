@@ -1,5 +1,5 @@
 import ValidatableRecordCallback from "../validatable/record-value-callback";
-export default class RecordCallbackClass {
+export default class RecordKeyCallback {
     constructor(validator, handler, validation, message) {
         this.validator = validator;
         this.handler = handler;

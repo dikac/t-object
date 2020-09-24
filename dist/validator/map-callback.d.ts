@@ -8,7 +8,7 @@ import RecordType from "./type/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import ValidatableReplace from "@dikac/t-validatable/boolean/replace";
 import Simple from "@dikac/t-validator/validatable/simple";
-export default class MapCallback<Container extends Record<any, Validator> = Record<PropertyKey, Validator>, Result extends Record<any, Instance> = Record<PropertyKey, Instance>, ValidatableType extends Validatable = Validatable, MessageType = unknown> implements Map<Container, Result, ValidatableType, MessageType> {
+export default class MapCallback<Container extends Record<PropertyKey, Validator> = Record<PropertyKey, Validator>, Result extends Partial<Record<PropertyKey, Instance>> = Partial<Record<PropertyKey, Instance>>, ValidatableType extends Validatable = Validatable, MessageType = unknown> implements Map<Container, Result, ValidatableType, MessageType> {
     validators: Container;
     map: (record: RecordParameter<Container>, validators: Container) => Result;
     validation: (result: Result) => ValidatableType;

@@ -1,5 +1,5 @@
 import RecordValueCallback from "../../dist/validator/record-key-callback";
-import ValidateValue from "../../dist/validator/validatable/record/record-key";
+import ValidateKey from "../../dist/validator/validatable/record/record-key";
 import ValidateValuePartial from "../../dist/validator/validatable/record/record-key-partial";
 import And from "../../dist/validatable/and";
 import Or from "../../dist/validatable/or";
@@ -32,7 +32,7 @@ describe("compiler compatibility", function() {
 
     describe("implicit", function() {
 
-        let property = new RecordValueCallback(validator, ValidateValue, And, (v)=>MessageMap(v)
+        let property = new RecordValueCallback(validator, ValidateKey, And, (v)=>MessageMap(v)
         );
 
         let validatable = property.validate(value);
@@ -52,8 +52,8 @@ describe("compiler compatibility", function() {
 
         describe("auto", function() {
 
-            let property = new RecordValueCallback<Record<PropertyKey, any>, Record<string, any>, TypeValidatorValue>(validator,
-                (value, validators) => ValidateValue(value, validators),
+            let property = new RecordValueCallback<TypeValidatorValue>(validator,
+                (value, validators) => ValidateKey(value, validators),
                 (v)=>And(v),
                 (v)=>MessageMap(<globalThis.Record<any, ValidatorValidatable>>v)
             );
@@ -67,8 +67,8 @@ describe("compiler compatibility", function() {
 
         describe("direct", function() {
 
-            let property = new RecordValueCallback<Record<PropertyKey, any>, Record<string, any>, TypeValidatorValue>(validator,
-                (value, validators) => ValidateValue(value, validators),
+            let property = new RecordValueCallback<TypeValidatorValue>(validator,
+                (value, validators) => ValidateKey(value, validators),
                 (v)=>And(<globalThis.Record<any, Validatable>>v),
                 (v)=>MessageMap(<globalThis.Record<any, ValidatorValidatable>>v)
             );
@@ -101,7 +101,7 @@ describe("compiler compatibility", function() {
 
         describe("auto", function() {
 
-            let property = new RecordValueCallback<Record<PropertyKey, any>, Record<string, any>, TypeValidatorValue>(
+            let property = new RecordValueCallback<TypeValidatorValue>(
                 validator,
                 (value, validators) =>
                     <Record<PropertyKey, Instance<any, string>>>ValidateValuePartial(value, validators),
@@ -118,7 +118,7 @@ describe("compiler compatibility", function() {
 
         describe("direct", function() {
 
-            let property = new RecordValueCallback<Record<PropertyKey, any>, Record<string, any>, TypeValidatorValue>(
+            let property = new RecordValueCallback<TypeValidatorValue>(
                 validator,
                 (value, validators) =>
                     <Record<PropertyKey, Instance<any, string>>>ValidateValuePartial(value, validators),
@@ -145,9 +145,9 @@ describe("implicit complete", function() {
 
         let validator = Type('string');
 
-        let property = new RecordValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators),
-            (v)=>And(v),
+        let property = new RecordValueCallback<typeof validator, Record<PropertyKey, Instance>>(validator,
+             ValidateKey,
+            And,
             MessageMap
         );
 
@@ -216,7 +216,7 @@ describe("implicit complete", function() {
         };
 
         let property = new RecordValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators),
+            (value, validators) => ValidateKey(value, validators),
             (v)=>And(v),
             MessageMap
         );
@@ -277,7 +277,7 @@ describe("implicit complete", function() {
         };
 
         let property = new RecordValueCallback(validator,
-            (value, validators) => ValidateValue(value, validators),
+            (value, validators) => ValidateKey(value, validators),
             (v)=>And(v),
             MessageMap
         );

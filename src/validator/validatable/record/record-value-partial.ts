@@ -1,5 +1,4 @@
 import Validator from "@dikac/t-validator/validator";
-import PartialUnion from "../../../partial-union";
 import MapInterface from "../../../map";
 import InferType from "@dikac/t-validator/type/infer";
 import {O} from "ts-toolbelt";
@@ -11,7 +10,7 @@ export default function RecordValue<
 >(
     object : RecordType,
     value : Value,
-) : PartialUnion<MapInterface<RecordType, Return<Value>>>  {
+) : Partial<MapInterface<RecordType, Return<Value>>>  {
 
     let result = {};
 

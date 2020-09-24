@@ -10,8 +10,8 @@ import RecordType from "./type/record/infer";
 import Instance from "@dikac/t-validator/validatable/validatable";
 
 export default interface Map<
-    Container extends Record<any, Validator>,
-    Result extends Record<any, Instance>,
+    Container extends Record<PropertyKey, Validator>,
+    Result extends Partial<Record<PropertyKey, Instance>>,
     ValidatableType extends Validatable,
     MessageType,
 > extends
