@@ -5,7 +5,7 @@ import ValidatableValid from "@dikac/t-validatable/boolean/value";
  * filter all valid {@link Validatable} while retain its original structure
  */
 export default function Valid(record) {
-    let validation = (v) => GuardValidatable(v) && ValidatableValid(v); //.valid;
+    let validation = (v) => GuardValidatable(v) && ValidatableValid(v);
     return Filter(record, validation);
 }
 //# sourceMappingURL=valid.js.map

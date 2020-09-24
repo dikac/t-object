@@ -21,8 +21,6 @@ export default class GetListFirst<
      */
     private handler : Partial<Record<keyof List.UnionOf<Objects>, List.UnionOf<Objects>>> = {};
 
-
-
     /**
      * reset cached mapping
      */

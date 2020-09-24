@@ -5,5 +5,4 @@ type Infer<Schema extends Record<PropertyKey, Validator>> = {
     [Key in keyof Schema] : InferArgument<Schema[Key]>
 };
 
-
 export default Infer;

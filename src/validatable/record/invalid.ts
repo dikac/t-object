@@ -12,8 +12,8 @@ export default function Invalid<
     record : Object
 ) : Partial<Object> {
 
-    let valdiation = (v) => GuardValidatable(v) && ValidatableInvalid(v);
+    let validation = (v) => GuardValidatable(v) && ValidatableInvalid(v);
 
-    return Filter(record, valdiation);
+    return Filter(record, validation);
 }
 

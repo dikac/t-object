@@ -9,7 +9,6 @@ export default class Empty<MessageType>
         Validator<object, object, boolean, boolean, EmptyValidatable<object, MessageType>>,
         Message<(result:Readonly<Value<object> & Validatable>)=>MessageType>
 {
-
     constructor(
        public message : (result:Readonly<Value<object> & Validatable>)=>MessageType
     ) {
