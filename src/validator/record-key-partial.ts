@@ -15,12 +15,7 @@ export default function RecordKeyPartial<
     message : (partial:Partial<Record<PropertyKey, ReturnInfer<ValidatorType>>>)=>MessageType,
 ) : RecordKey<ValidatorType, Partial<Record<PropertyKey, ReturnInfer<ValidatorType>>>, ValidatableType, MessageType> {
 
-    return new RecordKeyCallback(
-        validator,
-        (value, validators)  => <Partial<Record<PropertyKey, ReturnInfer<ValidatorType>>>> ValidateRecordKeyPartial(value, validators),
-        validation,
-        message
-    );
+    return new RecordKeyCallback(validator, ValidateRecordKeyPartial, validation, message);
 }
 
 

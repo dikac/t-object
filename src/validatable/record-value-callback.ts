@@ -1,8 +1,8 @@
 import Validator from "@dikac/t-validator/validator";
 import Validatable from "@dikac/t-validatable/validatable";
 import {O} from "ts-toolbelt";
-import SetGetter from "../value/value/set-getter";
 import RecordValue from "./record-value";
+import MemoizeAccessor from "../function/memoize-accessor";
 
 export default class RecordValueCallback<
     MessageType = unknown,
@@ -12,31 +12,44 @@ export default class RecordValueCallback<
     ValidatableType extends Validatable = Validatable
 > implements RecordValue<MessageType, ValueType, ValidatorType, Result, ValidatableType>
 {
-    readonly validatables : Result;
-    readonly valid : boolean;
-    readonly validatable : ValidatableType;
-    readonly messages : Result;
-    private messageFactory : (result:Result)=>MessageType
+    #message : (result:Result)=>MessageType
 
     constructor(
         readonly value: ValueType,
         readonly validator : ValidatorType,
-        map : (value:ValueType, validators:ValidatorType)=>Result,
-        validation : (result:Result)=>ValidatableType,
+        readonly map : (value:ValueType, validators:ValidatorType)=>Result,
+        readonly validation : (result:Result)=>ValidatableType,
         message : (result:Result)=>MessageType,
     ) {
 
-        this.messageFactory = message;
-
-        this.validatables = map(value, validator);
-        this.messages = this.validatables;
-
-        this.validatable = validation(this.validatables);
-        this.valid = this.validatable.valid;
+        this.#message = message;
     }
 
+    get messages() : Result {
+
+        return this.validatables;
+    }
+
+    get valid() : boolean {
+
+        return this.validatable.valid;
+    }
+
+    @MemoizeAccessor()
+    get validatable() : ValidatableType {
+
+        return this.validation(this.validatables);
+    }
+
+    @MemoizeAccessor()
+    get validatables() : Result {
+
+        return this.map(this.value, this.validator)
+    }
+
+    @MemoizeAccessor()
     get message() : MessageType {
 
-        return SetGetter(this, 'message', this.messageFactory(this.validatables));
+        return this.#message(this.validatables);
     }
 }

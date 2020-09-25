@@ -67,7 +67,7 @@ for(let i = 0; i <= 5; i++) {
     it('check call', () =>{
 
         expect(typeof instance.validatables.name.valid).toBe("boolean");
-        expect(typeof instance.validatable.valid).toBe("boolean");;
+        expect(typeof instance.validatable.valid).toBe("boolean");
         expect(typeof instance.valid).toBe("boolean");
         expect(typeof instance.message.name).toBe("string");
         expect(typeof instance.messages.name.message).toBe("string");
@@ -78,5 +78,27 @@ for(let i = 0; i <= 5; i++) {
         expect(validateValueCount).toBe(1);
         expect(andCount).toBe(1);
         expect(validator.name.called).toBe(1);
+    })
+}
+for(let i = 2; i <= 7; i++) {
+
+    it('check call', () =>{
+
+        let value = 'data' + i;
+        const instance = new ValueCallback(value, validator, validateValue, and, messageMap);
+
+        expect(instance.value).toBe("data" + i);
+        expect(typeof instance.validatables.name.valid).toBe("boolean");
+        expect(typeof instance.validatable.valid).toBe("boolean");
+        expect(typeof instance.valid).toBe("boolean");
+        expect(typeof instance.message.name).toBe("string");
+        expect(typeof instance.messages.name.message).toBe("string");
+        expect(typeof instance.validation).toBe("function");
+        expect(instance.validators.name).toBeInstanceOf(Countable);
+
+        expect(messageMapCount).toBe(i);
+        expect(validateValueCount).toBe(i);
+        expect(andCount).toBe(i);
+        expect(validator.name.called).toBe(i);
     })
 }

@@ -17,7 +17,7 @@ export default function RecordKeyAll<
 
     return new RecordKeyCallback(
         validator,
-        (object, value)=><Record<PropertyKey, ReturnInfer<ValidatorType>>>ValidateRecordKey(object, value),
+        ValidateRecordKey,
         validation,
         message
     ) as RecordKey<ValidatorType, Record<PropertyKey, ReturnInfer<ValidatorType>>, ValidatableType, MessageType>;

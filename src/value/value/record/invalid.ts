@@ -5,7 +5,7 @@ import RecordInfer from "./infer";
 import Map from "./map";
 import RemoveUndefined from "../../../omit-undefined";
 
-// TODO SHOULD VALUE REMOVED?
+
 export default function Invalid<
     Instance extends Record<PropertyKey, Value & Validatable>
 >(

@@ -1,16 +1,17 @@
-import Or from "../../dist/validatable/or";
+import And from "../../../dist/validatable/and";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 
-it("valids", function() {
+it("all valid", function() {
 
     let record = {
         valid1 : {valid:true},
-        valid2 : {valid:true},
+        valid2 : undefined,
+        valid3 : {valid:true},
     };
 
-    let result = Or(record);
+    let result = And(record);
 
     expect(result.valid).toBe(true);
 
@@ -18,14 +19,15 @@ it("valids", function() {
 
 
 
-it("invalids", () => {
+it("invalid", () => {
 
     let record = {
         invalid1 : {valid:false},
-        invalid2 : {valid:false},
+        invalid2 : undefined,
+        invalid3 : {valid:false},
     };
 
-    let result = Or(record);
+    let result = And(record);
 
     expect(result.valid).toBe(false);
 });
@@ -36,10 +38,11 @@ it("mixed", () => {
 
     let record = {
         valid : {valid:true},
+        undefined : undefined,
         invalid : {valid:false},
     };
 
-    let result = Or(record);
+    let result = And(record);
 
-    expect(result.valid).toBe(true);
+    expect(result.valid).toBe(false);
 });

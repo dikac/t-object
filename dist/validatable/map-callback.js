@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
     if (!privateMap.has(receiver)) {
         throw new TypeError("attempted to set private field on non-instance");
@@ -11,37 +20,57 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     }
     return privateMap.get(receiver);
 };
-var _value;
-import SetGetter from "../value/value/set-getter";
-import SetProperty from "../value/value/set-property";
+var _value, _message;
 import Pick from "../pick";
+import MemoizeAccessor from "../function/memoize-accessor";
 export default class MapCallback {
     constructor(value, validators, map, validation, message) {
         this.validators = validators;
         this.map = map;
         this.validation = validation;
         _value.set(this, void 0);
+        _message.set(this, void 0);
         __classPrivateFieldSet(this, _value, value);
-        this.messageFactory = message;
+        __classPrivateFieldSet(this, _message, message);
     }
     get valid() {
         return this.validatable.valid;
     }
     get validatable() {
-        return SetProperty(this, 'validatable', this.validation(this.validatables));
+        return this.validation(this.validatables);
     }
     get messages() {
         return this.validatables;
     }
     get validatables() {
-        return SetProperty(this, 'validatables', this.map(__classPrivateFieldGet(this, _value), this.validators));
+        return this.map(__classPrivateFieldGet(this, _value), this.validators);
     }
     get value() {
-        return SetProperty(this, 'value', Pick(__classPrivateFieldGet(this, _value), ...Object.keys(this.validators)));
+        return Pick(__classPrivateFieldGet(this, _value), ...Object.keys(this.validators));
     }
     get message() {
-        return SetGetter(this, 'message', this.messageFactory(this.validatables));
+        return __classPrivateFieldGet(this, _message).call(this, this.validatables);
     }
 }
-_value = new WeakMap();
+_value = new WeakMap(), _message = new WeakMap();
+__decorate([
+    MemoizeAccessor(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MapCallback.prototype, "validatable", null);
+__decorate([
+    MemoizeAccessor(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MapCallback.prototype, "validatables", null);
+__decorate([
+    MemoizeAccessor(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MapCallback.prototype, "value", null);
+__decorate([
+    MemoizeAccessor(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], MapCallback.prototype, "message", null);
 //# sourceMappingURL=map-callback.js.map

@@ -1,7 +1,6 @@
 import Validator from "@dikac/t-validator/validator";
 import ValidatorValidatable from "@dikac/t-validator/validatable/validatable";
 import Validatable from "@dikac/t-validatable/validatable";
-import SetGetter from "../value/value/set-getter";
 import Value from "./value";
 import MemoizeAccessor from "../function/memoize-accessor";
 

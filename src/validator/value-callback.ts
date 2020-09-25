@@ -58,11 +58,14 @@ export default class ValueCallback<
     ) {
     }
 
-    validate<Argument extends ValueType>(argument: Argument) : Replace<ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>, true>;
-    validate<Argument extends BaseType>(argument: Argument) : Return<BaseType, Argument, ValueType, ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>>
-    validate<Argument extends BaseType>(argument: Argument) {
+    validate<Argument extends ValueType>(argument: Argument)
+        : Replace<ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>, true>;
+    validate<Argument extends BaseType>(argument: Argument)
+        : Return<BaseType, Argument, ValueType, ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>>
 
-        return <ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType> | Return<BaseType, Argument, ValueType, ValidatableValueCallback<BaseType, MessageType, ValidatorsType, Validatables, ValidatableType>>>
+    validate<Argument extends BaseType>(argument: Argument)    {
+        return <Replace<ValidatableValue<BaseType, MessageType, ValidatorsType, Validatables, ValidatableType>, true> |
+            Return<BaseType, Argument, ValueType, ValidatableValue<Argument, MessageType, ValidatorsType, Validatables, ValidatableType>>>
             new ValidatableValueCallback(argument, this.validators, this.map, this.validation, this.message);
     }
 }

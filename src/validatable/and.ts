@@ -2,7 +2,6 @@ import Validatable from "@dikac/t-validatable/validatable";
 import AndBoolean from "./record/boolean/and";
 import Validatables from "./validatables";
 
-// TODO ADD SPEC FOR PARTIAL
 export default function And<
     Object extends Partial<Record<PropertyKey, Validatable>>
 >(
