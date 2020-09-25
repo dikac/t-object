@@ -5,7 +5,6 @@ import And from "../../../dist/validatable/and";
 import Or from "../../../dist/validatable/or";
 import MessageMap from "../../../dist/message/message/record/map";
 import Type from "@dikac/t-type/validator/type-standard";
-import Instance from "@dikac/t-validator/validatable/validatable";
 import MapCallbackFunction from "../../../dist/validator/map-callback-function";
 import InferReturn from "../../../dist/validator/validatable/record/infer";
 

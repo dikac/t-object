@@ -1,12 +1,9 @@
 import Type from "@dikac/t-type/validator/type-standard";
-import TypeValidator from "@dikac/t-type/validator/type";
 import RecordValueCallback from "../../../dist/validator/record-key-callback";
-import Instance from "@dikac/t-validator/validatable/validatable";
 import ValidateKey from "../../../dist/validator/validatable/record/record-key";
 import And from "../../../dist/validatable/and";
 import MessageMap from "../../../dist/message/message/record/map";
 import Or from "../../../dist/validatable/or";
-import MapInfer from "../../../dist/validator/validatable/record/infer";
 import Infer from "@dikac/t-validator/validatable/infer";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
