@@ -1,6 +1,14 @@
 import SetProperty from "../value/value/set-property";
 import Default from "../default";
 const defaults = { suffix: '', configurable: true, writable: true };
+/**
+ * to be used for decorator
+ *
+ * memoize value from getter and convert to another getter
+ *
+ * @param configuration
+ * @default {suffix:'', configurable:true, writable:true}
+ */
 export default function MemoizeProperty(configuration = defaults) {
     configuration = Default(configuration, defaults);
     return function (target, property, descriptor) {
