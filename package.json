@@ -1,12 +1,12 @@
 {
   "name": "@dikac/t-object",
-  "version": "0.35.3",
+  "version": "0.36.0",
   "description": "Typescript object",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
-    "@dikac/t-class": "^0.2.0",
+    "@dikac/t-array": "^0.25.2",
     "@dikac/t-boolean": "^0.10.1",
-    "@dikac/t-array": "^0.25.1",
+    "@dikac/t-class": "^0.2.1",
     "@dikac/t-function": "^0.14.1",
     "@dikac/t-message": "^0.11.1",
     "@dikac/t-string": "^0.15.2",
@@ -18,10 +18,10 @@
     "utility-types": "^3.10.0"
   },
   "devDependencies": {
-    "esm": "^3.2.25",
-    "@dikac/t-type": "^0.4.0",
+    "@dikac/t-type": "^0.4.2",
     "@types/jasmine": "^3.5.14",
     "cpy-cli": "^3.1.1",
+    "esm": "^3.2.25",
     "jasmine": "^3.6.1",
     "jasmine-ts-console-reporter": "^3.1.1",
     "json-properties-remover": "^0.1.2",
