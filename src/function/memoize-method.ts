@@ -13,7 +13,7 @@ const defaults = {suffix:'', configurable:true}
  * @param configuration
  * @default {suffix:'', configurable:true}
  */
-export default function MemoizeAccessor(configuration : Pick<PropertyDescriptor, 'configurable'> & Partial<Suffix> = defaults) : MethodDecorator  {
+export default function MemoizeMethod(configuration : Pick<PropertyDescriptor, 'configurable'> & Partial<Suffix> = defaults) : MethodDecorator  {
 
     configuration = Default(configuration, defaults)
 

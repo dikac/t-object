@@ -9,7 +9,7 @@ const defaults = { suffix: '', configurable: true };
  * @param configuration
  * @default {suffix:'', configurable:true}
  */
-export default function MemoizeAccessor(configuration = defaults) {
+export default function MemoizeMethod(configuration = defaults) {
     configuration = Default(configuration, defaults);
     return function (target, property, descriptor) {
         const symbol = Symbol(property + configuration.suffix);

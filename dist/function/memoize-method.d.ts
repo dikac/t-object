@@ -7,4 +7,4 @@ import Suffix from "@dikac/t-string/suffix/suffix";
  * @param configuration
  * @default {suffix:'', configurable:true}
  */
-export default function MemoizeAccessor(configuration?: Pick<PropertyDescriptor, 'configurable'> & Partial<Suffix>): MethodDecorator;
+export default function MemoizeMethod(configuration?: Pick<PropertyDescriptor, 'configurable'> & Partial<Suffix>): MethodDecorator;
