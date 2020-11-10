@@ -1,7 +1,7 @@
 import { O } from "ts-toolbelt";
 import { Required } from "utility-types";
 /**
- * set return from {@param factory} to getter for {@param object}
+ * set property from {@param factory} to getter for {@param object}
  * should be used outside
  *
  * @param object

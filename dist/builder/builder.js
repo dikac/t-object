@@ -34,5 +34,13 @@ export default class Builder {
         }
         return target;
     }
+    buildAsync(target = {}, option) {
+        const promises = [];
+        for (let [property, value] of this) {
+            const returns = value(target, property, this.context, option);
+            promises.push(Promise.resolve(returns));
+        }
+        return Promise.all(promises).then(() => target);
+    }
 }
 //# sourceMappingURL=builder.js.map

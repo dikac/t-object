@@ -8,6 +8,6 @@ type Callable<
     key : Property,
     context : Context,
     option : Option
-)=>void
+)=>any
 
 export default Callable;

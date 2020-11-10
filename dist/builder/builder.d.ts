@@ -13,4 +13,5 @@ export default class Builder<Type extends object, Context extends any = any, Opt
     has(property: keyof Type): boolean;
     [Symbol.iterator](): Iterator<[keyof Type, Callable<Type, keyof Type, Context, Option>]>;
     build(target: Partial<Type> | undefined, option: Option): Type;
+    buildAsync(target: Partial<Type> | undefined, option: Option): Promise<Type>;
 }

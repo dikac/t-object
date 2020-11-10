@@ -63,4 +63,18 @@ export default class Builder<
         return target as Type;
     }
 
+    buildAsync(target : Partial<Type> = {}, option : Option) : Promise<Type> {
+
+        const promises : Promise<any>[] = [];
+
+        for(let [property, value] of this) {
+
+            const returns = value(<Type>target, property, this.context, option);
+            promises.push(Promise.resolve(returns));
+
+        }
+
+        return Promise.all(promises).then(()=>target as Type);
+    }
+
 }
