@@ -3,14 +3,24 @@ import NameNotFound from "./name-not-found";
 
 export default function Name(value : any) : string {
 
+    let constructor : string|undefined;
+
     if(value && value.constructor && value.constructor.name) {
 
-        return value.constructor.name;
+        constructor = value.constructor.name;
     }
 
-    if(Class(value)) {
+    if(!constructor || constructor === 'Function') {
 
-        return  value.name;
+        if(Class(value)) {
+
+            return value.name;
+        }
+    }
+
+    if(constructor) {
+
+        return constructor;
     }
 
     throw new Error(NameNotFound(false, value));
