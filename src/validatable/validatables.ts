@@ -9,15 +9,14 @@ export default class Validatables<
     ValidatablesInterface<RecordType>
 {
 
+    readonly valid : boolean;
+
     constructor(
         public validatables : RecordType,
         public validation : (value:RecordType)=>Boolean
     ) {
-    }
 
-    get valid() : Boolean {
-
-        return this.validation(this.validatables)
+        this.valid = this.validation(this.validatables);
     }
 }
 

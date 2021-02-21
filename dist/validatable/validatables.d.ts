@@ -3,6 +3,6 @@ import ValidatablesInterface from "./validatables/validatables";
 export default class Validatables<RecordType extends Partial<Record<PropertyKey, Validatable>> = Partial<Record<PropertyKey, Validatable>>, Boolean extends boolean = boolean> implements Validatable, ValidatablesInterface<RecordType> {
     validatables: RecordType;
     validation: (value: RecordType) => Boolean;
+    readonly valid: boolean;
     constructor(validatables: RecordType, validation: (value: RecordType) => Boolean);
-    get valid(): Boolean;
 }

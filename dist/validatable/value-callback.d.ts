@@ -8,10 +8,10 @@ export default class ValueCallback<ValueType = unknown, MessageType = unknown, R
     readonly validators: RecordType;
     readonly map: (value: ValueType, validator: RecordType) => Result;
     readonly validation: (result: Result) => ValidatableType;
+    readonly validatable: ValidatableType;
+    readonly validatables: Result;
     constructor(value: ValueType, validators: RecordType, map: (value: ValueType, validator: RecordType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
     get valid(): boolean;
-    get validatable(): ValidatableType;
     get messages(): Result;
-    get validatables(): Result;
     get message(): MessageType;
 }

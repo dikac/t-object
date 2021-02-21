@@ -13,6 +13,8 @@ export default class ValueCallback<
 > implements Value<ValueType, MessageType, RecordType, Result, ValidatableType> {
 
     #message : (result:Result)=>MessageType;
+    readonly validatable : ValidatableType;
+    readonly validatables : Result;
 
     constructor(
         readonly value: ValueType,
@@ -23,17 +25,13 @@ export default class ValueCallback<
     ) {
 
         this.#message = message;
+        this.validatables = this.map(this.value, this.validators);
+        this.validatable = this.validation(this.validatables);
     }
 
     get valid() : boolean {
 
         return this.validatable.valid;
-    }
-
-    @MemoizeAccessor()
-    get validatable () : ValidatableType {
-
-        return this.validation(this.validatables);
     }
 
     get messages() : Result {
@@ -42,15 +40,16 @@ export default class ValueCallback<
     }
 
     @MemoizeAccessor()
-    get validatables() : Result {
-
-        return this.map(this.value, this.validators);
-    }
-
-    @MemoizeAccessor()
     get message() : MessageType {
 
-        return this.#message(this.validatables);
+        try {
+
+            return this.#message(this.validatables);
+
+        } catch (e) {
+
+            throw new Error(`error on generating message, ${e}`)
+        }
 
     }
 }

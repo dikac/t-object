@@ -12,7 +12,9 @@ export default class RecordValueCallback<
     ValidatableType extends Validatable = Validatable
 > implements RecordValue<MessageType, ValueType, ValidatorType, Result, ValidatableType>
 {
+    readonly validatable : ValidatableType;
     #message : (result:Result)=>MessageType
+    readonly validatables : Result;
 
     constructor(
         readonly value: ValueType,
@@ -23,6 +25,8 @@ export default class RecordValueCallback<
     ) {
 
         this.#message = message;
+        this.validatables = this.map(this.value, this.validator);
+        this.validatable = this.validation(this.validatables);
     }
 
     get messages() : Result {
@@ -36,20 +40,15 @@ export default class RecordValueCallback<
     }
 
     @MemoizeAccessor()
-    get validatable() : ValidatableType {
-
-        return this.validation(this.validatables);
-    }
-
-    @MemoizeAccessor()
-    get validatables() : Result {
-
-        return this.map(this.value, this.validator)
-    }
-
-    @MemoizeAccessor()
     get message() : MessageType {
 
-        return this.#message(this.validatables);
+        try {
+
+            return this.#message(this.validatables);
+
+        } catch (e) {
+
+            throw new Error(`error on generating message, ${e}`)
+        }
     }
 }

@@ -17,6 +17,8 @@ export default class MapCallback<
 
     #value : ValueType;
     #message : (result : Result)=>MessageType;
+    readonly validatable : ValidatableType;
+    readonly validatables : Result;
 
     constructor(
         value: ValueType,
@@ -28,6 +30,8 @@ export default class MapCallback<
 
         this.#value = value;
         this.#message = message;
+        this.validatables = this.map(this.#value, this.validators);
+        this.validatable = this.validation(this.validatables);
     }
 
     get valid() : boolean {
@@ -35,21 +39,9 @@ export default class MapCallback<
         return this.validatable.valid;
     }
 
-    @MemoizeAccessor()
-    get validatable() : ValidatableType {
-
-        return this.validation(this.validatables);
-    }
-
     get messages () : Result {
 
         return this.validatables;
-    }
-
-    @MemoizeAccessor()
-    get validatables() : Result {
-
-        return this.map(this.#value, this.validators);
     }
 
     @MemoizeAccessor()
@@ -61,6 +53,13 @@ export default class MapCallback<
     @MemoizeAccessor()
     get message() : MessageType {
 
-        return this.#message(this.validatables);
+        try {
+
+            return this.#message(this.validatables);
+
+        } catch (e) {
+
+            throw new Error(`error on generating message, ${e}`)
+        }
     }
 }

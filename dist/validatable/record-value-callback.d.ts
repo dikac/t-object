@@ -8,10 +8,10 @@ export default class RecordValueCallback<MessageType = unknown, ValueType extend
     readonly validator: ValidatorType;
     readonly map: (value: ValueType, validators: ValidatorType) => Result;
     readonly validation: (result: Result) => ValidatableType;
+    readonly validatable: ValidatableType;
+    readonly validatables: Result;
     constructor(value: ValueType, validator: ValidatorType, map: (value: ValueType, validators: ValidatorType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
     get messages(): Result;
     get valid(): boolean;
-    get validatable(): ValidatableType;
-    get validatables(): Result;
     get message(): MessageType;
 }

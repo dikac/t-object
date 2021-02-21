@@ -30,34 +30,25 @@ export default class ValueCallback {
         this.validation = validation;
         _message.set(this, void 0);
         __classPrivateFieldSet(this, _message, message);
+        this.validatables = this.map(this.value, this.validators);
+        this.validatable = this.validation(this.validatables);
     }
     get valid() {
         return this.validatable.valid;
     }
-    get validatable() {
-        return this.validation(this.validatables);
-    }
     get messages() {
         return this.validatables;
     }
-    get validatables() {
-        return this.map(this.value, this.validators);
-    }
     get message() {
-        return __classPrivateFieldGet(this, _message).call(this, this.validatables);
+        try {
+            return __classPrivateFieldGet(this, _message).call(this, this.validatables);
+        }
+        catch (e) {
+            throw new Error(`error on generating message, ${e}`);
+        }
     }
 }
 _message = new WeakMap();
-__decorate([
-    MemoizeAccessor(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [])
-], ValueCallback.prototype, "validatable", null);
-__decorate([
-    MemoizeAccessor(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [])
-], ValueCallback.prototype, "validatables", null);
 __decorate([
     MemoizeAccessor(),
     __metadata("design:type", Object),

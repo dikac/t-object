@@ -9,11 +9,11 @@ export default class MapCallback<MessageType = unknown, ValidatorsType extends R
     validators: ValidatorsType;
     private map;
     private validation;
+    readonly validatable: ValidatableType;
+    readonly validatables: Result;
     constructor(value: ValueType, validators: ValidatorsType, map: (values: RecordParameter<ValidatorsType>, validators: ValidatorsType) => Result, validation: (result: Result) => ValidatableType, message: (result: Result) => MessageType);
     get valid(): boolean;
-    get validatable(): ValidatableType;
     get messages(): Result;
-    get validatables(): Result;
     get value(): ValueType;
     get message(): MessageType;
 }
