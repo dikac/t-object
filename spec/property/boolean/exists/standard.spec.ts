@@ -3,9 +3,21 @@ import Property from "../../../../dist/property/boolean/exists";
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
 
-it(`method`, () => {
+it(`native method`, () => {
 
     expect(Property([], 'splice')).toBe(true)
+});
+
+it(`method`, () => {
+
+    class Class {
+
+        constructor(public test: number) {
+        }
+    }
+
+    let object =  new Class(1);
+    expect(Property(object, 'test')).toBe(true);
 });
 
 it(`property`, () => {

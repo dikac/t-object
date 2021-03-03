@@ -68,6 +68,7 @@ describe(`class`, () => {
         }
 
         let object = new Test;
+
         let descriptor = GetProperty(object, 'property');
 
         if(descriptor) {

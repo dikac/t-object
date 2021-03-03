@@ -6,12 +6,13 @@ export default function FromObject(object, property) {
             return descriptor;
         }
     }
-    // prototype
+    // prototype chain
     {
-        let prototype = Object.getPrototypeOf(object);
-        let descriptor = Object.getOwnPropertyDescriptor(prototype, property);
-        if (descriptor) {
-            return descriptor;
+        for (object = Object.getPrototypeOf(object); object; object = Object.getPrototypeOf(object)) {
+            let descriptor = Object.getOwnPropertyDescriptor(object, property);
+            if (descriptor) {
+                return descriptor;
+            }
         }
     }
 }

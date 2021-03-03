@@ -1,7 +1,5 @@
-import SetGetter from "../value/value/set-getter";
 import Default from "../default";
 import Suffix from "@dikac/t-string/suffix/suffix";
-import SetProperty from "../value/value/set-property";
 import SetMethod from "../value/value/set-method";
 
 const defaults = {suffix:'', configurable:true}

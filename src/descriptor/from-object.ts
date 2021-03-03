@@ -10,15 +10,17 @@ export default function FromObject(object : object, property : PropertyKey) : un
         }
     }
 
-    // prototype
+    // prototype chain
     {
-        let prototype = Object.getPrototypeOf(object);
+        for(object = Object.getPrototypeOf(object); object; object = Object.getPrototypeOf(object)) {
 
-        let descriptor = Object.getOwnPropertyDescriptor(prototype, property);
+            let descriptor = Object.getOwnPropertyDescriptor(object, property);
 
-        if(descriptor) {
+            if(descriptor) {
 
-            return descriptor;
+                return descriptor;
+            }
         }
+
     }
 }

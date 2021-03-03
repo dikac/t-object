@@ -6,7 +6,6 @@ import Return from "@dikac/t-validator/validatable/simple";
 import Instance from "@dikac/t-validator/validatable/validatable";
 import Replace from "@dikac/t-validatable/boolean/replace";
 import Value from "./value";
-import Message from "@dikac/t-message/message";
 
 /**
  * Base implementation of {@link Value}
