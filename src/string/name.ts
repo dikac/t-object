@@ -23,5 +23,10 @@ export default function Name(value : any) : string {
         return constructor;
     }
 
+    if(typeof value === "object") {
+
+        return 'Object';
+    }
+
     throw new Error(NameNotFound(false, value));
 }
