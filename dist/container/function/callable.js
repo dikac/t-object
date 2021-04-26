@@ -1,2 +1,2 @@
-import Callable from "../../builder/function/callable";
+export {};
 //# sourceMappingURL=callable.js.map

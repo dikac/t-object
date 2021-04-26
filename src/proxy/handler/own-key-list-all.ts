@@ -7,7 +7,7 @@ export default class OwnKeyListAll<
     Objects extends object[]
 > extends MultiHandlers<Target, Objects> implements Required<ProxyHandler<Target>, 'ownKeys'> {
 
-    private keys ?: PropertyKey[];
+    private keys ?: (string|symbol)[];
 
     reset() {
 
@@ -21,7 +21,7 @@ export default class OwnKeyListAll<
         return <Required<ProxyHandler<Argument>, 'ownKeys'>> handler;
     }
 
-    ownKeys(target: Target): PropertyKey[] {
+    ownKeys(target: Target): (string|symbol)[] {
 
         if(this.keys) {
 

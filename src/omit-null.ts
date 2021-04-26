@@ -6,7 +6,7 @@ import {Object} from "ts-toolbelt";
  */
 export default function OmitNull<O extends object>(
     object : O,
-)  : Omit<O, Object.Keys<Object.Select<O, null>>> {
+)  : Omit<O, keyof Object.Select<O, null>> {
 
     for(let property in object) {
 

@@ -12,7 +12,7 @@ export default class Debug<ObjectType extends object> implements Required<ProxyH
     getOwnPropertyDescriptor(target: ObjectType, p: PropertyKey): PropertyDescriptor | undefined;
     has(target: ObjectType, p: PropertyKey): boolean;
     isExtensible(target: ObjectType): boolean;
-    ownKeys(target: ObjectType): PropertyKey[];
+    ownKeys(target: ObjectType): (string | symbol)[];
     preventExtensions(target: ObjectType): boolean;
     set(target: ObjectType, p: PropertyKey, value: any, receiver: any): boolean;
 }

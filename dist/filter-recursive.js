@@ -1,4 +1,7 @@
 import IsObject from "./boolean/object";
+let c2 = '{}';
+let c3 = 11;
+let c4 = true;
 export default function FilterRecursive(record, filter) {
     let result = {};
     for (const property in record) {

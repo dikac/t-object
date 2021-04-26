@@ -6,7 +6,7 @@ import {Object} from "ts-toolbelt";
  */
 export default function OmitUndefined<O extends object>(
     object : O,
-)  : Omit<O, Object.Keys<Object.Select<O, undefined>>> {
+)  : Omit<O, keyof Object.Select<O, undefined>> {
 
     for(let property in object) {
 

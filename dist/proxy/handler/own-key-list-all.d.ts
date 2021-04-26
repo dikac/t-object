@@ -4,5 +4,5 @@ export default class OwnKeyListAll<Target extends object, Objects extends object
     private keys?;
     reset(): void;
     bindTo<Argument extends Target>(handler: ProxyHandler<Argument>): Required<ProxyHandler<Argument>, 'ownKeys'>;
-    ownKeys(target: Target): PropertyKey[];
+    ownKeys(target: Target): (string | symbol)[];
 }

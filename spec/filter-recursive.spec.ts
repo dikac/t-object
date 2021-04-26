@@ -1,6 +1,8 @@
 import FilterRecursive from "../dist/filter-recursive";
 import NotEmpty from "@dikac/t-string/boolean/not-empty";
+import String from "@dikac/t-string/boolean/string";
 import NotEmptyObject from "../dist/boolean/not-empty";
+import Object from "../dist/boolean/object";
 
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough()});
@@ -45,7 +47,7 @@ describe('single dimension', () => {
 
     it('filter not empty string & object', ()=>{
 
-        const filtered = FilterRecursive(object, (v)=>NotEmpty(v) && NotEmptyObject(v));
+        const filtered = FilterRecursive(object, (v)=>(String(v) && NotEmpty(v)) && (Object(v) && NotEmptyObject(v)));
 
         expect<any>(filtered).toEqual({
             retain : 'a',

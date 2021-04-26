@@ -69,7 +69,7 @@ export default class Debug<ObjectType extends object> implements Required<ProxyH
         return false;
     }
 
-    ownKeys(target: ObjectType): PropertyKey[] {
+    ownKeys(target: ObjectType): (string|symbol)[] {
 
         this.handler('ownKeys', [...arguments]);
         return [];
